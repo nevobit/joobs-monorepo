@@ -1,5 +1,6 @@
 {
     "name": "@joobs/data-sources",
+    "main": "./src/index.ts",
     "dependencies": {
         "drizzle-orm": "^0.28.6",
         "pg": "^8.11.3"
