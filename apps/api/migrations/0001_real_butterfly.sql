@@ -1,0 +1,1 @@
+ALTER TABLE "works" ADD COLUMN "status" varchar(256) NOT NULL;

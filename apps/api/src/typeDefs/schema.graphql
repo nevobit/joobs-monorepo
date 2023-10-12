@@ -1,5 +1,5 @@
 type Query {
-    gretting: String
+    getData: String
 }
 
 type Mutation {

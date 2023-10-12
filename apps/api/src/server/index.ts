@@ -4,7 +4,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { readFile } from 'fs/promises';
 import path from 'path';
 import { initDataSources } from '@joobs/data-sources';
-
+import resolvers from '../resolvers';
 // @ts-ignore
 import { name } from '../../package.json';
 import { ApolloServer } from '@apollo/server';
@@ -35,7 +35,7 @@ const main = async () => {
 
   const filePath = path.resolve(__dirname, '../typeDefs/schema.graphql');
   const typeDefs = await readFile(filePath, 'utf8');;
-  const server = new ApolloServer({ typeDefs });
+  const server = new ApolloServer({ typeDefs, resolvers });
   const { url } = await startStandaloneServer(server, { listen: { port: Number(PORT) } })
   logger.info(`🚀 Server listentinng on ${url}`)
 }

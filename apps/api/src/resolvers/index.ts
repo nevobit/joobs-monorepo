@@ -1,23 +1,14 @@
-import { StatusType, Type, Work } from '@joobs/entities'
+import { getAllWorks } from '@joobs/business-logic'
+export default {
+    Query: {
+        async getData(){
+            const works = await getAllWorks({});
+            console.log(works);
+            return 'ALL OKAY';
+        }
+    }
+}
 
 export const getData = () => {
-    const works : Work = {
-        title: '',
-        skills: [],
-        role: '',
-        location: {
-            type: Type.WorkHome,          
-            coords: {
-                lat: 0,
-                long: 0,
-                city: '',
-                country: '',
-            }
-        },
-        description: '',
-        uuid: '',
-        status: StatusType.ACTIVE,
-        created_at: new Date(),
-        updated_at: new Date()
-    }
+   
 }

@@ -4,5 +4,10 @@
     "main": "./src/index.ts",
     "scripts": {
         "build": "tsc"
+    },
+    "dependencies": {
+        "@joobs/data-sources": "workspace:^",
+        "@joobs/entities": "workspace:^",
+        "drizzle-orm": "^0.28.6"
     }
 }

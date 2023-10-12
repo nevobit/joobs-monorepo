@@ -26,6 +26,9 @@ importers:
       '@apollo/server':
         specifier: ^4.9.3
         version: 4.9.3(graphql@16.8.1)
+      '@joobs/business-logic':
+        specifier: workspace:^
+        version: link:../../packages/business-logic
       '@joobs/data-sources':
         specifier: workspace:^
         version: link:../../packages/data-sources
@@ -262,7 +265,17 @@ importers:
         specifier: ^4.5.3
         version: 4.9.5
 
-  packages/business-logic: {}
+  packages/business-logic:
+    dependencies:
+      '@joobs/data-sources':
+        specifier: workspace:^
+        version: link:../data-sources
+      '@joobs/entities':
+        specifier: workspace:^
+        version: link:../entities
+      drizzle-orm:
+        specifier: ^0.28.6
+        version: 0.28.6(@types/pg@8.10.4)(pg@8.11.3)
 
   packages/data-sources:
     dependencies:

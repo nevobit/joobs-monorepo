@@ -26,4 +26,4 @@ export const initPostgres = async({ url }: InitPostgresOptions) => {
 
 }
 
-export const getDbbINstance = () =>  dbInstance;
+export const getDbInstance = () =>  dbInstance;

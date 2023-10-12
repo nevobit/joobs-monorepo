@@ -43,6 +43,7 @@
     "@apollo/server": "^4.9.3",
     "@joobs/data-sources": "workspace:^",
     "@joobs/entities": "workspace:^",
+    "@joobs/business-logic": "workspace:^",
     "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
     "fastify": "4.23.2",
