@@ -11,9 +11,6 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useSelector } from 'react-redux';
-import { useQuery } from '@apollo/client';
-import { useEffect } from 'react';
 
 const TabBar = ({state, navigation}: BottomTabBarProps) => {
   const insets = useSafeAreaInsets();
@@ -22,11 +19,8 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
     <View
       style={{
         flexDirection: 'row',
-        borderTopColor: 'rgba(0, 0, 0, 0.5)',
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: 'rgba(255, 255, 255, 0)',
         justifyContent: 'space-around',
-        paddingTop: 8,
+        paddingTop: 10,
         paddingBottom: insets.bottom + 10,
         paddingLeft: insets.left,
         paddingRight: insets.right,
@@ -44,27 +38,27 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
           case 'Home':
             iconName = focused ? 'home-sharp' : 'home-outline';
             tabName = 'Inicio'
-            itemColor = !focused ? 'rgba(0, 0, 0,0.6)' :'#5169f6'
+            itemColor = !focused ? 'rgba(0, 0, 0,0.8)' :'#5169f6'
             break;
           case 'Projects':
-            iconName = focused ? 'square-sharp' : 'square-outline';
+            iconName = focused ? 'grid' : 'grid-outline';
             tabName = 'Proyectos'
-            itemColor = !focused ? 'rgba(0, 0, 0,0.6)' :'#5169f6'
+            itemColor = !focused ? 'rgba(0, 0, 0,0.8)' :'#5169f6'
             break;
           case 'Work':
-            iconName = focused ? 'portfolio-sharp' : 'portfolio-outline';
+            iconName = focused ? 'briefcase' : 'briefcase-outline';
             tabName = 'Trabajo'
-            itemColor = !focused ? 'rgba(0, 0, 0,0.6)' :'#5169f6'
+            itemColor = !focused ? 'rgba(0, 0, 0,0.8)' :'#5169f6'
             break;
           case 'Events':
             iconName = focused ? 'calendar-sharp' : 'calendar-outline';
             tabName = 'Eventos'
-            itemColor = !focused ? 'rgba(0, 0, 0,0.6)' :'#5169f6'
+            itemColor = !focused ? 'rgba(0, 0, 0,0.8)' :'#5169f6'
             break;
           case 'Profile':
             iconName = focused ? 'person' : 'person-outline';
             tabName = 'Perfil'
-            itemColor = !focused ? 'rgba(0, 0, 0,0.6)' :'#5169f6'
+            itemColor = !focused ? 'rgba(0, 0, 0,0.8)' :'#5169f6'
             break; 
           default:
             break;
@@ -87,7 +81,7 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                 <View style={{
                   alignItems: 'center',
                   }}>                  
-                    <Icon name={iconName} size={25} color={itemColor} />
+                    <Icon name={iconName} size={22} color={itemColor} />
                 </View>
                 <Text style={{
                   fontSize: 13,

@@ -6,13 +6,16 @@ import Signup from '../../screens/Signup';
 import Home from '../../screens/Home';
 import TabBar from '../../components/Layout/TabBar';
 import { useSelector } from 'react-redux';
+import { Profile, Work } from '../../screens/Private';
+import Header from '../../components/Layout/Header';
+import Events from '../../screens/Private/Events';
 
 const Tab = createBottomTabNavigator();
 const Auth = createStackNavigator();
 
 export const AuthNavigator = () => {
     return(
-        <Auth.Navigator screenOptions={{headerShown: false}}>
+        <Auth.Navigator screenOptions={{headerShown: true}}>
             <Auth.Screen 
                 name='Signin'
                 component={Signin}
@@ -36,16 +39,35 @@ export const AuthNavigator = () => {
 
 export const AppNavigator = () => {
     return (
-      <Tab.Navigator screenOptions={{
-        headerShown: false
-      }}
+      <Tab.Navigator 
       tabBar={(props: any) => <TabBar {...props} />}
       >
-        <Tab.Screen name='Home' component={Home} />
-        <Tab.Screen name='Projects' component={Home} />
-        <Tab.Screen name='Work' component={Home} />
-        <Tab.Screen name='Events' component={Home} />
-        <Tab.Screen name='Profile' component={Home} />
+        <Tab.Screen name='Home' component={Home} 
+          options={{
+            header: () => <Header title='Joobs' />,
+          }}
+        
+        />
+        <Tab.Screen name='Projects' component={Home} 
+            options={{
+              header: () => <Header title='Proyectos' />,
+            }}
+        />
+        <Tab.Screen name='Work' component={Work} 
+        options={{
+          header: () => <Header title='Trabajo' />,
+        }}
+        />
+        <Tab.Screen name='Events' component={Events} 
+            options={{
+              header: () => <Header title='Eventos' />,
+            }}
+        />
+        <Tab.Screen name='Profile' component={Profile} 
+            options={{
+              header: () => <Header title='@nestor65303' />,
+            }}
+        />
 
       </Tab.Navigator>
     )
