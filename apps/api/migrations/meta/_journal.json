@@ -15,6 +15,13 @@
       "when": 1697069230043,
       "tag": "0001_real_butterfly",
       "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1697325264790,
+      "tag": "0002_flowery_sauron",
+      "breakpoints": false
     }
   ]
 }
