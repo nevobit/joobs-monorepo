@@ -1,9 +1,23 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import React, { useEffect } from 'react'
 import { WorkCard } from '../../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useMutation, useQuery } from '@apollo/client'
+import { WORKS } from '../../../../graphql/queries'
+import Button from '../../../../components/Shared/Button'
+import { CREATE_WORK } from '../../../../graphql/mutations/works'
 
 const Explorer = () => {
+  const { data, loading, error, refetch } = useQuery(WORKS);
+  
+  const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK)
+  if(error){
+    Alert.alert('HUBO UN ERROR', error.message);
+    return
+  }
+  useEffect(() => {
+    refetch();
+  }, [refetch])
   return (
     <View>
            
@@ -25,35 +39,41 @@ const Explorer = () => {
           </View>
         </View>
 
+        {loading? <ActivityIndicator color='#121212' size='large' /> : (
+          
+
         <ScrollView style={{
           paddingHorizontal: 15,
           marginBottom: 50
         }}>
-
-        {/* CARD */}
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Camilo Aristizabal' title='Prompt engineering que pueda generar recursos de imagenes con IA para un nichorelogiosos, cultural y espiritual.' money={1000} type='Practicante' />
-        <WorkCard name='Fernando Matos' title='Desarrollador web para la contruccion de un sitio web para una Edtech' money={1000} type='Tiempo completo' />
-        <WorkCard name='Victoria Palacios' title='Editor de videos para IG Reels' money={1000} type='Freelancer' />
-        <WorkCard name='Adan Rodriguez' title='Co-Founder tecnico para una startup fintech' money={1000} type='Co-founder' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
-        <WorkCard name='Andres Rendon' title='Editor de videos para IG Reels' money={1000} type='Tiempo completo' />
+          {data.works.map((work: any) => (
+            <WorkCard key={work.uuid} name='Andres Rendon' title={work.title} money={1000} type={work.role} />
+          ))}
 
         </ScrollView>
+                )}
+
+<View style={{
+  paddingHorizontal: 15
+}}>
+
+                <Button onPress={() => createWork({
+                  variables: {
+                    data: {
+                      description: "Necesito un experto en php para un backend en laravel",
+                      role: "Proyecto",
+                      title: "PHP Developer",
+                      user: "445g434f3-3f34g3-g45g45-g4g45g4g45",
+                      skills: [
+                        "PHP",
+                        "Backend"
+                      ],
+                      status: "active" 
+                    }
+                  }
+                })} text='Crear Oportunidad' loading={creatingLoading} />
+                </View>
+
     </View>
   )
 }

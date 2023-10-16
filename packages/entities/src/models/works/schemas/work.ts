@@ -18,10 +18,16 @@ export interface Location {
     coords: Coords;
 }
 
+export interface Remuneration {
+    value: number;
+    frecuency: string;
+}
 export interface Work extends Base {
     title: string;
     skills: string[];
     role: string;
+    user: string;
     location: Location;
     description: string;
+    remuneration: Remuneration;
 }

@@ -1,7 +1,50 @@
+type Remuneration {
+    value: Int
+    frecuency: String
+}
+
+type Location {
+    long: Float
+    lat: Float
+    address: String
+}
+
+type Work {
+    title: String
+    user: String
+    role: String
+    skills: [String]
+    description: String
+    remuneration: Remuneration
+    location: Location
+}
+
 type Query {
-    getData: String
+    works: [Work]
+}
+
+input RemunerationInput {
+    value: Float
+    frecuency: String
+}
+
+input LocationInput {
+    long: Float
+    lat: Float
+    address: String
+}
+
+input DataCreateWork {
+    title: String
+    user: String
+    role: String
+    status: String
+    description: String
+    skills: [String]
+    location: LocationInput
+    remuneration: RemunerationInput
 }
 
 type Mutation {
-    greting: String
+    createWork(data: DataCreateWork): Work
 }

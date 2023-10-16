@@ -1,13 +1,9 @@
-import { Result, Work, works, StatusType, Params } from "@joobs/entities";
+import { Result, works, StatusType, Params } from "@joobs/entities";
 import { getDbInstance } from '@joobs/data-sources'
 import { eq } from 'drizzle-orm'
 
-export const getAllWorks = async ({ page= 1, limit=14, search, status= StatusType.ACTIVE }: Params): Promise<Result<any> | Error> => {
-    const result = getDbInstance().select({
-        uuid: works.uuid,
-        title: works.title,
-        status: works.status
-    }).from(works);
+export const getAllWorks = async ({ page= 1, limit=14, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
+    const result = getDbInstance().select().from(works);
 
     await result.where(eq(works.status, status));
 
@@ -18,12 +14,7 @@ export const getAllWorks = async ({ page= 1, limit=14, search, status= StatusTyp
 
 
     let items = await result.limit(pageSize);
-    items = (await result).map((item) => ({
-        uuid: item.uuid,
-        title: item.uuid,
-        status: item.uuid
-    })) as Work[];
-    
+
     const hasPreviousPage = page > 1;
     const previousPage = hasPreviousPage ? page - 1 : page;
 
