@@ -40,7 +40,8 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
           }}>
             <Text style={{
               fontWeight: '600',
-              fontSize: 16
+              fontSize: 16,
+              color: 'rgba(0,0,0,0.8)',
             }}>{name.charAt(0)}</Text>
           </View>
           <View style={{
@@ -128,7 +129,8 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
         }}>
           <Icon name='chatbubble-outline' size={20} color="rgba(0,0,0,0.8)"  />
           <Text style={{
-            fontSize: 14
+            fontSize: 14,
+            color:'rgba(0,0,0,0.8)'
           }}>0</Text>
         </View>
 

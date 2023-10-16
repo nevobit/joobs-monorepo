@@ -2,12 +2,10 @@ import React from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Input from '../../components/Shared/Input'
 import Field from '../../components/Shared/Field'
-import Geolocation from '@react-native-community/geolocation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { HomePost } from '../../components/UI'
 
-const Home = () => {
-    Geolocation.getCurrentPosition(info => console.log(info));
+const Home = ({navigation}: any) => {
 
   return (
     <>
@@ -22,7 +20,9 @@ const Home = () => {
         <HomePost title={'title'} text='Hola a todos, quien esta interesado en formar un equipo conmigo para una hackaton de IA/ML ' name="Shivam" type='Placements Club' />
     </ScrollView>
        
-       <TouchableOpacity style={{
+       <TouchableOpacity 
+       onPress={() => navigation.navigate('CreatePost')}
+       style={{
       position: 'absolute',
       backgroundColor: '#5169f6',
       height: 50,

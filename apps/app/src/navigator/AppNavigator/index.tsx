@@ -1,81 +1,42 @@
 import React from 'react'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
-import Signin from '../../screens/Signin';
-import Signup from '../../screens/Signup';
-import Home from '../../screens/Home';
-import TabBar from '../../components/Layout/TabBar';
 import { useSelector } from 'react-redux';
-import { Profile, Work } from '../../screens/Private';
-import Header from '../../components/Layout/Header';
-import Events from '../../screens/Private/Events';
+import CreatePost from '../../screens/Home/CreatePost';
+import Messages from '../../screens/Private/Messages';
+import AuthStack from './AuthStack';
+import TabNavigator from '../TabNavigator';
 
-const Tab = createBottomTabNavigator();
-const Auth = createStackNavigator();
-
-export const AuthNavigator = () => {
-    return(
-        <Auth.Navigator screenOptions={{headerShown: true}}>
-            <Auth.Screen 
-                name='Signin'
-                component={Signin}
-                options={{
-                    presentation: 'card',
-                    animationTypeForReplace: 'push'
-                }}
-            />
-             <Auth.Screen 
-                name='Signup'
-                component={Signup}
-                options={{
-                    presentation: 'card',
-                    animationTypeForReplace: 'push'
-                }}
-            />
-        </Auth.Navigator>
-    )
+export type RootStackParamsList = {
+  Initial: undefined;
+  CreatePost: undefined;
+  Messages: undefined
 }
 
+export const HomeStack = createStackNavigator<RootStackParamsList>();
 
 export const AppNavigator = () => {
-    return (
-      <Tab.Navigator 
-      tabBar={(props: any) => <TabBar {...props} />}
-      >
-        <Tab.Screen name='Home' component={Home} 
-          options={{
-            header: () => <Header title='Joobs' />,
-          }}
-        
-        />
-        <Tab.Screen name='Projects' component={Home} 
-            options={{
-              header: () => <Header title='Proyectos' />,
-            }}
-        />
-        <Tab.Screen name='Work' component={Work} 
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name='Initial' component={TabNavigator} options={{
+        headerShown: false
+      }} />
+      <HomeStack.Screen name="CreatePost" component={CreatePost}
         options={{
-          header: () => <Header title='Trabajo' />,
+          headerShown: false,
         }}
-        />
-        <Tab.Screen name='Events' component={Events} 
-            options={{
-              header: () => <Header title='Eventos' />,
-            }}
-        />
-        <Tab.Screen name='Profile' component={Profile} 
-            options={{
-              header: () => <Header title='@nestor65303' />,
-            }}
-        />
+      />
+      <HomeStack.Screen name="Messages" component={Messages}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  )
+}
 
-      </Tab.Navigator>
-    )
-  }
-
-  export const NavigatorContainer = () => {
-    const {user} =  useSelector((state:any) => state.auth);
-    return <>
-    {user ? <AppNavigator /> : <AuthNavigator />}
-    </>
-  }
+export const NavigatorContainer = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  return <>
+    {user ? <AppNavigator /> : <AuthStack />}
+  </>
+}

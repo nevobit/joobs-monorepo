@@ -2,12 +2,18 @@ import { View, Text, StatusBar, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './styles'
 import Icon  from 'react-native-vector-icons/Ionicons'
+import { RootStackParamsList } from '../../../navigator/AppNavigator';
+import { StackScreenProps } from '@react-navigation/stack';
+import { HomeStackParamList } from '../../../navigator/AppNavigator/HomeStack';
+
+interface HomeProps extends StackScreenProps<HomeStackParamList>{}
 
 interface Props{
-    title: string
+    title: string;
+    navigation: any
 }
 
-const Header = ({title}: Props) => {
+const Header = ({title, navigation}: Props) => {
   return (
     <View style={{
         backgroundColor: '#121212',
@@ -35,7 +41,7 @@ const Header = ({title}: Props) => {
                 <Icon name='notifications-outline' size={24} color='#fff' />            
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
                 <Icon name='chatbubble-outline' size={24} color='#fff' />            
             </TouchableOpacity>
 

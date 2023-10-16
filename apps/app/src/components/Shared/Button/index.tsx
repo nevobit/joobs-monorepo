@@ -1,22 +1,24 @@
 import React from 'react'
-import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, ButtonProps, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
-interface Props {
+interface Props extends TouchableOpacityProps{
     text: string
     onPress?: any
     loading?: boolean
 }
 
-const Button = ({loading, onPress, text}: Props) => {
+const Button = ({loading, onPress, text, style, ...rest}: Props) => {
   return (
     <TouchableOpacity 
     onPress={onPress}
-    style={{
-        backgroundColor: '#000',
-        paddingVertical: 15,
-        borderRadius: 10,
-        marginTop: 20
-    }}>
+    style={[{
+      backgroundColor: '#5368f5',
+      paddingVertical: 10,
+      borderRadius: 50,
+      marginTop: 20
+  }, style]}
+    {...rest}
+    >
       {loading? <ActivityIndicator /> : (
 
         <Text style={{
