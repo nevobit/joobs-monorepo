@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Listing = () => {
+const Listing = ({navigation}: any) => {
   return (
     <View style={{
       alignItems: 'center',
@@ -28,7 +28,9 @@ const Listing = () => {
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20
-      }}>
+      }}
+      onPress={() => navigation.navigate('CreateWork')}
+      >
         <Text style={{
           color: '#fff',
           fontSize: 14

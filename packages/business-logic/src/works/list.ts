@@ -2,7 +2,7 @@ import { Result, works, StatusType, Params } from "@joobs/entities";
 import { getDbInstance } from '@joobs/data-sources'
 import { eq } from 'drizzle-orm'
 
-export const getAllWorks = async ({ page= 1, limit=14, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
+export const getAllWorks = async ({ page= 1, limit=24, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
     const result = getDbInstance().select().from(works);
 
     await result.where(eq(works.status, status));

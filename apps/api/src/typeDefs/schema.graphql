@@ -10,6 +10,7 @@ type Location {
 }
 
 type Work {
+    uuid: ID
     title: String
     user: String
     role: String

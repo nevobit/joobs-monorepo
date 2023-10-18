@@ -10,11 +10,7 @@ import { CREATE_WORK } from '../../../../graphql/mutations/works'
 const Explorer = () => {
   const { data, loading, error, refetch } = useQuery(WORKS);
   
-  const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK)
-  if(error){
-    Alert.alert('HUBO UN ERROR', error.message);
-    return
-  }
+
   useEffect(() => {
     refetch();
   }, [refetch])
@@ -57,21 +53,7 @@ const Explorer = () => {
   paddingHorizontal: 15
 }}>
 
-                <Button onPress={() => createWork({
-                  variables: {
-                    data: {
-                      description: "Necesito un experto en php para un backend en laravel",
-                      role: "Proyecto",
-                      title: "PHP Developer",
-                      user: "445g434f3-3f34g3-g45g45-g4g45g4g45",
-                      skills: [
-                        "PHP",
-                        "Backend"
-                      ],
-                      status: "active" 
-                    }
-                  }
-                })} text='Crear Oportunidad' loading={creatingLoading} />
+                <Button text='Crear Oportunidad'  />
                 </View>
 
     </View>

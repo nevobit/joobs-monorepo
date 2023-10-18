@@ -4,7 +4,6 @@ export default {
         works: async () => {
             try{
                 const works = await getAllWorks({});
-                console.log("WORKSS", works.items);
                 return works.items;
             }catch(err:any){
                 throw new Error(err);
@@ -13,9 +12,9 @@ export default {
     },
     Mutation: {
         createWork: async (_: any, {data}: any, _context: any) => {
-            console.log(data);
             const { title, description, skills, status, role, user, location, remuneration } = data;
             const work = await createWork({title, description, skills, status, role, user, location, remuneration});
+            console.log({work});
             return work;
         }
     }
