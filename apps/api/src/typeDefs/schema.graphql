@@ -49,3 +49,26 @@ input DataCreateWork {
 type Mutation {
     createWork(data: DataCreateWork): Work
 }
+
+type Stages{
+    description: String
+    requirements: [String]
+}
+
+input StagesInput{
+    description: String
+    requirements: [String]
+}
+
+
+
+type Project {
+    title: String
+    description: String
+    skills: [String]
+    stages: [String]
+    steps: [String]
+    difficulty: String
+    duration: String
+    reward: String
+}
