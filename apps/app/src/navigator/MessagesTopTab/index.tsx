@@ -1,6 +1,6 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React from 'react';
-import Explorer from '../../screens/Private/Work/Explorer';
+import Chats from '../../screens/Private/Messages/Chats';
 import Listing from '../../screens/Private/Work/Listing';
 
 const Tab = createMaterialTopTabNavigator();
@@ -16,7 +16,7 @@ const MessagesTopTap = () => {
       tabBarActiveTintColor: '#5368f5',
     }}
       >
-      <Tab.Screen name="Mensajes" component={Explorer} />
+      <Tab.Screen name="Mensajes" component={Chats} />
       <Tab.Screen name="JB Trabajo" component={Listing} />
     </Tab.Navigator>
   );

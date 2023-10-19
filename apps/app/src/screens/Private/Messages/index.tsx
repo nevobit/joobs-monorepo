@@ -3,7 +3,7 @@ import React from 'react'
 import MessagesTopTap from '../../../navigator/MessagesTopTab'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const Messages = () => {
+const Messages = ({ navigation  }: any) => {
   return (
     <SafeAreaView style={{
         flex: 1
@@ -16,7 +16,7 @@ const Messages = () => {
             alignItems: 'center',
             gap: 10
         }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon name='arrow-back' size={25} color='#fff' />
             </TouchableOpacity>
             <Text style={{

@@ -9,34 +9,34 @@ import { CREATE_WORK } from '../../../../graphql/mutations/works'
 
 const Explorer = () => {
   const { data, loading, error, refetch } = useQuery(WORKS);
-  
 
   useEffect(() => {
     refetch();
-  }, [refetch])
+  }, [refetch]);
+
   return (
     <View>
-           
-           <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingVertical: 10,
-          paddingHorizontal: 15
-        }}>
-          <Text style={{
-            fontSize: 16,
-            color: 'rgba(0,0,0,0.8)'
-          }}>Oportunidades para ti</Text>
-          <View>
-            <TouchableOpacity>
-              <Icon name='search-outline' size={22} color="#000" />
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        {loading? <ActivityIndicator color='#121212' size='large' /> : (
-          
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 10,
+        paddingHorizontal: 15
+      }}>
+        <Text style={{
+          fontSize: 16,
+          color: 'rgba(0,0,0,0.8)'
+        }}>Oportunidades para ti</Text>
+        <View>
+          <TouchableOpacity>
+            <Icon name='search-outline' size={22} color="#000" />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {loading ? <ActivityIndicator color='#121212' size='large' /> : (
+
 
         <ScrollView style={{
           paddingHorizontal: 15,
@@ -47,14 +47,7 @@ const Explorer = () => {
           ))}
 
         </ScrollView>
-                )}
-
-<View style={{
-  paddingHorizontal: 15
-}}>
-
-                <Button text='Crear Oportunidad'  />
-                </View>
+      )}
 
     </View>
   )

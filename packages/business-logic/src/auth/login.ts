@@ -11,7 +11,7 @@ export const login =async ({email}: Partial<User>) => {
     const user = result[0];
 
     if(!user){
-        throw new Error('User not found');
+        throw new Error('User don\'t exist');
     }
 
     // Send email logic

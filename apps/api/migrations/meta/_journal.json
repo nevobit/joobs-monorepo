@@ -43,6 +43,13 @@
       "when": 1697500334469,
       "tag": "0005_lucky_boomer",
       "breakpoints": false
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1697736525196,
+      "tag": "0006_safe_betty_brant",
+      "breakpoints": false
     }
   ]
 }

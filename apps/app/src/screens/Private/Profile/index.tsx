@@ -1,13 +1,8 @@
 import React from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
-import Input from '../../../components/Shared/Input'
-import Field from '../../../components/Shared/Field'
-import Geolocation from '@react-native-community/geolocation'
+import { ScrollView, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { HomePost } from '../../../components/UI'
 
 const Profile = () => {
-  Geolocation.getCurrentPosition(info => console.log(info));
 
   return (
     <View style={{

@@ -21,7 +21,7 @@ const Listing = ({navigation}: any) => {
         marginTop: 5,
         marginBottom: 10,
         color: 'rgba(0, 0, 0, 0.6)'
-      }}>No dejes este esoacui solo. Crea una oferta de trabajo y atrae candidadtos fabulosos en poco tiempo!</Text>
+      }}>No dejes este espacio solo. Crea una oferta de trabajo y atrae candidadtos fabulosos en poco tiempo!</Text>
 
       <TouchableOpacity style={{
         backgroundColor: '#5368f5',

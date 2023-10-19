@@ -20,9 +20,6 @@ type Work {
     location: Location
 }
 
-type Query {
-    works: [Work]
-}
 
 input RemunerationInput {
     value: Float
@@ -46,9 +43,6 @@ input DataCreateWork {
     remuneration: RemunerationInput
 }
 
-type Mutation {
-    createWork(data: DataCreateWork): Work
-}
 
 type Stages{
     description: String
@@ -60,8 +54,6 @@ input StagesInput{
     requirements: [String]
 }
 
-
-
 type Project {
     title: String
     description: String
@@ -71,4 +63,36 @@ type Project {
     difficulty: String
     duration: String
     reward: String
+}
+
+# USER
+
+type User {
+    uuid: ID
+    name: String
+    email: String
+}
+
+type AuthPayload {
+    token: String
+}
+
+input UserInput {
+    name: String
+    email: String
+    phone: String
+    photo: String
+}
+
+type Query {
+    works: [Work]
+}
+
+
+type Mutation {
+    createWork(data: DataCreateWork): Work
+
+    # USER
+    userLogin(email: String!): AuthPayload
+    userRegister(userData: UserInput): AuthPayload
 }

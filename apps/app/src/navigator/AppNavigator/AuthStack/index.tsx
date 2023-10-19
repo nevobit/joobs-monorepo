@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Onboarding from '../../../screens/Onboarding';
 import Signin from '../../../screens/Signin';
 import Signup from '../../../screens/Signup';
+import RegisterWorkStack from '../../../screens/Register'
 
 const Auth = createStackNavigator();
 
@@ -29,6 +30,14 @@ export const AuthStack = () => {
         <Auth.Screen
           name='Signup'
           component={Signup}
+          options={{
+            presentation: 'card',
+            animationTypeForReplace: 'push'
+          }}
+        />
+        <Auth.Screen
+          name='Register'
+          component={RegisterWorkStack}
           options={{
             presentation: 'card',
             animationTypeForReplace: 'push'
