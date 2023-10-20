@@ -21,6 +21,7 @@ type Work {
 
 type Query {
     works: [Work]
+    projects: [Project]
 }
 
 input RemunerationInput {
@@ -47,26 +48,48 @@ input DataCreateWork {
 
 type Mutation {
     createWork(data: DataCreateWork): Work
+    createProject(data: DataCreateProject): Project
 }
 
-type Stages{
+type Stages {
     description: String
     requirements: [String]
 }
 
-input StagesInput{
+input StagesInput {
     description: String
     requirements: [String]
 }
 
+type Steps {
+    duration: String
+    resources: [String]
+    inCharge: String
+}
 
+input StepsInput {
+    duration: String
+    resources: [String]
+    inCharge: String
+}
+
+input DataCreateProject {
+    title: String
+    description: String
+    skills: [String]
+    stages: [StagesInput]
+    steps: [StepsInput]
+    difficulty: String
+    duration: String
+    reward: String
+}
 
 type Project {
     title: String
     description: String
     skills: [String]
-    stages: [String]
-    steps: [String]
+    stages: [Stages]
+    steps: [Steps]
     difficulty: String
     duration: String
     reward: String
