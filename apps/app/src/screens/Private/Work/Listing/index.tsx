@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Listing = () => {
+const Listing = ({navigation}: any) => {
   return (
     <View style={{
       alignItems: 'center',
@@ -21,14 +21,16 @@ const Listing = () => {
         marginTop: 5,
         marginBottom: 10,
         color: 'rgba(0, 0, 0, 0.6)'
-      }}>No dejes este esoacui solo. Crea una oferta de trabajo y atrae candidadtos fabulosos en poco tiempo!</Text>
+      }}>No dejes este espacio solo. Crea una oferta de trabajo y atrae candidadtos fabulosos en poco tiempo!</Text>
 
       <TouchableOpacity style={{
         backgroundColor: '#5368f5',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20
-      }}>
+      }}
+      onPress={() => navigation.navigate('CreateWork')}
+      >
         <Text style={{
           color: '#fff',
           fontSize: 14

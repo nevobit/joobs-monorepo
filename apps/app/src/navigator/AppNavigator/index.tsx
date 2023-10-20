@@ -5,11 +5,13 @@ import CreatePost from '../../screens/Home/CreatePost';
 import Messages from '../../screens/Private/Messages';
 import AuthStack from './AuthStack';
 import TabNavigator from '../TabNavigator';
+import CreateWorkStack from '../../screens/Private/Work/CreateWork';
 
 export type RootStackParamsList = {
   Initial: undefined;
   CreatePost: undefined;
-  Messages: undefined
+  Messages: undefined;
+  CreateWork: undefined;
 }
 
 export const HomeStack = createStackNavigator<RootStackParamsList>();
@@ -26,6 +28,12 @@ export const AppNavigator = () => {
         }}
       />
       <HomeStack.Screen name="Messages" component={Messages}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+<HomeStack.Screen name="CreateWork" component={CreateWorkStack}
         options={{
           headerShown: false,
         }}

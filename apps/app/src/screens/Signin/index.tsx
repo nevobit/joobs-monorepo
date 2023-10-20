@@ -15,12 +15,13 @@ const Signin = ({navigation}: any) => {
     const onSubmit = async (e: any) => {
         e.preventDefault();
         setLoading(true);
-        try {
-          dispatch(signin({phone: 3226589914, name: 'Nestor Mosquera'}));
-          setLoading(false);
-        } catch (err) {
-          console.log(err);
-        }
+        navigation.navigate('Register')
+        // try {
+        //   dispatch(signin({phone: 3226589914, name: 'Nestor Mosquera'}));
+        //   setLoading(false);
+        // } catch (err) {
+        //   console.log(err);
+        // }
       };
   return (
     <View style={{

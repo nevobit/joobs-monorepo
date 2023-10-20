@@ -9,38 +9,34 @@ import { CREATE_WORK } from '../../../../graphql/mutations/works'
 
 const Explorer = () => {
   const { data, loading, error, refetch } = useQuery(WORKS);
-  
-  const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK)
-  if(error){
-    Alert.alert('HUBO UN ERROR', error.message);
-    return
-  }
+
   useEffect(() => {
     refetch();
-  }, [refetch])
+  }, [refetch]);
+
   return (
     <View>
-           
-           <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingVertical: 10,
-          paddingHorizontal: 15
-        }}>
-          <Text style={{
-            fontSize: 16,
-            color: 'rgba(0,0,0,0.8)'
-          }}>Oportunidades para ti</Text>
-          <View>
-            <TouchableOpacity>
-              <Icon name='search-outline' size={22} color="#000" />
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        {loading? <ActivityIndicator color='#121212' size='large' /> : (
-          
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 10,
+        paddingHorizontal: 15
+      }}>
+        <Text style={{
+          fontSize: 16,
+          color: 'rgba(0,0,0,0.8)'
+        }}>Oportunidades para ti</Text>
+        <View>
+          <TouchableOpacity>
+            <Icon name='search-outline' size={22} color="#000" />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {loading ? <ActivityIndicator color='#121212' size='large' /> : (
+
 
         <ScrollView style={{
           paddingHorizontal: 15,
@@ -51,28 +47,7 @@ const Explorer = () => {
           ))}
 
         </ScrollView>
-                )}
-
-<View style={{
-  paddingHorizontal: 15
-}}>
-
-                <Button onPress={() => createWork({
-                  variables: {
-                    data: {
-                      description: "Necesito un experto en php para un backend en laravel",
-                      role: "Proyecto",
-                      title: "PHP Developer",
-                      user: "445g434f3-3f34g3-g45g45-g4g45g4g45",
-                      skills: [
-                        "PHP",
-                        "Backend"
-                      ],
-                      status: "active" 
-                    }
-                  }
-                })} text='Crear Oportunidad' loading={creatingLoading} />
-                </View>
+      )}
 
     </View>
   )

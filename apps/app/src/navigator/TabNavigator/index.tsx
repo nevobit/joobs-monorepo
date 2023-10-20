@@ -38,7 +38,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen name='Profile' component={Profile}
                 options={({ navigation, route }) => ({
-                    header: () => <Header title='Perfil' navigation={navigation} />,
+                    header: () => <Header title='Perfil' navigation={navigation} profile />,
                   })}
             />
         </Tab.Navigator>
