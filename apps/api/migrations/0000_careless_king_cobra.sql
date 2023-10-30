@@ -16,6 +16,11 @@ CREATE TABLE IF NOT EXISTS "projects" (
 	"status" varchar(256) NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"updated_at" timestamp DEFAULT now(),
+	"description" varchar,
+	"skills" varchar,
+	"difficulty" varchar(256),
+	"duration" varchar(256),
+	"reward" varchar(256),
 	"user" varchar(256)
 );
 

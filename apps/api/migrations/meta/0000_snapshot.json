@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "6151ad78-89b0-415b-9cdf-5bb1b187b91a",
+  "id": "53b66171-13c8-4613-8098-666edcf303f9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "discussions": {
@@ -129,6 +129,36 @@
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "skills": {
+          "name": "skills",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "difficulty": {
+          "name": "difficulty",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration": {
+          "name": "duration",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reward": {
+          "name": "reward",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
         },
         "user": {
           "name": "user",
