@@ -37,13 +37,14 @@
     "release-it": "16.2.1",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
+    "tsc": "^2.0.4",
     "typescript": "5.2.2"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
+    "@joobs/business-logic": "workspace:^",
     "@joobs/data-sources": "workspace:^",
     "@joobs/entities": "workspace:^",
-    "@joobs/business-logic": "workspace:^",
     "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
     "fastify": "4.23.2",

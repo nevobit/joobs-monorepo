@@ -81,6 +81,9 @@ importers:
       ts-node-dev:
         specifier: 2.0.0
         version: 2.0.0(@types/node@20.8.0)(typescript@5.2.2)
+      tsc:
+        specifier: ^2.0.4
+        version: 2.0.4
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -129,6 +132,9 @@ importers:
       react-native-gesture-handler:
         specifier: ^2.13.2
         version: 2.13.2(react-native@0.72.3)(react@18.2.0)
+      react-native-image-picker:
+        specifier: ^7.0.2
+        version: 7.0.2(react-native@0.72.3)(react@18.2.0)
       react-native-pager-view:
         specifier: ^6.2.1
         version: 6.2.1(react-native@0.72.3)(react@18.2.0)
@@ -10867,6 +10873,16 @@ packages:
       react-native: 0.72.3(@babel/core@7.22.11)(@babel/preset-env@7.20.2)(react@18.2.0)
     dev: false
 
+  /react-native-image-picker@7.0.2(react-native@0.72.3)(react@18.2.0):
+    resolution: {integrity: sha512-2Y+TMzv2l32IikqYpj4WOqkYvv42SXkSvL9zAo0XdhA3Rbe3lc0Oz12KlR6M2bGh8RxXz5lUrs+9mxy/GpcLIg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.72.3(@babel/core@7.22.11)(@babel/preset-env@7.20.2)(react@18.2.0)
+    dev: false
+
   /react-native-pager-view@6.2.1(react-native@0.72.3)(react@18.2.0):
     resolution: {integrity: sha512-fZ8chez5J+w831nSnbtK8hwlCiMy1DgpFv8xG6ajXLsAI8uMkGvP554QDIDNlUoCuVwMf7OFyd32Y2Nm2Iaj9Q==}
     peerDependencies:
@@ -12299,6 +12315,11 @@ packages:
       typescript: 5.2.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: true
+
+  /tsc@2.0.4:
+    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
+    hasBin: true
     dev: true
 
   /tsconfig-paths@3.14.2:
