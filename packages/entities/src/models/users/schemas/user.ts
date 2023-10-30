@@ -51,6 +51,7 @@ export interface User extends Base {
     isBlocked: boolean;
     isSuspended: boolean;
     block_reason: string;
+    code: number;
     suspended_reason: string;
     notifications: boolean;
     last_login: string;

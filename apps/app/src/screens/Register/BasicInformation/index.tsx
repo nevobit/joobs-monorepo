@@ -1,11 +1,26 @@
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StatusBar, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import React, { useState } from 'react'
 import Field from '../../../components/Shared/Field'
 import Input from '../../../components/Shared/Input'
 import Button from '../../../components/Shared/Button'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useUploadImage } from '../../../hooks'
+import { useDispatch, useSelector } from 'react-redux'
+import { saveUserInfo } from '../../../store/features/auth'
 
-const BasicInformation = () => {
+const BasicInformation = ({navigation, route}: any) => {
+    const { photo, isLoading, error, getPhoto } = useUploadImage(); 
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const { userInfo } = useSelector((state: any) => state.auth);
+
+    const dispatch = useDispatch();
+
+    const onSubmit = () => {
+        dispatch(saveUserInfo({ name, phone }));
+        navigation.navigate('PersonInformation', { name, phone })
+    }
+
   return (
     <View style={{
         backgroundColor: '#5368f5',
@@ -37,7 +52,9 @@ const BasicInformation = () => {
             paddingHorizontal: 15,
         }}>
 
-            <TouchableOpacity style={{
+            <TouchableOpacity 
+            onPress={getPhoto}
+            style={{
                 backgroundColor: 'orange',
                 height: 100,
                 width: 100,
@@ -45,16 +62,36 @@ const BasicInformation = () => {
                 position:'absolute',
                 top: -50,
                 left: '50%',
-                transform: [{ translateX: -50 }],
+                transform: [{ translateX: -40 }],
                 zIndex: 999,
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
+                  {photo?.length > 5 ? (
+                <Image 
+                style={{
+                  height:'100%',
+                  width:'100%',
+                  resizeMode: 'contain'
+                }}
+                source={{
+                  uri: photo
+                }} />
+            ): (
+                <>
+                {isLoading? <ActivityIndicator /> : (
+
                 <Text style={{
                     fontSize: 55,
                     fontWeight: '400',
                     color: '#fff'
-                }}>N</Text>
+                }}>{userInfo.email?.charAt(0).toUpperCase()}</Text>
+                )}
+
+                </>
+
+            )}
+                
                 <View style={{
                     position: 'absolute',
                     bottom: 0,
@@ -79,14 +116,16 @@ const BasicInformation = () => {
             }}>
 
             <Field label='Cual es tu nombre completo?'>
-                <Input placeholder='Jose Pelaez' />
+                <Input placeholder='Jose Pelaez' onChangeText={(text) => setName(text)} />
             </Field>
             <Field label='Cual es tu numero de telefono?'>
-                <Input placeholder='Ej. 3214554555' />
+                <Input placeholder='Ej. 3214554555' onChangeText={(text) => setPhone(text)} />
             </Field>
             </View>
 
-            <Button style={{
+            <Button 
+            onPress={onSubmit}
+            style={{
                 marginTop: 'auto',
                 marginBottom: 30
             }} text='Continuar ->' />

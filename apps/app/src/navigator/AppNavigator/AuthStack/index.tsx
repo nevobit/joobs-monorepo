@@ -5,6 +5,7 @@ import Onboarding from '../../../screens/Onboarding';
 import Signin from '../../../screens/Signin';
 import Signup from '../../../screens/Signup';
 import RegisterWorkStack from '../../../screens/Register'
+import VerificationCode from '../../../screens/VerificationCode';
 
 const Auth = createStackNavigator();
 
@@ -34,6 +35,14 @@ export const AuthStack = () => {
             presentation: 'card',
             animationTypeForReplace: 'push'
           }}
+        />
+        <Auth.Screen 
+        name='VerificationCode'
+        component={VerificationCode}
+        options={{
+          presentation: 'card',
+          animationTypeForReplace: 'push'
+        }}
         />
         <Auth.Screen
           name='Register'

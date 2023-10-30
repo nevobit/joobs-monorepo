@@ -20,7 +20,7 @@ const HomeStack = () => {
     <Stack.Navigator>
     <Stack.Screen name="Joobs" component={Home} 
       options={({ navigation, route }) => ({
-        header: () => <Header title='Joobs' navigation={navigation} />,
+        header: () => <Header title='Joobs' messages navigation={navigation} />,
       })}
     />
 

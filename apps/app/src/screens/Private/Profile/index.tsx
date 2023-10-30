@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useUser } from '../../../hooks/users/useUser'
 
 const Profile = () => {
+  const { isLoading, user, refetch } = useUser();
 
+  useEffect(() => {
+    refetch()
+},[refetch])
   return (
     <View style={{
       height: '100%',
@@ -41,7 +46,7 @@ const Profile = () => {
               fontSize: 40,
               fontWeight: '400',
               color: '#fff'
-            }}>N</Text>
+            }}>{user?.name.charAt(0).toUpperCase()}</Text>
           </View>
 
           <Text style={{
@@ -49,7 +54,7 @@ const Profile = () => {
             marginLeft: 10,
             fontSize: 16,
             color: '#fff'
-          }}>Nestor Mosquera</Text>
+          }}>{user?.name}</Text>
 
 
           <Text style={{

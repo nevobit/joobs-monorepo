@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1696978869735,
-      "tag": "0000_motionless_lucky_pierre",
-      "breakpoints": false
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1697069230043,
-      "tag": "0001_real_butterfly",
-      "breakpoints": false
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1697325264790,
-      "tag": "0002_flowery_sauron",
-      "breakpoints": false
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1697496474351,
-      "tag": "0003_first_tarot",
-      "breakpoints": false
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1697499401402,
-      "tag": "0004_solid_cassandra_nova",
-      "breakpoints": false
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1697500334469,
-      "tag": "0005_lucky_boomer",
-      "breakpoints": false
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1697736525196,
-      "tag": "0006_safe_betty_brant",
+      "when": 1698680652381,
+      "tag": "0000_long_clea",
       "breakpoints": false
     }
   ]

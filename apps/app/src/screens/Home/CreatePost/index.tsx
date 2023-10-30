@@ -1,13 +1,40 @@
+import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { CREATE_DISCUSSION } from '../../../graphql/mutations/discussions'
+import { useSelector } from 'react-redux'
 
 const CreatePost = ({navigation}: any) => {
+    const { user } = useSelector((state: any) => state.auth);
+
+    const [createDiscussion, { loading: isCreating, error: creatingError }] = useMutation(CREATE_DISCUSSION)
+    if(creatingError){
+      Alert.alert('No se pudo crear la publicacion', creatingError.message);
+      return
+    }
 
     const [post, setPost] = useState({
         title: '',
         description: '',
     })
+
+    const onSubmit = async () => {
+        await createDiscussion({
+            variables: {
+                data: {
+                    title: post.title,
+                    description: post.description,
+                }
+            },
+            context: {
+                headers: {
+                  authorization: user.token ? `Bearer ${user.token}` : '',
+                },
+              },
+        });
+        navigation.navigate('Home')
+    }
 
 
     return (
@@ -59,7 +86,10 @@ const CreatePost = ({navigation}: any) => {
                     fontSize: 16,
                     marginLeft: 5
                 }} >{post.title.length}/160</Text>
-                <TextInput style={{
+                <TextInput 
+                multiline
+                onChangeText={(text) => setPost((prev) => ({ ...prev, description: text }))} 
+                style={{
                     fontSize: 14
                 }} placeholder='Descripcion de la discusion (opcional)' />
                 <Text style={{
@@ -77,7 +107,9 @@ const CreatePost = ({navigation}: any) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginTop: 'auto'
-                }}>
+                }}
+                onPress={onSubmit}
+                >
                     <Text style={{
                         color: '#fff',
                         fontSize: 16.

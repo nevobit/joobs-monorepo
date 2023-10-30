@@ -1,7 +1,7 @@
 import { jsonb, pgTable, text, timestamp, uniqueIndex, uuid, varchar } from 'drizzle-orm/pg-core';
 
 export const works = pgTable('works', {
-    uuid: uuid('id').defaultRandom().notNull(),
+    uuid: uuid('id').defaultRandom().notNull().primaryKey().unique(),
     title: varchar('title', { length: 256 }).notNull(),
     skills: text('skills'),
     role: varchar('role', { length: 256 }),

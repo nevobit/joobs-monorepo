@@ -36,7 +36,9 @@ const main = async () => {
   const filePath = path.resolve(__dirname, '../typeDefs/schema.graphql');
   const typeDefs = await readFile(filePath, 'utf8');;
   const server = new ApolloServer({ typeDefs, resolvers });
-  const { url } = await startStandaloneServer(server, { listen: { port: Number(PORT) } })
+  const { url } = await startStandaloneServer(server, { 
+    context: async ({ req }) => ({ req }),
+    listen: { port: Number(PORT) } })
   logger.info(`🚀 Server listentinng on ${url}`)
 }
 

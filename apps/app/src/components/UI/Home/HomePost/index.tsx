@@ -17,6 +17,7 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
       backgroundColor: '#fff',
       // height: 40,
       padding: 15,
+      borderRadius: 5,
       marginBottom: 15,
     }}>
       <View style={{
@@ -51,10 +52,10 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
               fontWeight: '600',
               color: 'rgba(0,0,0,0.8)'
             }}>{name}</Text>
-            <Text style={{
+            {/* <Text style={{
               fontSize: 12,
               color: 'rgba(0,0,0,0.8)'
-            }}>Professional</Text>
+            }}>Professional</Text> */}
           </View>
         </View>
 

@@ -30,7 +30,7 @@ const Header = ({ title, navigation, messages, notifications, profile, whathsapp
     <View style={{
       backgroundColor: '#121212',
       padding: 10,
-      paddingBottom: 15
+      paddingBottom: 5
     }}>
       <StatusBar backgroundColor={'#121212'} barStyle='light-content' />
       <View style={{

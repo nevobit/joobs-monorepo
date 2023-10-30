@@ -9,6 +9,7 @@ const Work = () => {
     <SafeAreaView style={{
       flex: 1
     }}>
+      
         <WorkTopTap />
     </SafeAreaView>
   )

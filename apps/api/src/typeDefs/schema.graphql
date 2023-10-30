@@ -21,6 +21,16 @@ type Work {
 }
 
 
+type Discussion {
+    uuid: ID
+    title: String
+    user: User
+    images: String
+    link: String
+    description: String
+}
+
+
 input RemunerationInput {
     value: Float
     frecuency: String
@@ -43,6 +53,12 @@ input DataCreateWork {
     remuneration: RemunerationInput
 }
 
+input DataCreateDiscussion {
+    title: String
+    images: String
+    link: String
+    description: String
+}
 
 type Stages{
     description: String
@@ -71,10 +87,26 @@ type User {
     uuid: ID
     name: String
     email: String
+    phone: String
+    photo: String
+    location: Location
+    skills: [String]
+    born_date: String
+    gender: String
 }
 
 type AuthPayload {
     token: String
+    type: String
+}
+
+type AuthPayloadCode {
+    token: String
+}
+
+input LocationInput {
+    longitude: Float
+    latitude: Float
 }
 
 input UserInput {
@@ -82,17 +114,25 @@ input UserInput {
     email: String
     phone: String
     photo: String
+    location: LocationInput
+    skills: [String]
+    born_date: String
+    gender: String
 }
 
 type Query {
     works: [Work]
+    discussions: [Discussion]
+    user: User
 }
 
 
 type Mutation {
     createWork(data: DataCreateWork): Work
+    createDiscussion(data: DataCreateDiscussion): Discussion
 
     # USER
     userLogin(email: String!): AuthPayload
-    userRegister(userData: UserInput): AuthPayload
+    verifyCode(email: String!, code: String!): AuthPayloadCode
+    userRegister(data: UserInput): AuthPayloadCode
 }

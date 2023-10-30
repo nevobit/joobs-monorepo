@@ -4,12 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const initialState = {
     user: null,
     userInfo: {
-      firstname: '',
-      lastname: '',
+      name: '',
+      email: '',
       phone: '',
-      accountType: '',
       photo: '',
-      interests: {},
+      gender: '',
+      born_date: '',
+      location: {},
+      skills: [],
     },
     isLoading: true,
     isSignout: false,

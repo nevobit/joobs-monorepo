@@ -6,22 +6,33 @@ import Button from '../../components/Shared/Button'
 import { useDispatch } from 'react-redux'
 import { signin } from '../../store/features/auth'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '../../graphql/mutations'
 
 const Signin = ({navigation}: any) => {
-    const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const [login, {loading, error}] = useMutation(LOGIN);
+
 
     const onSubmit = async (e: any) => {
         e.preventDefault();
-        setLoading(true);
-        navigation.navigate('Register')
-        // try {
-        //   dispatch(signin({phone: 3226589914, name: 'Nestor Mosquera'}));
-        //   setLoading(false);
-        // } catch (err) {
-        //   console.log(err);
-        // }
+        try {
+          const { data } = await login({
+            variables: {
+              email
+            }
+          });
+          navigation.navigate('VerificationCode', { email, type: data.userLogin.type })
+          // if(data.userLogin.type == 'register') {
+            // navigation.navigate('Register')
+          // }else{
+            // dispatch(signin({token: data.userLogin.token}));
+          // }
+        } catch (err) {
+          console.log(err);
+        }
       };
   return (
     <View style={{
@@ -46,7 +57,7 @@ const Signin = ({navigation}: any) => {
         }}>Inicia sesión con tu correo</Text>
         
         <Field label='Correo electronico'>
-            <Input placeholder='Ingresa tu correo electronico' />
+            <Input onChangeText={(text) => setEmail(text)} placeholder='Ingresa tu correo electronico' />
         </Field>
 
         <Text style={{

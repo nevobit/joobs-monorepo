@@ -9,9 +9,15 @@
         "@joobs/data-sources": "workspace:^",
         "@joobs/entities": "workspace:^",
         "drizzle-orm": "^0.28.6",
-        "jsonwebtoken": "^9.0.2"
+        "form-data": "^4.0.0",
+        "jsonwebtoken": "^9.0.2",
+        "mailersend": "^2.2.0",
+        "mailgun.js": "^9.3.0",
+        "otp-generator": "^4.0.1",
+        "resend": "^1.1.0"
     },
     "devDependencies": {
-        "@types/jsonwebtoken": "^9.0.4"
+        "@types/jsonwebtoken": "^9.0.4",
+        "@types/otp-generator": "^4.0.1"
     }
 }

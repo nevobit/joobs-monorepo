@@ -23,17 +23,17 @@ const TabNavigator = () => {
             />
             <Tab.Screen name='Projects' component={Home}
                 options={({ navigation, route }) => ({
-                    header: () => <Header title='Proyectos' navigation={navigation} />,
+                    header: () => <Header title='Proyectos' messages navigation={navigation} />,
                   })}
             />
             <Tab.Screen name='Work' component={Work}
                 options={({ navigation, route }) => ({
-                    header: () => <Header title='Trabajo' navigation={navigation} />,
+                    header: () => <Header title='Trabajo' messages navigation={navigation} />,
                   })}
             />
             <Tab.Screen name='Events' component={Events}
                options={({ navigation, route }) => ({
-                header: () => <Header title='Eventos' navigation={navigation} />,
+                header: () => <Header title='Eventos' messages navigation={navigation} />,
               })}
             />
             <Tab.Screen name='Profile' component={Profile}
