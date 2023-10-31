@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useUser } from '../../../hooks/users/useUser'
 
@@ -15,6 +15,8 @@ const Profile = () => {
       marginBottom: 10,
       backgroundColor: 'rgba(255, 255, 255, .6)'
     }}>
+      {isLoading ? <ActivityIndicator color='#000' /> : (
+        <>
 
       <View style={{
         backgroundColor: '#121212',
@@ -251,6 +253,7 @@ const Profile = () => {
         <Text style={{
           fontWeight: '400',
           fontSize: 12,
+          color: 'rgba(0,0,0,0.8)'
         }}>Solo visible para ti</Text>
         </View>
         </View>
@@ -301,6 +304,9 @@ const Profile = () => {
         </View>
       </View>
       </View>
+      </>
+
+      )}
 
 
     </ScrollView>

@@ -13,8 +13,8 @@ import { useUser } from '../../hooks/users/useUser';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-    const { isLoading, user, refetch } = useUser();
-    const profileTitle = user?.email.split('@')[0];
+    const { user } = useUser();
+    const profileTitle = user?.email?.split('@')[0];
     return (
         <Tab.Navigator
             initialRouteName='Joobs'

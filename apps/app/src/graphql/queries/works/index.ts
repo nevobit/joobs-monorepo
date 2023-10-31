@@ -7,7 +7,6 @@ query Query {
     description
     role
     title
-    user
   }
 }
 `

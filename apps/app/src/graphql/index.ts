@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 
 const httpLink = createHttpLink({
-    uri: 'http://192.168.31.107:8000/graphql'
+    uri: 'https://joobs-api.onrender.com/graphql'
 });
 
 const client = new ApolloClient({

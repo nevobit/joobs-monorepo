@@ -9,11 +9,7 @@ export const getAllWorks = async ({ page= 1, limit=24, search, status= StatusTyp
     console.log(status)
     const db = drizzle(infoInstance, { schema: { users, works } })
 
-    const result = await db.query.works.findMany({
-        with: {
-            user: true
-        }
-    })
+    const result = await db.query.works.findMany()
 
     const pageSize = limit;
     const skip = (page - 1) * pageSize;

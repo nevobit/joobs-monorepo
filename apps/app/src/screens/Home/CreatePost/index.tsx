@@ -5,11 +5,16 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { CREATE_DISCUSSION } from '../../../graphql/mutations/discussions'
 import { useSelector } from 'react-redux'
 import { useUploadImage } from '../../../hooks'
+import { DISCUSSIONS } from '../../../graphql/queries'
 
 const CreatePost = ({navigation}: any) => {
     const { user } = useSelector((state: any) => state.auth);
 
-    const [createDiscussion, { loading: isCreating, error: creatingError }] = useMutation(CREATE_DISCUSSION)
+    const [createDiscussion, { loading: isCreating, error: creatingError }] = useMutation(CREATE_DISCUSSION, {
+        refetchQueries: [
+            { query: DISCUSSIONS }
+        ]
+    })
     if(creatingError){
       Alert.alert('No se pudo crear la publicacion', creatingError.message);
       return
@@ -91,7 +96,8 @@ console.log(post.images)
             }}>
                 <TextInput placeholderTextColor='rgba(0,0,0,0.5)' style={{
                     fontSize: 16,
-                    fontWeight: '600'
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.8)'
                 }}
                     multiline
                     placeholder='Dale un titulo a tu discusion' onChangeText={(text) => setPost((prev) => ({ ...prev, title: text }))} />
@@ -105,8 +111,9 @@ console.log(post.images)
                 multiline
                 onChangeText={(text) => setPost((prev) => ({ ...prev, description: text }))} 
                 style={{
-                    fontSize: 14
-                }} placeholder='Descripcion de la discusion (opcional)' />
+                    fontSize: 14,
+                    color: 'rgba(0,0,0,0.8)',
+                }} placeholder='Descripcion de la discusion (opcional)' placeholderTextColor='rgba(0,0,0,0.4)' />
                 <Text style={{
                     color: 'rgba(0,0,0,0.5)',
                     fontWeight: '600',
@@ -153,7 +160,7 @@ console.log(post.images)
                         borderTopColor: 'rgba(0,0,0,0.1)',
                         marginBottom: 10
                     }}>
-                        <Icon name='image' size={30} />
+                        <Icon name='image' size={30} color='rgba(0,0,0,0.8)' />
                     </TouchableOpacity>
                     <TouchableOpacity style={{
                     backgroundColor: '#5169f6',

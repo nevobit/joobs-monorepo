@@ -10,7 +10,6 @@ mutation Mutation($data: DataCreateWork) {
     }
     role
     title
-    user
   }
 }
 `

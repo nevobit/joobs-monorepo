@@ -10,6 +10,7 @@ import { CREATE_WORK } from '../../../../graphql/mutations/works'
 const Explorer = () => {
   const { data, loading, error, refetch } = useQuery(WORKS);
 
+  console.log(error)
   useEffect(() => {
     refetch();
   }, [refetch]);

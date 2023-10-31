@@ -7,18 +7,22 @@ import Textarea from '../../../../../components/Shared/Textarea'
 import { useMutation } from '@apollo/client'
 import { CREATE_WORK } from '../../../../../graphql/mutations/works'
 import { useUser } from '../../../../../hooks/users/useUser'
+import { WORKS } from '../../../../../graphql/queries'
 
 const Review = ({ navigation, route }: any) => {
-    const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK)
+    const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK, {
+        refetchQueries: [
+            { query: WORKS }
+        ]
+    })
     const { isLoading, user, refetch } = useUser();
 
     if (creatingError) {
         Alert.alert('No se pudo crear la publicacion', creatingError.message);
+        console.log(creatingError)
         return
     }
 
-
-    console.log(route.params.skills)
     const onSubmit = async () => {
         await createWork({
             variables: {
