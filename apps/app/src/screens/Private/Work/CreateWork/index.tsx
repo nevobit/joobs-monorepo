@@ -14,9 +14,9 @@ export type HomeStackParamList = {
   Title: undefined;
   Skills: { title: string };
   Role: { title: string, skills: string[] };
-  Location: { title: string, skills: string[], type: string };
-  Description: { title: string, skills: string[], type: string, location: { address: string } };
-  Review: { title: string, skills: string[], type: string, location: { address: string }, description: string };
+  Location: { title: string, skills: string[], type: string, remuneration: { value: number, frecuency: string } };
+  Description: { title: string, skills: string[], type: string, location: { address: string }, remuneration: { value: number, frecuency: string } };
+  Review: { title: string, skills: string[], type: string, location: { address: string }, description: string, remuneration: { value: number, frecuency: string } };
 
 };
 

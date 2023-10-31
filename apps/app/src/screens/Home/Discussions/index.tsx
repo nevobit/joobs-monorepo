@@ -8,9 +8,6 @@ import { DISCUSSIONS } from '../../../graphql/queries'
 const Discussions = ({ navigation }: any) => {
   const { data, loading, error, refetch } = useQuery(DISCUSSIONS);
 
-  console.log(data)
-  console.log(loading)
-
   useEffect(() => {
     refetch()
   }, [refetch])
@@ -29,8 +26,8 @@ const Discussions = ({ navigation }: any) => {
             paddingHorizontal: 15,
             marginBottom: 50
           }}>
-            {data.discussions.map((discussion: any) => (
-              <HomePost title={discussion.title} text={discussion.description} name={discussion.user.name} type='Placements Club' />
+            {data.discussions.slice().reverse().map((discussion: any) => (
+              <HomePost key={discussion.uuid} title={discussion.title} text={discussion.description} name={discussion.user.name} type='Placements Club' />
             ))}
 
           </ScrollView>

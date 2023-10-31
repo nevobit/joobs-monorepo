@@ -36,7 +36,7 @@ const Title = ({navigation}: any) => {
                         fontWeight: '400',
                         fontSize: 14,
                         color: 'rgba(0,0,0,0.8)'
-                    }}>0/120</Text>
+                    }}>{title.length}/120</Text>
                 </View>
 
                 <Input placeholder='Escribe un titulo para tu publicacion' onChangeText={(text) => setTitle(text)} />

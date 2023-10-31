@@ -1,6 +1,6 @@
 import { Base } from "../../../common";
 
-export enum Club {
+enum Club {
     programming = "programming",
     design = "design",
     business = "business",

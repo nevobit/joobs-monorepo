@@ -6,32 +6,35 @@ import Button from '../../../../../components/Shared/Button'
 import Textarea from '../../../../../components/Shared/Textarea'
 import { useMutation } from '@apollo/client'
 import { CREATE_WORK } from '../../../../../graphql/mutations/works'
+import { useUser } from '../../../../../hooks/users/useUser'
 
-const Review = ({navigation, route}: any) => {
+const Review = ({ navigation, route }: any) => {
     const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK)
-    if(creatingError){
-      Alert.alert('No se pudo crear la publicacion', creatingError.message);
-      return
+    const { isLoading, user, refetch } = useUser();
+
+    if (creatingError) {
+        Alert.alert('No se pudo crear la publicacion', creatingError.message);
+        return
     }
 
 
+    console.log(route.params.skills)
     const onSubmit = async () => {
         await createWork({
             variables: {
-              data: {
-                description: route.params.description,
-                role: route.params.role,
-                title: route.params.title,
-                user: "445g434f3-3f34g3-g45g45-g4g45g4g45",
-                skills: [
-                  route.params.skills,
-                ],
-                location: { address: route.params.location.address },
-                status: "active" 
-              }
+                data: {
+                    description: route.params.description,
+                    role: route.params.role,
+                    title: route.params.title,
+                    remuneration: route.params.remuneration,
+                    user: user.uuid,
+                    skills: route.params.skills,
+                    location: { address: route.params.location.address },
+                    status: "active"
+                }
             }
-          })
-          navigation.navigate('Work')
+        })
+        navigation.navigate('Work')
     }
     return (
         <View style={{
@@ -58,7 +61,7 @@ const Review = ({navigation, route}: any) => {
                         fontSize: 18,
                         color: 'rgba(0,0,0,0.8)'
                     }}>Revisa tu publicacion</Text>
-                         <Text style={{
+                    <Text style={{
                         fontWeight: '400',
                         fontSize: 14,
                         color: 'rgba(0,0,0,0.8)'
@@ -72,13 +75,38 @@ const Review = ({navigation, route}: any) => {
                     borderRadius: 10,
                     padding: 15
                 }}>
-                    
+
                     <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-between'
                     }}>
-                        <View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center'
+                        }}>
+                            <View style={{
+                                height: 50,
+                                width: 50,
+                                backgroundColor: '#5368f5',
+                                borderRadius: 50,
+                                borderWidth: 2,
+                                borderColor: '#474747',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}>
+                                <Text style={{
+                                    fontSize: 28,
+                                    fontWeight: '400',
+                                    color: '#fff'
+                                }}>{user?.name.charAt(0).toUpperCase()}</Text>
+                            </View>
+
+                            <Text style={{
+                                marginLeft: 10,
+                                fontSize: 16,
+                                color: 'rgba(0,0,0,0.8)'
+                            }}>{user?.name}</Text>
 
                         </View>
                         <Text style={{
@@ -97,19 +125,24 @@ const Review = ({navigation, route}: any) => {
                     }}>{route.params.title}</Text>
 
                     <View style={{
-                        flexDirection: 'row'
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        gap: 10
                     }}>
-                        <Text style={{
-                            backgroundColor: 'rgba(255,255,255,.6)',
-                            borderRadius: 20,
-                            paddingHorizontal: 10,
-                            paddingVertical: 4,
-                            fontSize: 12,
-                            fontWeight: '500'
-                        }}>{route.params.skills}</Text>
+                        {route.params.skills.map((skill: string) => (
+                            <Text style={{
+                                backgroundColor: 'rgba(255,255,255,.6)',
+                                borderRadius: 20,
+                                paddingHorizontal: 10,
+                                paddingVertical: 4,
+                                fontSize: 12,
+                                fontWeight: '500'
+                            }}>{skill}</Text>
+                        ))}
+
                     </View>
                     <View style={{
-                        width:'100%',
+                        width: '100%',
                         height: 3,
                         backgroundColor: 'rgba(255,255,255,.5)',
                         borderRadius: 10
@@ -143,11 +176,11 @@ const Review = ({navigation, route}: any) => {
                         }}>Volver</Text>
                     </TouchableOpacity>
 
-                <Button text='Enviar'  onPress={onSubmit}  style={{
-                    width: '60%'
-                }} loading={creatingLoading} />
+                    <Button text='Enviar' onPress={onSubmit} style={{
+                        width: '60%'
+                    }} loading={creatingLoading} />
 
-</View>
+                </View>
 
             </View>
 

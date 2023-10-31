@@ -10,9 +10,10 @@ const Profile = () => {
     refetch()
 },[refetch])
   return (
-    <View style={{
+    <ScrollView style={{
       height: '100%',
       marginBottom: 10,
+      backgroundColor: 'rgba(255, 255, 255, .6)'
     }}>
 
       <View style={{
@@ -197,8 +198,93 @@ const Profile = () => {
           </View>
         </ScrollView>
       </View>
+            <View style={{
+              paddingHorizontal: 15
+            }}>
 
-    </View>
+      <View style={{
+        marginTop: 15,
+        backgroundColor: 'rgba(0,0,0,0.05)',
+        borderRadius: 10,
+        padding: 10
+      }} >
+        <View style={{
+          flexDirection:'row',
+          alignItems: 'center'
+        }}>
+        <Text style={{
+          fontWeight: '600',
+          fontSize: 16,
+          color: 'rgba(0,0,0,0.8)',
+        }}>Informacion Privada </Text>
+       <View style={{
+          
+          backgroundColor: 'rgba(255,255,255, .8)',
+          marginLeft: 10,
+          borderRadius: 50,
+          paddingHorizontal: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
+          display: 'flex',
+          flexDirection: 'row'
+        }}> 
+        <Text> <Icon name="time-outline"  /> </Text> 
+        <Text style={{
+          fontWeight: '400',
+          fontSize: 12,
+        }}>Solo visible para ti</Text>
+        </View>
+        </View>
+        <View>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10
+          }}>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >Genero</Text>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >{user?.gender}</Text>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10
+          }}>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >Telefono</Text>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >{user?.phone}</Text>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10
+          }}>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >Nacimiento</Text>
+            <Text style={{
+              fontSize: 14,
+              color: 'rgba(0,0,0,0.8)'
+            }} >{user?.born_date}</Text>
+          </View>
+
+        </View>
+      </View>
+      </View>
+
+
+    </ScrollView>
   )
 }
 

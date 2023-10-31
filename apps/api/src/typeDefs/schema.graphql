@@ -12,7 +12,7 @@ type Location {
 type Work {
     uuid: ID
     title: String
-    user: String
+    user: User
     role: String
     skills: [String]
     description: String
@@ -27,6 +27,13 @@ type Discussion {
     user: User
     images: String
     link: String
+    description: String
+}
+
+type Club {
+    uuid: ID
+    name: String
+    icon: String
     description: String
 }
 
@@ -57,6 +64,12 @@ input DataCreateDiscussion {
     title: String
     images: String
     link: String
+    description: String
+}
+
+input DataCreateClub {
+    name: String
+    icon: String
     description: String
 }
 
@@ -147,6 +160,7 @@ input UserInput {
 type Query {
     works: [Work]
     discussions: [Discussion]
+    clubs: [Club]
     user: User
 }
 
@@ -154,6 +168,7 @@ type Query {
 type Mutation {
     createWork(data: DataCreateWork): Work
     createDiscussion(data: DataCreateDiscussion): Discussion
+    createClub(data: DataCreateClub): Club
 
     # USER
     userLogin(email: String!): AuthPayload

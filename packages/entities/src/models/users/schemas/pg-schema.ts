@@ -1,6 +1,8 @@
 import { relations } from "drizzle-orm";
 import { integer, jsonb, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
 import { discussions } from "../../discussions";
+import { clubs } from "../../clubs";
+import { works } from "../../works";
 
 export const users = pgTable('users', {
     uuid: uuid('id').defaultRandom().notNull().unique().primaryKey(),
@@ -29,6 +31,15 @@ export const users = pgTable('users', {
     }
 });
 
+export const usersOnClubs = pgTable('user_clubs', {
+    userId: uuid('id').notNull().references(() => users.uuid),
+    clubId: uuid('id').notNull().references(() => clubs.uuid),
+    created_at: timestamp('created_at').defaultNow(),
+    updated_at: timestamp('updated_at').defaultNow(),
+});
+
 export const userRelations = relations(users, ({ many }) => ({
-    discussions: many(discussions)
+    discussions: many(discussions),
+    works: many(works),
+    usersClubs: many(usersOnClubs)
 }))

@@ -72,7 +72,7 @@ const Description = ({navigation, route}: any) => {
                         }}>Volver</Text>
                     </TouchableOpacity>
 
-                <Button text='Revisar ->' onPress={() => navigation.navigate('Review', { title: route.params.title, skills: route.params.skills, role: route.params.role, location: { address: route.params.location.address }, description: description })}  style={{
+                <Button text='Revisar ->' onPress={() => navigation.navigate('Review', { remuneration: route.params.remuneration, title: route.params.title, skills: route.params.skills, role: route.params.role, location: { address: route.params.location.address }, description: description })}  style={{
                     width: '60%'
                 }} />
 

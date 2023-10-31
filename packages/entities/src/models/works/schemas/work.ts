@@ -26,7 +26,7 @@ export interface Work extends Base {
     title: string;
     skills: string[];
     role: string;
-    user: string;
+    userId: string;
     location: Location;
     description: string;
     remuneration: Remuneration;

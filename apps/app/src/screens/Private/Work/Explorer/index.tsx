@@ -42,7 +42,7 @@ const Explorer = () => {
           paddingHorizontal: 15,
           marginBottom: 50
         }}>
-          {data.works.map((work: any) => (
+          {data.works.slice().reverse().map((work: any) => (
             <WorkCard key={work.uuid} name='Andres Rendon' title={work.title} money={1000} type={work.role} />
           ))}
 

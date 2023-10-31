@@ -23,7 +23,7 @@ const Header = ({ title, step, color }: Props) => {
         fontWeight: '600'
       }}>{title}</Text>
       )}
-      <StepIndicator  currentStep={step} totalSteps={6} />
+      <StepIndicator  currentStep={step} totalSteps={5} />
 
     </View>
   )

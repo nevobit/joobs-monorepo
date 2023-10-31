@@ -155,7 +155,7 @@ const Location = ({navigation, route}: any) => {
                         }}>Volver</Text>
                     </TouchableOpacity>
 
-                <Button text='Workspace ->' onPress={() => navigation.navigate('Description', { title: route.params.title, skills: route.params.skills, role: route.params.role, location: { address: location } })}  style={{
+                <Button text='Descripcion ->' onPress={() => navigation.navigate('Description', { remuneration: route.params.remuneration, title: route.params.title, skills: route.params.skills, role: route.params.role, location: { address: location } })}  style={{
                     width: '60%'
                 }} />
 

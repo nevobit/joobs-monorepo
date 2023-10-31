@@ -12,8 +12,8 @@ export default {
     },
     Mutation: {
         createWork: async (_: any, {data}: any, _context: any) => {
-            const { title, description, skills, status, role, user, location, remuneration } = data;
-            const work = await createWork({title, description, skills, status, role, user, location, remuneration});
+            const { title, description, skills, status, role, userId, location, remuneration } = data;
+            const work = await createWork({title, description, skills, status, role, userId, location, remuneration});
             return work;
         }
     }

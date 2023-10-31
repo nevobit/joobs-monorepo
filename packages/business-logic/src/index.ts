@@ -5,3 +5,4 @@ export * from './users';
 export * from './verify';
 export * from './works';
 export * from './discussions';
+export * from './clubs';

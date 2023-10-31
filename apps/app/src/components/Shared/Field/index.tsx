@@ -1,16 +1,18 @@
 import React, { ReactNode } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ViewProps } from 'react-native'
 
-interface Props {
+interface Props  extends ViewProps {
     label?: string;
-    children: ReactNode
+    children: ReactNode;
 }
 
-const Field = ({label, children}: Props) => {
+const Field = ({label, children, style, ...rest}: Props) => {
   return (
-    <View style={{
+    <View style={[{
         marginTop: 20
-    }}>
+    }, style]}
+    {...rest}
+    >
         {label &&
         <Text style={{
             fontSize: 16,

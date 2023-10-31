@@ -6,11 +6,15 @@ import Home from '../../screens/Home';
 import Header from '../../components/Layout/Header';
 import Events from '../../screens/Private/Events';
 import { Profile, Work } from '../../screens/Private';
+import Project from '../../screens/Projects';
+import { useUser } from '../../hooks/users/useUser';
 
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+    const { isLoading, user, refetch } = useUser();
+    const profileTitle = user?.email.split('@')[0];
     return (
         <Tab.Navigator
             initialRouteName='Joobs'
@@ -21,7 +25,7 @@ const TabNavigator = () => {
                     headerShown: false
                 }}
             />
-            <Tab.Screen name='Projects' component={Home}
+            <Tab.Screen name='Projects' component={Project}
                 options={({ navigation, route }) => ({
                     header: () => <Header title='Proyectos' messages navigation={navigation} />,
                   })}
@@ -38,7 +42,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen name='Profile' component={Profile}
                 options={({ navigation, route }) => ({
-                    header: () => <Header title='Perfil' navigation={navigation} profile />,
+                    header: () => <Header title={`@${profileTitle}`} navigation={navigation} profile />,
                   })}
             />
         </Tab.Navigator>

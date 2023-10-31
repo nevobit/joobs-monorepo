@@ -19,7 +19,7 @@ const Button = ({loading, onPress, text, style, ...rest}: Props) => {
   }, style]}
     {...rest}
     >
-      {loading? <ActivityIndicator /> : (
+      {loading? <ActivityIndicator color='#fff' /> : (
 
         <Text style={{
             textAlign: 'center',
