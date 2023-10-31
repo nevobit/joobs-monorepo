@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { Image, ScrollView, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useUser } from '../../../hooks/users/useUser'
 
@@ -30,7 +30,26 @@ const Profile = () => {
           borderRadius: 10,
           marginTop: 40
         }}>
-          <View style={{
+          {user?.photo? 
+
+          <Image source={{
+            uri: user.photo
+          }} 
+          style={{
+            width: 70,
+            height: 70,
+            borderRadius: 50,
+            overflow: 'hidden',
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            borderWidth: 4,
+            borderColor: '#474747',
+            position: 'absolute',
+            top: -25,
+            left: 15,
+          }}
+          />
+            :
+            <View style={{
             height: 70,
             width: 70,
             backgroundColor: '#5368f5',
@@ -49,7 +68,7 @@ const Profile = () => {
               color: '#fff'
             }}>{user?.name.charAt(0).toUpperCase()}</Text>
           </View>
-
+}
           <Text style={{
             marginTop: 50,
             marginLeft: 10,

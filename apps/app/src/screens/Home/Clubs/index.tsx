@@ -24,9 +24,13 @@ const Clubs = () => {
 
           <ScrollView style={{
             paddingHorizontal: 15,
-            marginBottom: 50
-          }}>
-            {data.clubs.map((club: any) => (
+            marginBottom: 50,
+          }}
+          contentContainerStyle={{
+            gap: 10
+          }}
+          >
+            {data?.clubs.map((club: any) => (
               <View key={club.uuid} style={{
                 height: 80,
                 width: '100%',

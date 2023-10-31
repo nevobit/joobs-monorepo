@@ -26,8 +26,8 @@ const Discussions = ({ navigation }: any) => {
             paddingHorizontal: 15,
             marginBottom: 50
           }}>
-            {data.discussions.slice().reverse().map((discussion: any) => (
-              <HomePost key={discussion.uuid} title={discussion.title} text={discussion.description} name={discussion.user.name} type='Placements Club' />
+            {data?.discussions.slice().reverse().map((discussion: any) => (
+              <HomePost key={discussion.uuid} title={discussion.title} image={discussion?.images} text={discussion.description} name={discussion.user.name} type='Placements Club' />
             ))}
 
           </ScrollView>

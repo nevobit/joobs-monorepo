@@ -1,9 +1,10 @@
 import { useMutation } from '@apollo/client'
-import React, { useState } from 'react'
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, Alert, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CREATE_DISCUSSION } from '../../../graphql/mutations/discussions'
 import { useSelector } from 'react-redux'
+import { useUploadImage } from '../../../hooks'
 
 const CreatePost = ({navigation}: any) => {
     const { user } = useSelector((state: any) => state.auth);
@@ -14,10 +15,23 @@ const CreatePost = ({navigation}: any) => {
       return
     }
 
-    const [post, setPost] = useState({
+    const { photo, isLoading, getPhoto, error } = useUploadImage();
+
+    const [post, setPost] = useState<{
+        title: string,
+        description: string,
+        images: string[]
+    }>({
         title: '',
         description: '',
-    })
+        images: []
+    });
+
+    useEffect(() => {
+        if(photo.length > 4){
+            setPost((prev) => ({ ...prev, images: [photo] }))
+        }
+    }, [photo])
 
     const onSubmit = async () => {
         await createDiscussion({
@@ -25,6 +39,7 @@ const CreatePost = ({navigation}: any) => {
                 data: {
                     title: post.title,
                     description: post.description,
+                    images: post.images
                 }
             },
             context: {
@@ -36,7 +51,7 @@ const CreatePost = ({navigation}: any) => {
         navigation.navigate('Home')
     }
 
-
+console.log(post.images)
     return (
         <>
             <View style={{
@@ -98,15 +113,55 @@ const CreatePost = ({navigation}: any) => {
                     fontSize: 16,
                     marginLeft: 5
                 }} >{post.description.length}/1500</Text>
+                {isLoading && <ActivityIndicator  color='#000' />}
+                {post.images.length > 0 && (
+                <View style={{
+                    marginTop: 10
+                }}>
+                    <View style={{
+                        borderWidth: 1,
+                        borderColor: 'rgba(0,0,0,0.1)',
+                        width:80,
+                        height:80,
+                        borderRadius: 5
+                    }}>
+                    <Image source={{
+                        uri: photo
+                    }} 
+                    style={{
+                        width: 80,
+                        height: 80,
+                        objectFit: 'contain'
+                    }}
+                    />
+                    </View>
 
-                <TouchableOpacity style={{
+                </View>
+                )}
+
+
+                <View style={{
+                    marginTop: 'auto'
+                }}>
+                    <TouchableOpacity 
+                    onPress={getPhoto}
+                    style={{
+                        padding: 5,
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderBottomColor: 'rgba(0,0,0,0.1)',
+                        borderTopColor: 'rgba(0,0,0,0.1)',
+                        marginBottom: 10
+                    }}>
+                        <Icon name='image' size={30} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{
                     backgroundColor: '#5169f6',
                     borderRadius: 50,
                     height: 45,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginTop: 'auto'
                 }}
                 onPress={onSubmit}
                 >
@@ -115,6 +170,8 @@ const CreatePost = ({navigation}: any) => {
                         fontSize: 16.
                     }}>Siguiente</Text>
                 </TouchableOpacity>
+                </View>
+               
             </View>
         </>
 

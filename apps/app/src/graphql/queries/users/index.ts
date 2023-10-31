@@ -7,6 +7,7 @@ export const GET_USER_BY_ID = gql`
       name
       email
       gender
+      photo
       phone
       born_date
     }

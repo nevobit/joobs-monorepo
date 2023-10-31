@@ -4,7 +4,6 @@ import { GET_USER_BY_ID } from "../../graphql/queries";
 
 export const useUser = () => {
     const { user } = useSelector((state: any) => state.auth);
-    console.log(user.token)
     const { data, loading, error, refetch } = useQuery(GET_USER_BY_ID, {
       context: {
         headers: {

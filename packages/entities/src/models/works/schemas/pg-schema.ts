@@ -1,6 +1,6 @@
-import { relations } from 'drizzle-orm';
+// import { relations } from 'drizzle-orm';
 import { jsonb, pgTable,  timestamp, uniqueIndex, uuid, varchar } from 'drizzle-orm/pg-core';
-import { users } from '../../users';
+// import { users } from '../../users';
 
 export const works = pgTable('works', {
     uuid: uuid('id').defaultRandom().notNull(),
@@ -9,7 +9,7 @@ export const works = pgTable('works', {
     role: varchar('role', { length: 256 }),
     location: jsonb('location'),
     remuneration: jsonb('remuneration'),
-    userId: uuid('user_id').notNull().references(() => users.uuid),
+    user: uuid('user').notNull(),
     description: varchar('description'), 
     status: varchar('status', { length: 256 }).notNull(),
     created_at: timestamp('created_at').defaultNow(),
@@ -20,9 +20,9 @@ export const works = pgTable('works', {
     }
 });
 
-export const workRelations = relations(works, ({ one }) => ({
-    user: one(users, {
-        fields: [works.userId],
-        references: [users.uuid]
-    })
-}))
+// export const workRelations = relations(works, ({ one }) => ({
+//     user: one(users, {
+//         fields: [works.userId],
+//         references: [users.uuid]
+//     })
+// }))

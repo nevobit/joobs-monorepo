@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface Props {
@@ -94,17 +94,17 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
       {image && (
 
       <Image source={{
-        uri: image
+        uri: image[0]
       }} style={{
         flex: 1,
         width: '100%',
         height: 400,
-        resizeMode: 'contain',
+        resizeMode: 'cover',
       }} />
 
       )}
 
-      <View style={{
+      {/* <View style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 1,
@@ -142,9 +142,13 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
         }}>
           <Icon name='share-social-outline' size={20} color='rgba(0,0,0,0.8)' />
         </View>
-      </View>
+      </View> */}
     </View>
   )
 }
 
 export default HomePost
+
+function success(width: number, height: number): void {
+  throw new Error('Function not implemented.');
+}

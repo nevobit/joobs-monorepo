@@ -39,7 +39,8 @@ const WorkCard = ({ name, type, title, money }: Props) => {
         }}>
           <Text style={{
             fontWeight: '600',
-            fontSize: 16
+            fontSize: 16,
+            color: 'rgba(0,0,0,0.8)'
           }}>{name.charAt(0)}</Text>
         </View>
         <View style={{

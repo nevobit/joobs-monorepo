@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "3db9785f-033f-4346-949b-620c2fb3ddd5",
+  "id": "a6ed1acf-ac6e-446a-aefb-1f28c03d227a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "discussions": {
@@ -428,8 +428,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
+        "user": {
+          "name": "user",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -470,21 +470,7 @@
           "isUnique": true
         }
       },
-      "foreignKeys": {
-        "works_user_id_users_id_fk": {
-          "name": "works_user_id_users_id_fk",
-          "tableFrom": "works",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

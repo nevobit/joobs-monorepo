@@ -8,7 +8,8 @@ const Chats = () => {
             textAlign: 'center',
             marginTop: 50,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 20,
+            color: 'rgba(0,0,0,0.8)'
         }} >Chats</Text>
     </View>
   )

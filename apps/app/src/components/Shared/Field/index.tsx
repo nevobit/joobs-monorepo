@@ -16,6 +16,7 @@ const Field = ({label, children, style, ...rest}: Props) => {
         {label &&
         <Text style={{
             fontSize: 16,
+            color: 'rgba(0,0,0,0.7)',
             marginBottom: 5,
             fontWeight: '600'
         }}>{label}</Text>}

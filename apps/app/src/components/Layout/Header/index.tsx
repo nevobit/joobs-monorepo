@@ -7,6 +7,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { HomeStackParamList } from '../../../navigator/AppNavigator/HomeStack';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../../store/features/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 interface HomeProps extends StackScreenProps<HomeStackParamList> { }
 
@@ -22,8 +23,9 @@ interface Props {
 const Header = ({ title, navigation, messages, notifications, profile, whathsapp }: Props) => {
   const [profileOptions, setProfileOptions] = useState(false);
   const dispatch = useDispatch();
-  const logout = () => {
+  const logout = async () => {
     dispatch(signout());
+    await GoogleSignin.signOut();
   };
   return (
     <>

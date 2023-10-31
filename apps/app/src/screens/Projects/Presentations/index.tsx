@@ -21,7 +21,8 @@ const Presentations = ({ navigation }: any) => {
   <Text style={{
         textAlign: 'center',
         fontSize: 16,
-        marginTop: 20
+        marginTop: 20,
+        color: 'rgba(0,0,0,0.8)'
       }} >No hay Presentaciones</Text>
        
       </ScrollView>

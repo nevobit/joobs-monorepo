@@ -6,6 +6,7 @@ query Query {
     uuid
     title
     description
+    images
     user {
       name
       email

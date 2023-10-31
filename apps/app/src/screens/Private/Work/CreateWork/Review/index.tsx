@@ -136,6 +136,7 @@ const Review = ({ navigation, route }: any) => {
                                 paddingHorizontal: 10,
                                 paddingVertical: 4,
                                 fontSize: 12,
+                                color: 'rgba(0,0,0,0.8)',
                                 fontWeight: '500'
                             }}>{skill}</Text>
                         ))}

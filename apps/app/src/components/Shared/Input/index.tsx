@@ -19,7 +19,7 @@ const Input = ({placeholder, ...rest}: Props) => {
     }}  
     onFocus={() => setIsFocused(true)}
     onBlur={() => setIsFocused(false)}
-    placeholder={placeholder}  {...rest}  />
+    placeholder={placeholder} placeholderTextColor="rgba(0,0,0,0.4)"  {...rest}  />
   )
 }
 

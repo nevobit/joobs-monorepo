@@ -1,10 +1,19 @@
 
-import { login, registerUser, verifyCode } from  '@joobs/business-logic'
+import { login, loginGoogle, registerUser, verifyCode } from  '@joobs/business-logic'
 
 export default {
     Mutation: {
         userLogin: async (_:any, { email }: {email: string}, _context: any) => {
             const result = await login({email});
+            
+            if(result instanceof Error){
+                return new Error('Invalid credentials');
+            }
+
+            return result;
+        },
+        userLoginGoogle: async (_:any, { email }: {email: string}, _context: any) => {
+            const result = await loginGoogle({email});
             
             if(result instanceof Error){
                 return new Error('Invalid credentials');

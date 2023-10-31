@@ -9,15 +9,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveUserInfo } from '../../../store/features/auth'
 
 const BasicInformation = ({navigation, route}: any) => {
-    const { photo, isLoading, error, getPhoto } = useUploadImage(); 
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
     const { userInfo } = useSelector((state: any) => state.auth);
+    const { photo, isLoading, error, getPhoto } = useUploadImage(); 
+    const [name, setName] = useState(userInfo?.name);
+    const [phone, setPhone] = useState('');
+
 
     const dispatch = useDispatch();
 
     const onSubmit = () => {
-        dispatch(saveUserInfo({ name, phone }));
+        dispatch(saveUserInfo({ name, phone, photo: photo?.length > 5 ? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ''}));
         navigation.navigate('PersonInformation', { name, phone })
     }
 
@@ -55,7 +56,7 @@ const BasicInformation = ({navigation, route}: any) => {
             <TouchableOpacity 
             onPress={getPhoto}
             style={{
-                backgroundColor: 'orange',
+                backgroundColor: photo?.length > 5 || userInfo?.photo.length > 5 ? '#fff' : 'orange',
                 height: 100,
                 width: 100,
                 borderRadius: 100,
@@ -67,15 +68,16 @@ const BasicInformation = ({navigation, route}: any) => {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-                  {photo?.length > 5 ? (
+                  {photo?.length > 5 || userInfo?.photo.length > 5 ? (
                 <Image 
                 style={{
                   height:'100%',
                   width:'100%',
-                  resizeMode: 'contain'
+                  resizeMode: 'cover',
+                  borderRadius: 50
                 }}
                 source={{
-                  uri: photo
+                  uri: photo.length > 5? photo.length : userInfo.photo 
                 }} />
             ): (
                 <>
@@ -116,7 +118,7 @@ const BasicInformation = ({navigation, route}: any) => {
             }}>
 
             <Field label='Cual es tu nombre completo?'>
-                <Input placeholder='Jose Pelaez' onChangeText={(text) => setName(text)} />
+                <Input placeholder='Jose Pelaez' value={name} onChangeText={(text) => setName(text)} />
             </Field>
             <Field label='Cual es tu numero de telefono?'>
                 <Input placeholder='Ej. 3214554555' onChangeText={(text) => setPhone(text)} />

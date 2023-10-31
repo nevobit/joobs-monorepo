@@ -9,6 +9,15 @@ mutation Mutation($email: String!) {
 }
 `
 
+export const LOGIN_GOOGLE = gql`
+mutation Mutation($email: String!) {
+    userLoginGoogle(email: $email) {
+        token
+        type
+    }
+}
+`
+
 export const VERIFY_CODE = gql`
 mutation Mutation($email: String!, $code: String!) {
   verifyCode(email: $email, code: $code) {
