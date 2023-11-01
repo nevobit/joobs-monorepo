@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Pressable } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Pressable, RefreshControl, FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import { WorkCard } from '../../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -10,10 +10,14 @@ import { CREATE_WORK } from '../../../../graphql/mutations/works'
 const Explorer = ({navigation}: any) => {
   const { data, loading, error, refetch } = useQuery(WORKS);
 
-  console.log("WORKS", data)
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+      refetch().then(() => {
+        setRefreshing(false);
+      });
+  }, []);
 
   return (
     <View>
@@ -39,17 +43,24 @@ const Explorer = ({navigation}: any) => {
       {loading ? <ActivityIndicator color='#121212' size='large' /> : (
 
 
-        <ScrollView style={{
+        <FlatList 
+        contentContainerStyle={{
           paddingHorizontal: 15,
           marginBottom: 50
-        }}>
-          {data?.works?.slice().reverse().map((work: any) => (
-            <Pressable key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >
-              <WorkCard remuneration={work.remuneration} created_at={work.created_at} name={work?.user?.name} title={work.title} money={1000} type={work.role} />
-            </Pressable>
-          ))}
+        }}
+          data={data.works}
+          renderItem={( { item } ) => 
+          <Pressable key={item.id} onPress={() => navigation.navigate('WorkDetails', { id: item.id })}>
+              <WorkCard {...item} />
+          </Pressable>  
+        
+        }
+          keyExtractor={(item) =>  item.id}
+          onEndReached={() => console.log('Cargando data')}
+          onEndReachedThreshold={0.5}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 
-        </ScrollView>
+        />
       )}
 
     </View>

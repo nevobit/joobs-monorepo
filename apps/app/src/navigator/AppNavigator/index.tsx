@@ -7,13 +7,17 @@ import AuthStack from './AuthStack';
 import TabNavigator from '../TabNavigator';
 import CreateWorkStack from '../../screens/Private/Work/CreateWork';
 import WorkDetails from '../../screens/Private/Work/Details';
+import Notifications from '../../screens/Private/Notifications';
+import Club from '../../screens/Home/Clubs/Club';
 
 export type RootStackParamsList = {
   Initial: undefined;
   CreatePost: undefined;
   Messages: undefined;
+  Notifications: undefined;
   CreateWork: undefined;
   WorkDetails: { id: string };
+  Club: { id: string };
 }
 
 export const HomeStack = createStackNavigator<RootStackParamsList>();
@@ -29,6 +33,13 @@ export const AppNavigator = () => {
           headerShown: false,
         }}
       />
+
+<HomeStack.Screen name="Notifications" component={Notifications}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <HomeStack.Screen name="Messages" component={Messages}
         options={{
           headerShown: false,
@@ -41,6 +52,11 @@ export const AppNavigator = () => {
         }}
       />
       <HomeStack.Screen name="WorkDetails" component={WorkDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen name="Club" component={Club}
         options={{
           headerShown: false,
         }}

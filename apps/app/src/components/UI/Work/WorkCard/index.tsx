@@ -5,17 +5,18 @@ import { DivisaFormater, fromNow } from '../../../../utils'
 import translateToSpanish from '../../../../utils/frecuency-formater';
 
 interface Props{
-  name: string;
-  type: string;
+  user: {
+    name: string;
+  }
   title: string;
-  money: number;
+  role: string;
   created_at: string;
   remuneration: {
     value: number;
     frecuency: string;
   }
 }
-const WorkCard = ({ name, type, title, created_at, remuneration }: Props) => {
+const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
 
   return (
     
@@ -49,14 +50,14 @@ const WorkCard = ({ name, type, title, created_at, remuneration }: Props) => {
             fontWeight: '600',
             fontSize: 16,
             color: 'rgba(0,0,0,0.8)'
-          }}>{name?.charAt(0)}</Text>
+          }}>{user?.name?.charAt(0)}</Text>
         </View>
         <View style={{
         }}>
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
-          }}>{name}</Text>
+          }}>{user?.name}</Text>
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
@@ -79,7 +80,7 @@ const WorkCard = ({ name, type, title, created_at, remuneration }: Props) => {
             color: 'rgba(0,0,0,.8)',
             fontSize: 12,
             fontWeight: '500'
-          }}>{type}</Text>
+          }}>{role}</Text>
         </View>
       </View>
 

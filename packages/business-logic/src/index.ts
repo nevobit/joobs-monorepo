@@ -4,6 +4,7 @@ export * from './clubs';
 export * from './discussions';
 export * from './mailing';
 export * from './projects';
+export * from './users-on-club';
 export * from './users';
 export * from './verify';
 export * from './works';

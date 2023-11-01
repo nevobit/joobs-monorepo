@@ -1,8 +1,10 @@
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, Alert, RefreshControl, Pressable } from 'react-native'
 import React, { useEffect } from 'react'
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { CLUBS } from '../../../graphql/queries/clubs';
-
+import { JOIN } from '../../../graphql/mutations/members';
+import { useUser } from '../../../hooks/users/useUser';
+import { useSelector } from 'react-redux';
 
 const colors: string[] = [
   "rgba(94, 53, 177, 0.5)", // Rosa claro
@@ -17,13 +19,58 @@ const colors: string[] = [
   "#E6EE9C", // Amarillo claro
 ];
 
-const Clubs = () => {
-    const { data, loading, error, refetch } = useQuery(CLUBS);
+const Clubs = ({ navigation }: any) => {
+  const { user: userCtx } = useSelector((state: any) => state.auth);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const { isLoading, user, refetch: refetchUser } = useUser();
 
-    useEffect(() => {
-      refetch()
-    }, [refetch]);
+    const { data, loading, error, refetch } = useQuery(CLUBS, {
+      context: {
+        headers: {
+          authorization: userCtx.token ? `Bearer ${userCtx.token}` : '',
+        },
+      },
+    });
 
+    const [join, { loading: creatingLoading, error: creatingError }] = useMutation(JOIN, {
+      refetchQueries: [
+          { query: CLUBS }
+      ]
+  })
+
+
+  const onSubmit = async (id: string) => {
+    try{
+      await join({
+        variables: {
+            data: {
+                userId: user.id,
+                clubId: id,
+            }
+        }
+    })
+    }catch(e){
+      Alert.alert('Error Critico', String(e));
+    }
+  }
+    
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+      refetch().then(() => {
+        setRefreshing(false);
+      })
+  }, []);
+
+  useEffect(() => {
+    refetchUser()
+    refetch()
+  }, [])
+
+  if (creatingError) {
+    Alert.alert('No te puedes unir a este club', creatingError.message);
+    return;
+}
 
     return (
     <>
@@ -33,7 +80,7 @@ const Clubs = () => {
         marginBottom: 10
       }}>
 
-        {loading ? <ActivityIndicator color='#121212' size='large' /> : (
+        {loading && isLoading ? <ActivityIndicator color='#121212' size='large' /> : (
 
 
           <ScrollView style={{
@@ -43,9 +90,11 @@ const Clubs = () => {
           contentContainerStyle={{
             gap: 10
           }}
+
+          refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh}  /> }
           >
             {data?.clubs.map((club: any, index: number) => (
-              <View key={club.id} style={{
+              <Pressable onPress={() => navigation.navigate('Club', { id: club.id })} key={club.id} style={{
                 height: 85,
                 width: '100%',
                 backgroundColor: colors[index],
@@ -66,26 +115,50 @@ const Clubs = () => {
                     <Text style={{
                       color: 'rgba(0,0,0,0.8)',
                       marginBottom: 5
-                    }}>1810 miembros</Text>
+                    }}>{club.members} miembros</Text>
                     </View>
-                    <TouchableOpacity style={{
+                    {!club.joined ? (
+
+                    <TouchableOpacity onPress={() => onSubmit(club.id)} style={{
                         backgroundColor: 'rgba(0,0,0,0.8)',
                         padding: 5,
                         paddingHorizontal: 20,
-                        borderRadius: 50
+                        borderRadius: 50,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 5
                     }}>
                         <Text style={{
                             color: '#fff',
                             fontSize: 14
                         }}>Unirse</Text>
+                         { creatingLoading &&  <ActivityIndicator color='#fff' /> }
                     </TouchableOpacity>
-                </View>
+                    ): (
+                      <TouchableOpacity style={{
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        borderColor: 'rgba(255,255,255,0.6)',
+                        padding: 5,
+                        paddingHorizontal: 20,
+                        borderRadius: 50
+                    }}>
+                        <Text style={{
+                            color: 'rgba(0,0,0,0.8)',
+                            fontSize: 14
+                        }}>Ver</Text>
+                    </TouchableOpacity>
+                    )}
+
+</View>
                 <Text numberOfLines={1} ellipsizeMode='tail' style={{
                     maxWidth: 300,
                     fontSize: 14,
                     color: 'rgba(0,0,0,0.6)'
                 }}>{club.description}</Text>
-              </View>
+              </Pressable>
             ))}
 
           </ScrollView>

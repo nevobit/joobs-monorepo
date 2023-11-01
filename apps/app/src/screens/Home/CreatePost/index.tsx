@@ -56,7 +56,6 @@ const CreatePost = ({navigation}: any) => {
         navigation.navigate('Home')
     }
 
-console.log(post.images)
     return (
         <>
             <View style={{

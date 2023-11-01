@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native'
 import React, { useEffect } from 'react'
 import { HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -7,6 +7,17 @@ import { DISCUSSIONS } from '../../../graphql/queries'
 
 const Discussions = ({ navigation }: any) => {
   const { data, loading, error, refetch } = useQuery(DISCUSSIONS);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      refetch()
+    }, 2000);
+  }, []);
+
 
   useEffect(() => {
     refetch()
@@ -25,7 +36,9 @@ const Discussions = ({ navigation }: any) => {
           <ScrollView style={{
             paddingHorizontal: 15,
             marginBottom: 50
-          }}>
+          }}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          >
             {data?.discussions?.slice().reverse().map((discussion: any) => (
               <HomePost key={discussion.id} title={discussion.title} image={discussion?.images} text={discussion.description} name={discussion.user.name} type='Placements Club' />
             ))}

@@ -1,22 +1,50 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import React, { useEffect } from 'react'
-import { ActivityIndicator, Text, View } from 'react-native'
-import { WORK } from '../../../../graphql/queries';
+import { ActivityIndicator, Alert, Text, View } from 'react-native'
+import { WORK, WORKS } from '../../../../graphql/queries';
 import { DivisaFormater, fromNow } from '../../../../utils';
 import translateToSpanish from '../../../../utils/frecuency-formater';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../../../components/Shared/Button';
+import { APPLY } from '../../../../graphql/mutations/applications';
+import { useUser } from '../../../../hooks/users/useUser';
 
-const WorkDetails = ({ route }: any) => {
+const WorkDetails = ({ navigation, route }: any) => {
     const { data, loading, error, refetch } = useQuery(WORK, {
         variables: {
             workId: route.params.id
         }
     });
-    console.log('WORK Details', data)
+
+    const [createApplication, { loading: creatingLoading, error: creatingError }] = useMutation(APPLY, {
+        refetchQueries: [
+            { query: WORKS }
+        ]
+    })
+    const { isLoading, user } = useUser();
+
+
+    const onSubmit = async () => {
+        await createApplication({
+            variables: {
+                data: {
+                    workId: route.params.id,
+                    userId: user.id
+                }
+            }
+        })
+        navigation.navigate('Work', { screen: 'Aplicaciones' })
+    }
+    
     useEffect(() => {
         refetch();
     }, [refetch]);
+
+
+    if (creatingError) {
+        Alert.alert('No puedes aplicar', "No puedes aplicar a está oferta porque ya lo hiciste, revisa tus aplicaciones");
+        navigation.navigate('Work', { screen: 'Aplicaciones' })
+    }
 
     return (
         <View style={{
@@ -142,7 +170,7 @@ const WorkDetails = ({ route }: any) => {
                         <View style={{
                             marginTop: 'auto'
                         }}>
-                            <Button text='Aplicar' style={{
+                            <Button text='Aplicar' onPress={onSubmit}  style={{
                                 marginTop: 'auto'
                             }} />
 

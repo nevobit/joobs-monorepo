@@ -3,6 +3,7 @@ import { relations } from "drizzle-orm";
 import { discussions } from "../../discussions";
 import { works } from "../../works";
 import { applications } from "../../applications";
+import { usersOnClub } from "../../users-on-clubs";
 
 export const users = pgTable('users', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -41,5 +42,6 @@ export const users = pgTable('users', {
 export const userRelations = relations(users, ({ many }) => ({
     discussions: many(discussions),
     works: many(works),
-    usersToApplications: many(applications)
+    usersToApplications: many(applications),
+    usersToClub: many(usersOnClub)
 }));

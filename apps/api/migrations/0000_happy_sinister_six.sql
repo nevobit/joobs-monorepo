@@ -52,6 +52,14 @@ CREATE TABLE IF NOT EXISTS "projects" (
 	"user" varchar(256)
 );
 
+CREATE TABLE IF NOT EXISTS "usersOnClub" (
+	"user_id" uuid NOT NULL,
+	"work_id" uuid NOT NULL,
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
+	CONSTRAINT usersOnClub_user_id_work_id PRIMARY KEY("user_id","work_id")
+);
+
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar(256),

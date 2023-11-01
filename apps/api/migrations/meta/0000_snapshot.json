@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "a0531599-5e1e-4949-8ed1-9c609eb4702f",
+  "id": "b145e4c8-7cf5-4c1b-bede-c7212dc9d70e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -328,6 +328,50 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "usersOnClub": {
+      "name": "usersOnClub",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "work_id": {
+          "name": "work_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "usersOnClub_user_id_work_id": {
+          "name": "usersOnClub_user_id_work_id",
+          "columns": [
+            "user_id",
+            "work_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "users": {

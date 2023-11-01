@@ -1,4 +1,4 @@
-import { createWork, getWorkById, getApplicationsById, verifyToken } from '@joobs/business-logic'
+import { getWorkById, getApplicationsById, verifyToken, createApplication } from '@joobs/business-logic'
 export default {
     Query: {
         applications: async (_: any, {}, ctx:any) => {
@@ -25,8 +25,8 @@ export default {
     },
     Mutation: {
         createApplication: async (_: any, {data}: any, _context: any) => {
-            const { title, description, skills, status, role, userId, location, remuneration } = data;
-            const work = await createWork({title, description, skills, status, role, userId, location, remuneration});
+            const { userId, workId } = data;
+            const work = await createApplication({ workId, userId });
             return work;
         }
     }

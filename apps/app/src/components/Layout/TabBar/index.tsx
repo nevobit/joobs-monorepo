@@ -84,7 +84,7 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                     <Icon name={iconName} size={22} color={itemColor} />
                 </View>
                 <Text style={{
-                  fontSize: 13,
+                  fontSize: 12,
                   color: itemColor
                 }}>{tabName}</Text>
             </TouchableOpacity>

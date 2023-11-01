@@ -15,12 +15,13 @@ interface Props {
   title: string;
   navigation: any
   notifications?: boolean;
+  search?: boolean;
   messages?: boolean;
   profile?: boolean;
   whathsapp?: boolean;
 }
 
-const Header = ({ title, navigation, messages, notifications, profile, whathsapp }: Props) => {
+const Header = ({ title, navigation, search, messages, notifications, profile, whathsapp }: Props) => {
   const [profileOptions, setProfileOptions] = useState(false);
   const dispatch = useDispatch();
   const logout = async () => {
@@ -29,64 +30,86 @@ const Header = ({ title, navigation, messages, notifications, profile, whathsapp
   };
   return (
     <>
-    <View style={{
-      backgroundColor: '#121212',
-      padding: 10,
-      paddingBottom: 5
-    }}>
-      <StatusBar backgroundColor={'#121212'} barStyle='light-content' />
       <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        backgroundColor: '#121212',
+        padding: 10,
+        paddingBottom: 5
       }}>
-
-        <Text style={styles.title}>{title}</Text>
+        <StatusBar backgroundColor={'#121212'} barStyle='light-content' />
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',
-          gap: 15
+          justifyContent: 'space-between'
         }}>
-          {whathsapp && (
 
-            <TouchableOpacity>
-              <Icon name='logo-whatsapp' size={24} color='#fff' />
-            </TouchableOpacity>
-          )}
+          <Text style={styles.title}>{title}</Text>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 15
+          }}>
+            {whathsapp && (
 
-          {notifications && (
+              <TouchableOpacity>
+                <Icon name='logo-whatsapp' size={24} color='#fff' />
+              </TouchableOpacity>
+            )}
 
-            <TouchableOpacity>
-              <Icon name='notifications-outline' size={24} color='#fff' />
-            </TouchableOpacity>
-          )}
+            {search && (
+              <TouchableOpacity onPress={() => navigation.navigate('Search')} >
+                <Icon name='search-outline' size={24} color='#fff' />
+              </TouchableOpacity>
+            )}
 
-          {messages && (
-            <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
-              <Icon name='chatbubble-outline' size={24} color='#fff' />
-            </TouchableOpacity>
-          )}
+            {notifications && (
+              <TouchableOpacity onPress={() => navigation.navigate('Notifications')} >
+                <Icon name='notifications-outline' size={24} color='#fff' />
+              </TouchableOpacity>
+            )}
 
-          {profile && (
-            <TouchableOpacity onPress={() => setProfileOptions(true)}>
-              <Icon name='ellipsis-vertical-sharp' size={24} color='#fff' />
-            </TouchableOpacity>
-          )}
+            {messages && (
+              <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
+                <Icon name='chatbubble-outline' size={24} color='#fff' />
+              </TouchableOpacity>
+            )}
 
+            {profile && (
+              <TouchableOpacity onPress={() => setProfileOptions(true)}>
+                <Icon name='ellipsis-vertical-sharp' size={24} color='#fff' />
+              </TouchableOpacity>
+            )}
+
+          </View>
         </View>
+
       </View>
 
-    </View>
-
-    <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
+      <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
       <TouchableOpacity onPress={logout}>
-        <Text style={{
-          textAlign: 'center',
-          color: 'rgba(0,0,0,0.8)',
-          fontSize: 14
-        }}>Cerrar sesion</Text>
-      </TouchableOpacity>
-    </BottomSheet>
+          <Text style={{
+            textAlign: 'center',
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14,
+            marginBottom: 20
+          }}>Danos retroalimentación</Text>
+        </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+          <Text style={{
+            textAlign: 'center',
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14,
+            marginBottom: 20
+          }}>Borrar cuenta</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={logout}>
+          <Text style={{
+            textAlign: 'center',
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          }}>Cerrar sesion</Text>
+        </TouchableOpacity>
+      </BottomSheet>
     </>
 
   )

@@ -4,10 +4,12 @@ import { StackNavigationProp, createStackNavigator } from '@react-navigation/sta
 import Home from '../../../screens/Home';
 import CreatePost from '../../../screens/Home/CreatePost';
 import Header from '../../../components/Layout/Header';
+import Search from '../../../screens/Private/Search';
 
 
 export type HomeStackParamList = {
   Joobs: undefined;
+  Search: undefined;
   CreatePost: undefined;
 };
 
@@ -17,12 +19,16 @@ const Stack = createStackNavigator<HomeStackParamList>();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator >
     <Stack.Screen name="Joobs" component={Home} 
       options={({ navigation, route }) => ({
-        header: () => <Header title='Joobs' messages navigation={navigation} />,
+        header: () => <Header title='Joobs' search notifications messages navigation={navigation} />,
       })}
     />
+       <Stack.Screen  options={{
+        headerShown: false
+       }} name='Search' component={Search}
+            />
 
   </Stack.Navigator>
   )

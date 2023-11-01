@@ -41,6 +41,8 @@ type Club {
     name: String
     icon: String
     description: String
+    members: Int
+    joined: Boolean
 }
 
 
@@ -118,6 +120,16 @@ input DataCreateApplication {
     workId: String
 }
 
+input DataCreateMember {
+    userId: String
+    clubId: String
+}
+
+type Member {
+    user: User
+    club: Club
+}
+
 type Project {
     title: String
     description: String
@@ -170,6 +182,10 @@ input UserInput {
 
 type Query {
     works: [Work]
+
+    members(id: String): [Member]
+    isJoined: Boolean
+
     workByUser: [Work]
     work(id: String): Work
 
@@ -179,6 +195,7 @@ type Query {
     discussions: [Discussion]
     
     clubs: [Club]
+    club(id: String): Club
     
     user: User
 }
@@ -191,6 +208,9 @@ type Mutation {
 
     # APPLICATIONS
     createApplication(data: DataCreateApplication): Application
+    
+    #
+    joinToClub(data: DataCreateMember): Member
 
     # USER
     userLogin(email: String!): AuthPayload
