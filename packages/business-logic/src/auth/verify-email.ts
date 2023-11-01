@@ -18,7 +18,7 @@ export const verifyEmail =async ({email}: Partial<User>) => {
 
     user.last_login = new Date().toString();
 
-    const token = sign({uuid: user.uuid}, JWT_SECRET!, { expiresIn: '15d' });
+    const token = sign({id: user.id}, JWT_SECRET!, { expiresIn: '15d' });
 
     return { token };
 

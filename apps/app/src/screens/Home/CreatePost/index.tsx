@@ -172,10 +172,12 @@ console.log(post.images)
                 }}
                 onPress={onSubmit}
                 >
+                    {isCreating? <ActivityIndicator /> : 
                     <Text style={{
                         color: '#fff',
                         fontSize: 16.
                     }}>Siguiente</Text>
+                }
                 </TouchableOpacity>
                 </View>
                

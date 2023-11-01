@@ -99,10 +99,148 @@ const skillsData = {
     'Tensorflow',
     'Deep Learning',
     'Biotecnologia',
-
-
-
   ],
+  design: [
+    'Diseño de moda',
+    'Diseño grafico',
+    'Illustrator',
+    'Photoshop',
+    'Canva',
+    'Figma',
+    'Adobe XD',
+    'Webflow',
+    'Interaction',
+    'Diseño de Juegos',
+    'UX Research',
+    'Diseño UI',
+    'Diseño UX',
+    'Diseño de Producto',
+    'Blender 3d',
+    'SketchUP',
+    'Revit',
+    'Lumion',
+    'UI/UX',
+    'Unreal Engine',
+    'SOLIDWORDS',
+    'Maya',
+    'Diseñador de Logo',
+    'Lightroom',
+    'Fusion 360',
+    'CorelDRAW',
+    'Miniatura Youtube',
+    'Vray',
+    'Wireframing',
+    'Adobe Indesign',
+    'Coraldraw',
+    'Prototipado',
+    'Ilustracion de Moda',
+    'Rhinoceros 3D',
+    'Diseño de Poster',
+    'Diseño de paquetes',
+    'User Research',
+    'Diseño de Flyer'
+  ],
+  marketing: [
+    'Content Writing',
+    'Social Media Management',
+    'Facebook Ads',
+    'Google Ads',
+    'Copywriting',
+    'Influencer Marketing',
+    'SEO',
+    'Marketing Digital',
+    'Creacion de contenido',
+    'Digital Media Mamangement',
+    'Email Marketing',
+    'Marketing',
+    'Performance Marketing',
+    'Estrategia de Marca',
+    'Marketing de Afiliados',
+    'Social Media Marketing',
+    'Instagram Ads',
+    'Relaciones Publicas',
+    'Social Media Analyst',
+    'Instagram Page Manager',
+    'Marketing de Producto',
+    'Youtube Channel Manager',
+    'Marketing de Contenido',
+    'Publicidad'
+  ],
+  writing: [
+    'Escritura de Guiones',
+    'Mecanografía',
+    'Escritura Científica',
+    'Poesía',
+    'Escritura de Articulos',
+    'Copytyping',
+    'Escritura optimizada para SEO',
+    'Escritura Academica',
+    'Escritura Creativa'
+  ],
+  finance: [
+    'Hablar en Público',
+    'Bolsa de Valores',
+    'Finanzas',
+    'Trading',
+    'Estrategia de Negocios',
+    'Liderazgo',
+    'Análisis de Renta Variable',
+    'Estadistica',
+    'Inversión',
+    'Shopify',
+    'Desarrollo de Negocios',
+    'Derecho (Leyes)',
+    'Analista de Negocios',
+    'Gestion',
+    'MS Office',
+    'MS Excel',
+    'PowerPoint',
+    'Manejo de Finanzas',
+    'Analista Tecnico',
+    'Ciencias Económicas',
+    'Inglés Comunicativo',
+    'Trabajo en equipo',
+    'Gestion del Riesgo',
+    'Options Trading',
+    'Gestion del Tiempo',
+    'Operaciones de RH',
+    'PowerBI',
+    'Investigación de Mercado',
+    'Analsis de Datos'
+  ],
+  product: [
+    'Analisis de Datos',
+    'Psicologia',
+    'Resolucion de Problemas',
+    'Emprendimiento',
+    'Google Analytics',
+    'Product Growth',
+    'Microsoft Word',
+    'Tableu',
+    'Estrategia de Producto',
+    'Planificación de Presupuesto',
+    'Estrategia de Precios',
+    'Habilidades Interpersonales'
+  ],
+  video: [
+    'Premier Pro',
+    'Final Cut Pro',
+    'iMovie',
+    'Motion Graphics',
+    'After Effects',
+    'Edicion de Video',
+    'Fotografia',
+    'Instagram Reels',
+    'Davince Resolve',
+    'Videografia',
+    'Edicion de Fotos',
+    'Youtube Video',
+    'Edicion de Audio',
+    'Filmmaking',
+    'Cinematografia',
+    'VN',
+    'Voz en Off'
+  ]
 };
   
 const SkillsInformation = ({ navigation, params }: any) => {
@@ -197,7 +335,6 @@ const SkillsInformation = ({ navigation, params }: any) => {
           style={{
             marginTop: 35,
             gap: 20,
-            paddingHorizontal: 10,
           }}>
           <Text
             style={{
@@ -230,7 +367,7 @@ const SkillsInformation = ({ navigation, params }: any) => {
                   style={{
                     fontSize: 13,
                     color: skills.includes(preference)
-                      ? 'rgba(0,0,0,1)'
+                      ? 'rgba(255,255,255,1)'
                       : 'rgba(0,0,0,0.8)',
                   }}>
                   {preference}
@@ -269,7 +406,7 @@ const SkillsInformation = ({ navigation, params }: any) => {
                   style={{
                     fontSize: 13,
                     color: skills.includes(preference)
-                      ? 'rgba(0,0,0,1)'
+                      ? 'rgba(255,255,255,1)'
                       : 'rgba(0,0,0,0.8)',
                   }}>
                   {preference}
@@ -277,7 +414,6 @@ const SkillsInformation = ({ navigation, params }: any) => {
               </TouchableOpacity>
             ))}
           </View>
-
           <Text
             style={{
               color: 'rgba(0,0,0,0.8)',
@@ -292,7 +428,6 @@ const SkillsInformation = ({ navigation, params }: any) => {
               flexDirection: 'row',
               gap: 10,
               flexWrap: 'wrap',
-              marginBottom: 100,
             }}>
             {skillsData.tech.map(preference => (
               <TouchableOpacity
@@ -310,7 +445,7 @@ const SkillsInformation = ({ navigation, params }: any) => {
                      style={{
                       fontSize: 13,
                       color: skills.includes(preference)
-                        ? 'rgba(0,0,0,1)'
+                        ? 'rgba(255,255,255,1)'
                         : 'rgba(0,0,0,0.8)',
                     }}
                   key={preference}>
@@ -319,12 +454,244 @@ const SkillsInformation = ({ navigation, params }: any) => {
               </TouchableOpacity>
             ))}
           </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+          Diseño
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}>
+            {skillsData.design.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+          Marketing
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}>
+            {skillsData.marketing.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+          Escritura
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}>
+            {skillsData.writing.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+          Finanzas y Negocios
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}>
+            {skillsData.finance.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+          Producto
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}>
+            {skillsData.product.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '600',
+              fontSize: 20,
+              textAlign: 'left',
+            }}>
+            Video
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+              marginBottom: 50,
+            }}>
+            {skillsData.video.map(preference => (
+              <TouchableOpacity
+                key={preference}
+                onPress={() => addSkill(preference)}
+                style={{
+                  backgroundColor: skills.includes(preference)
+                    ? '#5368f5'
+                    : 'rgba(0,0,0,0.1)',
+                  borderRadius: 15,
+                  padding: 5,
+                  paddingHorizontal: 20
+                }}>
+                <Text
+                     style={{
+                      fontSize: 13,
+                      color: skills.includes(preference)
+                        ? 'rgba(255,255,255,1)'
+                        : 'rgba(0,0,0,0.8)',
+                    }}
+                  key={preference}>
+                  {preference}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          
         </View>
       </ScrollView>
-    
-
-    
- 
                  <Button loading={loading} onPress={onSubmit} style={{
                     marginTop: 'auto',
                     marginBottom: 30

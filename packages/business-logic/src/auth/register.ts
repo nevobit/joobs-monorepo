@@ -14,6 +14,6 @@ export const registerUser = async (data: User): Promise<UserToken | Error> => {
         .where(eq(users.email, data.email))
         .returning();
 
-    const token = sign({uuid: result[0].uuid}, JWT_SECRET!, { expiresIn: '15d' });
+    const token = sign({id: result[0].id}, JWT_SECRET!, { expiresIn: '15d' });
     return { token };
 }

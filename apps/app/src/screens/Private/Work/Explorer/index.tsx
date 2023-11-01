@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Pressable } from 'react-native'
 import React, { useEffect } from 'react'
 import { WorkCard } from '../../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -7,10 +7,10 @@ import { WORKS } from '../../../../graphql/queries'
 import Button from '../../../../components/Shared/Button'
 import { CREATE_WORK } from '../../../../graphql/mutations/works'
 
-const Explorer = () => {
+const Explorer = ({navigation}: any) => {
   const { data, loading, error, refetch } = useQuery(WORKS);
 
-  console.log(error)
+  console.log("WORKS", data)
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -43,8 +43,10 @@ const Explorer = () => {
           paddingHorizontal: 15,
           marginBottom: 50
         }}>
-          {data?.works.slice().reverse().map((work: any) => (
-            <WorkCard key={work.uuid} name='Andres Rendon' title={work.title} money={1000} type={work.role} />
+          {data?.works?.slice().reverse().map((work: any) => (
+            <Pressable key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >
+              <WorkCard remuneration={work.remuneration} created_at={work.created_at} name={work?.user?.name} title={work.title} money={1000} type={work.role} />
+            </Pressable>
           ))}
 
         </ScrollView>

@@ -1,5 +1,5 @@
 import { View, Text, StatusBar, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Field from '../../../components/Shared/Field'
 import Input from '../../../components/Shared/Input'
 import Button from '../../../components/Shared/Button'
@@ -15,10 +15,17 @@ const BasicInformation = ({navigation, route}: any) => {
     const [phone, setPhone] = useState('');
 
 
+    let showPhoto = photo.length > 5? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ""
+
+    useEffect(() => {
+        showPhoto = photo; 
+    }, [photo])
+    console.log({showPhoto})
+
     const dispatch = useDispatch();
 
     const onSubmit = () => {
-        dispatch(saveUserInfo({ name, phone, photo: photo?.length > 5 ? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ''}));
+        dispatch(saveUserInfo({ name, phone, photo: showPhoto}));
         navigation.navigate('PersonInformation', { name, phone })
     }
 
@@ -68,7 +75,8 @@ const BasicInformation = ({navigation, route}: any) => {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-                  {photo?.length > 5 || userInfo?.photo.length > 5 ? (
+
+            {showPhoto.length > 5 ? (
                 <Image 
                 style={{
                   height:'100%',
@@ -77,9 +85,10 @@ const BasicInformation = ({navigation, route}: any) => {
                   borderRadius: 50
                 }}
                 source={{
-                  uri: photo.length > 5? photo.length : userInfo.photo 
+                  uri: showPhoto 
                 }} />
-            ): (
+               ):
+            (
                 <>
                 {isLoading? <ActivityIndicator /> : (
 
@@ -110,7 +119,7 @@ const BasicInformation = ({navigation, route}: any) => {
                 shadowOpacity: 0.3, // Para iOS
                 shadowRadius: 4, // Para iOS
                 }}>
-                    <Icon name='camera' />
+                    <Icon name='camera' color='rgba(0,0,0,0.8)' size={18} />
                 </View>
             </TouchableOpacity>
             <View style={{

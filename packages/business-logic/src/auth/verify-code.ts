@@ -32,7 +32,7 @@ export const verifyCode = async ({ email, code }: { code: number, email: string 
             user.last_login = new Date().toString();
 
             // Generar un token JWT con el ID de usuario
-            const token = sign({ uuid: user.uuid }, JWT_SECRET!, { expiresIn: '15d' });
+            const token = sign({ id: user.id }, JWT_SECRET!, { expiresIn: '15d' });
 
             return { token };
          

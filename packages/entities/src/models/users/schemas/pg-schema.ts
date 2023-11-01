@@ -1,11 +1,11 @@
-import { relations } from "drizzle-orm";
 import { integer, jsonb, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { discussions } from "../../discussions";
-import { clubs } from "../../clubs";
 import { works } from "../../works";
+import { applications } from "../../applications";
 
 export const users = pgTable('users', {
-    uuid: uuid('id').defaultRandom().notNull().unique().primaryKey(),
+    id: uuid('id').defaultRandom().primaryKey(),
     name: varchar('name', { length: 256 }),
     phone: varchar('phone', { length: 256 }),
     photo: varchar('photo', { length: 256 }),
@@ -26,20 +26,20 @@ export const users = pgTable('users', {
     updated_at: timestamp('updated_at').defaultNow(),
 }, (users) => {
     return {
-        idIndex: uniqueIndex('users_id_index').on(users.uuid),
-        pk: primaryKey(users.uuid)
+        idIndex: uniqueIndex('users_id_index').on(users.id),
+        pk: primaryKey(users.id)
     }
 });
 
-export const usersOnClubs = pgTable('user_clubs', {
-    userId: uuid('id').notNull().references(() => users.uuid),
-    clubId: uuid('id').notNull().references(() => clubs.uuid),
-    created_at: timestamp('created_at').defaultNow(),
-    updated_at: timestamp('updated_at').defaultNow(),
-});
+// export const usersOnClubs = pgTable('user_clubs', {
+//     userId: uuid('id').notNull().references(() => users.id),
+//     clubId: uuid('id').notNull().references(() => clubs.id),
+//     created_at: timestamp('created_at').defaultNow(),
+//     updated_at: timestamp('updated_at').defaultNow(),
+// });
 
 export const userRelations = relations(users, ({ many }) => ({
     discussions: many(discussions),
     works: many(works),
-    usersClubs: many(usersOnClubs)
-}))
+    usersToApplications: many(applications)
+}));

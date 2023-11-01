@@ -32,5 +32,5 @@ export const initPostgres = async({ url }: InitPostgresOptions) => {
     console.log('Postgres connection established')
 }
 
-export const clientDb =  () => client;
+export const clientDb = () => client;
 export const getDbInstance = () =>  dbInstance;

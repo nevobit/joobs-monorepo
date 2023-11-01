@@ -1,4 +1,4 @@
-import { Result, StatusType, Params, users, clubs, discussionRelations, userRelations } from "@joobs/entities";
+import { Result, StatusType, Params, users, clubs,  userRelations } from "@joobs/entities";
 import { clientDb, /*getDbInstance */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -7,7 +7,7 @@ export const getAllClubs = async ({ page= 1, limit=24, search, status= StatusTyp
     const infoInstance = await clientDb();
 
     console.log(status)
-    const db = drizzle(infoInstance, { schema: { users, clubs, discussionRelations, userRelations } })
+    const db = drizzle(infoInstance, { schema: { users, clubs, userRelations } })
 
     // await result.where(eq(discussions.status, status));
 

@@ -13,7 +13,7 @@ export default {
     },
     Mutation: {
         createClub: async (_: any, {data}: any, _ctx: any) => {
-            // await verifyToken(ctx) as {uuid: string};
+            // await verifyToken(ctx) as {id: string};
             const { name, description, icon } = data;
             const club = await createClub({name, description, icon, status: 'active' });
             return club;

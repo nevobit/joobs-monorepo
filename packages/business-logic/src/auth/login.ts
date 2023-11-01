@@ -21,10 +21,10 @@ export const login =async ({email}: {email: string}) => {
 
     await getDbInstance().update(users)
         .set({ code: Number(code), last_login: new Date().toString()  })
-        .where(eq(users.uuid, user.uuid))
+        .where(eq(users.id, user.id))
         .returning();
 
-    const token = sign({uuid: user.uuid}, JWT_SECRET!, { expiresIn: '15d' });
+    const token = sign({id: user.id}, JWT_SECRET!, { expiresIn: '15d' });
 
     return { token, type };
 }

@@ -100,10 +100,21 @@ const PersonInformation = ({ navigation, params }: any) => {
                             placeholder=''
                             mode='dropdown'
                             >
-                            <Picker.Item label="Masculino" value="masculino" />
-                            <Picker.Item label="Femenino" value="femenino" />
-                            <Picker.Item label="No Binario" value="no binario" />
-                            <Picker.Item label="Prefiero no decirlo" value="no" />
+                            <Picker.Item style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }} label="Selecciona un genero" value="" />
+                            <Picker.Item style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}   label="Masculino" value="masculino" />
+                            <Picker.Item style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}  label="Femenino" value="femenino" />
+                            <Picker.Item style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}  label="No Binario" value="no binario" />
+                            <Picker.Item style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}  label="Prefiero no decirlo" value="no" />
                         </Picker>
                         </View>
 
@@ -113,7 +124,7 @@ const PersonInformation = ({ navigation, params }: any) => {
                             gap: 10
                         }}>
                             {years.map((year) => (
-                                <TouchableOpacity onPress={() => setBornDate(year.toString())} style={{
+                                <TouchableOpacity key={year} onPress={() => setBornDate(year.toString())} style={{
                                 backgroundColor: born_date == String(year)? '#5368f5' : 'rgba(0,0,0,0.1)',
                                 paddingHorizontal: 10,
                                 paddingVertical: 5,

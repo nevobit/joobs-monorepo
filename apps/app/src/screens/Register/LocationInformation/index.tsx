@@ -84,7 +84,8 @@ const LcationInformation = ({ navigation, params }: any) => {
                             style={{
                               height:'100%',
                               width:'100%',
-                              resizeMode: 'contain'
+                              resizeMode: 'contain',
+                              borderRadius: 50
                             }}
                             source={{
                               uri: userInfo.photo

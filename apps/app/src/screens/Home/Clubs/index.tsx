@@ -45,7 +45,7 @@ const Clubs = () => {
           }}
           >
             {data?.clubs.map((club: any, index: number) => (
-              <View key={club.uuid} style={{
+              <View key={club.id} style={{
                 height: 85,
                 width: '100%',
                 backgroundColor: colors[index],

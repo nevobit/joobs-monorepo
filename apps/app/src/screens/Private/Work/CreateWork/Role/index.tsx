@@ -14,6 +14,7 @@ const Role = ({ navigation, route }: any) => {
         frecuency: ''
     });
 
+    console.log(remuneration)
     return (
         <ScrollView style={{
             backgroundColor: '#121212',
@@ -62,7 +63,12 @@ const Role = ({ navigation, route }: any) => {
                             color: 'rgba(0,0,0,0.8)'
                         }}>Compensacion</Text>
                         <Field label='Desde'>
-                            <Input keyboardType='numeric' placeholder='2500000' onChange={(text) => setRemuneration((prev) => ({...prev, value: Number(text)}))} />
+                            <Input keyboardType='numeric' placeholder='2500000' onChangeText={(text) => {
+                                 const parsedValue = parseInt(text);
+                                 if (!isNaN(parsedValue)) {
+                                   setRemuneration((prev) => ({ ...prev, value: parsedValue }));
+                                 }
+                            }} />
                         </Field>
                     </View>
 

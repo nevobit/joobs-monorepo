@@ -1,12 +1,34 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator, Pressable } from 'react-native'
+import React, { useEffect } from 'react'
+import { useQuery } from '@apollo/client';
+import { WORKS } from '../../../../graphql/queries';
+import { useUser } from '../../../../hooks/users/useUser';
+import { WorkCard } from '../../../../components/UI';
 
 const Listing = ({navigation}: any) => {
+  const { user } = useUser();
+  const { data, loading, error, refetch } = useQuery(WORKS,  {
+    context: {
+      headers: {
+        authorization: user?.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  console.log("LISTING", data)
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <View style={{
       alignItems: 'center',
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
     }}>
+
+      {loading ? <ActivityIndicator /> : (
+        <>
+          {data.works.length == 0 ? (
+            <>
       <Text style={{
         fontWeight: '500',
         color: 'rgba(0,0,0,0.8)',
@@ -36,6 +58,25 @@ const Listing = ({navigation}: any) => {
           fontSize: 14
         }}>Crear Publicacion</Text>
       </TouchableOpacity>
+            </>
+            ):  (
+              <View style={{
+                marginTop: 10,
+                width: '100%',
+              }}>
+                {data.works.map((work: any) => (
+   <Pressable style={{
+    width: '100%'
+   }} key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >
+   <WorkCard remuneration={work.remuneration} created_at={work.created_at} name={work?.user?.name} title={work.title} money={1000} type={work.role} />
+ </Pressable>
+                ))}
+              </View>
+            )}
+        </>
+      )}
+      
+   
     </View>
   )
 }

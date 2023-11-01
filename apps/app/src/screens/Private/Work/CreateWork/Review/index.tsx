@@ -31,7 +31,7 @@ const Review = ({ navigation, route }: any) => {
                     role: route.params.role,
                     title: route.params.title,
                     remuneration: route.params.remuneration,
-                    user: user.uuid,
+                    userId: user.id,
                     skills: route.params.skills,
                     location: { address: route.params.location.address },
                     status: "active"

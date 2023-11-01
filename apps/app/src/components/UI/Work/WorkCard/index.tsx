@@ -1,14 +1,22 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { DivisaFormater, fromNow } from '../../../../utils'
+import translateToSpanish from '../../../../utils/frecuency-formater';
 
 interface Props{
-  name: string,
-  type: string,
-  title: string,
-  money: number
+  name: string;
+  type: string;
+  title: string;
+  money: number;
+  created_at: string;
+  remuneration: {
+    value: number;
+    frecuency: string;
+  }
 }
-const WorkCard = ({ name, type, title, money }: Props) => {
+const WorkCard = ({ name, type, title, created_at, remuneration }: Props) => {
+
   return (
     
     <View style={{
@@ -41,7 +49,7 @@ const WorkCard = ({ name, type, title, money }: Props) => {
             fontWeight: '600',
             fontSize: 16,
             color: 'rgba(0,0,0,0.8)'
-          }}>{name.charAt(0)}</Text>
+          }}>{name?.charAt(0)}</Text>
         </View>
         <View style={{
         }}>
@@ -52,7 +60,7 @@ const WorkCard = ({ name, type, title, money }: Props) => {
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
-          }}>Hace 1 dia</Text>
+          }}>{fromNow(created_at)}</Text>
         </View>
         </View>
 
@@ -99,7 +107,7 @@ const WorkCard = ({ name, type, title, money }: Props) => {
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
-          }}>$1,300,000/mensual</Text>
+          }}>{DivisaFormater({value: remuneration?.value})} / {translateToSpanish(remuneration?.frecuency)}</Text>
         </View>
 
         <View style={{

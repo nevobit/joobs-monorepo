@@ -10,7 +10,7 @@ type Location {
 }
 
 type Work {
-    uuid: ID
+    id: ID
     title: String
     user: User
     role: String
@@ -18,11 +18,12 @@ type Work {
     description: String
     remuneration: Remuneration
     location: Location
+    created_at: String
 }
 
 
 type Discussion {
-    uuid: ID
+    id: ID
     title: String
     user: User
     images: [String]
@@ -30,8 +31,13 @@ type Discussion {
     description: String
 }
 
+type Application {
+    user: User
+    work: Work
+}
+
 type Club {
-    uuid: ID
+    id: ID
     name: String
     icon: String
     description: String
@@ -51,7 +57,7 @@ input LocationInput {
 
 input DataCreateWork {
     title: String
-    user: String
+    userId: String
     role: String
     status: String
     description: String
@@ -107,6 +113,11 @@ input DataCreateProject {
     reward: String
 }
 
+input DataCreateApplication {
+    userId: String
+    workId: String
+}
+
 type Project {
     title: String
     description: String
@@ -121,7 +132,7 @@ type Project {
 # USER
 
 type User {
-    uuid: ID
+    id: ID
     name: String
     email: String
     phone: String
@@ -159,8 +170,16 @@ input UserInput {
 
 type Query {
     works: [Work]
+    workByUser: [Work]
+    work(id: String): Work
+
+    applications: [Application]
+    application: Application
+
     discussions: [Discussion]
+    
     clubs: [Club]
+    
     user: User
 }
 
@@ -169,6 +188,9 @@ type Mutation {
     createWork(data: DataCreateWork): Work
     createDiscussion(data: DataCreateDiscussion): Discussion
     createClub(data: DataCreateClub): Club
+
+    # APPLICATIONS
+    createApplication(data: DataCreateApplication): Application
 
     # USER
     userLogin(email: String!): AuthPayload

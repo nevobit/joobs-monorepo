@@ -1,4 +1,4 @@
-import { Result, works, StatusType, Params, users  } from "@joobs/entities";
+import { Result, works, StatusType, Params, users, workRelations  } from "@joobs/entities";
 import { clientDb } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -7,9 +7,13 @@ export const getAllWorks = async ({ page= 1, limit=24, search, status= StatusTyp
     const infoInstance = await clientDb();
 
     console.log(status)
-    const db = drizzle(infoInstance, { schema: { users, works } })
+    const db = drizzle(infoInstance, { schema: { users, works, workRelations } })
 
-    const result = await db.query.works.findMany()
+    const result = await db.query.works.findMany({
+        with: {
+            user: true
+        }
+    })
 
     const pageSize = limit;
     const skip = (page - 1) * pageSize;

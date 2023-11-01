@@ -12,8 +12,8 @@ export default {
     },
     Mutation: {
         createDiscussion: async (_: any, {data}: any, ctx: any) => {
-            const { uuid } = await verifyToken(ctx) as {uuid: string};
-            const userId = uuid;
+            const { id } = await verifyToken(ctx) as {id: string};
+            const userId = id;
             const { title, description, images, link } = data;
             const discussion = await createDiscussion({title, description, images, link, userId, status: 'active' });
             return discussion;
