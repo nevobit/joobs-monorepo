@@ -15,3 +15,18 @@ query Query {
   }
 }
 `
+
+export const DISCUSSION = gql`
+query Query($discussionId: String) {
+  discussion(id: $discussionId) {
+    title
+    description
+    images
+    user {
+      name
+      photo
+    }
+    created_at
+  }
+}
+`

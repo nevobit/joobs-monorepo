@@ -8,3 +8,4 @@ export * from './users-on-club';
 export * from './users';
 export * from './verify';
 export * from './works';
+export * from './comments'

@@ -47,6 +47,16 @@ type Club {
 }
 
 
+type Comment {
+    id: ID
+    text: String
+    user: User
+    discussionId: Discussion
+    created_at: String
+}
+
+
+
 input RemunerationInput {
     value: Float
     frecuency: String
@@ -80,6 +90,12 @@ input DataCreateClub {
     name: String
     icon: String
     description: String
+}
+
+input DataCreateComment {
+    text: String
+    userId: String
+    discussionId: String
 }
 
 type Stages {
@@ -184,6 +200,8 @@ input UserInput {
 type Query {
     works: [Work]
 
+    comments(id: String): [Comment]
+
     members(id: String): [Member]
     isJoined: Boolean
 
@@ -194,24 +212,28 @@ type Query {
     application: Application
 
     discussions: [Discussion]
+    discussion(id: String): Discussion
     
     clubs: [Club]
     club(id: String): Club
     
     user: User
+    users: [User]
 }
 
 
 type Mutation {
     createWork(data: DataCreateWork): Work
     createDiscussion(data: DataCreateDiscussion): Discussion
-    createClub(data: DataCreateClub): Club
 
     # APPLICATIONS
     createApplication(data: DataCreateApplication): Application
     
-    #
+    #CLUBS
     joinToClub(data: DataCreateMember): Member
+    createClub(data: DataCreateClub): Club
+
+    comment(data: DataCreateComment): Comment
 
     # USER
     userLogin(email: String!): AuthPayload

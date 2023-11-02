@@ -1,8 +1,8 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { fromNow } from '../../../../utils';
-
+import Share from 'react-native-share';
 interface Props {
   name: string,
   type: string,
@@ -13,12 +13,26 @@ interface Props {
   created_at: string;
   photo?: string;
 }
+
 const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) => {
+  const share = async () => {
+    const options = {
+      message: `Hey, estoy teniendo una discusion interesante sobre ${title}`,
+      url: 'https://joobs.lat'
+    }
+
+    try {
+      await Share.open(options)
+    }catch(e) {
+      Alert.alert('No se puede compartir', String(e))
+    }
+
+  }
+  
   return (
 
     <View style={{
       backgroundColor: '#fff',
-      // height: 40,
       padding: 15,
       borderRadius: 5,
       marginBottom: 15,
@@ -116,13 +130,15 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
 
       )}
 
-      {/* <View style={{
-        flexDirection: 'row',
+     <View style={{
+        flexDirection: 'row-reverse',
         justifyContent: 'space-between',
         borderTopWidth: 1,
         borderTopColor: 'rgba(0,0,0,0.1)',
-        paddingTop: 8
+        paddingTop: 10,
+        paddingHorizontal: 5
       }}>
+         {/* 
         <View style={{
           flexDirection: 'row',
           gap: 5,
@@ -146,15 +162,15 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
             color:'rgba(0,0,0,0.8)'
           }}>0</Text>
         </View>
-
-        <View style={{
+*/}
+        <TouchableOpacity onPress={share} style={{
           flexDirection: 'row',
           alignItems: 'center',
           gap: 7
         }}>
-          <Icon name='share-social-outline' size={20} color='rgba(0,0,0,0.8)' />
-        </View>
-      </View> */}
+          <Icon name='share-social-outline' size={25} color='rgba(0,0,0,0.8)' />
+        </TouchableOpacity>
+      </View> 
     </View>
   )
 }

@@ -1,5 +1,5 @@
 
-import { getUserById, verifyToken } from  '@joobs/business-logic'
+import { getAllUser, getUserById, verifyToken } from  '@joobs/business-logic'
 
 export default {
     Query: {
@@ -9,6 +9,15 @@ export default {
             try{
                 const user = await getUserById(id);
                 return user;
+            }catch(err:any){
+                console.log(err);
+                throw new Error(err);
+            }
+        },
+        users: async (_: any, {}, _ctx:any) => {
+            try{
+                const users = await getAllUser();
+                return users;
             }catch(err:any){
                 console.log(err);
                 throw new Error(err);

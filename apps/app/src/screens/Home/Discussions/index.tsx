@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native'
+import { TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl, Pressable } from 'react-native'
 import React, { useEffect } from 'react'
 import { HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -23,7 +23,7 @@ const Discussions = ({ navigation }: any) => {
   return (
     <>
       <ScrollView style={{
-        paddingVertical: 10,
+        paddingVertical: 15,
         height: '100%',
         marginBottom: 10
       }}
@@ -35,12 +35,13 @@ const Discussions = ({ navigation }: any) => {
 
 
           <ScrollView style={{
-            paddingHorizontal: 15,
             marginBottom: 50
           }}
           >
             {data?.discussions?.slice().reverse().map((discussion: any) => (
-              <HomePost key={discussion.id} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
+              <Pressable onPress={() => navigation.navigate('Discussion', { id: discussion.id })} > 
+                <HomePost key={discussion.id} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
+              </Pressable>
             ))}
 
           </ScrollView>

@@ -22,6 +22,7 @@ const colors: string[] = [
 const Clubs = ({ navigation }: any) => {
   const { user: userCtx } = useSelector((state: any) => state.auth);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [actualId, setActualId] = React.useState('');
   const { isLoading, user, refetch: refetchUser } = useUser();
 
     const { data, loading, error, refetch } = useQuery(CLUBS, {
@@ -39,7 +40,9 @@ const Clubs = ({ navigation }: any) => {
   })
 
 
+
   const onSubmit = async (id: string) => {
+    setActualId(id);
     try{
       await join({
         variables: {
@@ -134,7 +137,7 @@ const Clubs = ({ navigation }: any) => {
                             color: '#fff',
                             fontSize: 14
                         }}>Unirse</Text>
-                         { creatingLoading &&  <ActivityIndicator color='#fff' /> }
+                         { creatingLoading && actualId == club.id &&  <ActivityIndicator color='#fff' /> }
                     </TouchableOpacity>
                     ): (
                       <TouchableOpacity style={{

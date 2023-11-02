@@ -5,6 +5,7 @@ import discussions from './discussions'
 import clubs from './clubs'
 import applications from './applications'
 import members from './users-on-club'
+import comments from './comments'
 
 export default {
     Query: {
@@ -14,6 +15,7 @@ export default {
         ...clubs.Query,
         ...applications.Query,
         ...members.Query,
+        ...comments.Query,
     },
     Mutation: {
         ...auth.Mutation,
@@ -21,6 +23,7 @@ export default {
         ...discussions.Mutation,
         ...clubs.Mutation,
         ...applications.Mutation,
-        ...members.Mutation
+        ...members.Mutation,
+        ...comments.Mutation,
     }
 }

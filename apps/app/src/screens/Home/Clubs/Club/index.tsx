@@ -198,6 +198,7 @@ const Club = ({ navigation, route }: any) => {
                                     borderRadius: 10,
                                     elevation: 1,
                                     padding: 10,
+                                    marginBottom: 10
                                 }}>
                                     <View style={{
                                         flexDirection: 'row',

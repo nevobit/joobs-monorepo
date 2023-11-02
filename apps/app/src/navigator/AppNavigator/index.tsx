@@ -9,6 +9,7 @@ import CreateWorkStack from '../../screens/Private/Work/CreateWork';
 import WorkDetails from '../../screens/Private/Work/Details';
 import Notifications from '../../screens/Private/Notifications';
 import Club from '../../screens/Home/Clubs/Club';
+import DiscussionDetails from '../../screens/Home/Discussions/Discussion'
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -18,6 +19,7 @@ export type RootStackParamsList = {
   CreateWork: undefined;
   WorkDetails: { id: string };
   Club: { id: string };
+  Discussion: { id: string };
 }
 
 export const HomeStack = createStackNavigator<RootStackParamsList>();
@@ -57,6 +59,11 @@ export const AppNavigator = () => {
         }}
       />
       <HomeStack.Screen name="Club" component={Club}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen name="Discussion" component={DiscussionDetails}
         options={{
           headerShown: false,
         }}
