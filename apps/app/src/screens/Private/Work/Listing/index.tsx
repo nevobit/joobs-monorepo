@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, ActivityIndicator, Pressable } from 'react-native'
-import React, { useEffect } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator, Pressable, ScrollView, RefreshControl } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client';
 import { WORKS } from '../../../../graphql/queries';
 import { useUser } from '../../../../hooks/users/useUser';
@@ -7,6 +7,7 @@ import { WorkCard } from '../../../../components/UI';
 
 const Listing = ({ navigation }: any) => {
   const { user } = useUser();
+  const [refreshing, setRefreshing] = useState(false);
   const { data, loading, error, refetch } = useQuery(WORKS, {
     context: {
       headers: {
@@ -14,6 +15,15 @@ const Listing = ({ navigation }: any) => {
       },
     },
   });
+
+  console.log(error)
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+      refetch().then(() => {
+        setRefreshing(false);
+      })
+  }, []);
 
   console.log("LISTING", data)
   useEffect(() => {
@@ -60,10 +70,12 @@ const Listing = ({ navigation }: any) => {
               </TouchableOpacity>
             </>
           ) : (
-            <View style={{
+            <ScrollView style={{
               marginTop: 10,
               width: '100%',
-            }}>
+            }}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+            >
               {data.works.map((work: any) => (
                 <Pressable style={{
                   width: '100%'
@@ -71,7 +83,7 @@ const Listing = ({ navigation }: any) => {
                   <WorkCard role={work.role} remuneration={work.remuneration} created_at={work.created_at} user={work?.user} title={work.title}  />
                 </Pressable>
               ))}
-            </View>
+            </ScrollView>
           )}
         </>
       )}

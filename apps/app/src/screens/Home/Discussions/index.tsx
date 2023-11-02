@@ -12,12 +12,10 @@ const Discussions = ({ navigation }: any) => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-      refetch()
-    }, 2000);
+      refetch().then(() => {
+        setRefreshing(false);
+      })
   }, []);
-
 
   useEffect(() => {
     refetch()
@@ -28,7 +26,10 @@ const Discussions = ({ navigation }: any) => {
         paddingVertical: 10,
         height: '100%',
         marginBottom: 10
-      }}>
+      }}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      
+      >
 
         {loading ? <ActivityIndicator color='#121212' size='large' /> : (
 
@@ -37,10 +38,9 @@ const Discussions = ({ navigation }: any) => {
             paddingHorizontal: 15,
             marginBottom: 50
           }}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           >
             {data?.discussions?.slice().reverse().map((discussion: any) => (
-              <HomePost key={discussion.id} title={discussion.title} image={discussion?.images} text={discussion.description} name={discussion.user.name} type='Placements Club' />
+              <HomePost key={discussion.id} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
             ))}
 
           </ScrollView>

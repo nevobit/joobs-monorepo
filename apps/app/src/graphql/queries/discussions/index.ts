@@ -9,8 +9,9 @@ query Query {
     images
     user {
       name
-      email
+      photo
     }
+    created_at
   }
 }
 `

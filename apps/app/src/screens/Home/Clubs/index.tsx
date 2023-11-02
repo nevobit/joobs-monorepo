@@ -7,16 +7,16 @@ import { useUser } from '../../../hooks/users/useUser';
 import { useSelector } from 'react-redux';
 
 const colors: string[] = [
-  "rgba(94, 53, 177, 0.5)", // Rosa claro
-  "rgba(0, 121, 107, 0.5)", // Lila claro
-  "rgba(40, 53, 147, 0.5)", // Lavanda
-  "rgba(230, 81, 0, 0.5)", // Azul claro
-  "rgba(0, 96, 100, 0.5)", // Azul cielo
-  "rgba(96, 125, 139, 0.5)", // Turquesa claro
-  "#80CBC4", // Verde menta
-  "#A5D6A7", // Verde claro
-  "#C5E1A5", // Lima claro
-  "#E6EE9C", // Amarillo claro
+  "rgba(94, 53, 177, 0.3)", // Rosa claro
+  "rgba(0, 121, 107, 0.3)", // Lila claro
+  "#E6EE9C70", // Amarillo claro
+  "#C5E1A550", // Lima claro
+  "#A5D6A750", // Verde claro
+  "#80CBC450", // Verde menta
+  "rgba(230, 81, 0, 0.3)", // Azul claro
+  "rgba(96, 125, 139, 0.3)", // Turquesa claro
+  "rgba(0, 96, 100, 0.3)", // Azul cielo
+  "rgba(40, 53, 147, 0.3)", // Lavanda
 ];
 
 const Clubs = ({ navigation }: any) => {

@@ -26,6 +26,7 @@ type Discussion {
     id: ID
     title: String
     user: User
+    created_at: String
     images: [String]
     link: String
     description: String

@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "b145e4c8-7cf5-4c1b-bede-c7212dc9d70e",
+  "id": "d3cdb56f-33cf-4894-aced-b1c2768704f4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -233,14 +233,7 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "discussions_user_id": {
-          "name": "discussions_user_id",
-          "columns": [
-            "user_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "projects": {

@@ -1,6 +1,7 @@
 import { View, Text, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { fromNow } from '../../../../utils';
 
 interface Props {
   name: string,
@@ -9,8 +10,10 @@ interface Props {
   money?: number
   text: string;
   image?: string;
+  created_at: string;
+  photo?: string;
 }
-const HomePost = ({ name, type, title, image, text, money }: Props) => {
+const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) => {
   return (
 
     <View style={{
@@ -30,6 +33,13 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
           flexDirection: 'row',
           gap: 8
         }}>
+        {photo ? <Image source={{
+          uri: photo
+        }}  width={30} height={30} style={{
+          borderRadius: 50,
+          borderWidth: 1,
+          borderColor: 'rgba(0,0,0,0.1)'
+        }} /> : (
 
           <View style={{
             backgroundColor: '#d5bffd',
@@ -45,6 +55,8 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
               color: 'rgba(0,0,0,0.8)',
             }}>{name.charAt(0)}</Text>
           </View>
+        )}
+
           <View style={{
           }}>
             <Text style={{
@@ -52,14 +64,14 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
               fontWeight: '600',
               color: 'rgba(0,0,0,0.8)'
             }}>{name}</Text>
-            {/* <Text style={{
+            <Text style={{
               fontSize: 12,
               color: 'rgba(0,0,0,0.8)'
-            }}>Professional</Text> */}
+            }}>{fromNow(created_at)}</Text>
           </View>
         </View>
 
-        <View style={{
+        {/* <View style={{
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: '#c1c6fb70',
@@ -73,7 +85,7 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
             fontSize: 12,
             fontWeight: '500'
           }}>{type}</Text>
-        </View>
+        </View> */}
       </View>
 
       <Text style={{
@@ -88,7 +100,7 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
         fontSize: 15,
         fontWeight: '400',
         color: 'rgba(0,0,0,0.6)',
-        marginBottom: 20
+        marginBottom: 15
       }}>{text}</Text>
 
       {image && (
@@ -98,8 +110,8 @@ const HomePost = ({ name, type, title, image, text, money }: Props) => {
       }} style={{
         flex: 1,
         width: '100%',
-        height: 400,
-        resizeMode: 'cover',
+        height: 300,
+        resizeMode: 'contain',
       }} />
 
       )}

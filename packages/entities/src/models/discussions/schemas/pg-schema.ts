@@ -1,5 +1,5 @@
 // import { relations } from "drizzle-orm";
-import { pgTable, primaryKey, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
 import { users } from "../../users";
 import { relations } from "drizzle-orm";
 
@@ -15,7 +15,6 @@ export const discussions = pgTable('discussions', {
     updated_at: timestamp('updated_at').defaultNow(),
 }, (discussions) => {
     return {
-        cpk: primaryKey(discussions.userId),
         idIndex: uniqueIndex('discussions_id_index').on(discussions.id)
     }
 });

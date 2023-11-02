@@ -68,7 +68,9 @@ const Club = ({ navigation, route }: any) => {
         refetch()
     }, [refetch])
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{
+            flex: 1
+        }}>
             <View style={{
                 backgroundColor: '#121212',
                 // height: 30,
@@ -86,6 +88,7 @@ const Club = ({ navigation, route }: any) => {
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 contentContainerStyle={{
                     flex: 1,
+                    height: '100%',
                     marginTop:-15,
                     marginBottom: 10,
                     backgroundColor: 'rgba(255, 255, 255, .3)'
@@ -192,7 +195,6 @@ const Club = ({ navigation, route }: any) => {
                             {dataMembers?.members.map((member: any) => (
                                 <View style={{
                                     backgroundColor: '#fff',
-                                    // height: 50,
                                     borderRadius: 10,
                                     elevation: 1,
                                     padding: 10,

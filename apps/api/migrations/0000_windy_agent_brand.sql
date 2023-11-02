@@ -34,8 +34,7 @@ CREATE TABLE IF NOT EXISTS "discussions" (
 	"status" varchar(256),
 	"user_id" uuid,
 	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp DEFAULT now(),
-	CONSTRAINT discussions_user_id PRIMARY KEY("user_id")
+	"updated_at" timestamp DEFAULT now()
 );
 
 CREATE TABLE IF NOT EXISTS "projects" (
