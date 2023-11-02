@@ -4,9 +4,19 @@ import { HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useQuery } from '@apollo/client'
 import { DISCUSSIONS } from '../../../graphql/queries'
+import { useSelector } from 'react-redux'
 
-const Discussions = ({ navigation }: any) => {
-  const { data, loading, error, refetch } = useQuery(DISCUSSIONS);
+const Discussions = ({ navigation, search }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
+
+  const { data, loading, error, refetch } = useQuery(DISCUSSIONS, {
+    context: {
+      headers: {
+          authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+  },
+  });
+
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -16,6 +26,8 @@ const Discussions = ({ navigation }: any) => {
         setRefreshing(false);
       })
   }, []);
+
+  console.log(data)
 
   useEffect(() => {
     refetch()
@@ -38,9 +50,9 @@ const Discussions = ({ navigation }: any) => {
             marginBottom: 50
           }}
           >
-            {data?.discussions?.slice().reverse().map((discussion: any) => (
-              <Pressable onPress={() => navigation.navigate('Discussion', { id: discussion.id })} > 
-                <HomePost key={discussion.id} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
+            {data?.discussions?.slice().reverse().filter((disscusion: any) => disscusion.title?.toLowerCase().includes(search?.toLowerCase() || '')).map((discussion: any) => (
+              <Pressable key={discussion.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} > 
+                <HomePost refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
               </Pressable>
             ))}
 

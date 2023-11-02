@@ -8,12 +8,13 @@ import Applications from '../../screens/Private/Work/Applications';
 import Discussions from '../../screens/Home/Discussions';
 import Clubs from '../../screens/Home/Clubs';
 import { Work } from '../../screens/Private';
+import Members from '../../screens/Private/Members';
 import Project from '../../screens/Projects';
 import ProjectsList from '../../screens/Projects/ProjectsList';
 
 const Tab = createMaterialTopTabNavigator();
 
-const SearchTopTap = () => {
+const SearchTopTap = ({navigation, search}: any) => {
   return (
     <Tab.Navigator
 
@@ -25,10 +26,10 @@ const SearchTopTap = () => {
       tabBarActiveTintColor: '#5368f5',
     }}
       >
-      <Tab.Screen name="Discusiones" component={Discussions} />
+      <Tab.Screen name="Discusiones" component={() => <Discussions navigation={navigation} search={search} />} />
       <Tab.Screen name="Clubs" component={Clubs} />
-      <Tab.Screen name="Trabajos" component={Listing} />
-      <Tab.Screen name="Miembros" component={Applications} />
+      <Tab.Screen name="Trabajos" component={Explorer} />
+      <Tab.Screen name="Miembros" component={Members} />
       <Tab.Screen name="Proyectos" component={ProjectsList} />
     </Tab.Navigator>
   );

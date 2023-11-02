@@ -25,15 +25,19 @@ const Clubs = ({ navigation }: any) => {
   const [actualId, setActualId] = React.useState('');
   const { isLoading, user, refetch: refetchUser } = useUser();
 
-    const { data, loading, error, refetch } = useQuery(CLUBS, {
+    const { data, loading, error, refetch,  } = useQuery(CLUBS, {
       context: {
         headers: {
           authorization: userCtx.token ? `Bearer ${userCtx.token}` : '',
         },
       },
     });
-
+ 
     const [join, { loading: creatingLoading, error: creatingError }] = useMutation(JOIN, {
+      onCompleted: () => {
+        refetchUser();
+        refetch();
+      },
       refetchQueries: [
           { query: CLUBS }
       ]
@@ -52,23 +56,26 @@ const Clubs = ({ navigation }: any) => {
             }
         }
     })
+    await refetchUser() 
+    await refetch()
     }catch(e){
       Alert.alert('Error Critico', String(e));
     }
   }
     
-
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-      refetch().then(() => {
-        setRefreshing(false);
-      })
+    Promise.all([refetchUser(), refetch()]).then(() => {
+      setRefreshing(false);
+    });
+
   }, []);
 
   useEffect(() => {
-    refetchUser()
-    refetch()
-  }, [])
+    Promise.all([refetchUser(), refetch()]).then(() => {
+      setRefreshing(false);
+    });
+  }, [refetchUser, refetch])
 
   if (creatingError) {
     Alert.alert('No te puedes unir a este club', creatingError.message);
@@ -97,7 +104,7 @@ const Clubs = ({ navigation }: any) => {
           refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh}  /> }
           >
             {data?.clubs.map((club: any, index: number) => (
-              <Pressable onPress={() => navigation.navigate('Club', { id: club.id })} key={club.id} style={{
+              <Pressable key={club.id} onPress={() => navigation.navigate('Club', { id: club.id })}  style={{
                 height: 85,
                 width: '100%',
                 backgroundColor: colors[index],
@@ -147,7 +154,9 @@ const Clubs = ({ navigation }: any) => {
                         padding: 5,
                         paddingHorizontal: 20,
                         borderRadius: 50
-                    }}>
+                    }}
+                    onPress={() => navigation.navigate('Club', { id: club.id })}
+                    >
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             fontSize: 14

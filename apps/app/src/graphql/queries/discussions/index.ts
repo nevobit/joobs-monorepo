@@ -6,7 +6,10 @@ query Query {
     id
     title
     description
+    comments
     images
+    likes
+    liked
     user {
       name
       photo
@@ -22,6 +25,8 @@ query Query($discussionId: String) {
     title
     description
     images
+    likes
+    liked
     user {
       name
       photo

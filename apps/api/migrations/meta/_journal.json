@@ -15,6 +15,13 @@
       "when": 1698930693819,
       "tag": "0001_lean_madame_web",
       "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1698947382286,
+      "tag": "0002_spooky_phalanx",
+      "breakpoints": false
     }
   ]
 }

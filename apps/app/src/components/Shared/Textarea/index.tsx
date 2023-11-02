@@ -14,6 +14,7 @@ const Textarea = ({placeholder, ...rest}: Props) => {
         borderRadius: 10,
         padding: 10,
         fontSize: 14,
+        color: 'rgba(0,0,0,0.8)',
         textAlignVertical: 'top',
         backgroundColor: isFocused? 'rgba(83, 104, 245, 0.1)' : '#fff'
     }} 
@@ -22,6 +23,7 @@ const Textarea = ({placeholder, ...rest}: Props) => {
     onFocus={() => setIsFocused(true)}
     onBlur={() => setIsFocused(false)}
     placeholder={placeholder} 
+    placeholderTextColor='rgba(0,0,0,0.4)'
     {...rest}
     />
   )

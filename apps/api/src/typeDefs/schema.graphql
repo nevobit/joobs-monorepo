@@ -29,6 +29,9 @@ type Discussion {
     created_at: String
     images: [String]
     link: String
+    comments: Int
+    likes: Int
+    liked: Boolean
     description: String
 }
 
@@ -50,6 +53,13 @@ type Club {
 type Comment {
     id: ID
     text: String
+    user: User
+    discussionId: Discussion
+    created_at: String
+}
+
+
+type Like {
     user: User
     discussionId: Discussion
     created_at: String
@@ -97,6 +107,12 @@ input DataCreateComment {
     userId: String
     discussionId: String
 }
+
+input DataCreateLike {
+    userId: String
+    discussionId: String
+}
+
 
 type Stages {
     description: String
@@ -202,6 +218,8 @@ type Query {
 
     comments(id: String): [Comment]
 
+    likes(id: String): [Like]
+
     members(id: String): [Member]
     isJoined: Boolean
 
@@ -234,6 +252,9 @@ type Mutation {
     createClub(data: DataCreateClub): Club
 
     comment(data: DataCreateComment): Comment
+
+    like(data: DataCreateLike): Like
+    likeDelete(data: DataCreateLike): Boolean
 
     # USER
     userLogin(email: String!): AuthPayload

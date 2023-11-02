@@ -93,7 +93,7 @@ const CreatePost = ({navigation}: any) => {
                 flex: 1,
                 paddingBottom: 25
             }}>
-                <TextInput placeholderTextColor='rgba(0,0,0,0.5)' style={{
+                <TextInput placeholderTextColor='rgba(0,0,0,0.4)' style={{
                     fontSize: 16,
                     fontWeight: '600',
                     color: 'rgba(0,0,0,0.8)'

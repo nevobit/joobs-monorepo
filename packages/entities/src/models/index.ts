@@ -2,6 +2,7 @@ export * from './applications';
 export * from './clubs';
 export * from './comments';
 export * from './discussions';
+export * from './likes';
 export * from './projects';
 export * from './users-on-clubs';
 export * from './users';

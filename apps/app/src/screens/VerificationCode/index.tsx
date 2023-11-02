@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, StatusBar, Text,  TouchableOpacity, View } from 'react-native'
 import Field from '../../components/Shared/Field'
 import Input from '../../components/Shared/Input'
 import Button from '../../components/Shared/Button'

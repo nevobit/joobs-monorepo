@@ -1,13 +1,14 @@
-import { Result, StatusType, Params, discussions, users,  userRelations, discussionRelations, works } from "@joobs/entities";
+import { Result, StatusType, Params, discussions, users, likes, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
 import { clientDb, /*getDbInstance */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
+import { eq } from "drizzle-orm";
 
 export const getAllDiscussions = async ({ page= 1, limit=24, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
     const infoInstance = await clientDb();
 
     console.log(status)
-    const db = drizzle(infoInstance, { schema: { users, discussions, userRelations, discussionRelations, works } })
+    const db = drizzle(infoInstance, { schema: { users, discussions, userRelations, comments, likes, likeRelations, discussionRelations, works } })
 
     // await result.where(eq(discussions.status, status));
 
@@ -18,20 +19,35 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
     })
 
     const pageSize = limit;
-    const skip = (page - 1) * pageSize;
     const count = (await result).length;
     const pages = Math.ceil(count / pageSize);
 
 
     // let items = await result.limit(pageSize);
-    let items = result;
+    // let items = result;
     const hasPreviousPage = page > 1;
     const previousPage = hasPreviousPage ? page - 1 : page;
 
     const hasNextPage = page < pages;
     const nextPage = hasNextPage? page + 1 : page;
 
-    console.log(skip, search)
+    const userLike = await db.query.likes.findMany({ where: eq(likes.userId, search!) });
+
+
+    const items = await Promise.all(
+        result.map(async (discussion) => {
+          const resultMembers = await db.query.comments.findMany({
+            where: eq(comments.discussionId, discussion.id!),
+          });
+
+          const resultLikes = await db.query.likes.findMany({
+            where: eq(likes.discussionId, discussion.id!),
+          });
+
+          const updatedClub = { ...discussion, comments: resultMembers.length, likes: resultLikes.length, liked: userLike.some((like) => like.discussionId === discussion.id)  };
+          return updatedClub;
+        })
+      );
     return {
         count,
         items,

@@ -6,9 +6,11 @@ import { CLUB } from '../../../../graphql/queries/clubs';
 import { useSelector } from 'react-redux';
 import { MEMBERS } from '../../../../graphql/queries/members';
 import { JOIN } from '../../../../graphql/mutations/members';
+import { useUser } from '../../../../hooks/users/useUser';
 
 const Club = ({ navigation, route }: any) => {
     const { user } = useSelector((state: any) => state.auth);
+    const { user: userInfo } = useUser(); 
     const [refreshing, setRefreshing] = React.useState(false);
 
     const { data, loading: isLoading, error, refetch } = useQuery(CLUB, {
@@ -34,6 +36,9 @@ const Club = ({ navigation, route }: any) => {
     });
 
     const [join, { loading: creatingLoading, error: creatingError }] = useMutation(JOIN, {
+        onCompleted: () => {
+            refetch()
+        },
         refetchQueries: [
             { query: CLUB }
         ]
@@ -45,7 +50,7 @@ const Club = ({ navigation, route }: any) => {
             await join({
                 variables: {
                     data: {
-                        userId: user.id,
+                        userId: userInfo.id,
                         clubId: id,
                     }
                 }
@@ -57,10 +62,9 @@ const Club = ({ navigation, route }: any) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        setTimeout(() => {
+        refetch().then(() => {
             setRefreshing(false);
-            refetch()
-        }, 2000);
+        })
     }, []);
 
 
@@ -77,7 +81,9 @@ const Club = ({ navigation, route }: any) => {
                 paddingHorizontal: 15,
                 flexDirection: 'row',
                 alignItems: 'center',
-                gap: 10
+                gap: 10,
+                paddingTop: 5,
+                paddingBottom: 5
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon name='arrow-back' size={25} color='#fff' />
@@ -91,7 +97,7 @@ const Club = ({ navigation, route }: any) => {
                     height: '100%',
                     marginTop:-15,
                     marginBottom: 10,
-                    backgroundColor: 'rgba(255, 255, 255, .3)'
+                    backgroundColor: 'rgba(255, 255, 255, .2)'
                 }}
             >
                 {isLoading ? <ActivityIndicator color='#000' size='large' style={{
@@ -136,7 +142,9 @@ const Club = ({ navigation, route }: any) => {
                                         <Text style={{
                                             fontSize: 14, color: 'rgba(0,0,0,0.8)'
                                         }}>Unirse</Text>
-                                        <Icon name='add-outline' size={20} color='rgba(0,0,0,0.8)' />
+                                        {creatingLoading? <ActivityIndicator color='#000' /> : (
+                                            <Icon name='add-outline' size={20} color='rgba(0,0,0,0.8)' />
+                                        )}
                                     </TouchableOpacity>
 
 
@@ -188,15 +196,14 @@ const Club = ({ navigation, route }: any) => {
                         <ScrollView contentContainerStyle={{
                             paddingHorizontal: 15,
                             paddingTop: 10,
-                            backgroundColor: 'rgba(255, 255, 255, .4)',
+                            backgroundColor: 'rgba(255, 255, 255, .2)',
                             flex: 1,
                             height: '100%',
                         }}>
                             {dataMembers?.members.map((member: any) => (
-                                <View style={{
+                                <View key={member.id} style={{
                                     backgroundColor: '#fff',
                                     borderRadius: 10,
-                                    elevation: 1,
                                     padding: 10,
                                     marginBottom: 10
                                 }}>
@@ -207,8 +214,8 @@ const Club = ({ navigation, route }: any) => {
                                     }}>
                                         <View style={{
                                             backgroundColor: 'rgba(230, 81, 0, 0.5)',
-                                            width: 30,
-                                            height: 30,
+                                            width: 50,
+                                            height: 50,
                                             flexDirection: 'row',
                                             borderRadius: 50,
                                             alignItems: 'center',
@@ -233,14 +240,14 @@ const Club = ({ navigation, route }: any) => {
                                         marginTop: 15
                                     }}>
                                         {member.user.skills.map((skill: string) => (
-                                            <Text style={{
-                                                backgroundColor: 'rgba(0,0,0,.1)',
+                                            <Text key={skill} style={{
+                                                backgroundColor: 'rgba(0,0,0,.05)',
                                                 borderRadius: 20,
                                                 paddingHorizontal: 10,
                                                 paddingVertical: 4,
-                                                fontSize: 12,
+                                                fontSize: 10,
                                                 color: 'rgba(0,0,0,0.8)',
-                                                fontWeight: '500'
+                                                fontWeight: '400'
                                             }}>{skill}</Text>
                                         ))}
 

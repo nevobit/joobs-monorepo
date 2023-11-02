@@ -76,7 +76,8 @@ const CreatePost = ({navigation}: any) => {
             }}>
                 <TextInput placeholderTextColor='rgba(0,0,0,0.5)' style={{
                     fontSize: 16,
-                    fontWeight: '600'
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.8)'
                 }}
                     multiline
                     placeholder='Dale un titulo a tu discusion' onChangeText={(text) => setPost((prev) => ({ ...prev, title: text }))} />

@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { fromNow } from '../../../../utils';
 import Share from 'react-native-share';
+import { useMutation } from '@apollo/client';
+import { DELETELIKE, LIKE } from '../../../../graphql/mutations/likes';
+import { LIKES } from '../../../../graphql/queries/likes';
+import { useUser } from '../../../../hooks/users/useUser';
+import { useSelector } from 'react-redux';
+import { DISCUSSIONS } from '../../../../graphql/queries';
 interface Props {
   name: string,
   type: string,
@@ -11,10 +17,18 @@ interface Props {
   text: string;
   image?: string;
   created_at: string;
+  comments: number;
+  likes: number;
+  liked: number;
   photo?: string;
+  refetch:any
+  discussionId: string;
 }
 
-const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) => {
+const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, type, title, image, created_at, text }: Props) => {
+  const { user: userInfo, refetch: refetchUser } = useUser();
+  const { user } = useSelector((state: any) => state.auth);
+
   const share = async () => {
     const options = {
       message: `Hey, estoy teniendo una discusion interesante sobre ${title}`,
@@ -23,12 +37,60 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
 
     try {
       await Share.open(options)
-    }catch(e) {
+    } catch (e) {
       Alert.alert('No se puede compartir', String(e))
     }
 
   }
-  
+
+
+  const [like, { loading: likeLoading, error: likeError }] = useMutation(LIKE, {
+    refetchQueries: [
+      { query: DISCUSSIONS }
+    ]
+  })
+
+  const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = useMutation(DELETELIKE, {
+    refetchQueries: [
+      { query: DISCUSSIONS }
+    ]
+  })
+
+  const onSubmitLike = async () => {
+    if (!liked) {
+
+      await like({
+        variables: {
+          data: {
+            discussionId: discussionId,
+            userId: userInfo.id
+          }
+        }
+      })
+
+      await refetchUser();
+      await refetch();
+    } else {
+      await likeDelete({
+        context: {
+          headers: {
+            authorization: user.token ? `Bearer ${user.token}` : '',
+          },
+        },
+        variables: {
+          data: {
+            discussionId: discussionId,
+            userId: userInfo.id
+          }
+        }
+      })
+
+      await refetchUser();
+      await refetch();
+    }
+
+  }
+
   return (
 
     <View style={{
@@ -47,29 +109,29 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
           flexDirection: 'row',
           gap: 8
         }}>
-        {photo ? <Image source={{
-          uri: photo
-        }}  width={30} height={30} style={{
-          borderRadius: 50,
-          borderWidth: 1,
-          borderColor: 'rgba(0,0,0,0.1)'
-        }} /> : (
-
-          <View style={{
-            backgroundColor: '#d5bffd',
-            height: 30,
-            width: 30,
+          {photo ? <Image source={{
+            uri: photo
+          }} width={30} height={30} style={{
             borderRadius: 50,
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Text style={{
-              fontWeight: '600',
-              fontSize: 16,
-              color: 'rgba(0,0,0,0.8)',
-            }}>{name.charAt(0)}</Text>
-          </View>
-        )}
+            borderWidth: 1,
+            borderColor: 'rgba(0,0,0,0.1)'
+          }} /> : (
+
+            <View style={{
+              backgroundColor: '#d5bffd',
+              height: 30,
+              width: 30,
+              borderRadius: 50,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Text style={{
+                fontWeight: '600',
+                fontSize: 16,
+                color: 'rgba(0,0,0,0.8)',
+              }}>{name.charAt(0)}</Text>
+            </View>
+          )}
 
           <View style={{
           }}>
@@ -119,50 +181,52 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
 
       {image && (
 
-      <Image source={{
-        uri: image[0]
-      }} style={{
-        flex: 1,
-        width: '100%',
-        height: 300,
-        resizeMode: 'contain',
-      }} />
+        <Image source={{
+          uri: image[0]
+        }} style={{
+          flex: 1,
+          width: '100%',
+          height: 300,
+          resizeMode: 'contain',
+        }} />
 
       )}
 
-     <View style={{
-        flexDirection: 'row-reverse',
+      <View style={{
+        flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 1,
         borderTopColor: 'rgba(0,0,0,0.1)',
         paddingTop: 10,
         paddingHorizontal: 5
       }}>
-         {/* 
-        <View style={{
-          flexDirection: 'row',
-          gap: 5,
-          alignItems: 'center'
-        }}>
-          <Icon name='triangle-outline' size={20} color='rgba(0,0,0,0.8)' />
+
+        <TouchableOpacity
+
+          disabled={likeDeleteLoading || likeLoading} onPress={onSubmitLike} style={{
+            flexDirection: 'row',
+            gap: 5,
+            alignItems: 'center'
+          }}>
+          <Icon name={!liked ? 'triangle-outline' : 'triangle'} size={20} color='rgba(0,0,0,0.8)' />
           <Text style={{
             fontSize: 14,
             color: 'rgba(0,0,0,0.8)'
-          }}>11</Text>
-        </View>
+          }}>{likes}</Text>
+        </TouchableOpacity>
 
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',
           gap: 7
         }}>
-          <Icon name='chatbubble-outline' size={20} color="rgba(0,0,0,0.8)"  />
+          <Icon name='chatbubble-outline' size={20} color="rgba(0,0,0,0.8)" />
           <Text style={{
             fontSize: 14,
-            color:'rgba(0,0,0,0.8)'
-          }}>0</Text>
+            color: 'rgba(0,0,0,0.8)'
+          }}>{comments}</Text>
         </View>
-*/}
+
         <TouchableOpacity onPress={share} style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -170,7 +234,7 @@ const HomePost = ({ name, photo, type, title, image, created_at, text }: Props) 
         }}>
           <Icon name='share-social-outline' size={25} color='rgba(0,0,0,0.8)' />
         </TouchableOpacity>
-      </View> 
+      </View>
     </View>
   )
 }

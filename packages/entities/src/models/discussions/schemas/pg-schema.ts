@@ -3,6 +3,7 @@ import { pgTable, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-or
 import { users } from "../../users";
 import { relations } from "drizzle-orm";
 import { comments } from "../../comments";
+import { likes } from "../../likes";
 
 export const discussions = pgTable('discussions', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -26,5 +27,6 @@ export const discussionRelations = relations(discussions, ({ one, many }) => ({
         fields: [discussions.userId],
         references: [users.id]
     }),
-    comments: many(comments)
+    comments: many(comments),
+    likes: many(likes)
 }))

@@ -13,3 +13,14 @@ export const GET_USER_BY_ID = gql`
     }
   }
 `
+
+export const USERS = gql`
+query Query {
+  users {
+    photo
+    name
+    id
+    skills
+  }
+}
+`
