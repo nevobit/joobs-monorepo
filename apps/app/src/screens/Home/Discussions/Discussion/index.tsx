@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity, Alert, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Image, TouchableOpacity, Alert, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView, Keyboard } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { fromNow } from '../../../../utils';
@@ -19,7 +19,7 @@ const DiscussionDetails = ({ navigation, route }: any) => {
     const { user } = useSelector((state: any) => state.auth);
     const { user: userInfo, refetch: refetchUser } = useUser();
     const [refreshing, setRefreshing] = React.useState(false);
-
+  const scrollViewRef = useRef<ScrollView>();
     const { data, loading: isLoading, error, refetch } = useQuery(DISCUSSION, {
         context: {
             headers: {
@@ -105,7 +105,9 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
       }
     })
 
-    setText('')
+    Keyboard.dismiss();
+    scrollViewRef.current?.scrollToEnd({animated: true})
+    await setText('')
     await refetchComments()
     await refetchUser()
     await refetch()

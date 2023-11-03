@@ -7,6 +7,7 @@ import applications from './applications'
 import members from './users-on-club'
 import comments from './comments'
 import likes from './likes'
+import projects from './projects'
 
 export default {
     Query: {
@@ -17,7 +18,8 @@ export default {
         ...applications.Query,
         ...members.Query,
         ...comments.Query,
-        ...likes.Query
+        ...likes.Query,
+        ...projects.Query,
     },
     Mutation: {
         ...auth.Mutation,
@@ -27,6 +29,7 @@ export default {
         ...applications.Mutation,
         ...members.Mutation,
         ...comments.Mutation,
-        ...likes.Mutation
+        ...likes.Mutation,
+        ...projects.Mutation
     }
 }

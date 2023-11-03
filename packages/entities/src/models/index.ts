@@ -3,6 +3,7 @@ export * from './clubs';
 export * from './comments';
 export * from './discussions';
 export * from './likes';
+export * from './participants';
 export * from './projects';
 export * from './users-on-clubs';
 export * from './users';

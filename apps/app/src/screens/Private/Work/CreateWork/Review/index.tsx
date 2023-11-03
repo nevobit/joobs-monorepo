@@ -153,7 +153,10 @@ const Review = ({ navigation, route }: any) => {
                         borderRadius: 10
                     }} />
 
-                    <Text>{route.params.description}</Text>
+                    <Text style={{
+                        fontSize: 14,
+                        color: 'rgba(0,0,0,0.8)',
+                    }}>{route.params.description}</Text>
                 </ScrollView>
 
                 <View style={{

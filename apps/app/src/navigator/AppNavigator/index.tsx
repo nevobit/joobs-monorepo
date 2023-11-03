@@ -10,6 +10,7 @@ import WorkDetails from '../../screens/Private/Work/Details';
 import Notifications from '../../screens/Private/Notifications';
 import Club from '../../screens/Home/Clubs/Club';
 import DiscussionDetails from '../../screens/Home/Discussions/Discussion'
+import ProjectDetails from '../../screens/Projects/ProjectsList/ProjectDetails';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamsList = {
   Messages: undefined;
   Notifications: undefined;
   CreateWork: undefined;
+  ProjectDetails: { id: string };
   WorkDetails: { id: string };
   Club: { id: string };
   Discussion: { id: string };
@@ -64,6 +66,11 @@ export const AppNavigator = () => {
         }}
       />
       <HomeStack.Screen name="Discussion" component={DiscussionDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen name="ProjectDetails" component={ProjectDetails}
         options={{
           headerShown: false,
         }}

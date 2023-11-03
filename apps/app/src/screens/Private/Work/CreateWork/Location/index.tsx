@@ -66,7 +66,9 @@ const Location = ({navigation, route}: any) => {
                                 color: 'rgba(0,0,0,0.8)',
                                 fontSize: 18
                             }}>Trabajo remoto</Text>
-                            <Text>El empleado puede trabajar remotamente.</Text>
+                            <Text style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}>El empleado puede trabajar remotamente.</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -95,7 +97,9 @@ const Location = ({navigation, route}: any) => {
                                 color: 'rgba(0,0,0,0.8)',
                                 fontSize: 18
                             }}>En oficina</Text>
-                            <Text>El empelado tiene que ir a la oficina de la empresa.</Text>
+                            <Text style={{
+                                color: 'rgba(0,0,0,0.6)',
+                            }} >El empelado tiene que ir a la oficina de la empresa.</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -124,7 +128,9 @@ const Location = ({navigation, route}: any) => {
                                 color: 'rgba(0,0,0,0.8)',
                                 fontSize: 18
                             }}>Hibrido</Text>
-                            <Text>Un mix de trabajo remoto y en oficina.</Text>
+                            <Text style={{
+                                color: 'rgba(0,0,0,0.8)',
+                            }}>Un mix de trabajo remoto y en oficina.</Text>
                         </View>
                     </TouchableOpacity>
                 

@@ -92,14 +92,14 @@ const WorkDetails = ({ navigation, route }: any) => {
                                     fontWeight: '600',
                                     fontSize: 16,
                                     color: 'rgba(0,0,0,0.8)'
-                                }}>{data.work.name?.charAt(0)}</Text>
+                                }}>{data.work.user.name?.charAt(0)}</Text>
                             </View>
                             <View style={{
                             }}>
                                 <Text style={{
                                     fontSize: 12,
                                     color: 'rgba(0,0,0,0.8)'
-                                }}>{data.work.name}</Text>
+                                }}>{data.work.user.name}</Text>
                                 <Text style={{
                                     fontSize: 12,
                                     color: 'rgba(0,0,0,0.8)'
@@ -146,7 +146,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                             paddingBottom: 15
                         }}>
                             {data.work.skills.map((skill: string) => (
-                                <Text style={{
+                                <Text key={skill} style={{
                                     backgroundColor: 'rgba(0,0,0, .1)',
                                     borderRadius: 20,
                                     paddingHorizontal: 10,

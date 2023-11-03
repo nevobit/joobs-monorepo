@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "d3cdb56f-33cf-4894-aced-b1c2768704f4",
+  "id": "7849a4a5-4155-415b-b8f9-224c0f6fada1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -115,6 +115,13 @@
       "name": "comments",
       "schema": "",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "gen_random_uuid()"
+        },
         "text": {
           "name": "text",
           "type": "text",
@@ -151,11 +158,10 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "comments_user_id_discussion_id": {
-          "name": "comments_user_id_discussion_id",
+        "comments_id": {
+          "name": "comments_id",
           "columns": [
-            "user_id",
-            "discussion_id"
+            "id"
           ]
         }
       },
@@ -236,6 +242,94 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "likes": {
+      "name": "likes",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discussion_id": {
+          "name": "discussion_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "likes_user_id_discussion_id": {
+          "name": "likes_user_id_discussion_id",
+          "columns": [
+            "user_id",
+            "discussion_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "participants": {
+      "name": "participants",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "work_id": {
+          "name": "work_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "participants_user_id_work_id": {
+          "name": "participants_user_id_work_id",
+          "columns": [
+            "user_id",
+            "work_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "projects": {
       "name": "projects",
       "schema": "",
@@ -275,13 +369,19 @@
         },
         "description": {
           "name": "description",
-          "type": "varchar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stages": {
+          "name": "stages",
+          "type": "jsonb[]",
           "primaryKey": false,
           "notNull": false
         },
         "skills": {
           "name": "skills",
-          "type": "varchar",
+          "type": "varchar[]",
           "primaryKey": false,
           "notNull": false
         },
@@ -303,8 +403,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user": {
-          "name": "user",
+        "submission": {
+          "name": "submission",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prerequisites": {
+          "name": "prerequisites",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false

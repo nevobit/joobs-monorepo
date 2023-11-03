@@ -1,13 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import Header from '../Header'
-import Input from '../../../../../components/Shared/Input'
 import Button from '../../../../../components/Shared/Button'
 import Textarea from '../../../../../components/Shared/Textarea'
 
 const Description = ({navigation, route}: any) => {
     const [description, setDescription] = useState('');
-    console.log(route.params)
     return (
         <View style={{
             backgroundColor: '#121212',

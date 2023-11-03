@@ -5,6 +5,7 @@ export * from './comments';
 export * from './discussions';
 export * from './likes';
 export * from './mailing';
+export * from './participants';
 export * from './projects';
 export * from './users-on-club';
 export * from './users';

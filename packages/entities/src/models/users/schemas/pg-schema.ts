@@ -4,6 +4,7 @@ import { discussions } from "../../discussions";
 import { works } from "../../works";
 import { applications } from "../../applications";
 import { usersOnClub } from "../../users-on-clubs";
+import { participants } from "../../participants";
 
 export const users = pgTable('users', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -43,5 +44,6 @@ export const userRelations = relations(users, ({ many }) => ({
     discussions: many(discussions),
     works: many(works),
     usersToApplications: many(applications),
-    usersToClub: many(usersOnClub)
+    usersToClub: many(usersOnClub),
+    participants: many(participants)
 }));
