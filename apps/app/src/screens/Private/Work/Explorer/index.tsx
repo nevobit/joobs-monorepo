@@ -115,7 +115,7 @@ const Explorer = ({navigation}: any) => {
           paddingHorizontal: 15,
           marginBottom: 50
         }}
-          data={data.works}
+          data={data.works.slice().reverse()}
           renderItem={( { item } ) => 
           <Pressable key={item.id} onPress={() => navigation.navigate('WorkDetails', { id: item.id })}>
               <WorkCard {...item} />
