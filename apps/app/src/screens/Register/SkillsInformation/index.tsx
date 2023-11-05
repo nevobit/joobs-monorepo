@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useMutation } from '@apollo/client'
 import { REGISTER_USER } from '../../../graphql/mutations'
 
-
 const skillsData = {
   development: [
     'Flutter',
@@ -255,11 +254,9 @@ const SkillsInformation = ({ navigation, params }: any) => {
         e.preventDefault();
         try {
 
-          console.log(userInfo)
           const { data } = await register({
             variables: {
               data: {
-
               name: userInfo.name,
               email: userInfo.email,
               phone: userInfo.phone,
@@ -269,11 +266,9 @@ const SkillsInformation = ({ navigation, params }: any) => {
               location: userInfo.location,
               skills
             }
-
             }
           });
 
-          console.log(data)
           dispatch(signin({token: data.userRegister.token}));
           navigation.navigate('Joobs')
         } catch (err) {
@@ -311,7 +306,7 @@ const SkillsInformation = ({ navigation, params }: any) => {
                 fontSize: 16,
                 marginTop: 20,
                 paddingHorizontal: 15
-            }}>Ahora Nestor 🌟</Text>
+            }}>Ahora {userInfo.name} 🌟</Text>
             <Text style={{
                 color: '#fff',
                 fontWeight: '600',

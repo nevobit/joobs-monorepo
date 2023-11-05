@@ -8,6 +8,7 @@ import { HomeStackParamList } from '../../../navigator/AppNavigator/HomeStack';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../../store/features/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import sendWhatsApp from '../../../utils/send-whatsapp';
 
 interface HomeProps extends StackScreenProps<HomeStackParamList> { }
 
@@ -19,9 +20,10 @@ interface Props {
   messages?: boolean;
   profile?: boolean;
   whathsapp?: boolean;
+  menu?: boolean;
 }
 
-const Header = ({ title, navigation, search, messages, notifications, profile, whathsapp }: Props) => {
+const Header = ({ menu, title, navigation, search, messages, notifications, profile, whathsapp }: Props) => {
   const [profileOptions, setProfileOptions] = useState(false);
   const dispatch = useDispatch();
   const logout = async () => {
@@ -41,16 +43,29 @@ const Header = ({ title, navigation, search, messages, notifications, profile, w
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
+          <View style={{
+            flexDirection: 'row',
+            gap: 10
+          }}>
 
-          <Text style={styles.title}>{title}</Text>
+            {menu && (
+
+              <TouchableOpacity onPress={() => sendWhatsApp('Quiero dar feedback')}>
+                <Icon name='menu' size={30} color='#fff' />
+              </TouchableOpacity>
+            )}
+            <Text style={styles.title}>{title}</Text>
+          </View>
+
           <View style={{
             flexDirection: 'row',
             alignItems: 'center',
             gap: 15
           }}>
+
             {whathsapp && (
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => sendWhatsApp('Quiero dar feedback')}>
                 <Icon name='logo-whatsapp' size={24} color='#fff' />
               </TouchableOpacity>
             )}
@@ -85,7 +100,7 @@ const Header = ({ title, navigation, search, messages, notifications, profile, w
       </View>
 
       <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
-      <TouchableOpacity onPress={logout}>
+        <TouchableOpacity onPress={logout}>
           <Text style={{
             textAlign: 'center',
             color: 'rgba(0,0,0,0.8)',
@@ -93,7 +108,7 @@ const Header = ({ title, navigation, search, messages, notifications, profile, w
             marginBottom: 20
           }}>Danos retroalimentación</Text>
         </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
+        <TouchableOpacity onPress={logout}>
           <Text style={{
             textAlign: 'center',
             color: 'rgba(0,0,0,0.8)',

@@ -16,8 +16,6 @@ const Listing = ({ navigation }: any) => {
     },
   });
 
-  console.log(error)
-
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
       refetch().then(() => {
@@ -25,7 +23,7 @@ const Listing = ({ navigation }: any) => {
       })
   }, []);
 
-  console.log("LISTING", data)
+
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -80,7 +78,7 @@ const Listing = ({ navigation }: any) => {
                 <Pressable style={{
                   width: '100%'
                 }} key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >
-                  <WorkCard role={work.role} remuneration={work.remuneration} created_at={work.created_at} user={work?.user} title={work.title}  />
+                  <WorkCard skills={work.skills} role={work.role} remuneration={work.remuneration} created_at={work.created_at} user={work?.user} title={work.title}  />
                 </Pressable>
               ))}
             </ScrollView>

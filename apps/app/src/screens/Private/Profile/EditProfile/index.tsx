@@ -38,10 +38,6 @@ const EditProfile = ({ navigation }: any) => {
     }
 
     useEffect(() => {
-        refetch()
-    }, []);
-
-    useEffect(() => {
         showPhoto = photo;
     }, [photo])
     return (

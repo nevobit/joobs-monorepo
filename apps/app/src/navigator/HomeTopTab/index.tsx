@@ -12,7 +12,7 @@ const HomeTopTap = () => {
 
     screenOptions={{
       tabBarStyle:{backgroundColor: '#121212'},
-      tabBarLabelStyle: {fontSize: 14, color: '#fff', textTransform: 'capitalize'},
+      tabBarLabelStyle: {fontSize: 16, color: '#fff', textTransform: 'capitalize'},
       tabBarIndicatorStyle: {backgroundColor: '#5368f5'},
       tabBarActiveTintColor: '#5368f5',
     }}

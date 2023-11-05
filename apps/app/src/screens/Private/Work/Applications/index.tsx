@@ -3,20 +3,9 @@ import React from 'react'
 import { useQuery } from '@apollo/client'
 import { APPLICATIONS } from '../../../../graphql/queries/applications'
 import { WorkCard } from '../../../../components/UI'
-import { useSelector } from 'react-redux'
 
 const Applications = ({navigation}: any) => {
-  const { user } = useSelector((state: any) => state.auth);
-
-  const { data, loading, error, refetch } = useQuery(APPLICATIONS, {
-    context: {
-      headers: {
-        Authorization: user.token ? `Bearer ${user.token}` : '',
-      }
-    }
-  })
-
-
+  const { data, loading, error, refetch } = useQuery(APPLICATIONS)
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -82,7 +71,7 @@ contentContainerStyle={{
 }}
   data={data.applications}
   renderItem={( { item } ) => 
-  <Pressable key={item.id} onPress={() => navigation.navigate('WorkDetails', { id: item.id })}>
+  <Pressable key={item.id} onPress={() => navigation.navigate('WorkDetails', { id: item.work.id })}>
       <WorkCard {...item.work} />
   </Pressable>  
 

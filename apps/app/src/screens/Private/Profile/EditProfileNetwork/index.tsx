@@ -111,7 +111,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
         <Icon name='logo-instagram' color='#E1306C' size={28} />
                     <Input style={{
                         width: '85%'
-                    }} placeholder='Ej: curious_harish' onChangeText={(text) => setUserInfo((prev) => ({...prev, instagram: text}))} />
+                    }} placeholder='Ej: curious_harish' value={userInfo.instagram} onChangeText={(text) => setUserInfo((prev) => ({...prev, instagram: text}))} />
         </View>
         <View style={{
             flexDirection: 'row',
@@ -122,7 +122,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
         <Icon name='logo-twitter' color='#1DA1F2' size={28} />
                     <Input style={{
                         width: '85%'
-                    }} placeholder='Ej: curiousharish' onChangeText={(text) => setUserInfo((prev) => ({...prev, twitter: text}))} />
+                    }} placeholder='Ej: curiousharish' value={userInfo.twitter} onChangeText={(text) => setUserInfo((prev) => ({...prev, twitter: text}))} />
         </View>
     </View>
 
@@ -144,7 +144,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
         <Icon name='logo-facebook' color='#3b5998' size={28} />
                     <Input style={{
                         width: '85%',
-                    }} placeholder='Ej: https://www.facebook.com/curios' onChangeText={(text) => setUserInfo((prev) => ({...prev, facebook: text}))} />
+                    }} placeholder='Ej: https://www.facebook.com/curios' value={userInfo.facebook} onChangeText={(text) => setUserInfo((prev) => ({...prev, facebook: text}))} />
         </View>
         <View style={{
             flexDirection: 'row',
@@ -155,7 +155,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
         <Icon name='logo-linkedin' color='#0A66C2' size={28} />
                     <Input style={{
                         width: '85%'
-                    }} placeholder='Ej: https://www.linkedin.com/curios' onChangeText={(text) => setUserInfo((prev) => ({...prev, linkedin: text}))} />
+                    }} placeholder='Ej: https://www.linkedin.com/curios' value={userInfo.linkedin} onChangeText={(text) => setUserInfo((prev) => ({...prev, linkedin: text}))} />
         </View>
     </View>
 

@@ -10,6 +10,7 @@ query Query {
       frecuency
     }
     title
+    skills
     user {
       photo
       name

@@ -18,6 +18,9 @@ export const GET_USER_BY_ID = gql`
       about
       company_name
       college
+      company_website
+      company_logo
+      company_description
       headline
       born_date
       icebreaker
@@ -36,6 +39,10 @@ query Query {
     name
     id
     skills
+    company_name
+    company_website
+    company_logo
+    company_description
   }
 }
 `

@@ -26,6 +26,11 @@ interface SocialLinks {
     facebook: string;
 }
 
+// interface ProofOfWork {
+//     links: string[];
+//     attachments: string[];
+// }
+
 export interface User extends Base {
     email: string;
     name: string;
@@ -42,7 +47,7 @@ export interface User extends Base {
     gender: string;
     graduation_date: string;
     school: string;
-    proof_of_work: string;
+    proof_of_work: any;
     description: string;
     isIndividual: boolean;
     title: string;

@@ -292,11 +292,23 @@ const Profile = ({ navigation }: any) => {
               <View style={{
                 marginTop: 20
               }}>
+                <View style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
+                }}>
+
                 <Text style={{
                   fontWeight: '600',
                   color: 'rgba(0,0,0,0.8)',
                   fontSize: 16
                 }}>Sobre mi</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('EditProfile', { id: 'g' })} style={{
+
+}}>
+                  <Icon name='pencil-outline' color='rgba(0,0,0,0.8)' size={22} />
+                </TouchableOpacity>
+                </View>
+
                 <View style={{
                   marginTop: 15,
                   backgroundColor: 'rgba(0,0,0,0.05)',
@@ -365,7 +377,7 @@ const Profile = ({ navigation }: any) => {
                     display: 'flex',
                     flexDirection: 'row'
                   }}>
-                    <Text> <Icon name="time-outline" /> </Text>
+                    <Text> <Icon name="time-outline" color='rgba(0,0,0,0.8)' /> </Text>
                     <Text style={{
                       fontWeight: '400',
                       fontSize: 12,
@@ -424,11 +436,22 @@ const Profile = ({ navigation }: any) => {
               <View style={{
                 marginTop: 20
               }}>
+                <View style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
+                }}>
+
                 <Text style={{
                   fontWeight: '600',
                   color: 'rgba(0,0,0,0.8)',
                   fontSize: 16
                 }}>Habilidades</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('EditProfileSkills', { id: 'g' })} style={{
+
+}}>
+                  <Icon name='pencil-outline' color='rgba(0,0,0,0.8)' size={22} />
+                </TouchableOpacity>
+                </View>
 
                 <View style={{
                   flexDirection: 'row',

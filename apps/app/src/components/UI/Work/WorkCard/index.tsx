@@ -1,37 +1,26 @@
-import { View, Text, Alert, Pressable } from 'react-native'
+import { View, Text, Alert, Pressable, Image } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DivisaFormater, fromNow } from '../../../../utils'
 import translateToSpanish from '../../../../utils/frecuency-formater';
 import Share from 'react-native-share';
+import share from '../../../../utils/share';
 
 interface Props{
   user: {
     name: string;
+    photo: string;
   }
   title: string;
   role: string;
+  skills: string[];
   created_at: string;
   remuneration: {
     value: number;
     frecuency: string;
   }
 }
-const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
-  const share = async () => {
-    const options = {
-      message: `Hey!, mira esta oferta para ${title}`,
-      url: 'https://joobs.lat'
-    }
-
-    try {
-      await Share.open(options)
-    } catch (e) {
-      console.log(e);
-      // Alert.alert('No se puede compartir', String(e))
-    }
-
-  }
+const WorkCard = ({ user, title, skills, created_at, remuneration, role }: Props) => {
   return (
     
     <View style={{
@@ -51,6 +40,26 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
           flexDirection: 'row',
           gap: 8
         }}>
+        {user?.photo ? (
+             <View style={{
+              backgroundColor: '#d5bffd',
+              height: 30,
+              width: 30,
+              borderRadius: 50,
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden'
+            }}>
+              <Image source={{
+                uri: user?.photo
+              }} style={{
+                width: 30,
+                height: 30,
+                objectFit: 'cover'
+                
+              }} />
+            </View>
+        ) : (
 
         <View style={{
           backgroundColor: '#d5bffd',
@@ -66,6 +75,8 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
             color: 'rgba(0,0,0,0.8)'
           }}>{user?.name?.charAt(0)}</Text>
         </View>
+        )}
+
         <View style={{
         }}>
           <Text style={{
@@ -107,6 +118,27 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
       }}>{title}</Text>
       
       <View style={{
+                flexDirection: 'row',
+                gap: 10,
+                flexWrap: 'wrap',
+                marginBottom: 10
+            }}>
+                {skills?.map((skill: string) => (
+
+                    <Text key={skill} style={{
+                        backgroundColor: 'rgba(0,0,0,.05)',
+                        borderRadius: 20,
+                        paddingHorizontal: 10,
+                        paddingVertical: 4,
+                        fontSize: 12,
+                        color: 'rgba(0,0,0,0.8)',
+                        fontWeight: '400'
+                    }}>{skill}</Text>
+                ))}
+
+            </View>
+
+      <View style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 1,
@@ -125,7 +157,7 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
           }}>{DivisaFormater({value: remuneration?.value})} / {translateToSpanish(remuneration?.frecuency)}</Text>
         </View>
 
-        <Pressable onPress={share} style={{
+        <Pressable onPress={() => share(title)} style={{
           flexDirection: 'row',
           alignItems: 'center',
           gap: 7

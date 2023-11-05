@@ -67,6 +67,7 @@ input DataCreateDiscussion {
 type Application {
     user: User
     work: Work
+    proof_of_work: String
 }
 
 type Club {
@@ -154,6 +155,7 @@ input DataCreateProject {
 input DataCreateApplication {
     userId: String
     workId: String
+    proof_of_work: String
 }
 
 input DataCreateMember {
@@ -205,12 +207,16 @@ type User {
     about: String
     company_name: String
     college: String
+    proof_of_work: ProofOfWork
     graduation_year: String
     icebreaker: [String]
     instagram: String
     facebook: String
     linkedin: String
     twitter: String
+    company_website: String
+    company_logo: String
+    company_description: String
 }
 
 type AuthPayload {
@@ -227,6 +233,16 @@ input LocationInput {
     latitude: Float
 }
 
+type ProofOfWork {
+    links: [String]
+    attachments: [String]
+}
+
+input ProofOfWorkInput {
+    links: [String]
+    attachments: [String]
+}
+
 input UserInput {
     name: String
     email: String
@@ -239,6 +255,8 @@ input UserInput {
     headline: String
     about: String
     company_name: String
+    company_website: String
+    proof_of_work: ProofOfWorkInput
     college: String
     graduation_year: String   
     icebreaker: [String]
@@ -246,6 +264,8 @@ input UserInput {
     facebook: String
     linkedin: String
     twitter: String
+    company_logo: String
+    company_description: String
 }
 
 type Query {
@@ -269,6 +289,7 @@ type Query {
 
     applications: [Application]
     application: Application
+    applied: Boolean
 
     discussions: [Discussion]
     discussion(id: String): Discussion

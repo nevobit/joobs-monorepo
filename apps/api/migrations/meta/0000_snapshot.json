@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "fe255399-c058-434c-b7e1-a26e08dc8ba7",
+  "id": "a449f034-5132-4616-8db3-0c26b22dcf9d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -19,6 +19,12 @@
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
+        },
+        "proof_of_work": {
+          "name": "proof_of_work",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -577,6 +583,30 @@
         "username": {
           "name": "username",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_website": {
+          "name": "company_website",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_logo": {
+          "name": "company_logo",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_description": {
+          "name": "company_description",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "proof_of_work": {
+          "name": "proof_of_work",
+          "type": "jsonb[]",
           "primaryKey": false,
           "notNull": false
         },

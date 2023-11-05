@@ -22,3 +22,9 @@ query Query {
   }
 }
 `
+
+export const APPLIED = gql`
+query Query {
+  applied
+}
+`

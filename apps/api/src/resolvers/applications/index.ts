@@ -1,4 +1,4 @@
-import { getWorkById, getApplicationsById, verifyToken, createApplication } from '@joobs/business-logic'
+import { getWorkById, getApplicationsById, verifyToken, createApplication, getUserApplied } from '@joobs/business-logic'
 export default {
     Query: {
         applications: async (_: any, {}, ctx:any) => {
@@ -21,12 +21,22 @@ export default {
                 console.log(err);
                 throw new Error(err);
             }
+        },
+        applied: async (_: any, {}, ctx:any) => {
+            const { id } = await verifyToken(ctx) as {id: string};
+            try{
+                const applied = await getUserApplied(id);
+                return applied;
+            }catch(err:any){
+                console.log(err);
+                throw new Error(err);
+            }
         }
     },
     Mutation: {
         createApplication: async (_: any, {data}: any, _context: any) => {
-            const { userId, workId } = data;
-            const work = await createApplication({ workId, userId });
+            const { userId, workId, proof_of_work } = data;
+            const work = await createApplication({ workId, userId, proof_of_work });
             return work;
         }
     }

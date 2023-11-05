@@ -1,4 +1,4 @@
-import { TouchableOpacity, ScrollView, RefreshControl, Pressable, View } from 'react-native'
+import { TouchableOpacity, ScrollView, RefreshControl, Pressable, View, Text } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -22,6 +22,52 @@ const Discussions = ({ navigation, search }: any) => {
       <ScrollView style={styles.container}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
+        <View style={{
+          backgroundColor: 'rgba(255,255,255,1)',
+          marginBottom: 15,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 20,
+          height: 50,
+          paddingHorizontal: 15
+        }}>
+          <TouchableOpacity style={{
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            paddingHorizontal: 20,
+            paddingVertical: 5,
+            borderRadius: 50
+          }}>
+            <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '400',
+              fontSize: 13
+            }}>Para ti</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            paddingHorizontal: 20,
+            paddingVertical: 5,
+            borderRadius: 50
+          }}>
+            <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '400',
+              fontSize: 13
+            }}>Popular</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            paddingHorizontal: 20,
+            paddingVertical: 5,
+            borderRadius: 50
+          }}>
+            <Text style={{
+              color: 'rgba(0,0,0,0.8)',
+              fontWeight: '400',
+              fontSize: 13
+            }}>Lo último</Text>
+          </TouchableOpacity>
+        </View>
         {isLoading ?
           <View style={{
             flex: 1,
