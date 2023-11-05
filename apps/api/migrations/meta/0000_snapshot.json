@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "7849a4a5-4155-415b-b8f9-224c0f6fada1",
+  "id": "fe255399-c058-434c-b7e1-a26e08dc8ba7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -296,8 +296,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "work_id": {
-          "name": "work_id",
+        "project_id": {
+          "name": "project_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -320,11 +320,11 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "participants_user_id_work_id": {
-          "name": "participants_user_id_work_id",
+        "participants_user_id_project_id": {
+          "name": "participants_user_id_project_id",
           "columns": [
             "user_id",
-            "work_id"
+            "project_id"
           ]
         }
       },
@@ -522,6 +522,48 @@
         },
         "company_name": {
           "name": "company_name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "college": {
+          "name": "college",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icebreaker": {
+          "name": "icebreaker",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "instagram": {
+          "name": "instagram",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "facebook": {
+          "name": "facebook",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin": {
+          "name": "linkedin",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "twitter": {
+          "name": "twitter",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "graduation_year": {
+          "name": "graduation_year",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false

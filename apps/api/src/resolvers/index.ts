@@ -8,7 +8,9 @@ import members from './users-on-club'
 import comments from './comments'
 import likes from './likes'
 import projects from './projects'
-
+import participants from './participants'
+import messages from './messages'
+ 
 export default {
     Query: {
         ...works.Query,
@@ -20,6 +22,7 @@ export default {
         ...comments.Query,
         ...likes.Query,
         ...projects.Query,
+        ...participants.Query,
     },
     Mutation: {
         ...auth.Mutation,
@@ -30,6 +33,12 @@ export default {
         ...members.Mutation,
         ...comments.Mutation,
         ...likes.Mutation,
-        ...projects.Mutation
+        ...projects.Mutation,
+        ...participants.Mutation,
+        ...messages.Mutation,
+        ...users.Mutation,
+    },
+    Subscription: {
+        ...messages.Subscription
     }
 }

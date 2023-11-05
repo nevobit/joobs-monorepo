@@ -10,8 +10,8 @@ input RemunerationInput {
 }
 
 type Location {
-    long: Float
-    lat: Float
+    longitude: Float
+    latitude: Float
     address: String
 }
 
@@ -96,8 +96,8 @@ type Like {
 
 
 input LocationInput {
-    long: Float
-    lat: Float
+    longitude: Float
+    latitude: Float
     address: String
 }
 
@@ -201,6 +201,16 @@ type User {
     skills: [String]
     born_date: String
     gender: String
+    headline: String
+    about: String
+    company_name: String
+    college: String
+    graduation_year: String
+    icebreaker: [String]
+    instagram: String
+    facebook: String
+    linkedin: String
+    twitter: String
 }
 
 type AuthPayload {
@@ -226,6 +236,16 @@ input UserInput {
     skills: [String]
     born_date: String
     gender: String
+    headline: String
+    about: String
+    company_name: String
+    college: String
+    graduation_year: String   
+    icebreaker: [String]
+    instagram: String
+    facebook: String
+    linkedin: String
+    twitter: String
 }
 
 type Query {
@@ -242,7 +262,7 @@ type Query {
     isJoined: Boolean
 
     participants(id: String): [Participant]
-    isParticipant: Boolean
+    isParticipant(projectId: String): Boolean
 
     workByUser: [Work]
     work(id: String): Work
@@ -287,4 +307,17 @@ type Mutation {
     userLoginGoogle(email: String!): AuthPayload
     verifyCode(email: String!, code: String!): AuthPayloadCode
     userRegister(data: UserInput): AuthPayloadCode
+    updateUser(data: UserInput): User
+
+    addMessage(text: String!): Boolean
+}
+
+type Message {
+    id: ID
+    user: User
+    text: String
+}
+
+type Subscription {
+    messageAdded: Message
 }

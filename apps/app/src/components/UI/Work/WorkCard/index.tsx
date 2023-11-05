@@ -1,8 +1,9 @@
-import { View, Text } from 'react-native'
+import { View, Text, Alert, Pressable } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DivisaFormater, fromNow } from '../../../../utils'
 import translateToSpanish from '../../../../utils/frecuency-formater';
+import Share from 'react-native-share';
 
 interface Props{
   user: {
@@ -17,7 +18,20 @@ interface Props{
   }
 }
 const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
+  const share = async () => {
+    const options = {
+      message: `Hey!, mira esta oferta para ${title}`,
+      url: 'https://joobs.lat'
+    }
 
+    try {
+      await Share.open(options)
+    } catch (e) {
+      console.log(e);
+      // Alert.alert('No se puede compartir', String(e))
+    }
+
+  }
   return (
     
     <View style={{
@@ -111,7 +125,7 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
           }}>{DivisaFormater({value: remuneration?.value})} / {translateToSpanish(remuneration?.frecuency)}</Text>
         </View>
 
-        <View style={{
+        <Pressable onPress={share} style={{
           flexDirection: 'row',
           alignItems: 'center',
           gap: 7
@@ -120,7 +134,7 @@ const WorkCard = ({ user, title, created_at, remuneration, role }: Props) => {
             color: 'green'
           }}>Compartir</Text>
           <Icon name='logo-whatsapp' color='green' />
-        </View>
+        </Pressable>
       </View>
     </View>
   )

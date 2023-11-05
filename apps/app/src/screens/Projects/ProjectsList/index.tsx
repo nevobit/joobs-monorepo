@@ -26,9 +26,10 @@ const ProjectsList = ({navigation}: any) => {
     <>
       <ScrollView contentContainerStyle={{
         paddingVertical: 10,
-        height: '100%',
+        minHeight: '100%',
         marginBottom: 10,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        gap: 15
       }}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >

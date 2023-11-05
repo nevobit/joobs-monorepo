@@ -27,8 +27,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/bunyan": "^1.8.9",
+    "@types/cors": "^2.8.15",
     "@types/jest": "29.5.5",
     "@types/node": "^20.8.0",
+    "@types/ws": "^8.5.8",
     "auto-changelog": "2.4.0",
     "bunyan": "^1.8.15",
     "dotenv": "^16.3.1",
@@ -42,13 +44,20 @@
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
+    "@graphql-tools/schema": "^10.0.0",
     "@joobs/business-logic": "workspace:^",
     "@joobs/data-sources": "workspace:^",
     "@joobs/entities": "workspace:^",
+    "apollo-server-express": "^3.12.1",
+    "cors": "^2.8.5",
     "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
+    "express": "^4.18.2",
     "fastify": "4.23.2",
-    "graphql": "^16.8.1"
+    "graphql": "^16.8.1",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.14.2",
+    "ws": "^8.14.2"
   },
   "engines": {
     "node": ">=18"

@@ -2,16 +2,18 @@ import { works, users, workRelations,  applicationsRelations, participants, part
 import { clientDb } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 // 
-export const getUserParticipant = async (id: string): Promise<Boolean> => {
+export const getUserParticipant = async (projectId: string, id: string): Promise<Boolean> => {
     const infoInstance = await clientDb();
 
     const db = drizzle(infoInstance, { schema: { users, works, applicationsRelations, workRelations, participants, participantsRelations } })
 
     const result = await db.query.participants.findMany({
-        where: eq(participants.userId, id!),
+        where: and(eq(participants.userId, id), eq(participants.projectId, projectId)),
     });
+
+    console.log({result})
 
     const isJoined = result.length > 0;
 

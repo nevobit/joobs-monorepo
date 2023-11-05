@@ -6,12 +6,12 @@ import { useMutation, useQuery } from '@apollo/client'
 import { WORKS } from '../../../../graphql/queries'
 import Button from '../../../../components/Shared/Button'
 import { CREATE_WORK } from '../../../../graphql/mutations/works'
+import {  Instagram, List, Facebook } from 'react-content-loader/native'
 
 const Explorer = ({navigation}: any) => {
   const { data, loading, error, refetch } = useQuery(WORKS);
-
   const [refreshing, setRefreshing] = React.useState(false);
-
+  
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
       refetch().then(() => {
@@ -40,7 +40,43 @@ const Explorer = ({navigation}: any) => {
         </View>
       </View>
 
-      {loading ? <ActivityIndicator color='#121212' size='large' /> : (
+      {loading ? 
+      <View style={{
+        paddingHorizontal: 15,
+        gap: 10
+      }}>
+        <View style={{
+          backgroundColor: '#fff',
+          borderRadius: 10,
+          padding: 5
+        }}>
+          <Facebook   /> 
+        </View>
+        <View style={{
+          backgroundColor: '#fff',
+          borderRadius: 10,
+          padding: 5
+        }}>
+          <Facebook   /> 
+        </View>
+        <View style={{
+          backgroundColor: '#fff',
+          borderRadius: 10,
+          padding: 5
+        }}>
+          <Facebook   /> 
+        </View>
+        <View style={{
+          backgroundColor: '#fff',
+          borderRadius: 10,
+          padding: 5
+        }}>
+          <Facebook   /> 
+        </View>
+
+      </View>
+      
+      : (
 
 
         <FlatList 

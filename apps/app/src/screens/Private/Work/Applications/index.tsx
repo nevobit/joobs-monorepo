@@ -57,7 +57,9 @@ const Applications = ({navigation}: any) => {
         paddingVertical: 10,
         borderRadius: 20
       }}
-      onPress={() => navigation.navigate('Work')}
+      onPress={() => navigation.navigate('Work', {
+        screen: 'Explorar'
+      })}
       >
         <Text style={{
           color: '#fff',

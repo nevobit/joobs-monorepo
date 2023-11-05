@@ -12,16 +12,16 @@ import client from './src/graphql';
 
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={client}>      
     <Provider store={store}>
-      <SafeAreaProvider>
-        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-        <NavigationContainer>
-          <NavigatorContainer />
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <ApolloProvider client={client}>
+        <SafeAreaProvider>
+          <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+          <NavigationContainer>
+            <NavigatorContainer />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </ApolloProvider>
     </Provider>
-    </ApolloProvider>
   );
 }
 

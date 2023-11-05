@@ -10,10 +10,11 @@ export default {
                 throw new Error(err);
             }
         },
-        isParticipant: async (_: any, {}, ctx:any) => {
+        isParticipant: async (_: any, {projectId}: {projectId: string}, ctx:any) => {
              const { id } = await verifyToken(ctx) as { id: string };
             try{
-                const joined = await getUserParticipant(id);
+                const joined = await getUserParticipant(projectId, id);
+                console.log("JOINDES", joined)
                 return joined;
             }catch(err:any){
                 throw new Error(err);
@@ -22,8 +23,9 @@ export default {
     },
     Mutation: {
         participate: async (_: any, { data }: any, _context: any) => {
-            const { userId, projectId } = data;
-            const work = await createParticipant({ projectId, userId });
+            console.log("[PARTICIPATE]", data)
+            const { user, project } = data;
+            const work = await createParticipant({ projectId: project, userId: user });
             return work;
         }
     }

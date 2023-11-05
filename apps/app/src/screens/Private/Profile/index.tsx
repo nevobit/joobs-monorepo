@@ -1,315 +1,528 @@
-import React, { useEffect } from 'react'
-import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ActivityIndicator, Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useUser } from '../../../hooks/users/useUser'
+// import { BottomSheet } from '../../../containers'
+import Button from '../../../components/Shared/Button'
+import Field from '../../../components/Shared/Field'
+import Input from '../../../components/Shared/Input'
+import Textarea from '../../../components/Shared/Textarea'
+import BottomSheet from '@gorhom/bottom-sheet';
+import Geolocation from '@react-native-community/geolocation'
 
-const Profile = () => {
+const Profile = ({ navigation }: any) => {
+  const [editProfile, setEditProfile] = useState(false);
   const { isLoading, user, refetch } = useUser();
+  const [location, setLocation] = useState({
+    country: '',
+    city: '',
+  })
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA5SAL5LaKBmpsUYh1KUkeGyBBIeWMtJEg`
+        )
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log({ responseJson })
+            const addressComponents = responseJson.results[0].address_components;
+            let country = '';
+            let city = '';
+            for (let component of addressComponents) {
+              if (component.types.includes('country')) {
+                country = component.long_name;
+              }
+              if (component.types.includes('locality') || component.types.includes('administrative_area_level_1')) {
+                city = component.long_name;
+              }
+            }
+            setLocation({ country, city });
+          })
+          .catch((error) => {
+            console.error(error);
+            // setError('Error fetching data');
+          });
+      },
+      // (error) => setError(error.message),
+      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  }, []);
 
   useEffect(() => {
     refetch()
   }, [refetch])
   return (
-    <ScrollView style={{
-      height: '100%',
-      marginBottom: 10,
-      backgroundColor: 'rgba(255, 255, 255, .6)'
-    }}>
-      {isLoading ? <ActivityIndicator color='#000' /> : (
-        <>
+    <>
 
-          <View style={{
-            backgroundColor: '#121212',
-            height: 370,
-            paddingHorizontal: 15,
-            borderBottomEndRadius: 15,
-            borderBottomStartRadius: 15
-          }}>
+      <ScrollView style={{
+        height: '100%',
+        marginBottom: 10,
+        backgroundColor: 'rgba(255, 255, 255, .6)'
+      }}>
+        {isLoading ? <ActivityIndicator color='#000' style={{
+          marginTop: 15,
+        }} size='large' /> : (
+          <>
+
             <View style={{
-              position: 'relative',
-              backgroundColor: '#474747',
-              height: 150,
-              borderRadius: 10,
-              marginTop: 40
+              backgroundColor: '#121212',
+              height: 370,
+              paddingHorizontal: 15,
+              borderBottomEndRadius: 15,
+              borderBottomStartRadius: 15
             }}>
-              {user?.photo ?
+              <View style={{
+                position: 'relative',
+                backgroundColor: '#474747',
+                height: 150,
+                borderRadius: 10,
+                marginTop: 40
+              }}>
+                {user?.photo ?
 
-                <Image source={{
-                  uri: user.photo
-                }}
-                  style={{
-                    width: 70,
+                  <Image source={{
+                    uri: user.photo
+                  }}
+                    style={{
+                      width: 70,
+                      height: 70,
+                      borderRadius: 50,
+                      overflow: 'hidden',
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderWidth: 4,
+                      borderColor: '#474747',
+                      position: 'absolute',
+                      top: -25,
+                      left: 15,
+                    }}
+                  />
+                  :
+                  <View style={{
                     height: 70,
+                    width: 70,
+                    backgroundColor: '#5368f5',
                     borderRadius: 50,
-                    overflow: 'hidden',
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderWidth: 4,
-                    borderColor: '#474747',
                     position: 'absolute',
                     top: -25,
                     left: 15,
-                  }}
-                />
-                :
-                <View style={{
-                  height: 70,
-                  width: 70,
-                  backgroundColor: '#5368f5',
-                  borderRadius: 50,
-                  position: 'absolute',
-                  top: -25,
-                  left: 15,
-                  borderWidth: 4,
-                  borderColor: '#474747',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Text style={{
-                    fontSize: 40,
-                    fontWeight: '400',
-                    color: '#fff'
-                  }}>{user?.name?.charAt(0).toUpperCase()}</Text>
-                </View>
-              }
-              <Text style={{
-                marginTop: 50,
-                marginLeft: 10,
-                fontSize: 16,
-                color: '#fff'
-              }}>{user?.name}</Text>
-
-
-              <Text style={{
-                marginTop: 10,
-                marginLeft: 10,
-                fontSize: 14,
-                color: '#fff'
-              }}>0 conexiones</Text>
-
-
-
-            </View>
-
-            <ScrollView horizontal style={{
-              flex: 1,
-              marginTop: 20,
-              flexDirection: 'row',
-              gap: 10,
-              position: 'relative',
-            }}>
-              <View style={{
-                backgroundColor: '#f2f2f2',
-                width: 112,
-                height: 135,
-                borderRadius: 10,
-                padding: 10,
-                marginRight: 8,
-                position: 'relative',
-                marginTop: 10
-              }}>
-                <View style={{
-                  position: 'absolute',
-                  top: -10,
-                  left: 10,
-                  backgroundColor: '#fddf8e',
-                  height: 30,
-                  width: 30,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Icon name='information-circle-outline' size={25} color='rgba(0,0,0,0.8)' />
-
-                </View>
+                    borderWidth: 4,
+                    borderColor: '#474747',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Text style={{
+                      fontSize: 40,
+                      fontWeight: '400',
+                      color: '#fff'
+                    }}>{user?.name?.charAt(0).toUpperCase()}</Text>
+                  </View>
+                }
                 <Text style={{
-                  marginTop: 10,
-                  fontWeight: '600',
-                  color: 'rgba(0,0,0,0.8)',
-                  fontSize: 16
-                }}>Informacion Personal</Text>
-                <Text style={{
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>Agrega tu descripcion</Text>
-
-                <Text style={{
-                  marginTop: 'auto',
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>4/5 completados</Text>
-              </View>
-              <View style={{
-                backgroundColor: '#f2f2f2',
-                width: 112,
-                height: 135,
-                borderRadius: 10,
-                padding: 10,
-                marginRight: 8,
-                marginTop: 10
-              }}>
-                <View style={{
-                  position: 'absolute',
-                  top: -10,
-                  left: 10,
-                  backgroundColor: '#a4eba4',
-                  height: 30,
-                  width: 30,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Icon name='school-outline' size={25} color='rgba(0,0,0,0.8)' />
-
-                </View>
-                <Text style={{
-                  marginTop: 10,
-                  fontWeight: '600',
-                  color: 'rgba(0,0,0,0.8)',
-                  fontSize: 16
-                }}>Educacion</Text>
-                <Text style={{
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>Agrega tu descripcion</Text>
-
-                <Text style={{
-                  marginTop: 'auto',
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>4/5 completados</Text>
-              </View>
-              <View style={{
-                backgroundColor: '#f2f2f2',
-                width: 112,
-                height: 135,
-                borderRadius: 10,
-                padding: 10,
-                marginTop: 10
-              }}>
-                <View style={{
-                  position: 'absolute',
-                  top: -10,
-                  left: 10,
-                  backgroundColor: '#c09ffb',
-                  height: 30,
-                  width: 30,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Icon name='chatbubble-outline' size={20} color='rgba(0,0,0,0.8)' />
-
-                </View>
-                <Text style={{
-                  marginTop: 10,
-                  fontWeight: '600',
-                  color: 'rgba(0,0,0,0.8)',
-                  fontSize: 16
-                }}>Networking</Text>
-                <Text style={{
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>Agrega tu descripcion</Text>
-
-                <Text style={{
-                  marginTop: 'auto',
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>4/5 completados</Text>
-              </View>
-            </ScrollView>
-          </View>
-          <View style={{
-            paddingHorizontal: 15
-          }}>
-
-            <View style={{
-              marginTop: 15,
-              backgroundColor: 'rgba(0,0,0,0.05)',
-              borderRadius: 10,
-              padding: 10
-            }} >
-              <View style={{
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontWeight: '600',
-                  fontSize: 16,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>Informacion Privada </Text>
-                <View style={{
-
-                  backgroundColor: 'rgba(255,255,255, .8)',
+                  marginTop: 50,
                   marginLeft: 10,
-                  borderRadius: 50,
-                  paddingHorizontal: 10,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'row'
-                }}>
-                  <Text> <Icon name="time-outline" /> </Text>
+                  fontSize: 16,
+                  color: '#fff'
+                }}>{user?.name}</Text>
+
+                {user?.headline && (
+
                   <Text style={{
-                    fontWeight: '400',
+                    marginTop: 10,
+                    marginLeft: 10,
+                    fontSize: 13,
+                    color: '#fff'
+                  }}>{user?.headline}</Text>
+                )}
+
+
+                <Text style={{
+                  marginTop: 10,
+                  marginLeft: 10,
+                  fontSize: 14,
+                  color: '#fff'
+                }}>0 conexiones</Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate('EditProfile', { id: 'g' })} style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 10
+                }}>
+                  <Icon name='pencil-outline' color='#fff' size={25} />
+                </TouchableOpacity>
+
+              </View>
+
+              <ScrollView horizontal style={{
+                flex: 1,
+                marginTop: 20,
+                flexDirection: 'row',
+                gap: 10,
+                position: 'relative',
+              }}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditProfile', { id: 'g' })} style={{
+                  backgroundColor: '#f2f2f2',
+                  width: 112,
+                  height: 135,
+                  borderRadius: 10,
+                  padding: 10,
+                  marginRight: 8,
+                  position: 'relative',
+                  marginTop: 10
+                }}>
+                  <View style={{
+                    position: 'absolute',
+                    top: -10,
+                    left: 10,
+                    backgroundColor: '#fddf8e',
+                    height: 30,
+                    width: 30,
+                    borderRadius: 5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Icon name='information-circle-outline' size={25} color='rgba(0,0,0,0.8)' />
+
+                  </View>
+                  <Text style={{
+                    marginTop: 10,
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.8)',
+                    fontSize: 16
+                  }}>Informacion Personal</Text>
+                  <Text style={{
                     fontSize: 12,
-                    color: 'rgba(0,0,0,0.8)'
-                  }}>Solo visible para ti</Text>
-                </View>
-              </View>
-              <View>
-                <View style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 10
-                }}>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >Genero</Text>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >{user?.gender}</Text>
-                </View>
-                <View style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 10
-                }}>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >Telefono</Text>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >{user?.phone}</Text>
-                </View>
-                <View style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 10
-                }}>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >Nacimiento</Text>
-                  <Text style={{
-                    fontSize: 14,
-                    color: 'rgba(0,0,0,0.8)'
-                  }} >{user?.born_date}</Text>
-                </View>
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>Agrega tu descripcion</Text>
 
-              </View>
+                  {/* <Text style={{
+                    marginTop: 'auto',
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>4/5 completados</Text> */}
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('EditProfileEducation', { id: 'g' })} style={{
+                  backgroundColor: '#f2f2f2',
+                  width: 112,
+                  height: 135,
+                  borderRadius: 10,
+                  padding: 10,
+                  marginRight: 8,
+                  marginTop: 10
+                }}>
+                  <View style={{
+                    position: 'absolute',
+                    top: -10,
+                    left: 10,
+                    backgroundColor: '#a4eba4',
+                    height: 30,
+                    width: 30,
+                    borderRadius: 5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Icon name='school-outline' size={25} color='rgba(0,0,0,0.8)' />
+
+                  </View>
+                  <Text style={{
+                    marginTop: 10,
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.8)',
+                    fontSize: 16
+                  }}>Educacion</Text>
+                  <Text style={{
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>Agrega tu descripcion</Text>
+
+                  {/* <Text style={{
+                    marginTop: 'auto',
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>4/5 completados</Text> */}
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('EditProfileNetwork', { id: 'g' })} style={{
+                  backgroundColor: '#f2f2f2',
+                  width: 112,
+                  height: 135,
+                  borderRadius: 10,
+                  padding: 10,
+                  marginTop: 10
+                }}>
+                  <View style={{
+                    position: 'absolute',
+                    top: -10,
+                    left: 10,
+                    backgroundColor: '#c09ffb',
+                    height: 30,
+                    width: 30,
+                    borderRadius: 5,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Icon name='chatbubble-outline' size={20} color='rgba(0,0,0,0.8)' />
+
+                  </View>
+                  <Text style={{
+                    marginTop: 10,
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.8)',
+                    fontSize: 16
+                  }}>Networking</Text>
+                  <Text style={{
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>Agrega tu descripcion</Text>
+                  {/* 
+                  <Text style={{
+                    marginTop: 'auto',
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>4/5 completados</Text> */}
+                </TouchableOpacity>
+              </ScrollView>
             </View>
-          </View>
-        </>
+            <View style={{
+              paddingHorizontal: 15,
+              paddingBottom: 20
+            }}>
 
-      )}
+              <View style={{
+                marginTop: 20
+              }}>
+                <Text style={{
+                  fontWeight: '600',
+                  color: 'rgba(0,0,0,0.8)',
+                  fontSize: 16
+                }}>Sobre mi</Text>
+                <View style={{
+                  marginTop: 15,
+                  backgroundColor: 'rgba(0,0,0,0.05)',
+                  borderRadius: 10,
+                  padding: 10
+                }} >
+                  {user?.about && (
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)',
+                      marginBottom: 10
+                    }}>{user?.about}</Text>
+                  )}
+                  <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                  }}>
+                    {user?.location?.latitude && (
+                      <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+
+                        <Text  > <Icon name="location-outline" color='rgba(0,0,0,0.8)' size={24} />
+                        </Text>
+                        <Text style={{
+                          fontWeight: '400',
+                          color: 'rgba(0,0,0,0.8)'
+                        }}>{location.city}, {location.country}</Text>
+                      </View>
+
+                    )}
+
+                  </View>
+                </View>
+
+              </View>
+
+              {/* Private Information */}
+              <View style={{
+                marginTop: 15,
+                backgroundColor: 'rgba(0,0,0,0.05)',
+                borderRadius: 10,
+                padding: 10
+              }} >
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}>
+                  <Text style={{
+                    fontWeight: '600',
+                    fontSize: 16,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>Informacion Privada </Text>
+                  <View style={{
+
+                    backgroundColor: 'rgba(255,255,255, .8)',
+                    marginLeft: 10,
+                    borderRadius: 50,
+                    paddingHorizontal: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    display: 'flex',
+                    flexDirection: 'row'
+                  }}>
+                    <Text> <Icon name="time-outline" /> </Text>
+                    <Text style={{
+                      fontWeight: '400',
+                      fontSize: 12,
+                      color: 'rgba(0,0,0,0.8)'
+                    }}>Solo visible para ti</Text>
+                  </View>
+                </View>
+                <View>
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10
+                  }}>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >Genero</Text>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >{user?.gender}</Text>
+                  </View>
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10
+                  }}>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >Telefono</Text>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >{user?.phone}</Text>
+                  </View>
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10
+                  }}>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >Nacimiento</Text>
+                    <Text style={{
+                      fontSize: 14,
+                      color: 'rgba(0,0,0,0.8)'
+                    }} >{user?.born_date}</Text>
+                  </View>
+
+                </View>
+              </View>
+
+              {/* SKILLS */}
+              <View style={{
+                marginTop: 20
+              }}>
+                <Text style={{
+                  fontWeight: '600',
+                  color: 'rgba(0,0,0,0.8)',
+                  fontSize: 16
+                }}>Habilidades</Text>
+
+                <View style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  marginTop: 10
+                }}>
+
+                  {user?.skills.map((skill: string) => (
+                    <Text style={{
+                      color: 'rgba(0,0,0,0.8)',
+                      fontSize: 15,
+                      marginRight: 10
+                    }} key={skill}>{skill},</Text>
+                  ))}
+                </View>
+
+              </View>
+
+              {/* SOCIAL LINKS */}
+              <Text style={{
+                fontSize: 16,
+                color: 'rgba(0,0,0,0.8)',
+                fontWeight: '600',
+                marginTop: 25
+              }}>Redes sociales</Text>
+              <Text style={{
+                color: 'rgba(0,0,0,0.6)',
+                fontSize: 14,
+                fontWeight: '400'
+              }}>Para que las personas puedan conocerte mejor</Text>
+
+              <Pressable onPress={() => navigation.navigate('EditProfileNetwork', { id: 'g' })}   style={{
+                marginTop: 20
+              }}
+              >
+               
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 15
+                }}>
+                  <Icon name='logo-instagram' color='#E1306C' size={28} />
+                  <Input style={{
+                    width: '85%'
+                  }} editable={false} placeholder='Agregar usuario de Instagram' value={user?.instagram} />
+                </View>
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 15,
+                  marginTop: 15
+                }}>
+                  <Icon name='logo-twitter' color='#1DA1F2' size={28} />
+                  <Input editable={false} style={{
+                    width: '85%'
+                  }} placeholder='Agregar usuario de Twitter' value={user?.twitter} />
+                </View>
+              </Pressable>
+
+              <View style={{
+                marginTop: 20
+              }}
+              >
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 15
+                }}>
+                  <Icon name='logo-facebook' color='#3b5998' size={28} />
+                  <Input  style={{
+                    width: '85%',
+                  }} editable={false} placeholder='Agregar link de Facebook' value={user?.facebook} />
+                </View>
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 15,
+                  marginTop: 15
+                }}>
+                  <Icon name='logo-linkedin' color='#0A66C2' size={28} />
+                  <Input style={{
+                    width: '85%'
+                  }} editable={false} placeholder='Agregar link de Linkedin' value={user?.linkedin} />
+                </View>
+              </View>
+
+            </View>
+          </>
+
+        )}
 
 
-    </ScrollView>
+      </ScrollView>
+    </>
   )
 }
 

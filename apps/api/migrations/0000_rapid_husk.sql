@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS "likes" (
 
 CREATE TABLE IF NOT EXISTS "participants" (
 	"user_id" uuid NOT NULL,
-	"work_id" uuid NOT NULL,
+	"project_id" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"updated_at" timestamp DEFAULT now(),
-	CONSTRAINT participants_user_id_work_id PRIMARY KEY("user_id","work_id")
+	CONSTRAINT participants_user_id_project_id PRIMARY KEY("user_id","project_id")
 );
 
 CREATE TABLE IF NOT EXISTS "projects" (
@@ -87,6 +87,13 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"images" varchar(256)[],
 	"method" varchar(256),
 	"company_name" varchar(256),
+	"college" varchar(256),
+	"icebreaker" text[],
+	"instagram" varchar(256),
+	"facebook" varchar(256),
+	"linkedin" varchar(256),
+	"twitter" varchar(256),
+	"graduation_year" varchar(256),
 	"headline" varchar(256),
 	"username" varchar(256),
 	"about" text,

@@ -179,7 +179,7 @@ const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, 
         marginBottom: 15
       }}>{text}</Text>
 
-      {image && (
+      {image && image?.length > 0 && (
 
         <Image source={{
           uri: image[0]

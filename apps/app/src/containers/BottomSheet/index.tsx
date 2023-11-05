@@ -14,7 +14,8 @@ const BottomSheet = ({ children, isVisible, setIsVisible }: Props) => {
       transparent={true}
       visible={isVisible}
     >
-      <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
+      <TouchableWithoutFeedback 
+      onPress={() => setIsVisible(false)}>
         <View style={styles.bottomSheetContainer}>
           {/* Parte superior del BottomSheet */}
           <View style={styles.bottomSheetHeader}>

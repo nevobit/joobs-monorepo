@@ -7,9 +7,24 @@ export const GET_USER_BY_ID = gql`
       name
       email
       gender
+      skills
       photo
       phone
+      location {
+        latitude
+        longitude
+        address
+      }
+      about
+      company_name
+      college
+      headline
       born_date
+      icebreaker
+      instagram
+      facebook
+      linkedin
+      twitter
     }
   }
 `

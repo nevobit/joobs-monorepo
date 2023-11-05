@@ -11,6 +11,10 @@ import Notifications from '../../screens/Private/Notifications';
 import Club from '../../screens/Home/Clubs/Club';
 import DiscussionDetails from '../../screens/Home/Discussions/Discussion'
 import ProjectDetails from '../../screens/Projects/ProjectsList/ProjectDetails';
+import EditProfile from '../../screens/Private/Profile/EditProfile';
+import Chat from '../../screens/Private/Chat';
+import EditProfileEducation from '../../screens/Private/Profile/EditProfileEducation';
+import EditProfileNetwork from '../../screens/Private/Profile/EditProfileNetwork';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -18,10 +22,14 @@ export type RootStackParamsList = {
   Messages: undefined;
   Notifications: undefined;
   CreateWork: undefined;
+  Chat: undefined;
   ProjectDetails: { id: string };
   WorkDetails: { id: string };
   Club: { id: string };
   Discussion: { id: string };
+  EditProfile: { id: string };
+  EditProfileEducation: { id: string };
+  EditProfileNetwork: { id: string };
 }
 
 export const HomeStack = createStackNavigator<RootStackParamsList>();
@@ -37,19 +45,16 @@ export const AppNavigator = () => {
           headerShown: false,
         }}
       />
-
-<HomeStack.Screen name="Notifications" component={Notifications}
+      <HomeStack.Screen name="Notifications" component={Notifications}
         options={{
           headerShown: false,
         }}
       />
-
       <HomeStack.Screen name="Messages" component={Messages}
         options={{
           headerShown: false,
         }}
       />
-
       <HomeStack.Screen name="CreateWork" component={CreateWorkStack}
         options={{
           headerShown: false,
@@ -73,6 +78,30 @@ export const AppNavigator = () => {
       <HomeStack.Screen name="ProjectDetails" component={ProjectDetails}
         options={{
           headerShown: false,
+        }}
+      />
+      <HomeStack.Screen name="EditProfile" component={EditProfile}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+       <HomeStack.Screen name="EditProfileEducation" component={EditProfileEducation}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+       <HomeStack.Screen name="EditProfileNetwork" component={EditProfileNetwork}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+      <HomeStack.Screen name="Chat" component={Chat}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
         }}
       />
     </HomeStack.Navigator>

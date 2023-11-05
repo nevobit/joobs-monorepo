@@ -15,10 +15,10 @@ const Field = ({label, children, style, ...rest}: Props) => {
     >
         {label &&
         <Text style={{
-            fontSize: 16,
+            fontSize: 15,
             color: 'rgba(0,0,0,0.7)',
             marginBottom: 5,
-            fontWeight: '600'
+            fontWeight: '500'
         }}>{label}</Text>}
         {children}
     </View>

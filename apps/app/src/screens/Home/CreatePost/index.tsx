@@ -39,6 +39,7 @@ const CreatePost = ({navigation}: any) => {
     }, [photo])
 
     const onSubmit = async () => {
+        if(post.title.length > 1){
         await createDiscussion({
             variables: {
                 data: {
@@ -54,6 +55,8 @@ const CreatePost = ({navigation}: any) => {
               },
         });
         navigation.navigate('Home')
+    }
+
     }
 
     return (

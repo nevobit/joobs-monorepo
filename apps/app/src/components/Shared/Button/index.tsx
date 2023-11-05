@@ -17,6 +17,7 @@ const Button = ({loading, onPress, text, style, ...rest}: Props) => {
       borderRadius: 50,
       marginTop: 20
   }, style]}
+  disabled={loading}
     {...rest}
     >
       {loading? <ActivityIndicator color='#fff' /> : (

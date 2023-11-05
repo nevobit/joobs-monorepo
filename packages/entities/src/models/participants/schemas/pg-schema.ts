@@ -5,7 +5,7 @@ import { projects } from '../../projects';
 
 export const participants = pgTable('participants', {
     userId: uuid('user_id').notNull(),
-    projectId: uuid('work_id').notNull(),
+    projectId: uuid('project_id').notNull(),
     created_at: timestamp('created_at').defaultNow(),
     updated_at: timestamp('updated_at').defaultNow(),
 }, (t) => ({
