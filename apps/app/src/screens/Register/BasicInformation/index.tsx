@@ -15,7 +15,7 @@ const BasicInformation = ({navigation, route}: any) => {
     const [phone, setPhone] = useState('');
 
 
-    let showPhoto = photo.length > 5? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ""
+    let showPhoto = photo?.length > 5? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ""
 
     useEffect(() => {
         showPhoto = photo; 

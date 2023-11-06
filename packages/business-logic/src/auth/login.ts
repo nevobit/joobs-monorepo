@@ -10,7 +10,7 @@ export const login =async ({email}: {email: string}) => {
     const result = await getDbInstance().select().from(users).where(and(eq(users!.email, email!)));
     let user = result[0];
     let type = 'login';
-    if(!user){
+    if(!user || user.name == '' || user.location == null){
         const data = { email, status: 'active', last_login:  new Date().toString()}
         const result = await getDbInstance().insert(users).values(data).returning();
         user = result[0];
