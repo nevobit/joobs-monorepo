@@ -5,7 +5,6 @@ export default {
         likes: async (_: any, {id}: { id: string }, _ctx:any) => {
             try{
                 const likes = await getLikes({id});
-                console.log(likes);
                 return likes;
             }catch(err:any){
                 throw new Error(err);
@@ -16,7 +15,6 @@ export default {
         like: async (_: any, { data }: any, _context: any) => {
             const { userId, discussionId } = data;
             const like = await createLike({ userId, discussionId });
-            console.log(like);
             return like;
         },
         likeDelete: async (_: any, { data }: any, _context: any) => {

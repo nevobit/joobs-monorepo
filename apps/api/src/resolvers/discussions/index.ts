@@ -2,7 +2,6 @@ import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion } from 
 export default {
     Query: {
         discussions: async (_:any, {}, ctx:any) => {
-            console.log(ctx)
             try{
                 const { id } = await verifyToken(ctx) as {id: string};
                 const discussions = await getAllDiscussions({search: id});

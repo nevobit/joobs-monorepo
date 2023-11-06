@@ -226,7 +226,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
               fontWeight: '600',
               fontSize: 16,
               color: 'rgba(0,0,0,0.8)',
-            }}>{data?.discussion?.user?.name.charAt(0)}</Text>
+            }}>{data?.discussion?.user?.name?.charAt(0)}</Text>
           </View>
         )}
 

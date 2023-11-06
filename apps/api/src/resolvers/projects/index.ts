@@ -16,7 +16,6 @@ export default {
                 const project = await getProjectById(id);
                 return project;
             }catch(err:any){
-                console.log(err);
                 throw new Error(err);
             }
         },
@@ -33,7 +32,6 @@ export default {
     },
     Mutation: {
         createProject: async (_: any, {data}: any, _context: any) => {
-            console.log(data)
             const project = await createProject({...data, status: 'active'});
             return project;
         }

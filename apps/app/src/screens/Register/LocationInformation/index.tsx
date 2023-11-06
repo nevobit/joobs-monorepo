@@ -95,7 +95,7 @@ const LcationInformation = ({ navigation, params }: any) => {
                             fontSize: 55,
                             fontWeight: '400',
                             color: '#fff'
-                        }}>{userInfo.name.charAt(0).toUpperCase()}</Text>
+                        }}>{userInfo.name?.charAt(0).toUpperCase()}</Text>
                     )}
 
                 </View>

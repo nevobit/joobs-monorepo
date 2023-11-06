@@ -14,7 +14,6 @@ export default {
              const { id } = await verifyToken(ctx) as { id: string };
             try{
                 const joined = await getUserParticipant(projectId, id);
-                console.log("JOINDES", joined)
                 return joined;
             }catch(err:any){
                 throw new Error(err);
@@ -23,7 +22,6 @@ export default {
     },
     Mutation: {
         participate: async (_: any, { data }: any, _context: any) => {
-            console.log("[PARTICIPATE]", data)
             const { user, project } = data;
             const work = await createParticipant({ projectId: project, userId: user });
             return work;

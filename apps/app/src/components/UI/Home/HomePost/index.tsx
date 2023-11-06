@@ -129,7 +129,7 @@ const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, 
                 fontWeight: '600',
                 fontSize: 16,
                 color: 'rgba(0,0,0,0.8)',
-              }}>{name.charAt(0)}</Text>
+              }}>{name?.charAt(0)}</Text>
             </View>
           )}
 

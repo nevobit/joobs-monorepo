@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "987824436257",
+    "project_id": "joobs-93292",
+    "storage_bucket": "joobs-93292.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987824436257:android:0c471c2cf3eb22f177df60",
+        "android_client_info": {
+          "package_name": "com.nevobit.joobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987824436257-dpcml2k0kn5tebptgpvpl9caoj1jm6vb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nevobit.joobs",
+            "certificate_hash": "9b1e046da8b682b86aa01ec66ddfd0a40e3e75c6"
+          }
+        },
+        {
+          "client_id": "987824436257-hvrj3nqp746qg9q2abl0m943ffol5udu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ7jeQx4N1m3UTLMVJ-ajJeynfOxDrdJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987824436257-hvrj3nqp746qg9q2abl0m943ffol5udu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

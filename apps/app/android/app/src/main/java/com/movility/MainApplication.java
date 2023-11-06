@@ -1,4 +1,4 @@
-package com.movility;
+package com.nevobit.joobs;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

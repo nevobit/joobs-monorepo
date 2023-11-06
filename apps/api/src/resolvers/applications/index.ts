@@ -3,7 +3,6 @@ export default {
     Query: {
         applications: async (_: any, {}, ctx:any) => {
             const { id } = await verifyToken(ctx) as {id: string};
-
             try{
                 const applications = await getApplicationsById({ search: id});
                 return applications.items;
@@ -18,7 +17,6 @@ export default {
                 const work = await getWorkById(id);
                 return work;
             }catch(err:any){
-                console.log(err);
                 throw new Error(err);
             }
         },
@@ -28,7 +26,6 @@ export default {
                 const applied = await getUserApplied(id);
                 return applied;
             }catch(err:any){
-                console.log(err);
                 throw new Error(err);
             }
         }

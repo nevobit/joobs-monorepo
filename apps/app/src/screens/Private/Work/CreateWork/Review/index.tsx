@@ -103,7 +103,7 @@ const Review = ({ navigation, route }: any) => {
                                     fontSize: 28,
                                     fontWeight: '400',
                                     color: '#fff'
-                                }}>{user?.name.charAt(0).toUpperCase()}</Text>
+                                }}>{user?.name?.charAt(0).toUpperCase()}</Text>
                             </View>
 
                             <Text style={{

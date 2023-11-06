@@ -22,9 +22,7 @@ export default {
             return result;
         },
         verifyCode: async (_:any, { email, code }: {code: number, email: string}, _context: any) => {
-            console.log({email})
             const result = await verifyCode({code, email});
-            console.log({result})
             if(result instanceof Error){
                 return new Error('Invalid credentials');
             }
@@ -32,9 +30,7 @@ export default {
             return {token: result.token};
         },
         userRegister: async (_:any, { data }: any, _context: any) => {
-            console.log({data})
             const result = await registerUser(data);
-            console.log({result})
             if(result instanceof Error){
                 return new Error('Invalid credentials');
             }

@@ -53,7 +53,6 @@ const Signin = ({navigation}: any) => {
             fontWeight: '600',
             fontSize: 20,
             color: 'rgba(0,0,0,0.8)',
-            marginBottom: 180
         }}>Inicia sesión con tu correo</Text>
         
         <Field label='Correo electronico'>

@@ -5,7 +5,6 @@ export default {
         clubs: async (_: any, {}, ctx: any) => {
             try{
                 const { id } = await verifyToken(ctx) as {id: string};
-
                 const clubs = await getAllClubs({ search: id });
                 return clubs.items;
             }catch(err:any){
@@ -26,7 +25,6 @@ export default {
     },
     Mutation: {
         createClub: async (_: any, {data}: any, _ctx: any) => {
-            // await verifyToken(ctx) as {id: string};
             const { name, description, icon } = data;
             const club = await createClub({name, description, icon, status: 'active' });
             return club;

@@ -12,8 +12,9 @@ import { useDispatch } from 'react-redux';
 import { saveUserInfo, signin } from '../../store/features/auth';
 
 GoogleSignin.configure({
+    scopes: [],
     // webClientId: '824309813919-l9eohikp7ovh8a6pd9926tt2r40i2em2.apps.googleusercontent.com',
-    webClientId: '824309813919-dn4gsirbmj8i2h208fa3rtssidc3f8p5.apps.googleusercontent.com'
+    webClientId: '987824436257-9mjhqtu4ou96fcugor6ie0f02fj0inhg.apps.googleusercontent.com'
 });
 
 const Onboarding = ({ navigation }: any) => {
@@ -83,7 +84,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontSize: 18,
                             fontWeight: '600',
                             color: 'rgba(0,0,0,0.8)'
-                        }}>Editor de video para creacio de contenido en IG y Youtube</Text>
+                        }}>Editor de video para creación de contenido en IG y YouTube</Text>
                     <View style={{
                         flexDirection: 'row',
                         gap: 10,
@@ -106,7 +107,7 @@ const Onboarding = ({ navigation }: any) => {
                             borderRadius: 50,
                             fontSize: 10,
                             fontWeight: '500'
-                        }} >Edicion de video</Text>
+                        }} >Edición de video</Text>
                         <Text style={{
                             backgroundColor: 'rgba(0,0,0,0.1)',
                             color: 'rgba(0,0,0,0.8)',
@@ -115,7 +116,7 @@ const Onboarding = ({ navigation }: any) => {
                             borderRadius: 50,
                             fontSize: 10,
                             fontWeight: '500'
-                        }} >Premier Pro</Text>
+                        }} >Premiere Pro</Text>
                     </View>
                     </View>
                     <View style={{
@@ -137,7 +138,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontSize: 18,
                             fontWeight: '600',
                             color: 'rgba(0,0,0,0.8)'
-                        }}>Co-fundador tecnico para una Startup FinTech en Bogota</Text>
+                        }}>Cofundador técnico para una Startup FinTech en Bogotá</Text>
                     <View style={{
                         flexDirection: 'row',
                         gap: 10,
@@ -151,7 +152,7 @@ const Onboarding = ({ navigation }: any) => {
                             borderRadius: 50,
                             fontSize: 12,
                             fontWeight: '500'
-                        }} >Co-Fundador</Text>
+                        }} >Cofundador</Text>
                         <Text style={{
                             backgroundColor: 'rgba(0,0,0,0.1)',
                             color: 'rgba(0,0,0,0.8)',
@@ -263,7 +264,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontWeight: '500',
                             fontSize: 14,
                             color: 'rgba(0,0,0,0.8)'
-                        }}>Continua con Google</Text>
+                        }}>Continúa con Google</Text>
                     )}
 
                 </TouchableOpacity>
@@ -315,7 +316,7 @@ const Onboarding = ({ navigation }: any) => {
                         color: '#fff',
                         textAlign: 'center',
                         fontSize: 16
-                    }}>Continua con tu correo</Text>
+                    }}>Continúa con tu correo</Text>
                 </TouchableOpacity>
             </View>
 

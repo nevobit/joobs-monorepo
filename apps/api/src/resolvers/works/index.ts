@@ -16,7 +16,6 @@ export default {
                 const work = await getWorkById(id);
                 return work;
             }catch(err:any){
-                console.log(err);
                 throw new Error(err);
             }
         },
@@ -26,7 +25,6 @@ export default {
                 const work = await getWorkByUserId(id);
                 return work;
             }catch(err:any){
-                console.log(err);
                 throw new Error(err);
             }
         }
