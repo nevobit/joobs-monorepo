@@ -37,30 +37,30 @@ export const getDbInstance = () =>  dbInstance;
 
 export interface InitPgsqlOptions {
     pgUrl?: string;
-  }
-  const { PGSQL_URL } = process.env;
-
-const initPostgresql = async ({ pgUrl }:InitPgsqlOptions): Promise<Pool | void> => {
-    try {
-        const parsedPGSQLUrl = new URL(pgUrl || PGSQL_URL || '');
-
-        const config = {
-            username: parsedPGSQLUrl.username,
-            password: parsedPGSQLUrl.password,
-            host: parsedPGSQLUrl.hostname,
-            database: parsedPGSQLUrl.pathname.replace(/^\/+|\/$/g, ''),
-            requestTimeout: 60000,
-            max: 10,
-            min: 0,
-            idleTimeoutMillis: 30000,
-        };
-
-        const connectionPool = new Pool(config);
-        await connectionPool.connect();
-
-        console.log('Pgsql successfully connected')
-
-    }catch(error){
-        console.log(error);
-    }
 }
+//   const { PGSQL_URL } = process.env;
+
+// const initPostgresql = async ({ pgUrl }:InitPgsqlOptions): Promise<Pool | void> => {
+//     try {
+//         const parsedPGSQLUrl = new URL(pgUrl || PGSQL_URL || '');
+
+//         const config = {
+//             username: parsedPGSQLUrl.username,
+//             password: parsedPGSQLUrl.password,
+//             host: parsedPGSQLUrl.hostname,
+//             database: parsedPGSQLUrl.pathname.replace(/^\/+|\/$/g, ''),
+//             requestTimeout: 60000,
+//             max: 10,
+//             min: 0,
+//             idleTimeoutMillis: 30000,
+//         };
+
+//         const connectionPool = new Pool(config);
+//         await connectionPool.connect();
+
+//         console.log('Pgsql successfully connected')
+
+//     }catch(error){
+//         console.log(error);
+//     }
+// }
