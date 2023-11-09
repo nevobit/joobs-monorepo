@@ -15,7 +15,7 @@ const BasicInformation = ({navigation, route}: any) => {
     const [phone, setPhone] = useState('');
 
 
-    let showPhoto = photo?.length > 5? photo : userInfo?.photo.length > 5 ? userInfo?.photo : ""
+    let showPhoto = photo?.length > 5? photo : userInfo?.photo?.length > 5 ? userInfo?.photo : ""
 
     useEffect(() => {
         showPhoto = photo; 
@@ -63,7 +63,7 @@ const BasicInformation = ({navigation, route}: any) => {
             <TouchableOpacity 
             onPress={getPhoto}
             style={{
-                backgroundColor: photo?.length > 5 || userInfo?.photo.length > 5 ? '#fff' : 'orange',
+                backgroundColor: photo?.length > 5 || userInfo?.photo?.length > 5 ? '#fff' : 'orange',
                 height: 100,
                 width: 100,
                 borderRadius: 100,
@@ -136,6 +136,7 @@ const BasicInformation = ({navigation, route}: any) => {
 
             <Button 
             onPress={onSubmit}
+            disabled={ phone.length < 4 || name.length < 4 }
             style={{
                 marginTop: 'auto',
                 marginBottom: 30

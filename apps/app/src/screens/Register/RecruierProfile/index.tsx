@@ -1,12 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StatusBar, Text, View } from 'react-native'
 import Field from '../../../components/Shared/Field'
 import Button from '../../../components/Shared/Button'
 import Input from '../../../components/Shared/Input'
 import Textarea from '../../../components/Shared/Textarea'
+import { useDispatch, useSelector } from 'react-redux'
+import { useMutation } from '@apollo/client'
+import { REGISTER_USER } from '../../../graphql/mutations'
+import { signin } from '../../../store/features/auth'
 
 const RecruirProfile = ({navigation}: any) => {
-  return (
+    const [company_name, setCompanyName] = useState<string>('');
+    const [company_description, setCompanyDescription] = useState<string>('');
+    
+    const { userInfo } = useSelector((state: any) => state.auth);
+    const [register, {loading, error}] = useMutation(REGISTER_USER);
+
+    const dispatch = useDispatch();
+
+    const onSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+
+          const { data } = await register({
+            variables: {
+              data: {
+              name: userInfo.name,
+              email: userInfo.email,
+              phone: userInfo.phone,
+              photo: userInfo.photo,
+              gender: userInfo.gender,
+              born_date: userInfo.born_date,
+              location: userInfo.location,
+              company_name,
+              company_description
+            }
+            }
+          });
+
+          dispatch(signin({token: data.userRegister.token}));
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+    return (
     <View style={{
         backgroundColor: '#FFF',
         flex: 1,
@@ -59,21 +97,15 @@ const RecruirProfile = ({navigation}: any) => {
                     fontSize: 24
                 }}>Nestor Mosquera</Text>
 
-
-                <Field label='Numero de telefono'>
-                    <Input placeholder='' />
-                </Field>
-
-
                 <Field label='Nombre de la empresa'>
-                    <Input placeholder='Menciona tu empresa/startup/idea' />
+                    <Input onChangeText={(text) => setCompanyName(text)} placeholder='Menciona tu empresa/startup/idea' />
                 </Field>
               <Field label='¿En qué estás trabajando?'>
-                <Textarea placeholder='Habla sobre tu idea, producto o vision' />
+                <Textarea onChangeText={(text) => setCompanyDescription(text)} placeholder='Habla sobre tu idea, producto o vision' />
               </Field>
             </View>
 
-            <Button onPress={() => navigation.navigate('LocationInformation')} style={{
+            <Button loading={loading} onPress={onSubmit} style={{
                 marginTop: 'auto',
                 marginBottom: 30
             }} text='Continuar ->' />

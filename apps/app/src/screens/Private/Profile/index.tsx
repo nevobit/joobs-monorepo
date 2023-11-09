@@ -459,7 +459,7 @@ const Profile = ({ navigation }: any) => {
                   marginTop: 10
                 }}>
 
-                  {user?.skills.map((skill: string) => (
+                  {user?.skills?.map((skill: string) => (
                     <Text style={{
                       color: 'rgba(0,0,0,0.8)',
                       fontSize: 15,

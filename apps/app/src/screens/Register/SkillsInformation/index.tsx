@@ -270,7 +270,6 @@ const SkillsInformation = ({ navigation, params }: any) => {
           });
 
           dispatch(signin({token: data.userRegister.token}));
-          navigation.navigate('Joobs')
         } catch (err) {
           console.log(err);
         }
@@ -687,7 +686,7 @@ const SkillsInformation = ({ navigation, params }: any) => {
           
         </View>
       </ScrollView>
-                 <Button loading={loading} onPress={onSubmit} style={{
+                 <Button loading={loading}  disabled={skills.length < 3} onPress={onSubmit} style={{
                     marginTop: 'auto',
                     marginBottom: 30
                 }} text='Continuar ->' /> 
