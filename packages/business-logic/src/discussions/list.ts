@@ -11,7 +11,7 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
     const db = drizzle(infoInstance, { schema: { users, discussions, userRelations, comments, likes, likeRelations, discussionRelations, works } })
 
     // await result.where(eq(discussions.status, status));
-
+  
     const result = await db.query.discussions.findMany({
         with: {
             user: true

@@ -1,6 +1,7 @@
 import { clientDb } from "@joobs/data-sources";
 import { User, users } from "@joobs/entities";
 import { eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { sign } from "jsonwebtoken";
 const { JWT_SECRET } = process.env;
 
@@ -9,7 +10,12 @@ interface UserToken {
 }
 
 export const registerUser = async (data: User): Promise<UserToken | Error> => {
-    const result = await clientDb().update(users)
+    const infoInstance = await clientDb();
+
+    const db = drizzle(infoInstance, { schema: { users } })
+  
+    
+    const result = await db.update(users)
         .set(data)
         .where(eq(users.email, data.email))
         .returning();

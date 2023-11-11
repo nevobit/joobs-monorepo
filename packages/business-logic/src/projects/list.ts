@@ -1,9 +1,15 @@
 import { Result, projects, StatusType, Params } from "@joobs/entities";
 import { clientDb } from '@joobs/data-sources'
 import { eq } from 'drizzle-orm'
+import { drizzle } from "drizzle-orm/node-postgres";
 
 export const getAllProjects = async ({ page= 1, limit=14, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
-    const result = clientDb().select().from(projects);
+    const infoInstance = await clientDb();
+
+    const db = drizzle(infoInstance, { schema: { projects } })
+  
+
+    const result = db.select().from(projects);
 
     await result.where(eq(projects.status, status));
 

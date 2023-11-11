@@ -1,19 +1,24 @@
 import { clientDb } from "@joobs/data-sources";
 import { users } from "@joobs/entities";
 import { and, eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { sign } from "jsonwebtoken";
 
 const { JWT_SECRET } = process.env;
 
 export const verifyCode = async ({ email, code }: { code: number, email: string }) => {
     try {
+        const infoInstance = await clientDb();
+
+        const db = drizzle(infoInstance, { schema: { users } })
+      
         // Verificar que las variables no sean nulas
         if (!email || !code) {
             throw new Error('Invalid input parameters');
         }
 
         // Consultar la base de datos para obtener el usuario
-        const result = await clientDb().select().from(users).where(and(eq(users.email, email)));
+        const result = await db.select().from(users).where(and(eq(users.email, email)));
 
         // Verificar si el usuario existe
         if (!result || result.length === 0) {

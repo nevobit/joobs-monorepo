@@ -1,5 +1,5 @@
 import { Client } from 'pg'
-import {  drizzle } from 'drizzle-orm/node-postgres'
+// import {  drizzle } from 'drizzle-orm/node-postgres'
 // import { migrate } from 'drizzle-orm/node-postgres/migrator'
 
 // let dbInstance: NodePgDatabase<Record<string, never>>;
@@ -33,8 +33,8 @@ export const initPostgresql = async({ url }: InitPgsqlOptions) => {
   await client.connect();
   console.log('Pgsql successfully connected')
 
-  const db = drizzle(client, { logger: true });
-  dbClient = db;
+  // const db = drizzle(client, { logger: true });
+  dbClient = client;
 }
 
 // export const initPostgres = async({ url }: InitPostgresOptions) => {
