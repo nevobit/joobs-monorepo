@@ -130,7 +130,7 @@ const BasicInformation = ({navigation, route}: any) => {
                 <Input placeholder='Jose Pelaez' value={name} onChangeText={(text) => setName(text)} />
             </Field>
             <Field label='Cual es tu numero de telefono?'>
-                <Input placeholder='Ej. 3214554555' onChangeText={(text) => setPhone(text)} />
+                <Input placeholder='Ej. 3214554555' keyboardType='number-pad' onChangeText={(text) => setPhone(text)} />
             </Field>
             </View>
 

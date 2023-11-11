@@ -106,7 +106,7 @@ export const AppNavigator = () => {
           presentation: 'modal',
         }}
       />
-      <HomeStack.Screen name="Chat" component={Chat}
+      <HomeStack.Screen name="Chat" component={Messages}
         options={{
           headerShown: false,
           presentation: 'modal',

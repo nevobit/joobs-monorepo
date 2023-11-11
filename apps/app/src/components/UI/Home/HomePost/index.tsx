@@ -38,7 +38,8 @@ const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, 
     try {
       await Share.open(options)
     } catch (e) {
-      Alert.alert('No se puede compartir', String(e))
+      console.log(e);
+      // Alert.alert('No se puede compartir', String(e))
     }
 
   }

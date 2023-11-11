@@ -1,4 +1,4 @@
-import { getDbInstance } from "@joobs/data-sources";
+import { clientDb } from "@joobs/data-sources";
 import { users } from "@joobs/entities";
 import { and, eq } from "drizzle-orm";
 import { sign } from "jsonwebtoken";
@@ -13,7 +13,7 @@ export const verifyCode = async ({ email, code }: { code: number, email: string 
         }
 
         // Consultar la base de datos para obtener el usuario
-        const result = await getDbInstance().select().from(users).where(and(eq(users.email, email)));
+        const result = await clientDb().select().from(users).where(and(eq(users.email, email)));
 
         // Verificar si el usuario existe
         if (!result || result.length === 0) {

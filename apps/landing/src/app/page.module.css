@@ -256,9 +256,11 @@
   justify-content: center;
   margin-top: 3rem;
   gap: 2rem;
+  z-index: 99999;
+
 }
 
-.cta button{
+.cta a{
   border-radius: 3rem;
   padding: 1.5rem 4rem;
   border: none;
@@ -268,6 +270,8 @@
   background-color: #fff;
   align-items: center;
   gap: 1rem;
+  color: #101114;
+  z-index: 99999;
 }
 
 .details{

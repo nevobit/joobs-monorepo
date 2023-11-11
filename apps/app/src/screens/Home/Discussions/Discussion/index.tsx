@@ -87,7 +87,8 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
     try {
       await Share.open(options)
     }catch(e) {
-      Alert.alert('No se puede compartir', String(e))
+      console.log(e)
+      // Alert.alert('No se puede compartir', String(e))
     }
 
   }
@@ -429,7 +430,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
       justifyContent: 'space-between',
     }}>
 
-    <Input onChangeText={(text) => setText(text)} placeholder='Salta a la conversacion'style={{
+    <Input  value={text} onChangeText={(text) => setText(text)} placeholder='Salta a la conversacion'style={{
       marginBottom: 10,
       width: '83%'
     }} />

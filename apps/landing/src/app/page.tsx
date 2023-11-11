@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -23,9 +24,8 @@ export default function Home() {
           <h1>líder uniendo mentes creativas y visionarias</h1>
           <p>Un lugar donde puedes aprender, encontrar oportunidades laborales y conocer personas apasionadas con las que crecer</p>
           <div className={styles.cta}>
-            <button><Image src='/play_store.png' width={30} height={30} alt='Play Store Icon' /> Descargar en Play Store</button>
-            <button><Image src='/apple-logo.svg' width={30} height={30} alt='App Store Icon' /> Descargar en App Store</button>
-
+            <Link href='https://play.google.com/store/apps/details?id=com.nevobit.joobs' ><Image src='/play_store.png' width={30} height={30} alt='Play Store Icon' /> Descargar en Play Store</Link>
+            <Link href='/' ><Image src='/apple-logo.svg' width={30} height={30} alt='App Store Icon' /> Descargar en App Store</Link>
           </div>
       </div>
     </main>

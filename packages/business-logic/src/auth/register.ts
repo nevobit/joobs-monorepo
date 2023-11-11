@@ -1,4 +1,4 @@
-import { getDbInstance } from "@joobs/data-sources";
+import { clientDb } from "@joobs/data-sources";
 import { User, users } from "@joobs/entities";
 import { eq } from "drizzle-orm";
 import { sign } from "jsonwebtoken";
@@ -9,7 +9,7 @@ interface UserToken {
 }
 
 export const registerUser = async (data: User): Promise<UserToken | Error> => {
-    const result = await getDbInstance().update(users)
+    const result = await clientDb().update(users)
         .set(data)
         .where(eq(users.email, data.email))
         .returning();

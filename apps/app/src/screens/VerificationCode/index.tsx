@@ -60,7 +60,7 @@ const VerificationCode = ({navigation, route}: any) => {
         }}>Te hemos enviado un correo electrónico</Text>
         
         <Field label='Codigo'>
-            <Input onChangeText={(text) => setCode(text)} placeholder='Ingresa el codigo' />
+            <Input keyboardType='number-pad' onChangeText={(text) => setCode(text)} maxLength={6} placeholder='Ingresa el codigo' />
         </Field>
 
         <Text style={{

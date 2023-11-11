@@ -12,7 +12,7 @@ const Events = () => {
     <View style={{
         padding: 20
     }}>
-        <EventCard image="https://i.ibb.co/qgTbdcg/Screenshot-from-2023-10-12-20-24-59.png" />
+        <EventCard image="https://i.ibb.co/V9QmJd4/TECH-SHOW.png" />
     </View>
     </>
 

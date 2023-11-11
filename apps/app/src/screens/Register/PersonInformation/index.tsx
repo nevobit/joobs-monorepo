@@ -7,6 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch, useSelector } from 'react-redux'
 import { saveUserInfo } from '../../../store/features/auth'
+import SelectDropdown from 'react-native-select-dropdown'
+
+const genders = [ 'Masculino', 'Femenino', 'No Binario', 'Prefiero no decirlo' ]
 
 const PersonInformation = ({ navigation, params }: any) => {
     const [gender, setGender] = useState('');
@@ -85,13 +88,45 @@ const PersonInformation = ({ navigation, params }: any) => {
                     }}>Nestor Mosquera</Text>
 
 
-                    <Field label='Cual es tu genero?'>
+                    <Field label='¿Cual es tu genero?'>
                         <View  style={{
                             borderWidth: 1,
                             borderColor: 'rgba(0,0,0,0.2)',
-                            borderRadius: 10
+                            borderRadius: 10,
+                            overflow: 'hidden'
                         }}>
 
+<SelectDropdown
+	data={genders}
+	onSelect={(selectedItem, index) => {
+        setGender(String(selectedItem))
+	}}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		// text represented after item is selected
+		// if data array is an array of objects then return selectedItem.property to render after item is selected
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		// text represented for each item in dropdown
+		// if data array is an array of objects then return item.property to represent item in dropdown
+		return item
+	}}
+    buttonStyle={{
+        width: "100%",
+        backgroundColor: '#fff',
+    }}
+    buttonTextStyle={{
+        fontSize: 14,
+        color: 'rgba(0,0,0,0.8)'
+    }}
+    rowTextStyle={{
+        fontSize: 14,
+        color: 'rgba(0,0,0,0.8)'
+    }}
+
+defaultButtonText='Selecciona una opción'
+/>
+{/* 
                         <Picker
                             selectedValue={setGender}
                             onValueChange={(itemValue) =>
@@ -115,7 +150,7 @@ const PersonInformation = ({ navigation, params }: any) => {
                             <Picker.Item style={{
                                 color: 'rgba(0,0,0,0.8)',
                             }}  label="Prefiero no decirlo" value="no" />
-                        </Picker>
+                        </Picker> */}
                         </View>
 
                     </Field>
@@ -125,7 +160,7 @@ const PersonInformation = ({ navigation, params }: any) => {
                         }}>
                             {years.map((year) => (
                                 <TouchableOpacity key={year} onPress={() => setBornDate(year.toString())} style={{
-                                backgroundColor: born_date == String(year)? '#5368f5' : 'rgba(0,0,0,0.1)',
+                                backgroundColor: born_date == String(year)? '#5368f5' : 'rgba(0,0,0,0.05)',
                                 paddingHorizontal: 10,
                                 paddingVertical: 5,
                                 borderRadius: 5

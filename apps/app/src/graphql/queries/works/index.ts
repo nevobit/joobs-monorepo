@@ -12,6 +12,7 @@ query Query {
     title
     skills
     user {
+      id
       photo
       name
     }

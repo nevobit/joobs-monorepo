@@ -103,7 +103,7 @@ const Clubs = ({ navigation }: any) => {
 
           refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh}  /> }
           >
-            {data?.clubs.map((club: any, index: number) => (
+            {data?.clubs?.map((club: any, index: number) => (
               <Pressable key={club.id} onPress={() => navigation.navigate('Club', { id: club.id })}  style={{
                 height: 85,
                 width: '100%',

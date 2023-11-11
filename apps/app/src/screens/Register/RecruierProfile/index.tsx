@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StatusBar, Text, View } from 'react-native'
+import { StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import Field from '../../../components/Shared/Field'
 import Button from '../../../components/Shared/Button'
 import Input from '../../../components/Shared/Input'
@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useMutation } from '@apollo/client'
 import { REGISTER_USER } from '../../../graphql/mutations'
 import { signin } from '../../../store/features/auth'
+import { useNavigation } from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const RecruirProfile = ({navigation}: any) => {
     const [company_name, setCompanyName] = useState<string>('');
@@ -15,6 +17,8 @@ const RecruirProfile = ({navigation}: any) => {
     
     const { userInfo } = useSelector((state: any) => state.auth);
     const [register, {loading, error}] = useMutation(REGISTER_USER);
+
+    const navigate = useNavigation();
 
     const dispatch = useDispatch();
 
@@ -50,14 +54,26 @@ const RecruirProfile = ({navigation}: any) => {
         flex: 1,
     }}>
         <StatusBar backgroundColor='#FFFFFF' />
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: 5,
+          paddingHorizontal: 15,
+          paddingLeft: 5,
+          gap: 10
+
+}}>
+
+        <TouchableOpacity onPress={() => navigate.goBack()}>
+        <Icon name='chevron-back' color='#000' size={25} />
+      </TouchableOpacity>
         <Text style={{
             color: 'rgba(0,0,0,0.8)',
             fontWeight: '600',
             fontSize: 20,
-            marginTop: 5,
-            paddingHorizontal: 15
 
         }}>Construyamos tu perfil juntos</Text>
+        </View>
 
         <View style={{
             backgroundColor: '#fff',
@@ -105,7 +121,7 @@ const RecruirProfile = ({navigation}: any) => {
               </Field>
             </View>
 
-            <Button loading={loading} onPress={onSubmit} style={{
+            <Button loading={loading}  disabled={ company_name.length < 3  || company_description.length < 10 } onPress={onSubmit} style={{
                 marginTop: 'auto',
                 marginBottom: 30
             }} text='Continuar ->' />

@@ -24,6 +24,9 @@ const Listing = ({ navigation }: any) => {
   }, []);
 
 
+  console.log(data?.works[0]?.user);
+  console.log("[USER]:", user);
+
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -35,7 +38,7 @@ const Listing = ({ navigation }: any) => {
 
       {loading ? <ActivityIndicator /> : (
         <>
-          {data.works.length == 0 ? (
+          {data.works.filter((work: any) => work?.user?.id == user.id).length == 0 ? (
             <>
               <Text style={{
                 fontWeight: '500',
@@ -51,9 +54,9 @@ const Listing = ({ navigation }: any) => {
                 marginTop: 5,
                 marginBottom: 10,
                 color: 'rgba(0, 0, 0, 0.6)'
-              }}>No dejes este espacio solo. Crea una oferta de trabajo y atrae candidadtos fabulosos en poco tiempo!</Text>
+              }}>No dejes este espacio solo. ¡Crea una oferta de trabajo y atrae candidatos fabulosos en poco tiempo!</Text>
 
-              <TouchableOpacity style={{
+              {/* <TouchableOpacity style={{
                 backgroundColor: '#5368f5',
                 paddingHorizontal: 20,
                 paddingVertical: 10,
@@ -65,7 +68,7 @@ const Listing = ({ navigation }: any) => {
                   color: '#fff',
                   fontSize: 14
                 }}>Crear Publicacion</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </>
           ) : (
             <ScrollView style={{
@@ -74,7 +77,7 @@ const Listing = ({ navigation }: any) => {
             }}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             >
-              {data.works.map((work: any) => (
+              {data.works.filter((work: any) => work?.user?.id == user.id).map((work: any) => (
                 <Pressable style={{
                   width: '100%'
                 }} key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >

@@ -6,7 +6,7 @@ import { clientDb } from '@joobs/data-sources'
 export const getProjectById = async (id: string) => {  
   const infoInstance = await clientDb();
 
-  // const result = await getDbInstance().select().from(works).where(and(eq(works.id, id)));
+  // const result = await clientDb().select().from(works).where(and(eq(works.id, id)));
   const db = drizzle(infoInstance, { schema: { users, projects } })
 
   const result = await db.query.projects.findMany({

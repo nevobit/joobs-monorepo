@@ -1,43 +1,73 @@
-import { Client, Pool } from 'pg'
-import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres'
-import { migrate } from 'drizzle-orm/node-postgres/migrator'
-export interface InitPostgresOptions {
+import { Client } from 'pg'
+import {  drizzle } from 'drizzle-orm/node-postgres'
+// import { migrate } from 'drizzle-orm/node-postgres/migrator'
+
+// let dbInstance: NodePgDatabase<Record<string, never>>;
+let dbClient: any;
+
+// const { POSTGRESQL_URL } = process.env;
+export interface InitPgsqlOptions {
     url?: string;
 }
+//   const { PGSQL_URL } = process.env;
 
-let dbInstance: NodePgDatabase<Record<string, never>>;
-let client: any;
-export const initPostgres = async({ url }: InitPostgresOptions) => {
+export const initPostgresql = async({ url }: InitPgsqlOptions) => {
+  // const parsedPOSTGRESQLUrl = new URL(pgUrl || '');
 
-    const pool = new Pool({
-        connectionString: url,
-        ssl: true
-    });
+  // console.log({parsedPOSTGRESQLUrl})
 
-    const clientInfo = new Client({
-        connectionString: url,
-        ssl: true
-    });
+  // const config = {
+  //   user: parsedPOSTGRESQLUrl.username,
+  //   password: parsedPOSTGRESQLUrl.password,
+  //   host: parsedPOSTGRESQLUrl.hostname,
+  //   port: 5432,
+  //   database: parsedPOSTGRESQLUrl.pathname.replace(/^\/+|\/$/g, ''),
+  //   requestTimeout: 60000,
+  // };
 
-    await clientInfo.connect();
+  const client = new Client({
+    connectionString: url,
+    ssl: true
+  });
 
-    const db = drizzle(pool);
+  await client.connect();
+  console.log('Pgsql successfully connected')
 
-    await migrate(db, {
-        migrationsFolder: './migrations'
-    });
-
-    dbInstance = db;
-    client = clientInfo;
-    console.log('Postgres connection established')
+  const db = drizzle(client, { logger: true });
+  dbClient = db;
 }
 
-export const clientDb = () => client;
-export const getDbInstance = () =>  dbInstance;
+// export const initPostgres = async({ url }: InitPostgresOptions) => {
 
-export interface InitPgsqlOptions {
-    pgUrl?: string;
-}
+//     const pool = new Pool({
+//         connectionString: url,
+//         ssl: true
+//     });
+
+//     const clientInfo = new Client({
+//         connectionString: url,
+//         ssl: true
+//     });
+
+//     await clientInfo.connect();
+
+//     const db = drizzle(pool);
+
+//     await migrate(db, {
+//         migrationsFolder: './migrations'
+//     });
+
+//     dbInstance = db;
+//     client = clientInfo;
+//     console.log('Postgres connection established')
+// }
+
+export const clientDb = () => dbClient;
+// export const clientDb = () =>  dbInstance;
+
+// export interface InitPgsqlOptions {
+//     pgUrl?: string;
+// }
 //   const { PGSQL_URL } = process.env;
 
 // const initPostgresql = async ({ pgUrl }:InitPgsqlOptions): Promise<Pool | void> => {

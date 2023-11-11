@@ -111,13 +111,13 @@ const LcationInformation = ({ navigation, params }: any) => {
 
 
          
-                    <Field label='En donde vives?'>
+                    <Field label='¿Donde vives?'>
 
 <Text style={{
                         fontWeight: '400',
                         color: 'rgba(0,0,0,0.5)',
                         fontSize: 14
-                    }}>Pronto podras cambiar tu ubicacion, de momento nosotros la seleccionaremos de forma automatica</Text>
+                    }}>Pronto podrás cambiar tu ubicación, de momento nosotros la seleccionaremos de forma automática</Text>
                     {/* <Input placeholder='Buscar' /> */}
                     </Field> 
                 </View>

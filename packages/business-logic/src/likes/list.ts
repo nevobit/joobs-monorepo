@@ -1,5 +1,5 @@
 import { users, clubs,  userRelations, workRelations, likes, likeRelations, applicationsRelations, usersOnClub, usersOnClubRelations  } from "@joobs/entities";
-import { clientDb, /*getDbInstance */ } from '@joobs/data-sources'
+import { clientDb, /*clientDb */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";

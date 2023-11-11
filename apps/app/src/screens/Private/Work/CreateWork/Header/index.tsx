@@ -1,6 +1,8 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import StepIndicator from './StepIndicator';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
     title?: string;
@@ -9,12 +11,16 @@ interface Props {
 }
 
 const Header = ({ title, step, color }: Props) => {
+  const navigate = useNavigation();
   return (
     <View style={{
         backgroundColor: color? color : '#121212',
         paddingTop: 10,
         paddingHorizontal: 15
     }}>
+      <TouchableOpacity onPress={() => navigate.goBack()}>
+        <Icon name='chevron-back' color='#fff' size={25} />
+      </TouchableOpacity>
       {title && (
 
       <Text style={{

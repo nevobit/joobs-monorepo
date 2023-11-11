@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 20,
     gap: 10,
-    marginBottom: 15
+    marginBottom: 15, 
   },
   step: {
     height: 7,

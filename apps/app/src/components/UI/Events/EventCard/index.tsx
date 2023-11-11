@@ -10,16 +10,25 @@ const EventCard = ({ image }: Props) => {
         <View style={{
             borderRadius: 15,
             overflow: 'hidden',
-            height: 420,
-            backgroundColor: '#121212',
+            height: 380,
+            backgroundColor: '#000',
         }}>
+            <View style={{
+                paddingHorizontal: 20,
+                marginTop: 15
+            }}>
+
             <Image source={{
                 uri: image
             }}
                 style={{
-                    height: 200
+                    width: '100%',
+                    // objectFit: 'contain',
+                    height: 150
                 }}
             />
+            </View>
+
 
             <View style={{
                 padding: 15

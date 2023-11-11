@@ -35,6 +35,8 @@ const Club = ({ navigation, route }: any) => {
         }
     });
 
+    console.log(dataMembers.members)
+
     const [join, { loading: creatingLoading, error: creatingError }] = useMutation(JOIN, {
         onCompleted: () => {
             refetch()
@@ -200,7 +202,7 @@ const Club = ({ navigation, route }: any) => {
                             flex: 1,
                             height: '100%',
                         }}>
-                            {dataMembers?.members.map((member: any) => (
+                            {dataMembers?.members?.map((member: any) => (
                                 <View key={member.id} style={{
                                     backgroundColor: '#fff',
                                     borderRadius: 10,
@@ -239,7 +241,7 @@ const Club = ({ navigation, route }: any) => {
                                         gap: 10,
                                         marginTop: 15
                                     }}>
-                                        {member.user.skills.map((skill: string) => (
+                                        {member?.user?.skills?.map((skill: string) => (
                                             <Text key={skill} style={{
                                                 backgroundColor: 'rgba(0,0,0,.05)',
                                                 borderRadius: 20,
