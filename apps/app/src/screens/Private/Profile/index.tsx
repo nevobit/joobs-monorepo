@@ -12,44 +12,62 @@ import Geolocation from '@react-native-community/geolocation'
 
 const Profile = ({ navigation }: any) => {
   const [editProfile, setEditProfile] = useState(false);
-  const { isLoading, user, refetch } = useUser();
+  const { isLoading, user, refetch, error } = useUser();
   const [location, setLocation] = useState({
     country: '',
     city: '',
   })
 
   useEffect(() => {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA5SAL5LaKBmpsUYh1KUkeGyBBIeWMtJEg`
-        )
-          .then((response) => response.json())
-          .then((responseJson) => {
-            console.log({ responseJson })
-            const addressComponents = responseJson.results[0].address_components;
-            let country = '';
-            let city = '';
-            for (let component of addressComponents) {
-              if (component.types.includes('country')) {
-                country = component.long_name;
+    try{
+      Geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA5SAL5LaKBmpsUYh1KUkeGyBBIeWMtJEg`
+          )
+            .then((response) => response.json())
+            .then((responseJson) => {
+              console.log({ responseJson })
+              const addressComponents = responseJson.results[0].address_components;
+              let country = '';
+              let city = '';
+              for (let component of addressComponents) {
+                if (component.types.includes('country')) {
+                  country = component.long_name;
+                }
+                if (component.types.includes('locality') || component.types.includes('administrative_area_level_1')) {
+                  city = component.long_name;
+                }
               }
-              if (component.types.includes('locality') || component.types.includes('administrative_area_level_1')) {
-                city = component.long_name;
-              }
-            }
-            setLocation({ country, city });
-          })
-          .catch((error) => {
-            console.error(error);
-            // setError('Error fetching data');
-          });
-      },
-      // (error) => setError(error.message),
-      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+              setLocation({ country, city });
+            })
+            .catch((error) => {
+              console.error(error);
+              // setError('Error fetching data');
+            });
+        },
+        // (error) => setError(error.message),
+        // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+    }catch(err){
+      console.log(err);
+    }
+  
   }, []);
+
+  if(error){
+    return <View style={{
+      minHeight: '100%'
+    }}>
+      <Text style={{
+        color: '#121212',
+        textAlign: 'center'
+      }}>
+        Algo salio mal, intentalo mas tarde
+      </Text>
+    </View>
+  }
 
   useEffect(() => {
     refetch()
@@ -117,7 +135,7 @@ const Profile = ({ navigation }: any) => {
                       fontSize: 40,
                       fontWeight: '400',
                       color: '#fff'
-                    }}>{user?.name?.charAt(0).toUpperCase()}</Text>
+                    }}>{user?.name?.charAt(0)?.toUpperCase()}</Text>
                   </View>
                 }
                 <Text style={{
@@ -340,7 +358,7 @@ const Profile = ({ navigation }: any) => {
                         <Text style={{
                           fontWeight: '400',
                           color: 'rgba(0,0,0,0.8)'
-                        }}>{location.city}, {location.country}</Text>
+                        }}>{location?.city}, {location?.country}</Text>
                       </View>
 
                     )}

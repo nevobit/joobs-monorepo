@@ -35,8 +35,6 @@ const Club = ({ navigation, route }: any) => {
         }
     });
 
-    console.log(dataMembers.members)
-
     const [join, { loading: creatingLoading, error: creatingError }] = useMutation(JOIN, {
         onCompleted: () => {
             refetch()
