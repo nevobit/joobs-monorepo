@@ -21,13 +21,13 @@ const UserProfile = ({ navigation, route }: any) => {
     city: '',
   })
 
-  useEffect(() => {
+  const getLocation = () => {
     try{
       Geolocation.getCurrentPosition(
         (position) => {
-          const { latitude, longitude } = position.coords;
+          // const { latitude, longitude } = position.coords;
           fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA5SAL5LaKBmpsUYh1KUkeGyBBIeWMtJEg`
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${user?.location?.latitude},${user?.location?.longitude}&key=AIzaSyA5SAL5LaKBmpsUYh1KUkeGyBBIeWMtJEg`
           )
             .then((response) => response.json())
             .then((responseJson) => {
@@ -44,6 +44,7 @@ const UserProfile = ({ navigation, route }: any) => {
                 }
               }
               setLocation({ country, city });
+              return { country, city }
             })
             .catch((error) => {
               console.error(error);
@@ -56,15 +57,17 @@ const UserProfile = ({ navigation, route }: any) => {
     }catch(err){
       console.log(err);
     }
-  
-  }, []);
 
+  }
+  useEffect(() => {
+    getLocation();
+  }, [isLoading])
   
   useEffect(() => {
     refetch()
   }, [refetch])
 
-  
+  console.log(location)
 
   const onRefresh = React.useCallback(() => {
       setRefreshing(true);
@@ -258,11 +261,11 @@ const UserProfile = ({ navigation, route }: any) => {
                       marginBottom: 10
                     }}>{user?.about}</Text>
                   )}
-                  <View style={{
+                  <Text style={{
                     flexDirection: 'row',
                     alignItems: 'center'
                   }}>
-                    {user?.location?.latitude && (
+                    {user?.location?.latitude > 0 && (
                       <View style={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -271,7 +274,8 @@ const UserProfile = ({ navigation, route }: any) => {
                         justifyContent: 'center'
                       }}>
 
-                        <Text  > <Icon name="location-outline" color='rgba(0,0,0,0.8)' size={24} />
+                        <Text> 
+                          <Icon name="location-outline" color='rgba(0,0,0,0.8)' size={24} />
                         </Text>
                         <Text style={{
                           fontWeight: '400',
@@ -281,7 +285,7 @@ const UserProfile = ({ navigation, route }: any) => {
 
                     )}
 
-                  </View>
+                  </Text>
                 </View>
 
               </View>

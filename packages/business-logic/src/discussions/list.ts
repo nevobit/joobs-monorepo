@@ -48,9 +48,20 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
           return updatedClub;
         })
       );
+
+      const sortedDiscussions = items.sort((a, b) => {
+        // Primero por likes (en orden descendente)
+        const likesComparison = b.likes - a.likes;
+        if (likesComparison !== 0) {
+            return likesComparison;
+        }
+    
+        // Luego por comentarios (en orden descendente)
+        return b.comments - a.comments;
+    });
     return {
         count,
-        items,
+        items: sortedDiscussions,
         pageInfo: {
             page,
             pages,

@@ -271,11 +271,11 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
       }}>{data?.discussion?.title}</Text>
 
       <Text style={{
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: '400',
         color: 'rgba(0,0,0,0.6)',
         marginBottom: 15
-      }}>{data?.discussion?.text}</Text>
+      }}>{data?.discussion?.description}</Text>
 
       {data?.discussion?.images && (
 

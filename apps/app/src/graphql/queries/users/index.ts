@@ -39,6 +39,7 @@ query Query {
     name
     id
     skills
+    headline
     company_name
     company_website
     company_logo

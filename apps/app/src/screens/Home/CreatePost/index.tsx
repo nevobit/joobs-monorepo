@@ -84,7 +84,7 @@ const CreatePost = ({navigation}: any) => {
                         fontSize: 18,
                         fontWeight: '600',
                         marginBottom: 3
-                    }}>Empezar una discusion</Text>
+                    }}>Empezar una discusión</Text>
                 </View>
                 <TouchableOpacity>
                     <Icon size={25} color='rgba(255,255, 255, .6)' name='information-circle' />
@@ -102,7 +102,7 @@ const CreatePost = ({navigation}: any) => {
                     color: 'rgba(0,0,0,0.8)'
                 }}
                     multiline
-                    placeholder='Dale un titulo a tu discusion' onChangeText={(text) => setPost((prev) => ({ ...prev, title: text }))} />
+                    placeholder='Dale un título a tú discusión' onChangeText={(text) => setPost((prev) => ({ ...prev, title: text }))} />
                 <Text style={{
                     color: 'rgba(0,0,0,0.5)',
                     fontWeight: '600',
@@ -115,7 +115,7 @@ const CreatePost = ({navigation}: any) => {
                 style={{
                     fontSize: 14,
                     color: 'rgba(0,0,0,0.8)',
-                }} placeholder='Descripcion de la discusion (opcional)' placeholderTextColor='rgba(0,0,0,0.4)' />
+                }} placeholder='Descripción de la discusión (opcional)' placeholderTextColor='rgba(0,0,0,0.4)' />
                 <Text style={{
                     color: 'rgba(0,0,0,0.5)',
                     fontWeight: '600',

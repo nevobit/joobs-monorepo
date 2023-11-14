@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useQuery } from '@apollo/client'
 import { USERS } from '../../../graphql/queries'
 import { useSelector } from 'react-redux'
+import { Image } from 'react-native'
 
 const Members = ({ navigation }: any) => {
     const { user } = useSelector((state: any) => state.auth);
@@ -71,16 +72,40 @@ const Members = ({ navigation }: any) => {
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                     }}>
-                                        <Text style={{
-                                            fontSize: 18,
-                                            color: 'rgba(0,0,0,0.8)'
-                                        }}>{user?.name?.charAt(0)}</Text>
+                                        {user?.photo ?
+
+                                            <Image source={{
+                                                uri: user.photo
+                                            }}
+                                                style={{
+                                                    width: 50,
+                                                    height: 50,
+                                                    borderRadius: 50,
+                                                    overflow: 'hidden',
+                                                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                                                }}
+                                            />
+                                            :
+                                            <Text style={{
+                                                fontSize: 18,
+                                                color: 'rgba(0,0,0,0.8)'
+                                            }}>{user?.name?.charAt(0)}</Text>
+                                        }
                                     </View>
+                                    <View>
+                                        
                                     <Text style={{
                                         color: 'rgba(0,0,0,0.8)',
                                         fontSize: 16,
                                         fontWeight: '500'
                                     }}>{user.name}</Text>
+                                      <Text style={{
+                                        color: 'rgba(0,0,0,0.6)',
+                                        fontSize: 13,
+                                        fontWeight: '400',
+                                    }}>{user.headline}</Text>
+                                    </View>
+
                                 </View>
 
                                 <View style={{
