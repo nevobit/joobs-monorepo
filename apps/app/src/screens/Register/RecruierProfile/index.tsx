@@ -111,7 +111,7 @@ const RecruirProfile = ({navigation}: any) => {
                     fontWeight: '600',
                     color: 'rgba(0,0,0,0.8)',
                     fontSize: 24
-                }}>Nestor Mosquera</Text>
+                }}>{userInfo.name}</Text>
 
                 <Field label='Nombre de la empresa'>
                     <Input onChangeText={(text) => setCompanyName(text)} placeholder='Menciona tu empresa/startup/idea' />

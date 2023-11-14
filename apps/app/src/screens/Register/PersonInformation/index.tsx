@@ -9,15 +9,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveUserInfo } from '../../../store/features/auth'
 import SelectDropdown from 'react-native-select-dropdown'
 
-const genders = [ 'Masculino', 'Femenino', 'No Binario', 'Prefiero no decirlo' ]
+const genders = ['Masculino', 'Femenino', 'No Binario', 'Prefiero no decirlo']
 
 const PersonInformation = ({ navigation, params }: any) => {
     const [gender, setGender] = useState('');
     const [born_date, setBornDate] = useState('');
+    const { userInfo } = useSelector((state: any) => state.auth);
+
+
     const startYear = 1970;
     const endYear = 2012;
     const years = Array.from({ length: endYear - startYear + 1 }, (_, index) => startYear + index);
-  
+
     const dispatch = useDispatch();
 
     console.log(gender)
@@ -75,7 +78,7 @@ const PersonInformation = ({ navigation, params }: any) => {
                         fontSize: 55,
                         fontWeight: '400',
                         color: '#fff'
-                    }}>N</Text>
+                    }}>{userInfo?.name.charAt(0)}</Text>
                 </View>
                 <View style={{
                     marginTop: 50
@@ -85,48 +88,48 @@ const PersonInformation = ({ navigation, params }: any) => {
                         fontWeight: '600',
                         color: 'rgba(0,0,0,0.8)',
                         fontSize: 24
-                    }}>Nestor Mosquera</Text>
+                    }}>{userInfo?.name}</Text>
 
 
                     <Field label='¿Cual es tu genero?'>
-                        <View  style={{
+                        <View style={{
                             borderWidth: 1,
                             borderColor: 'rgba(0,0,0,0.2)',
                             borderRadius: 10,
                             overflow: 'hidden'
                         }}>
 
-<SelectDropdown
-	data={genders}
-	onSelect={(selectedItem, index) => {
-        setGender(String(selectedItem))
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		// text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-    buttonStyle={{
-        width: "100%",
-        backgroundColor: '#fff',
-    }}
-    buttonTextStyle={{
-        fontSize: 14,
-        color: 'rgba(0,0,0,0.8)'
-    }}
-    rowTextStyle={{
-        fontSize: 14,
-        color: 'rgba(0,0,0,0.8)'
-    }}
+                            <SelectDropdown
+                                data={genders}
+                                onSelect={(selectedItem, index) => {
+                                    setGender(String(selectedItem))
+                                }}
+                                buttonTextAfterSelection={(selectedItem, index) => {
+                                    // text represented after item is selected
+                                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                    return selectedItem
+                                }}
+                                rowTextForSelection={(item, index) => {
+                                    // text represented for each item in dropdown
+                                    // if data array is an array of objects then return item.property to represent item in dropdown
+                                    return item
+                                }}
+                                buttonStyle={{
+                                    width: "100%",
+                                    backgroundColor: '#fff',
+                                }}
+                                buttonTextStyle={{
+                                    fontSize: 14,
+                                    color: 'rgba(0,0,0,0.8)'
+                                }}
+                                rowTextStyle={{
+                                    fontSize: 14,
+                                    color: 'rgba(0,0,0,0.8)'
+                                }}
 
-defaultButtonText='Selecciona una opción'
-/>
-{/* 
+                                defaultButtonText='Selecciona una opción'
+                            />
+                            {/* 
                         <Picker
                             selectedValue={setGender}
                             onValueChange={(itemValue) =>
@@ -160,19 +163,19 @@ defaultButtonText='Selecciona una opción'
                         }}>
                             {years.map((year) => (
                                 <TouchableOpacity key={year} onPress={() => setBornDate(year.toString())} style={{
-                                backgroundColor: born_date == String(year)? '#5368f5' : 'rgba(0,0,0,0.05)',
-                                paddingHorizontal: 10,
-                                paddingVertical: 5,
-                                borderRadius: 5
-                            }}>
-                                <Text style={{
-                                    fontSize:14,
-                                    fontWeight: '500',
-                                    color: born_date == String(year) ? "#fff" :  'rgba(0,0,0,0.8)'
-                                }}>{year}</Text>
-                            </TouchableOpacity>
+                                    backgroundColor: born_date == String(year) ? '#5368f5' : 'rgba(0,0,0,0.05)',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5,
+                                    borderRadius: 5
+                                }}>
+                                    <Text style={{
+                                        fontSize: 14,
+                                        fontWeight: '500',
+                                        color: born_date == String(year) ? "#fff" : 'rgba(0,0,0,0.8)'
+                                    }}>{year}</Text>
+                                </TouchableOpacity>
                             ))}
-                        </ScrollView> 
+                        </ScrollView>
                     </Field>
                 </View>
 

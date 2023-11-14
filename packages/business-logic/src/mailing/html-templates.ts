@@ -15,16 +15,20 @@ export const getEmailHTML = (htmlTemplate: string, code: string) => {
       <p style="max-width: 500px; margin: 0 auto; text-align: center; font-family: sans-serif; font-size: 14px; color: rgba(0,0,0, 0.6);">Joobs, Inc,. &copy; 2023, Joobs. Todos los derechos reservados. Joobs es una marca comercial registrada de nevobit.com</p>
     `;
   
-    return `${header}\n${htmlTemplate}\n${warning}\n${footer}`.replace(
-      '{code}',
-      code
-    );
+
+
+return `${header}\n${htmlTemplate}\n${warning}\n${footer}`.replace(
+  '{code}', // o '{Detalles de la Oportunidad}' según la condición
+  code
+);
+
   };
   
   export const EmailSubjects = {
     verification: 'Verificación de correo electrónico Joobs',
     changePassword: 'Cambio de contraseña en Joobs',
     resetPassword: 'Reestablecer contraseña en Joobs',
+    created: 'Oportunidad en Joobs',
   };
   
   export const EmailTemplates = {
@@ -35,6 +39,17 @@ export const getEmailHTML = (htmlTemplate: string, code: string) => {
         <h2>{code}</h2>
       </div>
     `,
+
+    created: `
+    <div style="padding: 1rem 2rem;">
+    <h3 style="font-size: 1.2rem; color: rgba(0,0,0, 0.8);">¡Nueva Oportunidad de Trabajo en Joobs!</h3>
+    <p style="font-size: 14px;">Se ha creado una emocionante nueva oportunidad de trabajo en Joobs. Revisa los detalles a continuación y no dudes en postularte:</p>
+    <h2>{code}</h2>
+    <p style="font-size: 14px;">¡Para aplicar y conocer más detalles, inicia sesión en la aplicación Joobs ahora!</p>
+    <a href="https://play.google.com/store/apps/details?id=com.nevobit.joobs" style="text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 15px; display: inline-block; border-radius: 5px;">Ir a Joobs</a>
+</div>
+
+  `,
   
     changePassword: `
       <div style=" padding: 1rem 2rem;">

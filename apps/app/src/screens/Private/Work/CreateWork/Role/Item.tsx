@@ -29,7 +29,9 @@ const Item = ({setType, type, title, copy}: any) => {
                                 color: 'rgba(0,0,0,0.8)',
                                 fontSize: 18
                             }}>{title}</Text>
-                            <Text>{copy}</Text>
+                            <Text style={{
+                                color: 'rgba(0,0,0,0.6)',
+                            }}>{copy}</Text>
                         </View>
                     </TouchableOpacity>
   )
