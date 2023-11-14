@@ -51,13 +51,13 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
 
       const sortedDiscussions = items.sort((a, b) => {
         // Primero por likes (en orden descendente)
-        const likesComparison = b.likes - a.likes;
+        const likesComparison = a.likes - b.likes;
         if (likesComparison !== 0) {
             return likesComparison;
         }
     
         // Luego por comentarios (en orden descendente)
-        return b.comments - a.comments;
+        return a.comments - b.comments;
     });
     return {
         count,
