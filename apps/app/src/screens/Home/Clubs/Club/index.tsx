@@ -224,7 +224,7 @@ const Club = ({ navigation, route }: any) => {
                                             <Text style={{
                                                 fontSize: 18,
                                                 color: 'rgba(0,0,0,0.8)'
-                                            }}>{member?.user?.name.charAt(0)}</Text>
+                                            }}>{member?.user?.name?.charAt(0)}</Text>
                                         </View>
                                         <Text style={{
                                             color: 'rgba(0,0,0,0.8)',

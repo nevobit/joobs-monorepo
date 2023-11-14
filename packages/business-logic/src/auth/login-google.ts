@@ -16,7 +16,8 @@ export const loginGoogle =async ({email}: {email: string}) => {
     let user = result[0];
     let type = 'login';
     if(!user){
-        const data = { email, status: 'active', last_login:  new Date().toString()}
+        const name = email.split('@')[0]
+        const data = { email, name, status: 'active', last_login:  new Date().toString()}
         const result = await db.insert(users).values(data).returning();
         user = result[0];
         type = 'register';

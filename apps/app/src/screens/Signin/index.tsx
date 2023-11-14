@@ -76,7 +76,7 @@ const Signin = ({navigation}: any) => {
         </TouchableOpacity>
         <Button style={{
           marginTop: 'auto'
-        }} loading={loading} onPress={onSubmit}  text='Continuar' />
+        }} disabled={!email.includes('@')} loading={loading}  onPress={onSubmit}  text='Continuar' />
        
     </View>
   )

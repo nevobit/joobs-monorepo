@@ -11,6 +11,7 @@ query Query {
     likes
     liked
     user {
+      id
       name
       photo
     }

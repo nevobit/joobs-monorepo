@@ -56,6 +56,10 @@ const Profile = ({ navigation }: any) => {
   
   }, []);
 
+  useEffect(() => {
+    refetch()
+  }, [refetch])
+
   if(error){
     return <View style={{
       minHeight: '100%'
@@ -69,9 +73,7 @@ const Profile = ({ navigation }: any) => {
     </View>
   }
 
-  useEffect(() => {
-    refetch()
-  }, [refetch])
+
   return (
     <>
 

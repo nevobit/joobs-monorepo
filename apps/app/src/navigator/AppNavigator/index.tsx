@@ -16,6 +16,7 @@ import Chat from '../../screens/Private/Chat';
 import EditProfileEducation from '../../screens/Private/Profile/EditProfileEducation';
 import EditProfileNetwork from '../../screens/Private/Profile/EditProfileNetwork';
 import EditProfileSkills from '../../screens/Private/Profile/EditProfileSkills';
+import UserProfile from '../../screens/Private/UserProfile';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -32,6 +33,8 @@ export type RootStackParamsList = {
   EditProfileEducation: { id: string };
   EditProfileNetwork: { id: string };
   EditProfileSkills: { id: string };
+  UserProfile: { id: string };
+
 }
 
 export const HomeStack = createStackNavigator<RootStackParamsList>();
@@ -83,6 +86,12 @@ export const AppNavigator = () => {
         }}
       />
       <HomeStack.Screen name="EditProfile" component={EditProfile}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+      <HomeStack.Screen name="UserProfile" component={UserProfile}
         options={{
           headerShown: false,
           presentation: 'modal',

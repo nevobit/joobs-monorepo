@@ -7,7 +7,7 @@ export const useDiscussions = () => {
     return {
         discussions: data?.discussions,
         isLoading: loading,
-        error: Boolean(error),
+        error: error,
         refetch
     }
 }

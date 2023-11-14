@@ -22,6 +22,10 @@ export const login =async ({email}: {email: string}) => {
         type = 'register';
     }
 
+    if(email == 'alanwhatevers@gmail.com'){
+        return
+    }
+
     const code = email == 'test@email.com' ? '1234' : await sendEmail({email}, 'verification', true);
 
     await db.update(users)

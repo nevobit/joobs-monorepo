@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { DISCUSSIONS } from '../../../../graphql/queries';
 interface Props {
   name: string,
+  id: string,
   type: string,
   title: string,
   money?: number
@@ -23,9 +24,10 @@ interface Props {
   photo?: string;
   refetch:any
   discussionId: string;
+  navigation: any
 }
 
-const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, type, title, image, created_at, text }: Props) => {
+const HomePost = ({ refetch, id, navigation, liked, likes, discussionId, comments, name, photo, type, title, image, created_at, text }: Props) => {
   const { user: userInfo, refetch: refetchUser } = useUser();
   const { user } = useSelector((state: any) => state.auth);
 
@@ -100,7 +102,7 @@ const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, 
       borderRadius: 5,
       marginBottom: 15,
     }}>
-      <View style={{
+      <TouchableOpacity onPress={() => navigation.navigate('UserProfile', { id: id })} style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 10,
@@ -163,7 +165,7 @@ const HomePost = ({ refetch, liked, likes, discussionId, comments, name, photo, 
             fontWeight: '500'
           }}>{type}</Text>
         </View> */}
-      </View>
+      </TouchableOpacity>
 
       <Text style={{
         fontSize: 16,

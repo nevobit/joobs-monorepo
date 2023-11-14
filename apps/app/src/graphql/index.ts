@@ -36,7 +36,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
 const httpLink = createHttpLink({
     uri: 'https://joobs-api.onrender.com/graphql'
-    // uri: 'http://192.168.1.46:8000/graphql'
+    // uri: 'http://192.168.2.211:8000/graphql'
 });
 
 const wsLink = new GraphQLWsLink(createWsClient({

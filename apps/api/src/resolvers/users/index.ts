@@ -3,10 +3,11 @@ import { getAllUser, getUserById, updateUser, verifyToken } from  '@joobs/busine
 
 export default {
     Query: {
-        user: async (_: any, {}, ctx:any) => {
+        user: async (_: any, { uuid }: any, ctx:any) => {
             const { id } = await verifyToken(ctx) as {id: string};
+            const userId = uuid ?? id;
             try{
-                const user = await getUserById(id);
+                const user = await getUserById(userId);
                 return user;
             }catch(err:any){
                 throw new Error(err);

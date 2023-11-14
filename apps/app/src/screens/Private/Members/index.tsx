@@ -51,7 +51,7 @@ const Members = ({ navigation }: any) => {
                     >
                         {data?.users?.slice().reverse().map((user: any) => (
                             //   <Pressable key={user.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} > 
-                            <View key={user.id} style={{
+                            <TouchableOpacity onPress={() => navigation.navigate('UserProfile', { id: user.id })} key={user.id} style={{
                                 backgroundColor: '#fff',
                                 borderRadius: 10,
                                 padding: 10,
@@ -102,7 +102,7 @@ const Members = ({ navigation }: any) => {
                                     ))}
 
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                             //  </Pressable>
                         ))}
 
