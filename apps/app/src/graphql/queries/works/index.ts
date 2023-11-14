@@ -15,6 +15,7 @@ query Query {
       id
       photo
       name
+      company_name
     }
     created_at
   }
@@ -30,6 +31,7 @@ query Query($workId: String) {
     user {
       photo
       name
+      company_name
     }
     id
     description

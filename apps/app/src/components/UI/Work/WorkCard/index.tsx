@@ -10,6 +10,8 @@ interface Props{
   user: {
     name: string;
     photo: string;
+    company_name: string;
+    company_logo: string;
   }
   title: string;
   role: string;
@@ -73,7 +75,7 @@ const WorkCard = ({ user, title, skills, created_at, remuneration, role }: Props
             fontWeight: '600',
             fontSize: 16,
             color: 'rgba(0,0,0,0.8)'
-          }}>{user?.name?.charAt(0)}</Text>
+          }}>{user?.company_name?.charAt(0)}</Text>
         </View>
         )}
 
@@ -82,7 +84,7 @@ const WorkCard = ({ user, title, skills, created_at, remuneration, role }: Props
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
-          }}>{user?.name}</Text>
+          }}>{user?.company_name}</Text>
           <Text style={{
             fontSize: 12,
             color: 'rgba(0,0,0,0.8)'
