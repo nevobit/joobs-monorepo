@@ -8,5 +8,7 @@ export const getAllUser = async () => {
   const db = drizzle(infoInstance, { schema: { users } })
 
   const result = await db.select().from(users);
-  return result;
+
+  const activeUser = result.filter(user => user.email !== 'test@email.com	');
+  return activeUser;
 };
