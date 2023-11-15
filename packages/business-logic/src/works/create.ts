@@ -14,9 +14,16 @@ export const createWork = async (data: InferInsertModel<typeof works>) => {
 
     const activeUser = usersResult.filter(user => user.email !== 'test@email.com	');
 
-    await Promise.all(activeUser.map(async (element) => {
-        await sendEmailCreatedWork({ title: result[0].title, email: element.email }, 'created' );
-    }));
+    for (let i = 0; i < activeUser.length; i++) {
+        const element = activeUser[i];
+        await sendEmailCreatedWork({ title: result[0].title, email: element.email }, 'created' )
+    }
+
+
+    // await Promise.all(activeUser.map(async (element) => {
+    //     await sendEmailCreatedWork({ title: result[0].title, email: element.email }, 'created' );
+    // }));
+
     return result[0];
 }
 

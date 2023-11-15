@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, Alert, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { WORK, WORKS } from '../../../../graphql/queries';
 import { DivisaFormater, fromNow } from '../../../../utils';
 import translateToSpanish from '../../../../utils/frecuency-formater';
@@ -45,7 +45,7 @@ const WorkDetails = ({ navigation, route }: any) => {
         })
         navigation.navigate('Work', { screen: 'Aplicaciones' })
     }
-    
+
 
 
     useEffect(() => {
@@ -71,163 +71,194 @@ const WorkDetails = ({ navigation, route }: any) => {
                 justifyContent: 'space-between',
                 paddingHorizontal: 10,
                 paddingBottom: 30,
-                paddingTop: 5
+                paddingTop: 5,
+                zIndex:-1
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 7
-        }}>
-          <Icon name='arrow-back-outline' size={24} color='#fff' />
-        </TouchableOpacity>
-                   <Pressable onPress={() => share(data?.work?.title)} style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 7
-        }}>
-          <Icon name='share-social-outline' size={24} color='#fff' />
-        </Pressable>
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 7
+                }}>
+                    <Icon name='arrow-back-outline' size={24} color='#fff' />
+                </TouchableOpacity>
+                <Pressable onPress={() => share(data?.work?.title)} style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 7
+                }}>
+                    <Icon name='share-social-outline' size={24} color='#fff' />
+                </Pressable>
             </View>
             {loading ? <ActivityIndicator size='large' color='#121212' style={{
                 marginTop: 20
             }} /> : (
-                
-                <View style={{
-                    borderTopEndRadius: 20,
-                    borderTopStartRadius: 20,
-                    flex: 1,
+
+                <ScrollView  style={{
                     zIndex: 999,
                     marginTop: -20,
-                    backgroundColor: '#fff'
-                }}>
-
-                <ScrollView contentContainerStyle={{
-                    // backgroundColor: '#fff',
-                    // height: '100%',
                     borderTopEndRadius: 20,
                     borderTopStartRadius: 20,
-                    marginTop: -20,
-                    paddingTop: 30,
-                    padding: 15,
-                    zIndex: 999,
-                    flex: 1
+
+                }}
+                    contentContainerStyle={{
+                    borderTopEndRadius: 20,
+                    borderTopStartRadius: 20,
+                    // flex: 1,
+                    minHeight: '100%',
+                    backgroundColor: '#fff',
+                    zIndex: 99
                 }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        gap: 10,
-                        alignItems: 'flex-start',
-                        marginTop: 5
-                    }}>
-                        <View style={{
-                            flexDirection: 'row',
-                            gap: 8
-                        }}>
-
-                            <View style={{
-                                backgroundColor: '#d5bffd',
-                                height: 30,
-                                width: 30,
-                                borderRadius: 50,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                <Text style={{
-                                    fontWeight: '600',
-                                    fontSize: 16,
-                                    color: 'rgba(0,0,0,0.8)'
-                                }}>{data?.work?.user?.name?.charAt(0)}</Text>
-                            </View>
-                            <View style={{
-                            }}>
-                                <Text style={{
-                                    fontSize: 12,
-                                    color: 'rgba(0,0,0,0.8)'
-                                }}>{data?.work?.user?.name}</Text>
-                                <Text style={{
-                                    fontSize: 12,
-                                    color: 'rgba(0,0,0,0.8)'
-                                }}>{fromNow(data?.work?.created_at)}</Text>
-                            </View>
-                        </View>
-                        <View >
-                         
-                        </View>
-                    </View>
 
                     <View style={{
+                        borderTopEndRadius: 20,
+                        borderTopStartRadius: 20,
+                        marginTop: -20,
+                        paddingTop: 30,
+                        padding: 15,
+                        zIndex: 999,
                         flex: 1
                     }}>
-                        <Text style={{
-                            color: '#111',
-                            fontWeight: '600',
-                            fontSize: 18,
-                            marginTop: 10
-                        }}>{data?.work?.title}</Text>
                         <View style={{
                             flexDirection: 'row',
-                            alignItems: 'center',
-                            marginTop: 10,
-                            gap: 10
+                            justifyContent: 'space-between',
+                            gap: 10,
+                            alignItems: 'flex-start',
+                            marginTop: 5
                         }}>
-                            <Icon name='cash-outline' size={20} color='rgba(0,0,0,0.8)' />
+                            <View style={{
+                                flexDirection: 'row',
+                                gap: 8
+                            }}>
+   {user?.photo ? (
+                                        <View style={{
+                                            backgroundColor: '#d5bffd',
+                                            height: 30,
+                                            width: 30,
+                                            borderRadius: 50,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            overflow: 'hidden'
+                                        }}>
+                                            <Image source={{
+                                                uri: user?.photo
+                                            }} style={{
+                                                width: 30,
+                                                height: 30,
+                                                objectFit: 'cover'
 
-                            <Text style={{
-                                color: 'rgba(0,0,0,0.8)',
-                                fontWeight: '500',
-                                fontSize: 14
-                            }}>{DivisaFormater({ value: data?.work?.remuneration?.value })} / {translateToSpanish(data?.work?.remuneration?.frecuency)}</Text>
+                                            }} />
+                                        </View>
+                                    ) : (
+
+                                        <View style={{
+                                            backgroundColor: '#d5bffd',
+                                            height: 30,
+                                            width: 30,
+                                            borderRadius: 50,
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                            <Text style={{
+                                                fontWeight: '600',
+                                                fontSize: 16,
+                                                color: 'rgba(0,0,0,0.8)'
+                                            }}>{user?.company_name?.charAt(0)}</Text>
+                                        </View>
+                                    )}
+                                <View style={{
+                                }}>
+                                 
+                                 
+                                        <Text style={{
+                                            fontSize: 12,
+                                            color: 'rgba(0,0,0,0.8)'
+                                        }}>{user?.company_name}</Text>
+                                        <Text style={{
+                                            fontSize: 12,
+                                            color: 'rgba(0,0,0,0.8)'
+                                        }}>{fromNow(data?.work?.created_at)}</Text>
+                                  
+
+                                </View>
+                            </View>
+                            <View >
+
+                            </View>
                         </View>
 
-
                         <View style={{
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            gap: 8,
-                            marginTop: 15,
-                            borderBottomColor: 'rgba(0,0,0,0.1)',
-                            borderBottomWidth: 1,
-                            paddingBottom: 15
+                            flex: 1
                         }}>
-                            {data?.work?.skills?.map((skill: string) => (
-                                <Text key={skill} style={{
-                                    backgroundColor: 'rgba(0,0,0, .05)',
-                                    borderRadius: 20,
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 4,
-                                    fontSize: 12,
+                            <Text style={{
+                                color: '#111',
+                                fontWeight: '600',
+                                fontSize: 18,
+                                marginTop: 10
+                            }}>{data?.work?.title}</Text>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                marginTop: 10,
+                                gap: 10
+                            }}>
+                                <Icon name='cash-outline' size={20} color='rgba(0,0,0,0.8)' />
+
+                                <Text style={{
                                     color: 'rgba(0,0,0,0.8)',
-                                    fontWeight: '500'
-                                }}>{skill}</Text>
-                            ))}
+                                    fontWeight: '500',
+                                    fontSize: 14
+                                }}>{DivisaFormater({ value: data?.work?.remuneration?.value })} / {translateToSpanish(data?.work?.remuneration?.frecuency)}</Text>
+                            </View>
 
-                        </View>
-                        <View style={{
-                            marginTop: 10
-                        }}>
-                            <Text style={{
-                                color: 'rgba(0,0,0,0.8)',
-                                fontSize: 14
-                            }}>{data?.work?.description}</Text>
-                        </View>
 
-                        <View style={{
-                            marginTop: 'auto'
-                        }}>
-                            <Button text='Aplicar' onPress={() => setModal(true)}  style={{
+                            <View style={{
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                gap: 8,
+                                marginTop: 15,
+                                borderBottomColor: 'rgba(0,0,0,0.1)',
+                                borderBottomWidth: 1,
+                                paddingBottom: 15
+                            }}>
+                                {data?.work?.skills?.map((skill: string) => (
+                                    <Text key={skill} style={{
+                                        backgroundColor: 'rgba(0,0,0, .05)',
+                                        borderRadius: 20,
+                                        paddingHorizontal: 10,
+                                        paddingVertical: 4,
+                                        fontSize: 12,
+                                        color: 'rgba(0,0,0,0.8)',
+                                        fontWeight: '500'
+                                    }}>{skill}</Text>
+                                ))}
+
+                            </View>
+                            <View style={{
+                                marginTop: 10
+                            }}>
+                                <Text style={{
+                                    color: 'rgba(0,0,0,0.8)',
+                                    fontSize: 14
+                                }}>{data?.work?.description}</Text>
+                            </View>
+
+                            <View style={{
                                 marginTop: 'auto'
-                            }} />
+                            }}>
+                                <Button text='Aplicar' onPress={() => setModal(true)} style={{
+                                    marginTop: 'auto'
+                                }} />
 
+                            </View>
                         </View>
+
+
                     </View>
-
-
                 </ScrollView>
-                </View>
 
             )}
 
-            <BottomSheet isVisible={modal}  setIsVisible={setModal}>
+            <BottomSheet isVisible={modal} setIsVisible={setModal}>
                 <View style={{
                     height: 400
                 }}>
@@ -237,7 +268,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                         fontSize: 18
                     }}>Agrega tu prueba de trabajo</Text>
 
-<Text style={{
+                    <Text style={{
                         fontWeight: '400',
                         color: 'rgba(0,0,0,0.6)',
                         fontSize: 14,
@@ -252,17 +283,17 @@ const WorkDetails = ({ navigation, route }: any) => {
                         marginTop: 'auto'
                     }}>
                         <Button loading={creatingLoading} text='Siguiente' onPress={onSubmit} />
-                        <TouchableOpacity 
-                        onPress={onSubmit}
-                        style={{
-                            borderWidth:1,
-                            borderColor: 'rgba(0,0,0,0.1)',
-                            height: 45,
-                            borderRadius: 50,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginTop: 15
-                        }}>
+                        <TouchableOpacity
+                            onPress={onSubmit}
+                            style={{
+                                borderWidth: 1,
+                                borderColor: 'rgba(0,0,0,0.1)',
+                                height: 45,
+                                borderRadius: 50,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: 15
+                            }}>
                             <Text style={{
                                 color: '#5368f5',
                                 fontSize: 16
