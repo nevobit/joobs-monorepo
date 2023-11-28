@@ -1,0 +1,5 @@
+{
+    "out": "./migrations",
+    "schema": "./node_modules/@joobs/entities/src/models",
+    "breakpoints": false
+}

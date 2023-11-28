@@ -1,0 +1,344 @@
+# Extra Types  
+type Remuneration {
+    value: Int
+    frecuency: String
+}
+
+input RemunerationInput {
+    value: Float
+    frecuency: String
+}
+
+type Location {
+    longitude: Float
+    latitude: Float
+    address: String
+}
+
+# WORK
+
+type Work {
+    id: ID
+    title: String
+    user: User
+    role: String
+    skills: [String]
+    description: String
+    remuneration: Remuneration
+    location: Location
+    created_at: String
+}
+
+input DataCreateWork {
+    title: String
+    userId: String
+    role: String
+    status: String
+    description: String
+    skills: [String]
+    location: LocationInput
+    remuneration: RemunerationInput
+}
+
+
+#DISCUSSION
+
+type Discussion {
+    id: ID
+    title: String
+    user: User
+    created_at: String
+    images: [String]
+    link: String
+    comments: Int
+    likes: Int
+    liked: Boolean
+    description: String
+}
+
+input DataCreateDiscussion {
+    title: String
+    images: [String]
+    link: String
+    description: String
+}
+
+# APPLICATION
+type Application {
+    user: User
+    work: Work
+    proof_of_work: String
+}
+
+type Club {
+    id: ID
+    name: String
+    icon: String
+    description: String
+    members: Int
+    joined: Boolean
+}
+
+
+type Comment {
+    id: ID
+    text: String
+    user: User
+    discussionId: Discussion
+    created_at: String
+}
+
+
+type Like {
+    user: User
+    discussionId: Discussion
+    created_at: String
+}
+
+
+input LocationInput {
+    longitude: Float
+    latitude: Float
+    address: String
+}
+
+
+input DataCreateClub {
+    name: String
+    icon: String
+    description: String
+}
+
+input DataCreateComment {
+    text: String
+    userId: String
+    discussionId: String
+}
+
+input DataCreateLike {
+    userId: String
+    discussionId: String
+}
+
+
+type Stages {
+    steps: [Steps]
+}
+
+input StagesInput {
+    steps: [StepsInput]
+}
+
+
+type Steps {
+    title: String
+    description: String
+}
+
+input StepsInput {
+    title: String
+     description: String
+}
+
+input DataCreateProject {
+    title: String
+    description: String
+    skills: [String]
+    stages: [StagesInput]
+    difficulty: String
+    duration: String
+    reward: String
+    prerequisites: String
+    submission: String
+}
+
+input DataCreateApplication {
+    userId: String
+    workId: String
+    proof_of_work: String
+}
+
+input DataCreateMember {
+    userId: String
+    clubId: String
+}
+
+type Member {
+    user: User
+    club: Club
+}
+
+type Participant {
+    user: User
+    project: Project
+}
+
+input DataCreateParticipant {
+    user: String
+    project: String
+}
+
+type Project {
+    id: ID
+    title: String
+    description: String
+    skills: [String]
+    stages: [Stages]
+    difficulty: String
+    duration: String
+    reward: String
+    prerequisites: String
+    submission: String
+}
+
+# USER
+
+type User {
+    id: ID
+    name: String
+    email: String
+    phone: String
+    photo: String
+    location: Location
+    skills: [String]
+    born_date: String
+    gender: String
+    headline: String
+    about: String
+    company_name: String
+    college: String
+    proof_of_work: ProofOfWork
+    graduation_year: String
+    icebreaker: [String]
+    instagram: String
+    facebook: String
+    linkedin: String
+    twitter: String
+    company_website: String
+    company_logo: String
+    company_description: String
+}
+
+type AuthPayload {
+    token: String
+    type: String
+}
+
+type AuthPayloadCode {
+    token: String
+}
+
+input LocationInput {
+    longitude: Float
+    latitude: Float
+}
+
+type ProofOfWork {
+    links: [String]
+    attachments: [String]
+}
+
+input ProofOfWorkInput {
+    links: [String]
+    attachments: [String]
+}
+
+input UserInput {
+    name: String
+    email: String
+    phone: String
+    photo: String
+    location: LocationInput
+    skills: [String]
+    born_date: String
+    gender: String
+    headline: String
+    about: String
+    company_name: String
+    company_website: String
+    proof_of_work: ProofOfWorkInput
+    college: String
+    graduation_year: String   
+    icebreaker: [String]
+    instagram: String
+    facebook: String
+    linkedin: String
+    twitter: String
+    company_logo: String
+    company_description: String
+}
+
+type Query {
+    project(id: String): Project
+    projects: [Project]
+
+    works: [Work]
+
+    comments(id: String): [Comment]
+
+    likes(id: String): [Like]
+
+    members(id: String): [Member]
+    isJoined: Boolean
+
+    participants(id: String): [Participant]
+    isParticipant(projectId: String): Boolean
+
+    workByUser: [Work]
+    work(id: String): Work
+
+    applications: [Application]
+    application: Application
+    applied: Boolean
+
+    discussions: [Discussion]
+    discussion(id: String): Discussion
+    
+    clubs: [Club]
+    club(id: String): Club
+    
+    user(uuid: String): User
+    users: [User]
+}
+
+
+type Mutation {
+    # WORKS
+    createWork(data: DataCreateWork): Work
+    createDiscussion(data: DataCreateDiscussion): Discussion
+
+    # APPLICATIONS
+    createApplication(data: DataCreateApplication): Application
+    
+    #CLUBS
+    joinToClub(data: DataCreateMember): Member
+    createClub(data: DataCreateClub): Club
+
+    #PARTICIPATION
+    participate(data: DataCreateParticipant): Participant
+    createProject(data: DataCreateProject): Project
+
+    comment(data: DataCreateComment): Comment
+
+    like(data: DataCreateLike): Like
+    likeDelete(data: DataCreateLike): Boolean
+
+    # USER
+    userLogin(email: String!): AuthPayload
+    userLoginGoogle(email: String!): AuthPayload
+    verifyCode(email: String!, code: String!): AuthPayloadCode
+    userRegister(data: UserInput): AuthPayloadCode
+    updateUser(data: UserInput): User
+
+    addMessage(text: String!): Boolean
+}
+
+type Message {
+    id: ID
+    user: User
+    text: String
+}
+
+type Subscription {
+    messageAdded: Message
+}
