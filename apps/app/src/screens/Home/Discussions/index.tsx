@@ -20,7 +20,7 @@ const Discussions = ({ navigation, search }: any) => {
   }, []);
 
   return (
-    <View statusColor="#f0f0f0" >
+    <View  >
       <ScrollView contentContainerStyle={{
         backgroundColor: "#f0f0f0",
         marginBottom: 10

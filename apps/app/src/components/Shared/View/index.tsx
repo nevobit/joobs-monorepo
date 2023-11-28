@@ -39,7 +39,7 @@ export const View = ({style, children, statusColor, barStyle}: Props) => {
     
           <StatusBar
             translucent
-            backgroundColor={statusColor}
+            backgroundColor={statusColor ?? '#121212'}
             barStyle={barStyle ?? 'light-content'}
           />
           {children}

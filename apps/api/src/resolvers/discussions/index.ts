@@ -29,8 +29,8 @@ export default {
         createDiscussion: async (_: any, {data}: any, ctx: any) => {
             const { id } = await verifyToken(ctx) as {id: string};
             const userId = id;
-            const { title, description, images, link } = data;
-            const discussion = await createDiscussion({title, description, images, link, userId, status: 'active' });
+            const { title, description, images, link, clubId } = data;
+            const discussion = await createDiscussion({title, description, images, link, userId, clubId, status: 'active' });
             return discussion;
         }
     }

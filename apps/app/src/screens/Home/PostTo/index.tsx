@@ -39,7 +39,7 @@ const PostTo = ({navigation, route}: any) => {
     const [ search, setSearch ] = useState("");
     const [ clubId, setClubId ] = useState("");
 
-  console.log(route.params.post);
+  console.log(clubId);
   const [createDiscussion, {loading: isCreating, error: creatingError}] =
     useMutation(CREATE_DISCUSSION, {
       refetchQueries: [{query: DISCUSSIONS}],

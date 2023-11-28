@@ -54,7 +54,7 @@ const Onboarding = ({ navigation }: any) => {
     }
     return (
         <View 
-        statusColor={"5368f5"}
+        statusColor={"#5368f5"}
         barStyle="light-content"
         style={{
             backgroundColor: "#5368f5",
