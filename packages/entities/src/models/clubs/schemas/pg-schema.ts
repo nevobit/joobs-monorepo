@@ -1,6 +1,8 @@
 // import { relations } from "drizzle-orm";
 // import { relations } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
+import { discussions } from "../../discussions";
 // import { usersOnClubs } from "../../users";
 
 export const clubs = pgTable('clubs', {
@@ -18,7 +20,6 @@ export const clubs = pgTable('clubs', {
 });
 
 
-// export const clubRelations = relations(clubs, ({ many }) => ({
-//     : many(usersOnClubs)
-// }))
-
+export const clubRelations = relations(clubs, ({ many }) => ({
+    discussions: many(discussions),
+}));

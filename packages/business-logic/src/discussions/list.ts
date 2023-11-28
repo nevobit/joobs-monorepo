@@ -14,7 +14,8 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
   
     const result = await db.query.discussions.findMany({
         with: {
-            user: true
+            user: true,
+            club: true
         }
     })
 

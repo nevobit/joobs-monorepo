@@ -4,6 +4,7 @@ import { users } from "../../users";
 import { relations } from "drizzle-orm";
 import { comments } from "../../comments";
 import { likes } from "../../likes";
+import { clubs } from "../../clubs";
 
 export const discussions = pgTable('discussions', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -13,6 +14,7 @@ export const discussions = pgTable('discussions', {
     link: varchar("link", { length: 256 }),
     status: varchar('status', { length: 256 }),
     userId: uuid('user_id'),
+    clubId: uuid('club_id'),
     created_at: timestamp('created_at').defaultNow(),
     updated_at: timestamp('updated_at').defaultNow(),
 }, (discussions) => {
@@ -26,6 +28,10 @@ export const discussionRelations = relations(discussions, ({ one, many }) => ({
     user: one(users, {
         fields: [discussions.userId],
         references: [users.id]
+    }),
+    club: one(clubs, {
+        fields: [discussions.clubId],
+        references: [clubs.id]
     }),
     comments: many(comments),
     likes: many(likes)
