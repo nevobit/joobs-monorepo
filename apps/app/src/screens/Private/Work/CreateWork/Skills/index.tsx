@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { View as DefaultView, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Header'
 import Input from '../../../../../components/Shared/Input'
 import Button from '../../../../../components/Shared/Button'
+import { View } from '../../../../../components/Shared/View'
 
 const skillsData = {
   development: [
@@ -255,11 +256,9 @@ const Skills = ({navigation, route}: any) => {
         })
       }
     return (
-        <View style={{
-            backgroundColor: '#121212',
-            flex: 1,
-        }}>
-            <View style={{
+        <View>
+          <Header  title='Crear una publicación' step={1} />
+            <DefaultView style={{
                 paddingHorizontal: 15,
                 paddingVertical: 20,
                 backgroundColor: '#fff',
@@ -268,7 +267,7 @@ const Skills = ({navigation, route}: any) => {
                 borderTopLeftRadius: 30,
             }}>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -285,11 +284,11 @@ const Skills = ({navigation, route}: any) => {
                         fontSize: 14,
                         color: 'rgba(0,0,0,0.8)'
                     }}>0/120</Text>
-                </View>
+                </DefaultView>
 
                 
                 <ScrollView>
-        <View
+        <DefaultView
           style={{
             marginTop: 10,
             gap: 20,
@@ -303,7 +302,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
             Desarrollo Web y Móvil
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -332,7 +331,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text
             style={{
               color: 'rgba(0,0,0,0.8)',
@@ -342,7 +341,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
             Ventas y Operaciones
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -371,7 +370,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text
             style={{
               color: 'rgba(0,0,0,0.8)',
@@ -381,7 +380,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
             Tecnologia
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -411,7 +410,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -420,7 +419,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
           Diseño
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -450,7 +449,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -459,7 +458,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
           Marketing
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -489,7 +488,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -498,7 +497,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
           Escritura
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -528,7 +527,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -537,7 +536,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
           Finanzas y Negocios
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -567,7 +566,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -576,7 +575,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
           Producto
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -606,7 +605,7 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -615,7 +614,7 @@ const Skills = ({navigation, route}: any) => {
             }}>
             Video
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -646,11 +645,11 @@ const Skills = ({navigation, route}: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           
-        </View>
+        </DefaultView>
       </ScrollView>
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -667,7 +666,9 @@ const Skills = ({navigation, route}: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginTop: 20
-                    }}>
+                    }}
+                    onPress={() => navigation.goBack()}
+                    >
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             fontWeight: '500',
@@ -679,9 +680,9 @@ const Skills = ({navigation, route}: any) => {
                     width: '60%'
                 }} />
 
-</View>
+</DefaultView>
 
-            </View>
+            </DefaultView>
 
         </View>
     )

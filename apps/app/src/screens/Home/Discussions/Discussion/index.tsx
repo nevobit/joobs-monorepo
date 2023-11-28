@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, Alert, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView, Keyboard } from 'react-native'
+import { View as DefaultView, Text, Image, TouchableOpacity, Alert, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView, Keyboard } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -13,6 +13,7 @@ import { COMMENT } from '../../../../graphql/mutations/comments';
 import { useUser } from '../../../../hooks/users/useUser';
 import { LIKES } from '../../../../graphql/queries/likes';
 import { DELETELIKE, LIKE } from '../../../../graphql/mutations/likes';
+import { View } from '../../../../components/Shared/View';
 
 const DiscussionDetails = ({ navigation, route }: any) => {
   const [text, setText] = useState('');
@@ -167,13 +168,9 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
   }, [refetch])
   
   return (
-    <SafeAreaView style={{
-      backgroundColor: '#fff',
-      height: '100%',
-      paddingBottom: 10
-    }}>
+    <View>
 
-<View style={{
+<DefaultView style={{
                 backgroundColor: '#121212',
                 // height: 30,
                 paddingHorizontal: 15,
@@ -187,7 +184,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
                     <Icon name='arrow-back' size={25} color='#fff' />
                 </TouchableOpacity>
 
-            </View>
+            </DefaultView>
 
     <ScrollView 
     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -196,14 +193,18 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
       padding: 15,
       borderRadius: 5,
       marginBottom: 15,
-    }}>
-      <View style={{
+    }}
+    style={{
+      backgroundColor: "#f0f0f0"
+    }}
+    >
+      <DefaultView style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 10,
         alignItems: 'flex-start',
       }}>
-        <View style={{
+        <DefaultView style={{
           flexDirection: 'row',
           gap: 8
         }}>
@@ -215,7 +216,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
           borderColor: 'rgba(0,0,0,0.1)'
         }} /> : (
 
-          <View style={{
+          <DefaultView style={{
             backgroundColor: '#d5bffd',
             height: 30,
             width: 30,
@@ -228,10 +229,10 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
               fontSize: 16,
               color: 'rgba(0,0,0,0.8)',
             }}>{data?.discussion?.user?.name?.charAt(0)}</Text>
-          </View>
+          </DefaultView>
         )}
 
-          <View style={{
+          <DefaultView style={{
           }}>
             <Text style={{
               fontSize: 14,
@@ -242,8 +243,8 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
               fontSize: 12,
               color: 'rgba(0,0,0,0.8)'
             }}>{fromNow(data?.discussion?.created_at)}</Text>
-          </View>
-        </View>
+          </DefaultView>
+        </DefaultView>
 
         {/* <View style={{
           flexDirection: 'row',
@@ -260,7 +261,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
             fontWeight: '500'
           }}>{type}</Text>
         </View> */}
-      </View>
+      </DefaultView>
 
       <Text style={{
         fontSize: 16,
@@ -290,7 +291,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
 
       )}
 
-     <View style={{
+     <DefaultView style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 1,
@@ -315,7 +316,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
         </TouchableOpacity>
         
 
-        <View style={{
+        <DefaultView style={{
           flexDirection: 'row',
           alignItems: 'center',
           gap: 7
@@ -325,7 +326,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
             fontSize: 14,
             color:'rgba(0,0,0,0.8)'
           }}>{dataComments?.comments.length}</Text>
-        </View>
+        </DefaultView>
 
         <TouchableOpacity onPress={share} style={{
           flexDirection: 'row',
@@ -334,12 +335,12 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
         }}>
           <Icon name='share-social-outline' size={25} color='rgba(0,0,0,0.8)' />
         </TouchableOpacity>
-      </View> 
+      </DefaultView> 
 
-      <View>
+      <DefaultView>
 
         {dataComments?.comments.length == 0 ? (
-          <View style={{
+          <DefaultView style={{
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 15
@@ -356,12 +357,12 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
             fontSize: 14
 
           }}>Sé el primero en comentar</Text>
-          </View> 
+          </DefaultView> 
 
         ): (
           <>
           {dataComments?.comments.map((comment: any) => (
-          <View key={comment.id} style={{
+          <DefaultView key={comment.id} style={{
             backgroundColor: '#fff',
             padding: 10,
             marginBottom: 15,
@@ -370,12 +371,12 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
             paddingBottom: 20,
             paddingTop: 5,
         }}>
-            <View style={{
+            <DefaultView style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 gap: 10
             }}>
-                <View style={{
+                <DefaultView style={{
                     backgroundColor: 'rgba(230, 81, 0, 0.5)',
                     width: 25,
                     height: 25,
@@ -388,7 +389,7 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
                         fontSize: 15,
                         color: 'rgba(0,0,0,0.8)'
                     }}>{comment.user.name.charAt(0)}</Text>
-                </View>
+                </DefaultView>
                 <Text style={{
                     color: 'rgba(0,0,0,0.8)',
                     fontSize: 14,
@@ -400,9 +401,9 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
                     fontWeight: '400'
                 }}>{fromNow(comment.created_at)}</Text>
                 
-            </View>
+            </DefaultView>
 
-            <View style={{
+            <DefaultView style={{
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 gap: 10,
@@ -413,21 +414,22 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
                   color: 'rgba(0,0,0,0.6)'
                 }}>{comment.text}</Text>
 
-            </View>
-        </View> 
+            </DefaultView>
+        </DefaultView> 
           ))}
 
         </>
 
 
         )}
-      </View>
+      </DefaultView>
     </ScrollView>
-    <View style={{
+    <DefaultView style={{
       paddingHorizontal: 10,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      backgroundColor: "#f0f0f0"
     }}>
 
     <Input  value={text} onChangeText={(text) => setText(text)} placeholder='Salta a la conversacion'style={{
@@ -450,9 +452,9 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
      )}
 
      </TouchableOpacity>
-    </View>
+    </DefaultView>
 
-    </SafeAreaView>
+    </View>
 
   )
 }

@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        paddingBottom: 15,
-        height: '100%',
-        marginBottom: 10
+        height: '100%'
     },
     button: {
         position: 'absolute',

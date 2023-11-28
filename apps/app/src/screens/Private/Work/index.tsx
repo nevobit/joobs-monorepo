@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View as DefaultView } from 'react-native'
 import WorkTopTap from '../../../navigator/WorkTopTab'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { WorkCard } from '../../../components/UI'
@@ -10,6 +10,8 @@ import Input from '../../../components/Shared/Input'
 import Button from '../../../components/Shared/Button'
 import { useUpdateUser, useUploadImage, useUser } from '../../../hooks'
 import Textarea from '../../../components/Shared/Textarea'
+import Header from '../../../components/Layout/Header'
+import { View } from '../../../components/Shared/View'
 
 const Work = ({ navigation }: any) => {
   const [modal, setModal] = useState(false)
@@ -53,9 +55,9 @@ const Work = ({ navigation }: any) => {
     refetch()
   }, [refetch])
   return (
-    <SafeAreaView style={{
-      flex: 1
-    }}>
+    <View>
+
+<Header title='Trabajo' whathsapp notifications messages navigation={navigation} />
 
       <WorkTopTap />
       <TouchableOpacity
@@ -67,7 +69,7 @@ const Work = ({ navigation }: any) => {
 
       <BottomSheet isVisible={modal} setIsVisible={setModal}>
         {step == '1' && (
-          <View style={{
+          <DefaultView style={{
             height: '80%'
           }}>
             <Text style={{
@@ -87,12 +89,12 @@ const Work = ({ navigation }: any) => {
             <Field label='Tu sitio web'>
               <Input onChangeText={(text) => setCompanyInfo((prev) => ({ ...prev, company_website: text }))} placeholder='Ej: www.joobs.lat' />
             </Field>
-            <View style={{
+            <DefaultView style={{
               marginTop: 'auto'
             }}>
               <Button onPress={() => setStep('2')} text='Siguiente' />
-            </View>
-          </View>
+            </DefaultView>
+          </DefaultView>
         )}
         {step == '2' && (
 
@@ -114,14 +116,14 @@ const Work = ({ navigation }: any) => {
             }}>Agrega un logo, un nombre y una descripcion para atraer al mejor talento!</Text>
 
 
-            <View style={{
+            <DefaultView style={{
               marginTop: 20
             }}>
               <Text style={{
                 fontSize: 14,
                 color: 'rgba(0,0,0,0.8)'
               }}>Logo</Text>
-              <View style={{
+              <DefaultView style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 gap: 20
@@ -153,9 +155,9 @@ const Work = ({ navigation }: any) => {
                     fontSize: 14
                   }}>Subir logo</Text>
                 </TouchableOpacity>
-              </View>
+              </DefaultView>
 
-            </View>
+            </DefaultView>
             <Field label='Nombre empresa / Proyecto'>
               <Input onChangeText={(text) => setCompanyInfo((prev) => ({ ...prev, company_name: text }))} placeholder='Ej: www.joobs.lat' />
             </Field>
@@ -163,17 +165,17 @@ const Work = ({ navigation }: any) => {
             <Field label='Descripcion empresa / Proyecto'>
               <Textarea onChangeText={(text) => setCompanyInfo((prev) => ({ ...prev, company_description: text }))} placeholder='Escribe un resumen de tu empresa o proyecto' />
             </Field>
-            <View style={{
+            <DefaultView style={{
               // marginTop: 'auto',
               position: 'relative',
               width: '100%',
             }}>
               <Button loading={isUpdating} onPress={updateAndCreate} text='Siguiente' />
-            </View>
+            </DefaultView>
           </ScrollView>
         )}
       </BottomSheet>
-    </SafeAreaView>
+    </View>
   )
 }
 

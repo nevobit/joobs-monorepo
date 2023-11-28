@@ -28,37 +28,37 @@ const CreateWorkStack = () => {
   return (
     <Stack.Navigator>
     <Stack.Screen name="Title" component={Title} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={0}  />
-      })}
+      options={{
+        headerShown: false
+      }}
     />
      <Stack.Screen name="Skills" component={Skills} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={1}  />
-      })}
+      options={{
+        headerShown: false
+      }}
     />
 
 <Stack.Screen name="Role" component={Role} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={2}  />
-      })}
+      options={{
+        headerShown: false
+      }}
     />
 
 <Stack.Screen name="Location" component={Location} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={3}  />
-      })}
+      options={{
+        headerShown: false
+      }}
     />
     <Stack.Screen name="Description" component={Description} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={4}  />
-      })}
+     options={{
+      headerShown: false
+    }}
     />
 
 <Stack.Screen name="Review" component={Review} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Crear una publicación' step={5}  />
-      })}
+      options={{
+        headerShown: false
+      }}
     />
 
   </Stack.Navigator>

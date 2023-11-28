@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, Alert, Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, Pressable, ScrollView, Text, TouchableOpacity, View as DefaultView } from 'react-native'
 import { WORK, WORKS } from '../../../../graphql/queries';
 import { DivisaFormater, fromNow } from '../../../../utils';
 import translateToSpanish from '../../../../utils/frecuency-formater';
@@ -12,6 +12,7 @@ import { BottomSheet } from '../../../../containers';
 import Field from '../../../../components/Shared/Field';
 import Input from '../../../../components/Shared/Input';
 import share from '../../../../utils/share';
+import { View } from '../../../../components/Shared/View';
 
 const WorkDetails = ({ navigation, route }: any) => {
     const [proof, setProof] = useState('');
@@ -60,10 +61,8 @@ const WorkDetails = ({ navigation, route }: any) => {
     }
 
     return (
-        <View style={{
-            flex: 1
-        }}>
-            <View style={{
+        <View>
+            <DefaultView style={{
                 // height: 80,
                 backgroundColor: '#121212',
                 flexDirection: 'row',
@@ -88,7 +87,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                 }}>
                     <Icon name='share-social-outline' size={24} color='#fff' />
                 </Pressable>
-            </View>
+            </DefaultView>
             {loading ? <ActivityIndicator size='large' color='#121212' style={{
                 marginTop: 20
             }} /> : (
@@ -109,7 +108,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                     zIndex: 99
                 }}>
 
-                    <View style={{
+                    <DefaultView style={{
                         borderTopEndRadius: 20,
                         borderTopStartRadius: 20,
                         marginTop: -20,
@@ -118,19 +117,19 @@ const WorkDetails = ({ navigation, route }: any) => {
                         zIndex: 999,
                         flex: 1
                     }}>
-                        <View style={{
+                        <DefaultView style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             gap: 10,
                             alignItems: 'flex-start',
                             marginTop: 5
                         }}>
-                            <View style={{
+                            <DefaultView style={{
                                 flexDirection: 'row',
                                 gap: 8
                             }}>
-   {user?.photo ? (
-                                        <View style={{
+   {data?.work?.user?.photo ? (
+                                        <DefaultView style={{
                                             backgroundColor: '#d5bffd',
                                             height: 30,
                                             width: 30,
@@ -147,10 +146,10 @@ const WorkDetails = ({ navigation, route }: any) => {
                                                 objectFit: 'cover'
 
                                             }} />
-                                        </View>
+                                        </DefaultView>
                                     ) : (
 
-                                        <View style={{
+                                        <DefaultView style={{
                                             backgroundColor: '#d5bffd',
                                             height: 30,
                                             width: 30,
@@ -162,40 +161,39 @@ const WorkDetails = ({ navigation, route }: any) => {
                                                 fontWeight: '600',
                                                 fontSize: 16,
                                                 color: 'rgba(0,0,0,0.8)'
-                                            }}>{user?.company_name?.charAt(0)}</Text>
-                                        </View>
+                                            }}>{data?.work?.user?.company_name?.charAt(0)}</Text>
+                                        </DefaultView>
                                     )}
-                                <View style={{
+                                <DefaultView style={{
                                 }}>
-                                 
-                                 
                                         <Text style={{
                                             fontSize: 12,
                                             color: 'rgba(0,0,0,0.8)'
-                                        }}>{user?.company_name}</Text>
+                                        }}>{data?.work?.user?.company_name}</Text>
                                         <Text style={{
                                             fontSize: 12,
                                             color: 'rgba(0,0,0,0.8)'
                                         }}>{fromNow(data?.work?.created_at)}</Text>
                                   
 
-                                </View>
-                            </View>
-                            <View >
+                                </DefaultView>
+                            </DefaultView>
+                            <DefaultView >
 
-                            </View>
-                        </View>
+                            </DefaultView>
+                        </DefaultView>
 
-                        <View style={{
+                        <DefaultView style={{
                             flex: 1
                         }}>
+
                             <Text style={{
                                 color: '#111',
                                 fontWeight: '600',
                                 fontSize: 18,
                                 marginTop: 10
                             }}>{data?.work?.title}</Text>
-                            <View style={{
+                            <DefaultView style={{
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 marginTop: 10,
@@ -208,10 +206,10 @@ const WorkDetails = ({ navigation, route }: any) => {
                                     fontWeight: '500',
                                     fontSize: 14
                                 }}>{DivisaFormater({ value: data?.work?.remuneration?.value })} / {translateToSpanish(data?.work?.remuneration?.frecuency)}</Text>
-                            </View>
+                            </DefaultView>
 
 
-                            <View style={{
+                            <DefaultView style={{
                                 flexDirection: 'row',
                                 flexWrap: 'wrap',
                                 gap: 8,
@@ -232,34 +230,35 @@ const WorkDetails = ({ navigation, route }: any) => {
                                     }}>{skill}</Text>
                                 ))}
 
-                            </View>
-                            <View style={{
+                            </DefaultView>
+                            <DefaultView style={{
                                 marginTop: 10
                             }}>
                                 <Text style={{
                                     color: 'rgba(0,0,0,0.8)',
                                     fontSize: 14
                                 }}>{data?.work?.description}</Text>
-                            </View>
+                            </DefaultView>
 
-                            <View style={{
-                                marginTop: 'auto'
+                            <DefaultView style={{
+                                marginTop: 'auto',
+                                marginBottom: 30
                             }}>
                                 <Button text='Aplicar' onPress={() => setModal(true)} style={{
                                     marginTop: 'auto'
                                 }} />
 
-                            </View>
-                        </View>
+                            </DefaultView>
+                        </DefaultView>
 
 
-                    </View>
+                    </DefaultView>
                 </ScrollView>
 
             )}
 
             <BottomSheet isVisible={modal} setIsVisible={setModal}>
-                <View style={{
+                <DefaultView style={{
                     height: 400
                 }}>
                     <Text style={{
@@ -279,7 +278,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                     <Field label='URL'>
                         <Input onChangeText={(text) => setProof(text)} placeholder='https://dominio.com/react/marketing' keyboardAppearance='dark' />
                     </Field>
-                    <View style={{
+                    <DefaultView style={{
                         marginTop: 'auto'
                     }}>
                         <Button loading={creatingLoading} text='Siguiente' onPress={onSubmit} />
@@ -299,8 +298,8 @@ const WorkDetails = ({ navigation, route }: any) => {
                                 fontSize: 16
                             }}>Saltar por ahora</Text>
                         </TouchableOpacity>
-                    </View>
-                </View>
+                    </DefaultView>
+                </DefaultView>
             </BottomSheet>
 
         </View>

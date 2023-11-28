@@ -1,19 +1,19 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View as DefaultView, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Header'
 import Input from '../../../../../components/Shared/Input'
 import Button from '../../../../../components/Shared/Button'
+import { View } from '../../../../../components/Shared/View'
 
 const Location = ({navigation, route}: any) => {
 
     const [location, setLocation] = useState('');
     console.log(route.params)
     return (
-        <View style={{
-            backgroundColor: '#121212',
-            flex: 1,
-        }}>
-            <View style={{
+        <View>
+                      <Header  title='Crear una publicación' step={3} />
+
+            <DefaultView style={{
                 paddingHorizontal: 15,
                 paddingVertical: 20,
                 backgroundColor: '#fff',
@@ -22,7 +22,7 @@ const Location = ({navigation, route}: any) => {
                 borderTopLeftRadius: 30,
             }}>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -33,10 +33,10 @@ const Location = ({navigation, route}: any) => {
                         fontWeight: '600',
                         fontSize: 18,
                         color: 'rgba(0,0,0,0.8)'
-                    }}>Ubicacion</Text>
-                </View>
+                    }}>Ubicación</Text>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                     gap: 20
                 }}>
 
@@ -52,7 +52,7 @@ const Location = ({navigation, route}: any) => {
                         backgroundColor: location == 'Trabajo Remoto'? 'rgba(83, 104, 245, 0.1)' : '#fff',
                         padding: 10
                     }}>
-                        <View style={{
+                        <DefaultView style={{
                             height: 20,
                             width: 20,
                             borderRadius: 50,
@@ -60,7 +60,7 @@ const Location = ({navigation, route}: any) => {
                             borderColor: 'rgba(0,0,0,0.3)'
                         }} />
 
-                        <View>
+                        <DefaultView>
                             <Text style={{
                                 fontWeight: '600',
                                 color: 'rgba(0,0,0,0.8)',
@@ -69,7 +69,7 @@ const Location = ({navigation, route}: any) => {
                             <Text style={{
                                 color: 'rgba(0,0,0,0.8)',
                             }}>El empleado puede trabajar remotamente.</Text>
-                        </View>
+                        </DefaultView>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         onPress={() => setLocation('En oficina')}
@@ -83,7 +83,7 @@ const Location = ({navigation, route}: any) => {
                             backgroundColor: location == 'En oficina'? 'rgba(83, 104, 245, 0.1)' : '#fff',
                             padding: 10
                         }}>
-                        <View style={{
+                        <DefaultView style={{
                             height: 20,
                             width: 20,
                             borderRadius: 50,
@@ -91,7 +91,7 @@ const Location = ({navigation, route}: any) => {
                             borderColor: 'rgba(0,0,0,0.3)'
                         }} />
 
-                        <View>
+                        <DefaultView>
                             <Text style={{
                                 fontWeight: '600',
                                 color: 'rgba(0,0,0,0.8)',
@@ -100,7 +100,7 @@ const Location = ({navigation, route}: any) => {
                             <Text style={{
                                 color: 'rgba(0,0,0,0.6)',
                             }} >El empelado tiene que ir a la oficina de la empresa.</Text>
-                        </View>
+                        </DefaultView>
                     </TouchableOpacity>
                     <TouchableOpacity 
                        onPress={() => setLocation('Hibrido')}
@@ -114,7 +114,7 @@ const Location = ({navigation, route}: any) => {
                            backgroundColor: location == 'Hibrido'? 'rgba(83, 104, 245, 0.1)' : '#fff',
                            padding: 10
                        }}>
-                        <View style={{
+                        <DefaultView style={{
                             height: 20,
                             width: 20,
                             borderRadius: 50,
@@ -122,21 +122,21 @@ const Location = ({navigation, route}: any) => {
                             borderColor: 'rgba(0,0,0,0.3)'
                         }} />
 
-                        <View>
+                        <DefaultView>
                             <Text style={{
                                 fontWeight: '600',
                                 color: 'rgba(0,0,0,0.8)',
                                 fontSize: 18
-                            }}>Hibrido</Text>
+                            }}>Híbrido</Text>
                             <Text style={{
                                 color: 'rgba(0,0,0,0.8)',
                             }}>Un mix de trabajo remoto y en oficina.</Text>
-                        </View>
+                        </DefaultView>
                     </TouchableOpacity>
                 
-                </View>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -153,7 +153,9 @@ const Location = ({navigation, route}: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginTop: 20
-                    }}>
+                    }}
+                    onPress={() => navigation.goBack()}
+                    >
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             fontWeight: '500',
@@ -165,9 +167,9 @@ const Location = ({navigation, route}: any) => {
                     width: '60%'
                 }} />
 
-</View>
+</DefaultView>
 
-            </View>
+            </DefaultView>
 
         </View>
     )

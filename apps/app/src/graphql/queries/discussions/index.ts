@@ -10,6 +10,10 @@ query Query {
     images
     likes
     liked
+    club {
+      id
+      name
+    }
     user {
       id
       name

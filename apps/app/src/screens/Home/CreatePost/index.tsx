@@ -1,25 +1,15 @@
 import { useMutation } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, Alert, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, Text, TextInput, TouchableOpacity, View as DefaultView } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CREATE_DISCUSSION } from '../../../graphql/mutations/discussions'
 import { useSelector } from 'react-redux'
 import { useUploadImage } from '../../../hooks'
 import { DISCUSSIONS } from '../../../graphql/queries'
+import { View } from '../../../components/Shared/View'
 
 const CreatePost = ({navigation}: any) => {
     const { user } = useSelector((state: any) => state.auth);
-
-    const [createDiscussion, { loading: isCreating, error: creatingError }] = useMutation(CREATE_DISCUSSION, {
-        refetchQueries: [
-            { query: DISCUSSIONS }
-        ]
-    })
-    if(creatingError){
-      Alert.alert('No se pudo crear la publicacion', creatingError.message);
-      return
-    }
-
     const { photo, isLoading, getPhoto, error } = useUploadImage();
 
     const [post, setPost] = useState<{
@@ -40,28 +30,14 @@ const CreatePost = ({navigation}: any) => {
 
     const onSubmit = async () => {
         if(post.title.length > 1){
-        await createDiscussion({
-            variables: {
-                data: {
-                    title: post.title,
-                    description: post.description,
-                    images: post.images
-                }
-            },
-            context: {
-                headers: {
-                  authorization: user.token ? `Bearer ${user.token}` : '',
-                },
-              },
-        });
-        navigation.navigate('Home')
+        navigation.navigate('PostTo', { post: post })
     }
 
     }
 
     return (
-        <>
-            <View style={{
+        <View>
+            <DefaultView style={{
                 backgroundColor: '#121212',
                 alignItems: 'center',
                 flexDirection: 'row',
@@ -69,7 +45,7 @@ const CreatePost = ({navigation}: any) => {
                 paddingHorizontal: 14,
                 paddingVertical: 10
             }}>
-                <View style={{
+                <DefaultView style={{
                     alignItems: 'center',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -85,20 +61,22 @@ const CreatePost = ({navigation}: any) => {
                         fontWeight: '600',
                         marginBottom: 3
                     }}>Empezar una discusión</Text>
-                </View>
+                </DefaultView>
                 <TouchableOpacity>
                     <Icon size={25} color='rgba(255,255, 255, .6)' name='information-circle' />
                 </TouchableOpacity>
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 paddingVertical: 5,
                 paddingHorizontal: 15,
                 flex: 1,
-                paddingBottom: 25
+                paddingBottom: 25,
+                backgroundColor: "#f0f0f0"
             }}>
                 <TextInput placeholderTextColor='rgba(0,0,0,0.4)' style={{
                     fontSize: 16,
                     fontWeight: '600',
+                    height: 30,
                     color: 'rgba(0,0,0,0.8)'
                 }}
                     multiline
@@ -107,27 +85,31 @@ const CreatePost = ({navigation}: any) => {
                     color: 'rgba(0,0,0,0.5)',
                     fontWeight: '600',
                     fontSize: 16,
-                    marginLeft: 5
+                    marginLeft: 0,
+                    marginTop: 5
                 }} >{post.title.length}/160</Text>
                 <TextInput 
                 multiline
                 onChangeText={(text) => setPost((prev) => ({ ...prev, description: text }))} 
                 style={{
                     fontSize: 14,
+                    height: 30,
+                    marginTop: 10,
                     color: 'rgba(0,0,0,0.8)',
                 }} placeholder='Descripción de la discusión (opcional)' placeholderTextColor='rgba(0,0,0,0.4)' />
                 <Text style={{
                     color: 'rgba(0,0,0,0.5)',
                     fontWeight: '600',
                     fontSize: 16,
-                    marginLeft: 5
+                    marginLeft: 0,
+                    marginTop: 5
                 }} >{post.description.length}/1500</Text>
                 {isLoading && <ActivityIndicator  color='#000' />}
                 {post.images.length > 0 && (
-                <View style={{
+                <DefaultView style={{
                     marginTop: 10
                 }}>
-                    <View style={{
+                    <DefaultView style={{
                         borderWidth: 1,
                         borderColor: 'rgba(0,0,0,0.1)',
                         width:80,
@@ -143,13 +125,13 @@ const CreatePost = ({navigation}: any) => {
                         objectFit: 'contain'
                     }}
                     />
-                    </View>
+                    </DefaultView>
 
-                </View>
+                </DefaultView>
                 )}
 
 
-                <View style={{
+                <DefaultView style={{
                     marginTop: 'auto'
                 }}>
                     <TouchableOpacity 
@@ -174,17 +156,17 @@ const CreatePost = ({navigation}: any) => {
                 }}
                 onPress={onSubmit}
                 >
-                    {isCreating? <ActivityIndicator /> : 
+                    
                     <Text style={{
                         color: '#fff',
                         fontSize: 16.
                     }}>Siguiente</Text>
-                }
+                
                 </TouchableOpacity>
-                </View>
+                </DefaultView>
                
-            </View>
-        </>
+            </DefaultView>
+        </View>
 
     )
 }

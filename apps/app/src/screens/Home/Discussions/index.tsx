@@ -1,10 +1,11 @@
-import { TouchableOpacity, ScrollView, RefreshControl, Pressable, View, Text } from 'react-native'
+import { TouchableOpacity, ScrollView, RefreshControl, Pressable, View as DefaultView, Text } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Instagram } from 'react-content-loader/native'
 import { useDiscussions } from '../../../hooks'
 import styles from './styles'
+import { View } from '../../../components/Shared/View'
 
 const Discussions = ({ navigation, search }: any) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -19,18 +20,22 @@ const Discussions = ({ navigation, search }: any) => {
   }, []);
 
   return (
-    <>
-      <ScrollView style={styles.container}
+    <View statusColor="#f0f0f0" >
+      <ScrollView contentContainerStyle={{
+        backgroundColor: "#f0f0f0",
+        marginBottom: 10
+      }} style={styles.container}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
-        <View style={{
+        <DefaultView style={{
           backgroundColor: 'rgba(255,255,255,1)',
           marginBottom: 15,
           flexDirection: 'row',
           alignItems: 'center',
           gap: 20,
           height: 50,
-          paddingHorizontal: 15
+          paddingHorizontal: 15,
+          paddingTop: 10
         }}>
           <TouchableOpacity style={{
             backgroundColor: 'rgba(0,0,0,0.1)',
@@ -68,14 +73,14 @@ const Discussions = ({ navigation, search }: any) => {
               fontSize: 13
             }}>Lo último</Text>
           </TouchableOpacity>
-        </View>
+        </DefaultView>
         {isLoading ?
-          <View style={{
+          <DefaultView style={{
             flex: 1,
             gap: 10
           }}>
             {['1','2','3'].map((v, i) => <Instagram key={v} backgroundColor='#fff' />)}
-          </View>
+          </DefaultView>
           : (
             <ScrollView style={{
               marginBottom: 50
@@ -83,7 +88,7 @@ const Discussions = ({ navigation, search }: any) => {
             >
               {discussions?.slice().reverse().filter((disscusion: any) => disscusion.title?.toLowerCase().includes(search?.toLowerCase() || '')).map((discussion: any) => (
                 <Pressable key={discussion.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} >
-                  <HomePost navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type='Placements Club' />
+                  <HomePost navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
                 </Pressable>
               ))}
 
@@ -95,7 +100,7 @@ const Discussions = ({ navigation, search }: any) => {
         style={styles.button}>
         <Icon name='pencil' size={22} color='#fff' />
       </TouchableOpacity>
-    </>
+    </View>
   )
 }
 

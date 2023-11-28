@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "a449f034-5132-4616-8db3-0c26b22dcf9d",
+  "id": "08e3f9ea-80d4-404c-bdac-2aca62ec62eb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "applications": {
@@ -216,6 +216,12 @@
         },
         "user_id": {
           "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "club_id": {
+          "name": "club_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { View as DefaultView, Text, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Header'
 import Input from '../../../../../components/Shared/Input'
@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/client'
 import { CREATE_WORK } from '../../../../../graphql/mutations/works'
 import { useUser } from '../../../../../hooks/users/useUser'
 import { WORKS } from '../../../../../graphql/queries'
+import { View } from '../../../../../components/Shared/View'
 
 const Review = ({ navigation, route }: any) => {
     const [createWork, { loading: creatingLoading, error: creatingError }] = useMutation(CREATE_WORK, {
@@ -41,11 +42,9 @@ const Review = ({ navigation, route }: any) => {
         navigation.navigate('Work')
     }
     return (
-        <View style={{
-            backgroundColor: '#121212',
-            flex: 1,
-        }}>
-            <View style={{
+        <View>
+                      <Header  title='Crear una publicación' step={5} />
+            <DefaultView style={{
                 paddingHorizontal: 15,
                 paddingVertical: 20,
                 backgroundColor: '#fff',
@@ -54,7 +53,7 @@ const Review = ({ navigation, route }: any) => {
                 borderTopLeftRadius: 30,
             }}>
 
-                <View style={{
+                <DefaultView style={{
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
                     marginBottom: 15
@@ -70,7 +69,7 @@ const Review = ({ navigation, route }: any) => {
                         fontSize: 14,
                         color: 'rgba(0,0,0,0.8)'
                     }}>Asi es como tu post aparecera a los candidatos</Text>
-                </View>
+                </DefaultView>
 
                 <ScrollView contentContainerStyle={{
                     gap: 20,
@@ -80,16 +79,16 @@ const Review = ({ navigation, route }: any) => {
                     padding: 15
                 }}>
 
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-between'
                     }}>
-                        <View style={{
+                        <DefaultView style={{
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}>
-                            <View style={{
+                            <DefaultView style={{
                                 height: 50,
                                 width: 50,
                                 backgroundColor: '#5368f5',
@@ -103,16 +102,16 @@ const Review = ({ navigation, route }: any) => {
                                     fontSize: 28,
                                     fontWeight: '400',
                                     color: '#fff'
-                                }}>{user?.name?.charAt(0).toUpperCase()}</Text>
-                            </View>
+                                }}>{user?.company_name?.charAt(0).toUpperCase()}</Text>
+                            </DefaultView>
 
                             <Text style={{
                                 marginLeft: 10,
                                 fontSize: 16,
                                 color: 'rgba(0,0,0,0.8)'
-                            }}>{user?.name}</Text>
+                            }}>{user?.company_name}</Text>
 
-                        </View>
+                        </DefaultView>
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             backgroundColor: '#c1c6fb70',
@@ -121,14 +120,14 @@ const Review = ({ navigation, route }: any) => {
                             paddingVertical: 4,
                             fontSize: 12
                         }}>{route.params.role}</Text>
-                    </View>
+                    </DefaultView>
                     <Text style={{
                         fontWeight: '600',
                         fontSize: 18,
                         color: 'rgba(0,0,0,0.8)'
                     }}>{route.params.title}</Text>
 
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         flexWrap: 'wrap',
                         gap: 10
@@ -145,8 +144,8 @@ const Review = ({ navigation, route }: any) => {
                             }}>{skill}</Text>
                         ))}
 
-                    </View>
-                    <View style={{
+                    </DefaultView>
+                    <DefaultView style={{
                         width: '100%',
                         height: 3,
                         backgroundColor: 'rgba(255,255,255,.5)',
@@ -159,7 +158,7 @@ const Review = ({ navigation, route }: any) => {
                     }}>{route.params.description}</Text>
                 </ScrollView>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -176,7 +175,9 @@ const Review = ({ navigation, route }: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginTop: 20
-                    }}>
+                    }}
+                    onPress={() => navigation.goBack()}
+                    >
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             fontWeight: '500',
@@ -188,9 +189,9 @@ const Review = ({ navigation, route }: any) => {
                         width: '60%'
                     }} loading={creatingLoading} />
 
-                </View>
+                </DefaultView>
 
-            </View>
+            </DefaultView>
 
         </View>
     )

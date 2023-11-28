@@ -9,6 +9,7 @@ query Query {
       user {
         photo
         name
+        company_name
       }
       remuneration {
         frecuency

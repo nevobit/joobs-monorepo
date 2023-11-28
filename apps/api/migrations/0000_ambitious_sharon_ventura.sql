@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "discussions" (
 	"link" varchar(256),
 	"status" varchar(256),
 	"user_id" uuid,
+	"club_id" uuid,
 	"created_at" timestamp DEFAULT now(),
 	"updated_at" timestamp DEFAULT now()
 );

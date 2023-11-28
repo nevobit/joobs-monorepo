@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView } from 'react-native'
+import { View as DefaultView, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Field from '../../../../components/Shared/Field'
@@ -7,6 +7,7 @@ import Textarea from '../../../../components/Shared/Textarea'
 import { useUpdateUser, useUploadImage, useUser } from '../../../../hooks'
 import Button from '../../../../components/Shared/Button'
 import styles from './styles'
+import { View } from '../../../../components/Shared/View'
 
 const EditProfile = ({ navigation }: any) => {
     const { isLoading, user, refetch } = useUser();
@@ -41,11 +42,9 @@ const EditProfile = ({ navigation }: any) => {
         showPhoto = photo;
     }, [photo])
     return (
-        <SafeAreaView style={{
-            flex: 1, backgroundColor: '#fff'
-        }}>
-
-            <View style={{
+        <View>
+       
+            <DefaultView style={{
                 backgroundColor: '#121212',
                 height: 30,
                 paddingHorizontal: 15,
@@ -61,15 +60,18 @@ const EditProfile = ({ navigation }: any) => {
                     color: '#fff',
                 }}>Editar perfil</Text>
 
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 height: 10,
                 backgroundColor: '#121212'
             }} />
             <ScrollView contentContainerStyle={{
                 padding: 15,
-            }}>
-                <View style={{
+                backgroundColor: "#f0f0f0"
+            }} style={{
+                backgroundColor: "#f0f0f0"
+            }} >
+                <DefaultView style={{
                     alignItems: 'center',
                     marginTop: 20
                 }}>
@@ -113,11 +115,11 @@ const EditProfile = ({ navigation }: any) => {
 
                             )}
 
-                        <View style={styles.camera}>
+                        <DefaultView style={styles.camera}>
                             <Icon name='camera' color='rgba(0,0,0,0.8)' size={18} />
-                        </View>
+                        </DefaultView>
                     </TouchableOpacity>
-                </View>
+                </DefaultView>
 
                 <Field label='Nombre completo'>
                     <Input placeholder=''  value={userInfo.name} onChangeText={(text) => setUserInfo((prev) => ({ ...prev, name: text }))} />
@@ -140,14 +142,20 @@ const EditProfile = ({ navigation }: any) => {
                     <Textarea placeholder='' value={userInfo.about} onChangeText={(text) => setUserInfo((prev) => ({ ...prev, about: text }))} />
                 </Field>
             </ScrollView>
-            <View style={{
+            <DefaultView style={{
                 marginTop: 'auto',
                 marginBottom: 20,
-                paddingHorizontal: 15
+                backgroundColor: "#f0f0f0",
+                paddingHorizontal: 15,
+                position: "absolute",
+                bottom: -20,
+                paddingBottom: 30,
+                width: "100%"
             }}>
                 <Button loading={isUpdating} text='Guardar' onPress={submit} />
-            </View>
-        </SafeAreaView>
+            </DefaultView>
+          
+        </View>
     )
 }
 

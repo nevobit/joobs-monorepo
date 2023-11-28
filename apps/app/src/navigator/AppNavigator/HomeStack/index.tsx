@@ -21,9 +21,9 @@ const HomeStack = () => {
   return (
     <Stack.Navigator >
     <Stack.Screen name="Joobs" component={Home} 
-      options={({ navigation, route }) => ({
-        header: () => <Header title='Joobs' search notifications messages navigation={navigation} />,
-      })}
+       options={{
+        headerShown: false
+       }}
     />
        <Stack.Screen  options={{
         headerShown: false

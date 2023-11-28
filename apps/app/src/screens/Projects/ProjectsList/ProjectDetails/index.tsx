@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native'
+import { View as DefaultView, Text, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Button from '../../../../components/Shared/Button'
@@ -10,6 +10,7 @@ import { Alert } from 'react-native'
 import { useUser } from '../../../../hooks/users/useUser'
 import { useIsParticipant } from '../../../../hooks/participants/useIsParticipant'
 import styles from './styles'
+import { View } from '../../../../components/Shared/View'
 
 const ProjectDetails = ({ navigation, route }: any) => {
     const [refreshing, setRefreshing] = useState(false);
@@ -59,10 +60,8 @@ const ProjectDetails = ({ navigation, route }: any) => {
     }, [refetchParticipant, refetchUser, refetch])
 
     return (
-        <SafeAreaView style={{
-            flex: 1
-        }}>
-            <View style={styles.header}>
+        <View>
+            <DefaultView style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon name='arrow-back' size={25} color='#fff' />
                 </TouchableOpacity>
@@ -70,8 +69,8 @@ const ProjectDetails = ({ navigation, route }: any) => {
                     fontSize: 20,
                     color: '#fff',
                 }}>Detalles del Proyecto</Text>
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 height: 10,
                 backgroundColor: '#121212'
             }} />
@@ -81,13 +80,18 @@ const ProjectDetails = ({ navigation, route }: any) => {
             }} size='large' color='rgba(0,0,0,0.8)' /> : (
 
                 <ScrollView contentContainerStyle={{
-                    padding: 15
+                    padding: 15,
+                    backgroundColor: "#f0f0f0"
+                }}
+
+                style={{
+                    backgroundColor: "#f0f0f0"
                 }}
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 >
 
-                    <View style={styles.card}>
-                        <View style={{
+                    <DefaultView style={styles.card}>
+                        <DefaultView style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between'
@@ -100,7 +104,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                 fontSize: 12,
                                 color: 'rgba(0,0,0,0.8)'
                             }}>{data?.project.difficulty}</Text>
-                            <View style={[styles.duration, {
+                            <DefaultView style={[styles.duration, {
                                 backgroundColor: Difficulty(data?.project?.difficulty),
                             }]}>
                                 <Icon name='time-outline' size={25} color='rgba(0,0,0,0.8)' />
@@ -108,8 +112,8 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                     fontSize: 14,
                                     color: 'rgba(0,0,0,0.8)'
                                 }}>{data?.project.duration}</Text>
-                            </View>
-                        </View>
+                            </DefaultView>
+                        </DefaultView>
                         <Text style={{
                             fontSize: 18,
                             fontWeight: '600',
@@ -123,7 +127,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                             marginTop: 5
                         }}>{data?.project.description}</Text>
 
-                        <View style={{
+                        <DefaultView style={{
                             flexDirection: 'row',
                             alignItems: 'flex-start',
                             marginTop: 15
@@ -135,9 +139,9 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                 color: 'rgba(0,0,0,0.8)',
                             }} >Prerequisito: </Text>
                             <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text} >{data?.project.prerequisites}</Text>
-                        </View>
+                        </DefaultView>
 
-                        <View style={{
+                        <DefaultView style={{
                             flexDirection: 'row',
                             alignItems: 'flex-start',
                             marginTop: 15
@@ -149,7 +153,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                 color: ' rgba(0,0,0,0.8)',
                             }} >Metodo de entrega: </Text>
                             <Text numberOfLines={4} ellipsizeMode="tail" style={styles.text} >{data?.project.submission}</Text>
-                        </View>
+                        </DefaultView>
                         <Text style={{
                             fontSize: 14,
                             fontWeight: '400',
@@ -157,7 +161,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                             marginTop: 15
                         }}>Habilidades que aprenderás</Text>
 
-                        <View style={{
+                        <DefaultView style={{
                             flexDirection: 'row',
                             gap: 10,
                             flexWrap: 'wrap',
@@ -167,20 +171,20 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                 <Text key={skill} style={styles.skill}>{skill}</Text>
                             ))}
 
-                        </View>
+                        </DefaultView>
                         {!isParticipant ? (
-                            <View style={{
+                            <DefaultView style={{
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 marginTop: 40
                             }}>
-                                <View style={styles.lock}>
+                                <DefaultView style={styles.lock}>
                                     <Icon name='lock-closed' size={40} color='rgba(0,0,0,0.8)' />
-                                </View>
+                                </DefaultView>
                                 <Text style={styles.message} >Las instrucciones solo son visibles para aquellos que comienzan el proyecto</Text>
-                            </View>
+                            </DefaultView>
                         ) : (
-                            <View style={{
+                            <DefaultView style={{
                                 marginTop: 20
                             }}>
                                 <Text style={{
@@ -189,7 +193,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                 }}>
                                     Instrucciones
                                 </Text>
-                                <View style={{
+                                <DefaultView style={{
                                 flexDirection: 'row',
                                 justifyContent: 'space-between',
                                 marginTop: 15
@@ -206,7 +210,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                     }}>
                                         <Text> <Icon name='chevron-back-outline' size={20} /> </Text>
                                     </TouchableOpacity>
-                                    <View style={{
+                                    <DefaultView style={{
                                         borderWidth: 1,
                                         borderColor: 'rgba(0,0,0,0.1)',
                                         borderRadius: 5,
@@ -226,7 +230,7 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                             fontWeight: '400',
                                             color: 'rgba(0,0,0,0.6)'
                                         }}>{data?.project?.stages[0]?.steps?.length} paso{data?.project?.stages[0]?.steps?.length > 1 ? 's': ''}</Text>
-                                    </View>
+                                    </DefaultView>
                                     <TouchableOpacity style={{
                                         borderWidth: 1,
                                         borderColor: 'rgba(0,0,0,0.1)',
@@ -240,12 +244,12 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                         <Text> <Icon name='chevron-forward-outline' size={20} /> </Text>
                                     </TouchableOpacity>
 
-                                </View>
-                                <View style={{
+                                </DefaultView>
+                                <DefaultView style={{
                                     marginTop: 15
                                 }}>
                                 {data?.project?.stages[0]?.steps.map((step: any, index: number) => (
-                                    <View key={step.title} style={{
+                                    <DefaultView key={step.title} style={{
                                         marginBottom: 10
                                     }}>
                                         <Text style={{
@@ -258,24 +262,24 @@ const ProjectDetails = ({ navigation, route }: any) => {
                                             fontWeight: '500',
                                             fontSize: 16
                                         }}>{step.title}</Text>
-                                    </View>
+                                    </DefaultView>
                                 ))}
-                                </View>
+                                </DefaultView>
                                 
-                            </View>
+                            </DefaultView>
                         )}
-                    </View>
+                    </DefaultView>
                 </ScrollView>
             )}
 
 
-            <View style={styles.btn}>
+            <DefaultView style={styles.btn}>
             {!isParticipant && (
                 <Button loading={isCreating} onPress={onSubmit} text='Comenzar' />
             )}
-            </View>
+            </DefaultView>
 
-</SafeAreaView>
+</View>
     )
 }
 

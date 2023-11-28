@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, TouchableOpacity, ActivityIndicator, Image } from 'react-native'
+import { View as DefaultView, Text, StatusBar, TouchableOpacity, ActivityIndicator, Image, SafeAreaView, Platform } from 'react-native'
 import React from 'react'
 import {
     GoogleSignin,
@@ -10,10 +10,12 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_GOOGLE } from '../../graphql/mutations';
 import { useDispatch } from 'react-redux';
 import { saveUserInfo, signin } from '../../store/features/auth';
+import { View } from '../../components/Shared/View';
 
 GoogleSignin.configure({
     scopes: [],
     // webClientId: '824309813919-l9eohikp7ovh8a6pd9926tt2r40i2em2.apps.googleusercontent.com',
+    iosClientId: "824309813919-1ar8btnh0rq8vgn9tjml43usr56s68nt.apps.googleusercontent.com",
     webClientId: '987824436257-9mjhqtu4ou96fcugor6ie0f02fj0inhg.apps.googleusercontent.com'
 });
 
@@ -51,20 +53,19 @@ const Onboarding = ({ navigation }: any) => {
         }
     }
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: '#5368f5',
-            padding: 15,
+        <View 
+        statusColor={"5368f5"}
+        barStyle="light-content"
+        style={{
+            backgroundColor: "#5368f5",
         }}>
-            <StatusBar backgroundColor='#5368f5' />
-
-            <View>
-                <View style={{
+            <DefaultView>
+                <DefaultView style={{
                     gap: 15,
                     alignItems: 'center',
                     marginTop: 40
                 }}>
-                    <View style={{
+                    <DefaultView style={{
                         backgroundColor: 'rgba(255, 255, 255, 1)',
                         opacity: .5,
                         borderRadius: 10,
@@ -85,7 +86,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontWeight: '600',
                             color: 'rgba(0,0,0,0.8)'
                         }}>Editor de video para creación de contenido en IG y YouTube</Text>
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         gap: 10,
                         marginTop: 15
@@ -117,9 +118,9 @@ const Onboarding = ({ navigation }: any) => {
                             fontSize: 10,
                             fontWeight: '500'
                         }} >Premiere Pro</Text>
-                    </View>
-                    </View>
-                    <View style={{
+                    </DefaultView>
+                    </DefaultView>
+                    <DefaultView style={{
                         backgroundColor: 'rgba(255, 255, 255, 1)',
                         borderRadius: 10,
                         height: 105,
@@ -139,7 +140,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontWeight: '600',
                             color: 'rgba(0,0,0,0.8)'
                         }}>Cofundador técnico para una Startup FinTech en Bogotá</Text>
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         gap: 10,
                         marginTop: 15
@@ -171,9 +172,9 @@ const Onboarding = ({ navigation }: any) => {
                             fontSize: 12,
                             fontWeight: '500'
                         }} >Desarrollo web</Text>
-                    </View>
-                    </View>
-                    <View style={{
+                    </DefaultView>
+                    </DefaultView>
+                    <DefaultView style={{
                         backgroundColor: 'rgba(255, 255, 255, 1)',
                         opacity: .5,
                         borderRadius: 10,
@@ -194,7 +195,7 @@ const Onboarding = ({ navigation }: any) => {
                             fontWeight: '600',
                             color: 'rgba(0,0,0,0.8)'
                         }}>Experto en Marketing Digital para nuestra agencia</Text>
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         gap: 10,
                         marginTop: 15
@@ -226,12 +227,13 @@ const Onboarding = ({ navigation }: any) => {
                             fontSize: 10,
                             fontWeight: '500'
                         }} >Google Ads</Text>
-                    </View>
-                    </View>
-                </View>
-            </View>
-            <View style={{
-                marginTop: 'auto'
+                    </DefaultView>
+                    </DefaultView>
+                </DefaultView>
+            </DefaultView>
+            <DefaultView style={{
+                marginTop: 'auto',
+                paddingHorizontal: 15
             }}>
 
                 <Text style={{
@@ -247,6 +249,8 @@ const Onboarding = ({ navigation }: any) => {
                     marginBottom: 15,
                     color: '#fff'
                 }}>Encuentra oportunidades remuneradas, mejora tus habilidades con eventos y establece contactos con mentes brillantes.</Text>
+                {Platform.OS !== "ios" && (
+
                 <TouchableOpacity
                     onPress={() => signinGoogleFn()}
                     style={{
@@ -268,7 +272,9 @@ const Onboarding = ({ navigation }: any) => {
                     )}
 
                 </TouchableOpacity>
-                {/* <Button text={'Sign in with Google'} onPress={() => {
+                )}
+
+{/* <Button text={'Sign in with Google'} onPress={() => {
                     GoogleSignin.configure({
                         webClientId: '824309813919-l9eohikp7ovh8a6pd9926tt2r40i2em2.apps.googleusercontent.com',
                     });
@@ -284,7 +290,7 @@ const Onboarding = ({ navigation }: any) => {
                         console.log("ERROR IS: " + JSON.stringify(e));
                     })
                 }} /> */}
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -292,7 +298,7 @@ const Onboarding = ({ navigation }: any) => {
                     marginTop: 10,
                     marginBottom: 10,
                 }}>
-                    <View style={{
+                    <DefaultView style={{
                         height: 1,
                         backgroundColor: 'rgba(255,255,255,.5)',
                         width: '45%'
@@ -301,12 +307,12 @@ const Onboarding = ({ navigation }: any) => {
                         color: '#fff',
                         fontSize: 14
                     }}>O</Text>
-                    <View style={{
+                    <DefaultView style={{
                         height: 1,
                         backgroundColor: 'rgba(255,255,255,.5)',
                         width: '45%'
                     }} />
-                </View>
+                </DefaultView>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Signin')}
                     style={{
@@ -318,7 +324,7 @@ const Onboarding = ({ navigation }: any) => {
                         fontSize: 16
                     }}>Continúa con tu correo</Text>
                 </TouchableOpacity>
-            </View>
+            </DefaultView>
 
         </View>
     )

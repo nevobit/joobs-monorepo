@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, StatusBar, Text, TextInput, TouchableOpacity, View as DefaultView} from 'react-native'
 import Field from '../../components/Shared/Field'
 import Input from '../../components/Shared/Input'
 import Button from '../../components/Shared/Button'
@@ -8,6 +8,7 @@ import { signin } from '../../store/features/auth'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../../graphql/mutations'
+import { View } from '../../components/Shared/View'
 
 const Signin = ({navigation}: any) => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,11 @@ const Signin = ({navigation}: any) => {
         }
       };
   return (
-    <View style={{
+    <View statusColor="#fff" barStyle="dark-content" style={{
+      flex: 1,
+      backgroundColor: "#fff"
+    }}>
+    <DefaultView style={{
         flex: 1,
         backgroundColor: '#fff',
         height: '100%',
@@ -78,7 +83,9 @@ const Signin = ({navigation}: any) => {
           marginTop: 'auto'
         }} disabled={!email.includes('@')} loading={loading}  onPress={onSubmit}  text='Continuar' />
        
+    </DefaultView>
     </View>
+
   )
 }
 

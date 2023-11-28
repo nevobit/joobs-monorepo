@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { View as DefaultView, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Field from '../../../../components/Shared/Field'
@@ -6,6 +6,7 @@ import Input from '../../../../components/Shared/Input'
 import Textarea from '../../../../components/Shared/Textarea'
 import { useUpdateUser, useUploadImage, useUser } from '../../../../hooks'
 import Button from '../../../../components/Shared/Button'
+import { View } from '../../../../components/Shared/View'
 
 
 const skillsData = {
@@ -281,11 +282,9 @@ const EditProfileSkills = ({ navigation }: any) => {
     }, [])
 
     return (
-        <SafeAreaView style={{
-            flex: 1, backgroundColor: '#fff'
-        }}>
+        <View>
 
-            <View style={{
+            <DefaultView style={{
                 backgroundColor: '#121212',
                 height: 30,
                 paddingHorizontal: 15,
@@ -301,18 +300,19 @@ const EditProfileSkills = ({ navigation }: any) => {
                     color: '#fff',
                 }}>Editar perfil</Text>
 
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 height: 10,
                 backgroundColor: '#121212'
             }} />
             <ScrollView contentContainerStyle={{
                 padding: 15,
+                backgroundColor: "#f0f0f0"
             }}>
-                <View style={{
+                <DefaultView style={{
                     alignItems: 'center',
                 }}>
-                </View>
+                </DefaultView>
                 <Text style={{
                     fontSize: 16,
                     color: 'rgba(0,0,0,0.8)',
@@ -320,7 +320,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 }}>Selecciona tus habilidades</Text>
 
              
-<View
+<DefaultView
           style={{
             marginTop: 15,
             gap: 20,
@@ -334,7 +334,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
             Desarrollo Web y Móvil
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -363,7 +363,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text
             style={{
               color: 'rgba(0,0,0,0.8)',
@@ -373,7 +373,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
             Ventas y Operaciones
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -402,7 +402,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text
             style={{
               color: 'rgba(0,0,0,0.8)',
@@ -412,7 +412,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
             Tecnologia
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -442,7 +442,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -451,7 +451,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
           Diseño
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -481,7 +481,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -490,7 +490,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
           Marketing
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -520,7 +520,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -529,7 +529,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
           Escritura
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -559,7 +559,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -568,7 +568,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
           Finanzas y Negocios
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -598,7 +598,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -607,7 +607,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
           Producto
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -637,7 +637,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           <Text style={{
               color: 'rgba(0,0,0,0.8)',
               fontWeight: '600',
@@ -646,7 +646,7 @@ const EditProfileSkills = ({ navigation }: any) => {
             }}>
             Video
           </Text>
-          <View
+          <DefaultView
             style={{
               flexDirection: 'row',
               gap: 10,
@@ -677,19 +677,24 @@ const EditProfileSkills = ({ navigation }: any) => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </DefaultView>
           
-        </View>
+        </DefaultView>
             </ScrollView>
-            <View style={{
+            <DefaultView style={{
                 marginTop: 'auto',
                 marginBottom: 20,
-                paddingHorizontal: 15
+                backgroundColor: "#f0f0f0",
+                paddingHorizontal: 15,
+                position: "absolute",
+                bottom: -20,
+                paddingBottom: 30,
+                width: "100%"
             }}>
                 <Button loading={isUpdating} onPress={submit} text='Guardar' />
-            </View>
+            </DefaultView>
 
-        </SafeAreaView>
+        </View>
     )
 }
 

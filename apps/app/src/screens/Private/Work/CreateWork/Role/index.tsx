@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { View as DefaultView, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Header'
 import Input from '../../../../../components/Shared/Input'
@@ -6,6 +6,7 @@ import Button from '../../../../../components/Shared/Button'
 import Item from './Item'
 import Field from '../../../../../components/Shared/Field'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { View } from '../../../../../components/Shared/View'
 
 const Role = ({ navigation, route }: any) => {
     const [type, setType] = useState('');
@@ -16,11 +17,13 @@ const Role = ({ navigation, route }: any) => {
 
     console.log(remuneration)
     return (
+        <View >
+          <Header  title='Crear una publicación' step={2} />
         <ScrollView style={{
             backgroundColor: '#121212',
         }}>
 
-            <View style={{
+            <DefaultView style={{
                 backgroundColor: '#fff',
                 paddingHorizontal: 15,
                 paddingVertical: 20,
@@ -29,7 +32,7 @@ const Role = ({ navigation, route }: any) => {
                 borderTopLeftRadius: 30,
             }}>
           
-                    <View style={{
+                    <DefaultView style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         alignItems: 'center',
@@ -41,9 +44,9 @@ const Role = ({ navigation, route }: any) => {
                             fontSize: 18,
                             color: 'rgba(0,0,0,0.8)'
                         }}>Tipo de rol</Text>
-                    </View>
+                    </DefaultView>
 
-                    <View style={{
+                    <DefaultView style={{
                         gap: 20
                     }}>
                         <Item setType={setType} title="Co-Founder" copy='Un partner que te ayude a contruir desde cero.' type={type} />
@@ -52,16 +55,16 @@ const Role = ({ navigation, route }: any) => {
                         <Item setType={setType} title="Tiempo completo" copy='Un empleado que dedique de 6 a 12 horas por dia.' type={type} />
                         <Item setType={setType} title="No estoy seguro" copy='No estoy seguro todavía' type={type} />
 
-                    </View>
+                    </DefaultView>
 
-                    <View style={{
+                    <DefaultView style={{
                         marginTop: 20
                     }}>
                         <Text style={{
                             fontWeight: '600',
                             fontSize: 18,
                             color: 'rgba(0,0,0,0.8)'
-                        }}>Compensacion</Text>
+                        }}>Compensación</Text>
                         <Field label='Desde'>
                             <Input keyboardType='numeric' placeholder='2500000' onChangeText={(text) => {
                                  const parsedValue = parseInt(text);
@@ -70,9 +73,9 @@ const Role = ({ navigation, route }: any) => {
                                  }
                             }} />
                         </Field>
-                    </View>
+                    </DefaultView>
 
-                    <View style={{
+                    <DefaultView style={{
                         marginTop: 20
                     }}>
                         <Text style={{
@@ -81,7 +84,7 @@ const Role = ({ navigation, route }: any) => {
                             color: 'rgba(0,0,0,0.8)',
                             marginBottom: 10
                         }}>Frecuencia</Text>
-                        <View  style={{
+                        <DefaultView  style={{
                                 gap: 20
                             }}>
 
@@ -91,19 +94,19 @@ const Role = ({ navigation, route }: any) => {
                         }}
                         onPress={() => setRemuneration((prev) => ({...prev, frecuency: 'project'}))}
                         >
-                            <View>
+                            <DefaultView>
                                 <Text style={{
                                     fontWeight: '500',
                                     color: 'rgba(0,0,0,0.8)',
                                     fontSize: 16
-                                }}>Proyecto Basico</Text>
+                                }}>Proyecto Básico</Text>
                                 <Text style={{
                                     fontWeight: '400',
                                     color: 'rgba(0,0,0,0.6)',
                                     fontSize: 14
                                 }}>Pago por proyecto terminado</Text>
-                            </View>
-                            <View style={{
+                            </DefaultView>
+                            <DefaultView style={{
                                 borderWidth: 1,
                                 borderColor: 'rgba(0,0,0,0.5)',
                                 width: 30,
@@ -115,7 +118,39 @@ const Role = ({ navigation, route }: any) => {
                             }}>
                                 
                                 <Icon name='checkmark' color={remuneration.frecuency == 'project'? '#fff': 'rgba(0,0,0,.8)'} size={25} />
-                            </View>
+                            </DefaultView>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
+                        }}
+                        onPress={() => setRemuneration((prev) => ({...prev, frecuency: 'hour'}))}
+                        >
+                            <DefaultView>
+                                <Text style={{
+                                    fontWeight: '500',
+                                    color: 'rgba(0,0,0,0.8)',
+                                    fontSize: 16
+                                }}>Por Hora</Text>
+                                <Text style={{
+                                    fontWeight: '400',
+                                    color: 'rgba(0,0,0,0.6)',
+                                    fontSize: 14
+                                }}>Pago por hora de trabajo</Text>
+                            </DefaultView>
+                            <DefaultView style={{
+                                borderWidth: 1,
+                                borderColor: 'rgba(0,0,0,0.5)',
+                                width: 30,
+                                height: 30,
+                                borderRadius: 5,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: remuneration.frecuency == 'hour'? '#5368f5': 'rgba(255,255,255,1)'
+                            }}>
+                                
+                                <Icon name='checkmark' color={remuneration.frecuency == 'hour'? '#fff': 'rgba(0,0,0,.8)'} size={25} />
+                            </DefaultView>
                         </TouchableOpacity>
                         <TouchableOpacity style={{
                             flexDirection: 'row',
@@ -123,7 +158,7 @@ const Role = ({ navigation, route }: any) => {
                         }}
                         onPress={() => setRemuneration((prev) => ({...prev, frecuency: 'monthly'}))}
                         >
-                            <View>
+                            <DefaultView>
                                 <Text style={{
                                     fontWeight: '500',
                                     color: 'rgba(0,0,0,0.8)',
@@ -134,8 +169,8 @@ const Role = ({ navigation, route }: any) => {
                                     color: 'rgba(0,0,0,0.6)',
                                     fontSize: 14
                                 }}>Pago fijo cada mes</Text>
-                            </View>
-                            <View style={{
+                            </DefaultView>
+                            <DefaultView style={{
                                 borderWidth: 1,
                                 borderColor: 'rgba(0,0,0,0.5)',
                                 width: 30,
@@ -147,7 +182,7 @@ const Role = ({ navigation, route }: any) => {
                             }}>
                                 
                                 <Icon name='checkmark' color={remuneration.frecuency == 'monthly'? '#fff': 'rgba(0,0,0,.8)'} size={25} />
-                            </View>
+                            </DefaultView>
                         </TouchableOpacity>
                         <TouchableOpacity style={{
                             flexDirection: 'row',
@@ -155,7 +190,7 @@ const Role = ({ navigation, route }: any) => {
                         }}
                         onPress={() => setRemuneration((prev) => ({...prev, frecuency: 'equity'}))}
                         >
-                            <View>
+                            <DefaultView>
                                 <Text style={{
                                     fontWeight: '500',
                                     color: 'rgba(0,0,0,0.8)',
@@ -166,8 +201,8 @@ const Role = ({ navigation, route }: any) => {
                                     color: 'rgba(0,0,0,0.6)',
                                     fontSize: 14
                                 }}>Compartir una parte de tu empresa</Text>
-                            </View>
-                            <View style={{
+                            </DefaultView>
+                            <DefaultView style={{
                                 borderWidth: 1,
                                 borderColor: 'rgba(0,0,0,0.5)',
                                 width: 30,
@@ -179,7 +214,7 @@ const Role = ({ navigation, route }: any) => {
                             }}>
                                 
                                 <Icon name='checkmark' color={remuneration.frecuency == 'equity'? '#fff': 'rgba(0,0,0,.8)'} size={25} />
-                            </View>
+                            </DefaultView>
                         </TouchableOpacity>
                         <TouchableOpacity style={{
                             flexDirection: 'row',
@@ -187,7 +222,7 @@ const Role = ({ navigation, route }: any) => {
                         }}
                         onPress={() => setRemuneration((prev) => ({...prev, frecuency: 'yearly'}))}
                         >
-                            <View>
+                            <DefaultView>
                                 <Text style={{
                                     fontWeight: '500',
                                     color: 'rgba(0,0,0,0.8)',
@@ -198,8 +233,8 @@ const Role = ({ navigation, route }: any) => {
                                     color: 'rgba(0,0,0,0.6)',
                                     fontSize: 14
                                 }}>Oferta de salario anual</Text>
-                            </View>
-                            <View style={{
+                            </DefaultView>
+                            <DefaultView style={{
                                 borderWidth: 1,
                                 borderColor: 'rgba(0,0,0,0.5)',
                                 width: 30,
@@ -211,21 +246,21 @@ const Role = ({ navigation, route }: any) => {
                             }}>
                                 
                                 <Icon name='checkmark' color={remuneration.frecuency == 'yearly'? '#fff': 'rgba(0,0,0,.8)'} size={25} />
-                            </View>
+                            </DefaultView>
                         </TouchableOpacity>
-                        </View>
+                        </DefaultView>
 
                   
-                    </View>
+                    </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginTop: 'auto',
                     gap: 10
                 }} >
-                    <TouchableOpacity style={{
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{
                         width: '40%',
                         borderWidth: 1,
                         borderColor: 'rgba(0,0,0,0.3)',
@@ -247,11 +282,13 @@ const Role = ({ navigation, route }: any) => {
                         width: '60%'
                     }} />
 
-                </View>
-            </View>
+                </DefaultView>
+            </DefaultView>
 
 
         </ScrollView>
+        </View>
+
     )
 }
 

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { View as DefaultView, Text , SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Field from '../../../../components/Shared/Field'
@@ -6,6 +6,7 @@ import Input from '../../../../components/Shared/Input'
 import Textarea from '../../../../components/Shared/Textarea'
 import { useUpdateUser, useUploadImage, useUser } from '../../../../hooks'
 import Button from '../../../../components/Shared/Button'
+import { View } from '../../../../components/Shared/View'
 
 const EditProfileNetwork = ({ navigation }: any) => {
     const { isLoading, user, refetch } = useUser();
@@ -50,11 +51,9 @@ const EditProfileNetwork = ({ navigation }: any) => {
     }, [])
 
     return (
-        <SafeAreaView style={{
-            flex: 1, backgroundColor: '#fff'
-        }}>
+        <View>
 
-            <View style={{
+            <DefaultView style={{
                 backgroundColor: '#121212',
                 height: 30,
                 paddingHorizontal: 15,
@@ -70,18 +69,24 @@ const EditProfileNetwork = ({ navigation }: any) => {
                     color: '#fff',
                 }}>Editar perfil</Text>
 
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 height: 10,
                 backgroundColor: '#121212'
             }} />
             <ScrollView contentContainerStyle={{
                 padding: 15,
-            }}>
-                <View style={{
+                backgroundColor: "#f0f0f0"
+            }}
+            style={{
+                backgroundColor: "#f0f0f0"
+
+            }}
+            >
+                <DefaultView style={{
                     alignItems: 'center',
                 }}>
-            </View>
+            </DefaultView>
             <Text style={{
                 fontSize: 16,
                 color: 'rgba(0,0,0,0.8)',
@@ -93,7 +98,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
                 fontWeight: '400'
             }}>Para que las personas puedan conocerte mejor</Text>
 
-<View style={{
+<DefaultView style={{
         marginTop: 20
     }}
     >   
@@ -103,7 +108,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
             marginBottom: 5,
             fontWeight: '500'
         }}>Agrega nombre de usuario</Text>
-        <View style={{
+        <DefaultView style={{
             flexDirection: 'row',
             alignItems: 'center',
             gap: 15
@@ -112,8 +117,8 @@ const EditProfileNetwork = ({ navigation }: any) => {
                     <Input style={{
                         width: '85%'
                     }} placeholder='Ej: curious_harish' value={userInfo.instagram} onChangeText={(text) => setUserInfo((prev) => ({...prev, instagram: text}))} />
-        </View>
-        <View style={{
+        </DefaultView>
+        <DefaultView style={{
             flexDirection: 'row',
             alignItems: 'center',
             gap: 15,
@@ -123,10 +128,10 @@ const EditProfileNetwork = ({ navigation }: any) => {
                     <Input style={{
                         width: '85%'
                     }} placeholder='Ej: curiousharish' value={userInfo.twitter} onChangeText={(text) => setUserInfo((prev) => ({...prev, twitter: text}))} />
-        </View>
-    </View>
+        </DefaultView>
+    </DefaultView>
 
-    <View style={{
+    <DefaultView style={{
         marginTop: 20
     }}
     >   
@@ -136,7 +141,7 @@ const EditProfileNetwork = ({ navigation }: any) => {
             marginBottom: 5,
             fontWeight: '500'
         }}>Agrega link del perfil</Text>
-        <View style={{
+        <DefaultView style={{
             flexDirection: 'row',
             alignItems: 'center',
             gap: 15
@@ -145,8 +150,8 @@ const EditProfileNetwork = ({ navigation }: any) => {
                     <Input style={{
                         width: '85%',
                     }} placeholder='Ej: https://www.facebook.com/curios' value={userInfo.facebook} onChangeText={(text) => setUserInfo((prev) => ({...prev, facebook: text}))} />
-        </View>
-        <View style={{
+        </DefaultView>
+        <DefaultView style={{
             flexDirection: 'row',
             alignItems: 'center',
             gap: 15,
@@ -156,14 +161,14 @@ const EditProfileNetwork = ({ navigation }: any) => {
                     <Input style={{
                         width: '85%'
                     }} placeholder='Ej: https://www.linkedin.com/curios' value={userInfo.linkedin} onChangeText={(text) => setUserInfo((prev) => ({...prev, linkedin: text}))} />
-        </View>
-    </View>
+        </DefaultView>
+    </DefaultView>
 
                 <Field label='Rompehielos' style={{
 
                 }}>
                {userInfo?.icebreaker.map((icebreaker:any, index:any) => (
-    <View key={index} style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 15, marginTop: 15 }}>
+    <DefaultView key={index} style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 15, marginTop: 15 }}>
       <Icon name='remove-circle' style={{
         marginTop: 5
       }} size={28} onPress={() => handleRemoveIcebreaker(index)} />
@@ -173,22 +178,27 @@ const EditProfileNetwork = ({ navigation }: any) => {
         onChangeText={(text) => handleIcebreakerChange(index, text)}
         style={{ height: 100, textAlignVertical: 'top', width: '85%' }}
       />
-    </View>
+    </DefaultView>
   ))}
   <TouchableOpacity onPress={handleAddIcebreaker}>
     <Text style={{ color: '#5368f5', marginTop: 10 }}>Agregar Frase Rompehielo</Text>
   </TouchableOpacity>
                 </Field>
             </ScrollView>
-            <View style={{
+            <DefaultView style={{
                 marginTop: 'auto',
                 marginBottom: 20,
-                paddingHorizontal: 15
+                paddingHorizontal: 15,
+                backgroundColor: "#f0f0f0",
+                position: "absolute",
+                bottom: -20,
+                paddingBottom: 30,
+                width: "100%"
             }}>
                 <Button loading={isUpdating} onPress={submit} text='Guardar' />
-            </View>
+            </DefaultView>
 
-        </SafeAreaView>
+        </View>
     )
 }
 

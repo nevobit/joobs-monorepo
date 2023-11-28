@@ -7,6 +7,7 @@ export default {
                 const discussions = await getAllDiscussions({search: id});
                 return discussions.items;
             }catch(err:any){
+                console.log(err)
                 throw new Error(err);
             }
         },

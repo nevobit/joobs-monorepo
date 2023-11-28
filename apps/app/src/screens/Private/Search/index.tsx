@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View as DefaultView } from 'react-native'
 import WorkTopTap from '../../../navigator/WorkTopTab'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { WorkCard } from '../../../components/UI'
 import SearchTopTap from '../../../navigator/SearchTopTab'
+import { View } from '../../../components/Shared/View'
 
 const Search = ({navigation}: any) => {
   const [search, setSearch] = useState('');
   return (
-    <SafeAreaView style={{
-      flex: 1
-    }}>
+    <View>
         
-<View style={{
+<DefaultView style={{
                 backgroundColor: '#121212',
                 // height: 30,
                 paddingHorizontal: 15,
@@ -37,10 +36,10 @@ const Search = ({navigation}: any) => {
                   fontSize: 14
                 }} placeholder='Buscar' onChangeText={(text) => setSearch(text)} placeholderTextColor='rgba(255,255,255,.3)' />
 
-            </View>
+            </DefaultView>
 
         <SearchTopTap navigation={navigation} search={search} />
-    </SafeAreaView>
+    </View>
   )
 }
 

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>movility</string>
+	<string>Joobs</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,8 +35,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Joobs Necesita acceso a tu ubicación para poder verificar que seas una persona real</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Joobs Necesita acceso a tu ubicación para poder verificar que seas una persona real</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Joobs Necesita acceso a tu galeria de fotos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Ionicons.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -1,16 +1,17 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View as DefaultView, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Button from '../../../../../components/Shared/Button'
 import Textarea from '../../../../../components/Shared/Textarea'
+import Header from '../Header'
+import { View } from '../../../../../components/Shared/View'
 
 const Description = ({navigation, route}: any) => {
     const [description, setDescription] = useState('');
     return (
-        <View style={{
-            backgroundColor: '#121212',
-            flex: 1,
-        }}>
-            <View style={{
+        <View>
+                                  <Header  title='Crear una publicación' step={3} />
+
+            <DefaultView style={{
                 paddingHorizontal: 15,
                 paddingVertical: 20,
                 backgroundColor: '#fff',
@@ -19,7 +20,7 @@ const Description = ({navigation, route}: any) => {
                 borderTopLeftRadius: 30,
             }}>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -31,9 +32,9 @@ const Description = ({navigation, route}: any) => {
                         fontSize: 18,
                         color: 'rgba(0,0,0,0.8)'
                     }}>Descripcion</Text>
-                </View>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                     gap: 20
                 }}>
                     <Textarea 
@@ -42,9 +43,9 @@ const Description = ({navigation, route}: any) => {
                     />
 
                 
-                </View>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -61,7 +62,9 @@ const Description = ({navigation, route}: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginTop: 20
-                    }}>
+                    }}
+                    onPress={() => navigation.goBack()}
+                    >
                         <Text style={{
                             color: 'rgba(0,0,0,0.8)',
                             fontWeight: '500',
@@ -73,9 +76,9 @@ const Description = ({navigation, route}: any) => {
                     width: '60%'
                 }} />
 
-</View>
+</DefaultView>
 
-            </View>
+            </DefaultView>
 
         </View>
     )

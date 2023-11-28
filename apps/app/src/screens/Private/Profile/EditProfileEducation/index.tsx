@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView } from 'react-native'
+import { View as DefaultView, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, ActivityIndicator, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Field from '../../../../components/Shared/Field'
@@ -6,6 +6,7 @@ import Input from '../../../../components/Shared/Input'
 import Textarea from '../../../../components/Shared/Textarea'
 import { useUpdateUser, useUploadImage, useUser } from '../../../../hooks'
 import Button from '../../../../components/Shared/Button'
+import { View } from '../../../../components/Shared/View'
 
 const EditProfileEducation = ({ navigation }: any) => {
     const { isLoading, user, refetch } = useUser();
@@ -37,11 +38,9 @@ const EditProfileEducation = ({ navigation }: any) => {
     }, [])
 
     return (
-        <SafeAreaView style={{
-            flex: 1, backgroundColor: '#fff'
-        }}>
+        <View >
 
-            <View style={{
+            <DefaultView style={{
                 backgroundColor: '#121212',
                 height: 30,
                 paddingHorizontal: 15,
@@ -57,18 +56,21 @@ const EditProfileEducation = ({ navigation }: any) => {
                     color: '#fff',
                 }}>Editar perfil</Text>
 
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
                 height: 10,
                 backgroundColor: '#121212'
             }} />
             <ScrollView contentContainerStyle={{
                 padding: 15,
-            }}>
-                <View style={{
+                backgroundColor: "#f0f0f0"
+            }} style={{
+                backgroundColor: "#f0f0f0"
+            }} >
+                <DefaultView style={{
                     alignItems: 'center',
                 }}>
-            </View>
+            </DefaultView>
             <Text style={{
                 fontSize: 16,
                 color: 'rgba(0,0,0,0.8)',
@@ -98,15 +100,20 @@ const EditProfileEducation = ({ navigation }: any) => {
                         </ScrollView> 
                 </Field>
             </ScrollView>
-            <View style={{
+            <DefaultView style={{
                 marginTop: 'auto',
                 marginBottom: 20,
-                paddingHorizontal: 15
+                paddingHorizontal: 15,
+                backgroundColor: "#f0f0f0",
+                position: "absolute",
+                bottom: -20,
+                paddingBottom: 30,
+                width: "100%"
             }}>
                 <Button loading={isUpdating} onPress={submit} text='Guardar' />
-            </View>
+            </DefaultView>
 
-        </SafeAreaView>
+        </View>
     )
 }
 

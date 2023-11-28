@@ -113,7 +113,7 @@ const Explorer = ({navigation}: any) => {
         <FlatList 
         contentContainerStyle={{
           paddingHorizontal: 15,
-          marginBottom: 50
+          paddingBottom: 50
         }}
           data={data.works.slice().reverse()}
           renderItem={( { item } ) => 

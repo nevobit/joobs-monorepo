@@ -26,24 +26,24 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen name='Projects' component={Project}
-                options={({ navigation, route }) => ({
-                    header: () => <Header title='Proyectos' search notifications  messages navigation={navigation} />,
-                  })}
+                options={{
+                    headerShown: false
+                  }}
             />
             <Tab.Screen name='Work' component={Work}
-                options={({ navigation, route }) => ({
-                    header: () => <Header title='Trabajo' whathsapp notifications messages navigation={navigation} />,
-                  })}
+                options={{
+                    headerShown: false
+                  }}
             />
             <Tab.Screen name='Events' component={Events}
-               options={({ navigation, route }) => ({
-                header: () => <Header title='Eventos'  notifications messages navigation={navigation} />,
-              })}
+               options={{
+                headerShown: false
+            }}  
             />
             <Tab.Screen name='Profile' component={Profile}
-                options={({ navigation, route }) => ({
-                    header: () => <Header title={`@${profileTitle}`} navigation={navigation} profile />,
-                  })}
+                options={{
+                    headerShown: false
+                  }}
             />
         </Tab.Navigator>
     )

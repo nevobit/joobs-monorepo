@@ -17,6 +17,8 @@ import EditProfileEducation from '../../screens/Private/Profile/EditProfileEduca
 import EditProfileNetwork from '../../screens/Private/Profile/EditProfileNetwork';
 import EditProfileSkills from '../../screens/Private/Profile/EditProfileSkills';
 import UserProfile from '../../screens/Private/UserProfile';
+import { SafeAreaView, StatusBar } from 'react-native';
+import PostTo from '../../screens/Home/PostTo';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -34,6 +36,7 @@ export type RootStackParamsList = {
   EditProfileNetwork: { id: string };
   EditProfileSkills: { id: string };
   UserProfile: { id: string };
+  PostTo: { post: any };
 
 }
 
@@ -88,37 +91,43 @@ export const AppNavigator = () => {
       <HomeStack.Screen name="EditProfile" component={EditProfile}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
         }}
       />
       <HomeStack.Screen name="UserProfile" component={UserProfile}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
         }}
       />
        <HomeStack.Screen name="EditProfileEducation" component={EditProfileEducation}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
         }}
       />
        <HomeStack.Screen name="EditProfileNetwork" component={EditProfileNetwork}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
         }}
       />
       <HomeStack.Screen name="EditProfileSkills" component={EditProfileSkills}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
         }}
       />
       <HomeStack.Screen name="Chat" component={Messages}
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'card',
+        }}
+      />
+        <HomeStack.Screen name="PostTo" component={PostTo}
+        options={{
+          headerShown: false,
+          presentation: 'card',
         }}
       />
     </HomeStack.Navigator>
@@ -128,6 +137,7 @@ export const AppNavigator = () => {
 export const NavigatorContainer = () => {
   const { user } = useSelector((state: any) => state.auth);
   return <>
-    {user ? <AppNavigator /> : <AuthStack />}
+    {user ? <AppNavigator /> : <AuthStack />    
+    }
   </>
 }

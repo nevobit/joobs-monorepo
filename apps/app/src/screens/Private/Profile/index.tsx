@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ActivityIndicator, Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, Pressable, ScrollView, Text, TouchableOpacity, View as DefaultView } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useUser } from '../../../hooks/users/useUser'
 // import { BottomSheet } from '../../../containers'
@@ -9,6 +9,8 @@ import Input from '../../../components/Shared/Input'
 import Textarea from '../../../components/Shared/Textarea'
 import BottomSheet from '@gorhom/bottom-sheet';
 import Geolocation from '@react-native-community/geolocation'
+import { View } from '../../../components/Shared/View'
+import Header from '../../../components/Layout/Header'
 
 const Profile = ({ navigation }: any) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -17,7 +19,7 @@ const Profile = ({ navigation }: any) => {
     country: '',
     city: '',
   })
-
+    const profileTitle = user?.email?.split('@')[0];
   useEffect(() => {
     try{
       Geolocation.getCurrentPosition(
@@ -61,7 +63,7 @@ const Profile = ({ navigation }: any) => {
   }, [refetch])
 
   if(error){
-    return <View style={{
+    return <DefaultView style={{
       minHeight: '100%'
     }}>
       <Text style={{
@@ -70,31 +72,32 @@ const Profile = ({ navigation }: any) => {
       }}>
         Algo salio mal, intentalo mas tarde
       </Text>
-    </View>
+    </DefaultView>
   }
 
 
   return (
-    <>
-
+    <View>
+      <Header title={`@${profileTitle}`} navigation={navigation} profile />
       <ScrollView style={{
-        height: '100%',
+        backgroundColor: '#f0f0f0'
+      }} contentContainerStyle={{
         marginBottom: 10,
-        backgroundColor: 'rgba(255, 255, 255, .6)'
-      }}>
+        backgroundColor: "#f0f0f0"
+      }} >
         {isLoading ? <ActivityIndicator color='#000' style={{
           marginTop: 15,
         }} size='large' /> : (
           <>
 
-            <View style={{
+            <DefaultView style={{
               backgroundColor: '#121212',
               height: 370,
               paddingHorizontal: 15,
               borderBottomEndRadius: 15,
               borderBottomStartRadius: 15
             }}>
-              <View style={{
+              <DefaultView style={{
                 position: 'relative',
                 backgroundColor: '#474747',
                 height: 150,
@@ -120,7 +123,7 @@ const Profile = ({ navigation }: any) => {
                     }}
                   />
                   :
-                  <View style={{
+                  <DefaultView style={{
                     height: 70,
                     width: 70,
                     backgroundColor: '#5368f5',
@@ -138,7 +141,7 @@ const Profile = ({ navigation }: any) => {
                       fontWeight: '400',
                       color: '#fff'
                     }}>{user?.name?.charAt(0)?.toUpperCase()}</Text>
-                  </View>
+                  </DefaultView>
                 }
                 <Text style={{
                   marginTop: 50,
@@ -173,7 +176,7 @@ const Profile = ({ navigation }: any) => {
                   <Icon name='pencil-outline' color='#fff' size={25} />
                 </TouchableOpacity>
 
-              </View>
+              </DefaultView>
 
               <ScrollView horizontal style={{
                 flex: 1,
@@ -192,7 +195,7 @@ const Profile = ({ navigation }: any) => {
                   position: 'relative',
                   marginTop: 10
                 }}>
-                  <View style={{
+                  <DefaultView style={{
                     position: 'absolute',
                     top: -10,
                     left: 10,
@@ -205,7 +208,7 @@ const Profile = ({ navigation }: any) => {
                   }}>
                     <Icon name='information-circle-outline' size={25} color='rgba(0,0,0,0.8)' />
 
-                  </View>
+                  </DefaultView>
                   <Text style={{
                     marginTop: 10,
                     fontWeight: '600',
@@ -232,7 +235,7 @@ const Profile = ({ navigation }: any) => {
                   marginRight: 8,
                   marginTop: 10
                 }}>
-                  <View style={{
+                  <DefaultView style={{
                     position: 'absolute',
                     top: -10,
                     left: 10,
@@ -245,7 +248,7 @@ const Profile = ({ navigation }: any) => {
                   }}>
                     <Icon name='school-outline' size={25} color='rgba(0,0,0,0.8)' />
 
-                  </View>
+                  </DefaultView>
                   <Text style={{
                     marginTop: 10,
                     fontWeight: '600',
@@ -271,7 +274,7 @@ const Profile = ({ navigation }: any) => {
                   padding: 10,
                   marginTop: 10
                 }}>
-                  <View style={{
+                  <DefaultView style={{
                     position: 'absolute',
                     top: -10,
                     left: 10,
@@ -284,7 +287,7 @@ const Profile = ({ navigation }: any) => {
                   }}>
                     <Icon name='chatbubble-outline' size={20} color='rgba(0,0,0,0.8)' />
 
-                  </View>
+                  </DefaultView>
                   <Text style={{
                     marginTop: 10,
                     fontWeight: '600',
@@ -303,16 +306,16 @@ const Profile = ({ navigation }: any) => {
                   }}>4/5 completados</Text> */}
                 </TouchableOpacity>
               </ScrollView>
-            </View>
-            <View style={{
+            </DefaultView>
+            <DefaultView style={{
               paddingHorizontal: 15,
               paddingBottom: 20
             }}>
 
-              <View style={{
+              <DefaultView style={{
                 marginTop: 20
               }}>
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between'
                 }}>
@@ -327,9 +330,9 @@ const Profile = ({ navigation }: any) => {
 }}>
                   <Icon name='pencil-outline' color='rgba(0,0,0,0.8)' size={22} />
                 </TouchableOpacity>
-                </View>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                   marginTop: 15,
                   backgroundColor: 'rgba(0,0,0,0.05)',
                   borderRadius: 10,
@@ -342,12 +345,12 @@ const Profile = ({ navigation }: any) => {
                       marginBottom: 10
                     }}>{user?.about}</Text>
                   )}
-                  <View style={{
+                  <DefaultView style={{
                     flexDirection: 'row',
                     alignItems: 'center'
                   }}>
                     {user?.location?.latitude && (
-                      <View style={{
+                      <DefaultView style={{
                         display: 'flex',
                         flexDirection: 'row',
                         gap: 1,
@@ -361,23 +364,23 @@ const Profile = ({ navigation }: any) => {
                           fontWeight: '400',
                           color: 'rgba(0,0,0,0.8)'
                         }}>{location?.city}, {location?.country}</Text>
-                      </View>
+                      </DefaultView>
 
                     )}
 
-                  </View>
-                </View>
+                  </DefaultView>
+                </DefaultView>
 
-              </View>
+              </DefaultView>
 
               {/* Private Information */}
-              <View style={{
+              <DefaultView style={{
                 marginTop: 15,
                 backgroundColor: 'rgba(0,0,0,0.05)',
                 borderRadius: 10,
                 padding: 10
               }} >
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   alignItems: 'center'
                 }}>
@@ -386,7 +389,7 @@ const Profile = ({ navigation }: any) => {
                     fontSize: 16,
                     color: 'rgba(0,0,0,0.8)',
                   }}>Informacion Privada </Text>
-                  <View style={{
+                  <DefaultView style={{
 
                     backgroundColor: 'rgba(255,255,255, .8)',
                     marginLeft: 10,
@@ -403,10 +406,10 @@ const Profile = ({ navigation }: any) => {
                       fontSize: 12,
                       color: 'rgba(0,0,0,0.8)'
                     }}>Solo visible para ti</Text>
-                  </View>
-                </View>
-                <View>
-                  <View style={{
+                  </DefaultView>
+                </DefaultView>
+                <DefaultView>
+                  <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     marginTop: 10
@@ -419,8 +422,8 @@ const Profile = ({ navigation }: any) => {
                       fontSize: 14,
                       color: 'rgba(0,0,0,0.8)'
                     }} >{user?.gender}</Text>
-                  </View>
-                  <View style={{
+                  </DefaultView>
+                  <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     marginTop: 10
@@ -433,8 +436,8 @@ const Profile = ({ navigation }: any) => {
                       fontSize: 14,
                       color: 'rgba(0,0,0,0.8)'
                     }} >{user?.phone}</Text>
-                  </View>
-                  <View style={{
+                  </DefaultView>
+                  <DefaultView style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     marginTop: 10
@@ -447,16 +450,16 @@ const Profile = ({ navigation }: any) => {
                       fontSize: 14,
                       color: 'rgba(0,0,0,0.8)'
                     }} >{user?.born_date}</Text>
-                  </View>
+                  </DefaultView>
 
-                </View>
-              </View>
+                </DefaultView>
+              </DefaultView>
 
               {/* SKILLS */}
-              <View style={{
+              <DefaultView style={{
                 marginTop: 20
               }}>
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between'
                 }}>
@@ -471,9 +474,9 @@ const Profile = ({ navigation }: any) => {
 }}>
                   <Icon name='pencil-outline' color='rgba(0,0,0,0.8)' size={22} />
                 </TouchableOpacity>
-                </View>
+                </DefaultView>
 
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   flexWrap: 'wrap',
                   marginTop: 10
@@ -486,9 +489,9 @@ const Profile = ({ navigation }: any) => {
                       marginRight: 10
                     }} key={skill}>{skill},</Text>
                   ))}
-                </View>
+                </DefaultView>
 
-              </View>
+              </DefaultView>
 
               {/* SOCIAL LINKS */}
               <Text style={{
@@ -508,7 +511,7 @@ const Profile = ({ navigation }: any) => {
               }}
               >
                
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   gap: 15
@@ -517,8 +520,8 @@ const Profile = ({ navigation }: any) => {
                   <Input style={{
                     width: '85%'
                   }} editable={false} placeholder='Agregar usuario de Instagram' value={user?.instagram} />
-                </View>
-                <View style={{
+                </DefaultView>
+                <DefaultView style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   gap: 15,
@@ -528,14 +531,14 @@ const Profile = ({ navigation }: any) => {
                   <Input editable={false} style={{
                     width: '85%'
                   }} placeholder='Agregar usuario de Twitter' value={user?.twitter} />
-                </View>
+                </DefaultView>
               </Pressable>
 
-              <View style={{
+              <DefaultView style={{
                 marginTop: 20
               }}
               >
-                <View style={{
+                <DefaultView style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   gap: 15
@@ -544,8 +547,8 @@ const Profile = ({ navigation }: any) => {
                   <Input  style={{
                     width: '85%',
                   }} editable={false} placeholder='Agregar link de Facebook' value={user?.facebook} />
-                </View>
-                <View style={{
+                </DefaultView>
+                <DefaultView style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   gap: 15,
@@ -555,17 +558,17 @@ const Profile = ({ navigation }: any) => {
                   <Input style={{
                     width: '85%'
                   }} editable={false} placeholder='Agregar link de Linkedin' value={user?.linkedin} />
-                </View>
-              </View>
+                </DefaultView>
+              </DefaultView>
 
-            </View>
+            </DefaultView>
           </>
 
         )}
 
 
       </ScrollView>
-    </>
+    </View>
   )
 }
 

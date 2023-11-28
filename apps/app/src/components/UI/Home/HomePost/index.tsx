@@ -9,6 +9,7 @@ import { LIKES } from '../../../../graphql/queries/likes';
 import { useUser } from '../../../../hooks/users/useUser';
 import { useSelector } from 'react-redux';
 import { DISCUSSIONS } from '../../../../graphql/queries';
+import { getColorForClub } from '../../../../screens/Home/club-color';
 interface Props {
   name: string,
   id: string,
@@ -150,10 +151,10 @@ const HomePost = ({ refetch, id, navigation, liked, likes, discussionId, comment
           </View>
         </View>
 
-        {/* <View style={{
+        <View style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: '#c1c6fb70',
+          backgroundColor: getColorForClub(type),
           gap: 7,
           padding: 5,
           paddingHorizontal: 10,
@@ -164,7 +165,7 @@ const HomePost = ({ refetch, id, navigation, liked, likes, discussionId, comment
             fontSize: 12,
             fontWeight: '500'
           }}>{type}</Text>
-        </View> */}
+        </View> 
       </TouchableOpacity>
 
       <Text style={{
