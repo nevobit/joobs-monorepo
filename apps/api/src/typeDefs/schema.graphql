@@ -47,6 +47,7 @@ type Discussion {
     id: ID
     title: String
     user: User
+    club: Club
     created_at: String
     images: [String]
     link: String
@@ -60,6 +61,7 @@ input DataCreateDiscussion {
     title: String
     images: [String]
     link: String
+    clubId: String
     description: String
 }
 
