@@ -29,10 +29,10 @@ export const discussionRelations = relations(discussions, ({ one, many }) => ({
         fields: [discussions.userId],
         references: [users.id]
     }),
+    comments: many(comments),
+    likes: many(likes),
     club: one(clubs, {
         fields: [discussions.clubId],
         references: [clubs.id]
     }),
-    comments: many(comments),
-    likes: many(likes)
 }))
