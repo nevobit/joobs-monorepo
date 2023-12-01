@@ -205,19 +205,41 @@ const HomePost = ({ refetch, id, navigation, liked, likes, discussionId, comment
         paddingHorizontal: 5
       }}>
 
+        <View style={{
+          flexDirection: "row",
+          gap: 20
+        }}>
+
         <TouchableOpacity
 
-          disabled={likeDeleteLoading || likeLoading} onPress={onSubmitLike} style={{
-            flexDirection: 'row',
-            gap: 5,
-            alignItems: 'center'
-          }}>
-          <Icon name={!liked ? 'triangle-outline' : 'triangle'} size={20} color='rgba(0,0,0,0.8)' />
-          <Text style={{
-            fontSize: 14,
-            color: 'rgba(0,0,0,0.8)'
-          }}>{likes}</Text>
-        </TouchableOpacity>
+disabled={likeDeleteLoading || likeLoading} onPress={onSubmitLike} style={{
+  flexDirection: 'row',
+  gap: 5,
+  alignItems: 'center'
+}}>
+<Icon name={!liked ? 'triangle-outline' : 'triangle'} size={20} color='rgba(0,0,0,0.8)' />
+<Text style={{
+  fontSize: 14,
+  color: 'rgba(0,0,0,0.8)'
+}}>{likes}</Text>
+</TouchableOpacity>
+
+        <TouchableOpacity
+
+// disabled={likeDeleteLoading || likeLoading} onPress={onSubmitLike} 
+style={{
+  flexDirection: 'row',
+  gap: 5,
+  alignItems: 'center',
+  transform: [{ rotate: '180deg' }],
+}}>
+<Icon name={'triangle-outline'} size={20} color='rgba(0,0,0,0.8)' />
+
+</TouchableOpacity>
+        </View>
+
+      
+        
 
         <View style={{
           flexDirection: 'row',

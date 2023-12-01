@@ -19,6 +19,7 @@ import EditProfileSkills from '../../screens/Private/Profile/EditProfileSkills';
 import UserProfile from '../../screens/Private/UserProfile';
 import { SafeAreaView, StatusBar } from 'react-native';
 import PostTo from '../../screens/Home/PostTo';
+import SideMenu from '../SideMenu';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -130,6 +131,7 @@ export const AppNavigator = () => {
           presentation: 'card',
         }}
       />
+       
     </HomeStack.Navigator>
   )
 }
@@ -137,7 +139,7 @@ export const AppNavigator = () => {
 export const NavigatorContainer = () => {
   const { user } = useSelector((state: any) => state.auth);
   return <>
-    {user ? <AppNavigator /> : <AuthStack />    
+    {user ? <SideMenu /> : <AuthStack />    
     }
   </>
 }

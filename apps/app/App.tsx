@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './src/store';
 import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
+import SideMenu from './src/navigator/SideMenu';
 
 function App(): JSX.Element {
   return (
@@ -17,7 +18,8 @@ function App(): JSX.Element {
         <SafeAreaProvider>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <NavigationContainer>
-            <NavigatorContainer />
+            <SideMenu />
+            {/* <NavigatorContainer /> */}
           </NavigationContainer>
         </SafeAreaProvider>
       </ApolloProvider>

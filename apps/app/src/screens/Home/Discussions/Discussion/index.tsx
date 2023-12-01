@@ -14,9 +14,13 @@ import { useUser } from '../../../../hooks/users/useUser';
 import { LIKES } from '../../../../graphql/queries/likes';
 import { DELETELIKE, LIKE } from '../../../../graphql/mutations/likes';
 import { View } from '../../../../components/Shared/View';
+import { BottomSheet } from '../../../../containers';
 
 const DiscussionDetails = ({ navigation, route }: any) => {
   const [text, setText] = useState('');
+  const [profileOptions, setProfileOptions] = useState(false);
+  const [reported, setReported] = useState(false);
+
     const { user } = useSelector((state: any) => state.auth);
     const { user: userInfo, refetch: refetchUser } = useUser();
     const [refreshing, setRefreshing] = React.useState(false);
@@ -115,6 +119,10 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
     await refetch()
   }
   }
+  const opening = () => {
+    setProfileOptions(false);  
+    setReported(true)
+  }
 
   const onSubmitLike = async() => {
     if(!data?.discussion.liked){
@@ -178,10 +186,15 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
                 alignItems: 'center',
                 gap: 10,
                 paddingTop: 5,
-                paddingBottom: 10
+                paddingBottom: 10,
+                justifyContent: "space-between"
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon name='arrow-back' size={25} color='#fff' />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setProfileOptions(true)}>
+                    <Icon name='ellipsis-vertical' size={25} color='#fff' />
                 </TouchableOpacity>
 
             </DefaultView>
@@ -454,6 +467,57 @@ const [likeDelete, { loading: likeDeleteLoading, error: likeDeleteError }] = use
      </TouchableOpacity>
     </DefaultView>
 
+ 
+    <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
+     
+
+        <TouchableOpacity onPress={opening}>
+          <Text style={{
+            textAlign: 'center',
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          }}>Reportar</Text>
+        </TouchableOpacity>
+      </BottomSheet>
+
+      <BottomSheet isVisible={reported} setIsVisible={() => setReported(!reported)}>
+          <Text style={{
+            textAlign: "center",
+            fontSize: 16,
+            fontWeight: "600"
+          }} >Reporte</Text>
+          <Text style={{
+            textAlign: "center",
+            fontSize: 12,
+            marginBottom: 20
+          }} >Ayúdanos a entender lo que está pasando y lo investigaremos.</Text>
+
+          <DefaultView style={{
+            width: 50,
+            height: 50,
+            borderRadius: 100,
+            backgroundColor: "#5368f5",
+            alignItems: "center",
+            justifyContent: "center",
+            alignSelf: "center",
+            marginBottom: 10
+          }}>
+            <Icon name='checkmark-outline' size={30} color="#fff" style={{
+              zIndex: 9999
+            }} />
+          </DefaultView>
+          <Text style={{
+            textAlign: "center",
+            fontSize: 16,
+            fontWeight: "600"
+          }} >Gracias por hacernos saber</Text>
+          <Text style={{
+            textAlign: "center",
+            fontSize: 12,
+            marginBottom: 20
+          }} >Tus comentarios son importantes para ayudarnos a mantener la comunidad Joobs segura y de calidad.</Text>
+          <Button text='Listo' onPress={() => setReported(false)} />
+   </BottomSheet>
     </View>
 
   )

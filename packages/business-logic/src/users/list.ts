@@ -9,6 +9,6 @@ export const getAllUser = async () => {
 
   const result = await db.select().from(users);
 
-  const activeUser = result.filter(user => user.email !== 'test@email.com	');
+  const activeUser = result.filter(user => user.email !== 'test@gmail.com' || user.name !== undefined);
   return activeUser;
 };

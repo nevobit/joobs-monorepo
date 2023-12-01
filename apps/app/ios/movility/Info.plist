@@ -36,11 +36,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Joobs Necesita acceso a tu ubicación para poder verificar que seas una persona real</string>
+	<string>Necesitamos acceder a tu ubicación para mostrarte eventos, trabajos o personas con las cuales ahcer networking cercanos a tu área.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Joobs Necesita acceso a tu ubicación para poder verificar que seas una persona real</string>
+	<string>Necesitamos acceder a tu ubicación para mostrarte eventos, trabajos o personas con las cuales ahcer networking cercanos a tu área.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Joobs Necesita acceso a tu galeria de fotos</string>
+	<string>Joobs Necesita acceso a tu galeria de fotos y puedas seleccionar una foto de perfil</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>

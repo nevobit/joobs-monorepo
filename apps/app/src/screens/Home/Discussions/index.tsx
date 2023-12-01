@@ -25,7 +25,7 @@ const Discussions = ({ navigation, search }: any) => {
         backgroundColor: "#f0f0f0",
         marginBottom: 10
       }} style={styles.container}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        refreshControl={<RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={onRefresh} />}
       >
         <DefaultView style={{
           backgroundColor: 'rgba(255,255,255,1)',

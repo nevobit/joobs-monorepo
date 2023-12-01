@@ -22,6 +22,8 @@ import Geolocation from '@react-native-community/geolocation';
 import {View} from '../../../components/Shared/View';
 
 const UserProfile = ({navigation, route}: any) => {
+  const [reported, setReported] = useState(false);
+
   const [editProfile, setEditProfile] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
   const [profileOptions, setProfileOptions] = useState(false);
@@ -31,6 +33,11 @@ const UserProfile = ({navigation, route}: any) => {
     country: '',
     city: '',
   });
+
+  const opening = () => {
+    setProfileOptions(false);  
+    setReported(true)
+  }
 
   const getLocation = () => {
     try {
@@ -44,16 +51,16 @@ const UserProfile = ({navigation, route}: any) => {
             .then(responseJson => {
               console.log({responseJson});
               const addressComponents =
-                responseJson.results[0].address_components;
+                responseJson?.results[0]?.address_components;
               let country = '';
               let city = '';
               for (let component of addressComponents) {
                 if (component.types.includes('country')) {
-                  country = component.long_name;
+                  country = component?.long_name;
                 }
                 if (
-                  component.types.includes('locality') ||
-                  component.types.includes('administrative_area_level_1')
+                  component?.types?.includes('locality') ||
+                  component?.types?.includes('administrative_area_level_1')
                 ) {
                   city = component.long_name;
                 }
@@ -81,7 +88,6 @@ const UserProfile = ({navigation, route}: any) => {
     refetch();
   }, [refetch]);
 
-  console.log(location);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -532,20 +538,57 @@ const UserProfile = ({navigation, route}: any) => {
       </ScrollView>
 
       <>
-        <BottomSheet
-          isVisible={profileOptions}
-          setIsVisible={() => setProfileOptions(!profileOptions)}>
-          <TouchableOpacity>
-            <Text
-              style={{
-                textAlign: 'center',
-                color: 'rgba(0,0,0,0.8)',
-                fontSize: 14,
-              }}>
-              Reportar
-            </Text>
-          </TouchableOpacity>
-        </BottomSheet>
+       
+    <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
+     
+
+     <TouchableOpacity onPress={opening}>
+       <Text style={{
+         textAlign: 'center',
+         color: 'rgba(0,0,0,0.8)',
+         fontSize: 14
+       }}>Reportar</Text>
+     </TouchableOpacity>
+   </BottomSheet>
+
+   <BottomSheet isVisible={reported} setIsVisible={() => setReported(!reported)}>
+       <Text style={{
+         textAlign: "center",
+         fontSize: 16,
+         fontWeight: "600"
+       }} >Reporte</Text>
+       <Text style={{
+         textAlign: "center",
+         fontSize: 12,
+         marginBottom: 20
+       }} >Ayúdanos a entender lo que está pasando y lo investigaremos.</Text>
+
+       <DefaultView style={{
+         width: 50,
+         height: 50,
+         borderRadius: 100,
+         backgroundColor: "#5368f5",
+         alignItems: "center",
+         justifyContent: "center",
+         alignSelf: "center",
+         marginBottom: 10
+       }}>
+         <Icon name='checkmark-outline' size={30} color="#fff" style={{
+           zIndex: 9999
+         }} />
+       </DefaultView>
+       <Text style={{
+         textAlign: "center",
+         fontSize: 16,
+         fontWeight: "600"
+       }} >Gracias por hacernos saber</Text>
+       <Text style={{
+         textAlign: "center",
+         fontSize: 12,
+         marginBottom: 20
+       }} >Tus comentarios son importantes para ayudarnos a mantener la comunidad Joobs segura y de calidad.</Text>
+       <Button text='Listo' onPress={() => setReported(false)} />
+</BottomSheet>
       </>
     </View>
   );

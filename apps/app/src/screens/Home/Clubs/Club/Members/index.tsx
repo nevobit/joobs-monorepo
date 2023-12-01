@@ -43,7 +43,7 @@ const MembersClub = ({id}: { id: string }) => {
                             color: 'rgba(0,0,0,0.8)',
                             fontSize: 16,
                             fontWeight: '500'
-                        }}>{member.user.name}</Text>
+                        }}>{member?.user?.name}</Text>
                     </DefaultView>
 
                     <DefaultView style={{

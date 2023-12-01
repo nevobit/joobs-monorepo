@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { signout } from '../../../store/features/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import sendWhatsApp from '../../../utils/send-whatsapp';
+import { DrawerActions } from '@react-navigation/native';
 
 interface HomeProps extends StackScreenProps<HomeStackParamList> { }
 
@@ -49,8 +50,7 @@ const Header = ({ menu, title, navigation, search, messages, notifications, prof
           }}>
 
             {menu && (
-
-              <TouchableOpacity onPress={() => sendWhatsApp('Quiero dar feedback')}>
+              <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer)}>
                 <Icon name='menu' size={30} color='#fff' />
               </TouchableOpacity>
             )}

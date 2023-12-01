@@ -38,7 +38,7 @@ const Listing = ({ navigation }: any) => {
 
       {loading ? <ActivityIndicator /> : (
         <>
-          {data.works.filter((work: any) => work?.user?.id == user.id).length == 0 ? (
+          {data?.works?.filter((work: any) => work?.user?.id == user.id).length == 0 ? (
             <>
               <Text style={{
                 fontWeight: '500',
@@ -77,7 +77,7 @@ const Listing = ({ navigation }: any) => {
             }}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             >
-              {data.works.filter((work: any) => work?.user?.id == user.id).map((work: any) => (
+              {data?.works?.filter((work: any) => work?.user?.id == user.id).map((work: any) => (
                 <Pressable style={{
                   width: '100%'
                 }} key={work.id} onPress={() => navigation.navigate('WorkDetails', { id: work.id })} >
