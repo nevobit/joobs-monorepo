@@ -1,4 +1,4 @@
-import { getAllClubs, createClub, verifyToken, getClub } from '@joobs/business-logic'
+import { getAllClubs, createClub, verifyToken, getClub, getMyClubs } from '@joobs/business-logic'
 
 export default {
     Query: {
@@ -21,7 +21,16 @@ export default {
                 }catch(err:any){
                     throw new Error(err);
                 }
-        }
+        },
+        myClubs: async (_: any, {}, ctx: any) => {
+            try{
+                const { id } = await verifyToken(ctx) as {id: string};
+                const clubs = await getMyClubs(id);
+                return clubs;
+            }catch(err:any){
+                throw new Error(err);
+            }
+        },
     },
     Mutation: {
         createClub: async (_: any, {data}: any, _ctx: any) => {

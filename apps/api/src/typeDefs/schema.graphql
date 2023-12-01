@@ -298,6 +298,7 @@ type Query {
     
     clubs: [Club]
     club(id: String): Club
+    myClubs: [Club]
     
     user(uuid: String): User
     users: [User]

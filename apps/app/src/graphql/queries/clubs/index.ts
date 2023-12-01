@@ -24,3 +24,16 @@ query Query($clubId: String) {
   }
 }
 `
+
+export const MYCLUBS = gql` 
+query MyClubs {
+  myClubs {
+    description
+    id
+    icon
+    joined
+    members
+    name
+  }
+}
+`
