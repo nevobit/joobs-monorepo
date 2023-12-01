@@ -18,7 +18,6 @@ const Members = ({ navigation }: any) => {
         },
     });
 
-
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
