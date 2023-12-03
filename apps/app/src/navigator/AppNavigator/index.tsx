@@ -12,14 +12,13 @@ import Club from '../../screens/Home/Clubs/Club';
 import DiscussionDetails from '../../screens/Home/Discussions/Discussion'
 import ProjectDetails from '../../screens/Projects/ProjectsList/ProjectDetails';
 import EditProfile from '../../screens/Private/Profile/EditProfile';
-import Chat from '../../screens/Private/Chat';
 import EditProfileEducation from '../../screens/Private/Profile/EditProfileEducation';
 import EditProfileNetwork from '../../screens/Private/Profile/EditProfileNetwork';
 import EditProfileSkills from '../../screens/Private/Profile/EditProfileSkills';
 import UserProfile from '../../screens/Private/UserProfile';
-import { SafeAreaView, StatusBar } from 'react-native';
 import PostTo from '../../screens/Home/PostTo';
 import SideMenu from '../SideMenu';
+import { MyDiscussions } from '../../screens/Private';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -38,6 +37,8 @@ export type RootStackParamsList = {
   EditProfileSkills: { id: string };
   UserProfile: { id: string };
   PostTo: { post: any };
+  MyDiscussions: undefined;
+
 
 }
 
@@ -126,6 +127,12 @@ export const AppNavigator = () => {
         }}
       />
         <HomeStack.Screen name="PostTo" component={PostTo}
+        options={{
+          headerShown: false,
+          presentation: 'card',
+        }}
+      />
+            <HomeStack.Screen name="MyDiscussions" component={MyDiscussions}
         options={{
           headerShown: false,
           presentation: 'card',

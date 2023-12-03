@@ -23,7 +23,7 @@ const Search = ({navigation}: any) => {
                 paddingBottom: 10
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon name='arrow-back' size={25} color='#fff' />
+                    <Icon name='chevron-back' size={25} color='#fff' />
                 </TouchableOpacity>
                 <TextInput style={{
                   backgroundColor: 'rgba(255,255,255,.2)',

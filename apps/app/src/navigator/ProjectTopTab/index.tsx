@@ -1,8 +1,5 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React from 'react';
-import Listing from '../../screens/Private/Work/Listing';
-import Discussions from '../../screens/Home/Discussions';
-import Clubs from '../../screens/Home/Clubs';
 import Presentations from '../../screens/Projects/Presentations';
 import ProjectsList from '../../screens/Projects/ProjectsList';
 
@@ -19,8 +16,8 @@ const ProjectTopTap = () => {
       tabBarActiveTintColor: '#5368f5',
     }}
       >
-      <Tab.Screen name="Presentaciones" component={Presentations} />
       <Tab.Screen name="Proyectos" component={ProjectsList} />
+      <Tab.Screen name="Presentaciones" component={Presentations} />
     </Tab.Navigator>
   );
 };

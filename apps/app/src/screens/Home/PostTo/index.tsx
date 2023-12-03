@@ -17,6 +17,8 @@ import {useSelector} from 'react-redux';
 import {useClubs, useUploadImage} from '../../../hooks';
 import {DISCUSSIONS} from '../../../graphql/queries';
 import {View} from '../../../components/Shared/View';
+import { BottomSheet } from '../../../containers';
+import Button from '../../../components/Shared/Button';
 const colors: string[] = [
     'rgba(94, 53, 177, 0.3)', // Rosa claro
     'rgba(0, 121, 107, 0.3)', // Lila claro
@@ -38,8 +40,9 @@ const PostTo = ({navigation, route}: any) => {
   const { isLoading, clubs } = useClubs();
     const [ search, setSearch ] = useState("");
     const [ clubId, setClubId ] = useState("");
+    const [ visible, setVisible ] = useState(false);
 
-  console.log(clubId);
+
   const [createDiscussion, {loading: isCreating, error: creatingError}] =
     useMutation(CREATE_DISCUSSION, {
       refetchQueries: [{query: DISCUSSIONS}],
@@ -101,7 +104,7 @@ const PostTo = ({navigation, route}: any) => {
             Publicar en
           </Text>
         </DefaultView>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> setVisible(true)} >
           <Icon
             size={25}
             color="rgba(255,255, 255, .6)"
@@ -207,6 +210,88 @@ const PostTo = ({navigation, route}: any) => {
 
         </DefaultView>
       </DefaultView>
+
+      <BottomSheet isVisible={visible} setIsVisible={() => setVisible(!visible)}>
+       <DefaultView style={{
+         width: 50,
+         height: 50,
+         borderRadius: 100,
+         backgroundColor: "#5368f5",
+         alignItems: "center",
+         justifyContent: "center",
+         alignSelf: "center",
+         marginBottom: 10
+       }}>
+         <Icon name='information-outline' size={30} color="#fff" style={{
+           zIndex: 9999
+         }} />
+       </DefaultView>
+       <Text style={{
+         textAlign: "left",
+         fontSize: 16,
+         fontWeight: "600",
+         marginBottom: 15,
+         marginTop: 15
+       }} >Pautas de discusión</Text>
+       <Text style={{
+         textAlign: "left",
+         fontSize: 12,
+         fontWeight: "300",
+         marginBottom: 20
+       }} >Joobs es una plataforma para discutir una variedad de temas. Te agradeceríamos si pudieras seguir estas pautas al crear una discusión:</Text>
+       
+       <DefaultView style={{
+        gap: 10,
+        marginBottom: 45
+       }}>
+            <DefaultView style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10
+            }} >
+                <Icon name='star' color="#5368f5" size={18} />
+                <Text style={{
+                    fontSize: 12,
+                    fontWeight: "300"
+                }} >Sé amable con aquellos que comentan tu discussión.</Text>
+            </DefaultView>
+            <DefaultView style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10
+            }} >
+                <Icon name='star' color="#5368f5" size={18} />
+                <Text style={{
+                    fontSize: 12,
+                    fontWeight: "300"
+                }} >Elige el club más relevante para publicar tu discussión.</Text>
+            </DefaultView>
+            <DefaultView style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10
+            }} >
+                <Icon name='star' color="#5368f5" size={18} />
+                <Text style={{
+                    fontSize: 12,
+                    fontWeight: "300"
+                }} >No promociones ni vendas ningún producto o servicio.</Text>
+            </DefaultView>
+            <DefaultView style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10
+            }} >
+                <Icon name='star' color="#5368f5" size={18} />
+                <Text style={{
+                    fontSize: 12,
+                    fontWeight: "300"
+                }} >No publiques requisitos de contratación. Puedes usar <Text style={{ color: "#5368f5", fontWeight: "500" }} >la sección de trabajo</Text> en su lugar.</Text>
+            </DefaultView>
+       </DefaultView>
+
+       <Button text='¡Entendido!' onPress={() => setVisible(false)} />
+</BottomSheet>
     </View>
   );
 };

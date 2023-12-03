@@ -11,7 +11,9 @@ const Discussions = ({ navigation, search }: any) => {
   const [refreshing, setRefreshing] = useState(false);
   const { discussions, isLoading, error, refetch } = useDiscussions();
 
+  console.log(discussions)
   console.log(error)
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch().then(() => {
@@ -79,7 +81,7 @@ const Discussions = ({ navigation, search }: any) => {
             flex: 1,
             gap: 10
           }}>
-            {['1','2','3'].map((v, i) => <Instagram key={v} backgroundColor='#fff' />)}
+            {['1','2','3'].map((v) => <Instagram key={v} backgroundColor='#fff' />)}
           </DefaultView>
           : (
             <ScrollView style={{
@@ -88,7 +90,7 @@ const Discussions = ({ navigation, search }: any) => {
             >
               {discussions?.slice().reverse().filter((disscusion: any) => disscusion.title?.toLowerCase().includes(search?.toLowerCase() || '')).map((discussion: any) => (
                 <Pressable key={discussion.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} >
-                  <HomePost navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
+                  <HomePost navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} disliked={discussion.disliked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
                 </Pressable>
               ))}
 

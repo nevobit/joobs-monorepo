@@ -1,14 +1,11 @@
 import { View as DefaultView, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Header'
-import Input from '../../../../../components/Shared/Input'
 import Button from '../../../../../components/Shared/Button'
 import { View } from '../../../../../components/Shared/View'
 
 const Location = ({navigation, route}: any) => {
-
     const [location, setLocation] = useState('');
-    console.log(route.params)
     return (
         <View>
                       <Header  title='Crear una publicación' step={3} />

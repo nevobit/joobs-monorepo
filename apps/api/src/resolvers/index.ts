@@ -7,6 +7,7 @@ import applications from './applications'
 import members from './users-on-club'
 import comments from './comments'
 import likes from './likes'
+import dislikes from './dislikes'
 import projects from './projects'
 import participants from './participants'
 import messages from './messages'
@@ -21,6 +22,7 @@ export default {
         ...members.Query,
         ...comments.Query,
         ...likes.Query,
+        ...dislikes.Query,
         ...projects.Query,
         ...participants.Query,
     },
@@ -33,6 +35,7 @@ export default {
         ...members.Mutation,
         ...comments.Mutation,
         ...likes.Mutation,
+        ...dislikes.Mutation,
         ...projects.Mutation,
         ...participants.Mutation,
         ...messages.Mutation,

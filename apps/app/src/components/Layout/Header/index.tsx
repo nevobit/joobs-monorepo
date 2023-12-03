@@ -79,6 +79,14 @@ const Header = ({ menu, title, navigation, search, messages, notifications, prof
             {notifications && (
               <TouchableOpacity onPress={() => navigation.navigate('Notifications')} >
                 <Icon name='notifications-outline' size={24} color='#fff' />
+                {/* <View style={{
+                  position: "absolute",
+                  right: 0,
+                  width:10,
+                  height:10,
+                  backgroundColor: "#5368f5",
+                  borderRadius: 100
+                }} /> */}
               </TouchableOpacity>
             )}
 

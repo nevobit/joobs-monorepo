@@ -10,7 +10,6 @@ const Drawer = createDrawerNavigator();
 const SideMenu = () => {
     const navigation = useNavigation<any>();
     const { clubs } = useMyClubs();
-    console.log(clubs)
     return (
         <Drawer.Navigator drawerContent={(props) => <View style={{
             backgroundColor: "#121212",
@@ -63,7 +62,7 @@ const SideMenu = () => {
                 }}>Guardados</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{
+            <TouchableOpacity onPress={() => navigation.navigate("MyDiscussions")} style={{
                 flexDirection: "row",
                 alignItems: "center",
                 gap: 5,

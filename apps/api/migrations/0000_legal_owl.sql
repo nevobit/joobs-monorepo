@@ -40,6 +40,14 @@ CREATE TABLE IF NOT EXISTS "discussions" (
 	"updated_at" timestamp DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS "dislikes" (
+	"user_id" uuid,
+	"discussion_id" uuid,
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
+	CONSTRAINT dislikes_user_id_discussion_id PRIMARY KEY("user_id","discussion_id")
+);
+
 CREATE TABLE IF NOT EXISTS "likes" (
 	"user_id" uuid,
 	"discussion_id" uuid,

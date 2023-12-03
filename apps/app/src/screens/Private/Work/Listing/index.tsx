@@ -23,10 +23,6 @@ const Listing = ({ navigation }: any) => {
       })
   }, []);
 
-
-  console.log(data?.works[0]?.user);
-  console.log("[USER]:", user);
-
   useEffect(() => {
     refetch();
   }, [refetch]);

@@ -27,7 +27,6 @@ const Onboarding = ({ navigation }: any) => {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            console.log({ userInfo })
             const { data } = await login({
                 variables: {
                     email: userInfo.user.email
@@ -40,7 +39,6 @@ const Onboarding = ({ navigation }: any) => {
                 dispatch(signin({ token: data.userLoginGoogle.token }));
             }
         } catch (error: any) {
-            console.log({ error })
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {

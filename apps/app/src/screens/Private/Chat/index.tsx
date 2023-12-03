@@ -74,7 +74,7 @@ const Chat = ({navigation}: any) => {
             gap: 10
         }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon name='arrow-back' size={25} color='#fff' />
+                <Icon name='chevron-back' size={25} color='#fff' />
             </TouchableOpacity>
             <Image source={{
                 uri: 'https://i.ibb.co/4m6pVHr/img5.jpg'

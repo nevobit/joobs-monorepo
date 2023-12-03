@@ -1,4 +1,4 @@
-import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion } from '@joobs/business-logic'
+import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion, getMyDiscussions } from '@joobs/business-logic'
 export default {
     Query: {
         discussions: async (_:any, {}, ctx:any) => {
@@ -22,7 +22,17 @@ export default {
                 }catch(err:any){
                     throw new Error(err);
                 }
-        }
+        },
+        myDiscussions: async (_:any, {}, ctx:any) => {
+            try{
+                const { id } = await verifyToken(ctx) as {id: string};
+                const discussions = await getMyDiscussions({search: id});
+                return discussions.items;
+            }catch(err:any){
+                console.log(err)
+                throw new Error(err);
+            }
+        },
     },
 
     Mutation: {

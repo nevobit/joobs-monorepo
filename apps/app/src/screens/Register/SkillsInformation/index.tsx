@@ -291,7 +291,6 @@ const SkillsInformation = ({ navigation, params }: any) => {
     })
   }
 
-  console.log(skills)
 
     return (
         <View style={{

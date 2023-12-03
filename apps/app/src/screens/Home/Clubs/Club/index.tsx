@@ -11,27 +11,16 @@ import { View } from '../../../../components/Shared/View';
 import ClubTopTap from '../../../../navigator/ClubTopTab';
 
 const Club = ({ navigation, route }: any) => {
-    const { user } = useSelector((state: any) => state.auth);
     const { user: userInfo } = useUser(); 
     const [refreshing, setRefreshing] = React.useState(false);
 
     const { data, loading: isLoading, error, refetch } = useQuery(CLUB, {
-        context: {
-            headers: {
-                authorization: user.token ? `Bearer ${user.token}` : '',
-            },
-        },
         variables: {
             clubId: route.params.id
         }
     });
 
     const { data: dataMembers, loading, refetch: refetchMembers } = useQuery(MEMBERS, {
-        context: {
-            headers: {
-                authorization: user.token ? `Bearer ${user.token}` : '',
-            },
-        },
         variables: {
             membersId: route.params.id
         }
@@ -86,7 +75,7 @@ const Club = ({ navigation, route }: any) => {
                 paddingBottom: 5
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon name='arrow-back' size={25} color='#fff' />
+                    <Icon name='chevron-back' size={25} color='#fff' />
                 </TouchableOpacity>
 
             </DefaultView>
@@ -123,9 +112,9 @@ const Club = ({ navigation, route }: any) => {
                                 <Text style={{
                                     fontSize: 16,
                                     color: '#fff'
-                                }}>{data.club.name}</Text>
+                                }}>{data?.club.name}</Text>
 
-                                {!data.club.joined ? (
+                                {!data?.club.joined ? (
                                     <TouchableOpacity
                                         onPress={() => onSubmit(route.params.id)}
                                         style={{
@@ -177,14 +166,14 @@ const Club = ({ navigation, route }: any) => {
                                     marginTop: 15,
                                     fontSize: 14,
                                     fontWeight: '500'
-                                }}>{data.club.members} integrantes</Text>
+                                }}>{data?.club.members} integrantes</Text>
 
                                 <Text style={{
                                     color: 'rgba(255,255,255,0.8)',
                                     marginTop: 15,
                                     fontSize: 14,
                                     fontWeight: '400'
-                                }}>{data.club.description}</Text>
+                                }}>{data?.club.description}</Text>
                             </DefaultView>
                             <Text style={{
                                 marginTop: 5,

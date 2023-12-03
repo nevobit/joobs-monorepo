@@ -20,7 +20,6 @@ const Review = ({ navigation, route }: any) => {
 
     if (creatingError) {
         Alert.alert('No se pudo crear la publicacion', creatingError.message);
-        console.log(creatingError)
         return
     }
 

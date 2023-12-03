@@ -1,14 +1,13 @@
-import { Result, works, StatusType, Params, users, workRelations, applications, applicationsRelations  } from "@joobs/entities";
+import { Result, works, Params, users, workRelations, applications, applicationsRelations  } from "@joobs/entities";
 import { clientDb } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
 // 
-export const getApplicationsById = async ({ page= 1, limit=24, search, status=StatusType.ACTIVE }: Params): Promise<Result<any>> => {
+export const getApplicationsById = async ({ page= 1, limit=24, search }: Params): Promise<Result<any>> => {
     const infoInstance = await clientDb();
     const db = drizzle(infoInstance, { schema: { users, works, applications, applicationsRelations, workRelations } })
 
-    console.log(status)
     const result = await db.query.applications.findMany({
         where: eq(applications.userId, search!),
         with: {

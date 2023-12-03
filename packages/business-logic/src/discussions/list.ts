@@ -1,4 +1,4 @@
-import { Result, StatusType, clubs, Params, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
+import { Result, StatusType, clubs, Params, dislikes, dislikeRelations, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
 import { clientDb, /*clientDb */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -8,7 +8,7 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
     const infoInstance = await clientDb();
 
     console.log(status)
-    const db = drizzle(infoInstance, { schema: { users, clubs, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
+    const db = drizzle(infoInstance, { schema: { users, clubs, dislikes, dislikeRelations, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
 
     // await result.where(eq(discussions.status, status));
   
@@ -33,6 +33,7 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
     const nextPage = hasNextPage? page + 1 : page;
 
     const userLike = await db.query.likes.findMany({ where: eq(likes.userId, search!) });
+    const userDislike = await db.query.dislikes.findMany({ where: eq(dislikes.userId, search!) });
 
 
     const items = await Promise.all(
@@ -45,7 +46,7 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, status= Sta
             where: eq(likes.discussionId, discussion.id!),
           });
 
-          const updatedClub = { ...discussion, comments: resultMembers.length, likes: resultLikes.length, liked: userLike.some((like) => like.discussionId === discussion.id)  };
+          const updatedClub = { ...discussion, comments: resultMembers.length, likes: resultLikes.length, liked: userLike.some((like) => like.discussionId === discussion.id), disliked: userDislike.some((like) => like.discussionId === discussion.id)  };
           return updatedClub;
         })
       );

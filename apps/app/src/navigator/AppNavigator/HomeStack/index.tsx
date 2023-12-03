@@ -8,13 +8,11 @@ import Home from '../../../screens/Home';
 import CreatePost from '../../../screens/Home/CreatePost';
 import Header from '../../../components/Layout/Header';
 import Search from '../../../screens/Private/Search';
-import SideMenu from '../../../screens/Home/SideMenu';
 
 export type HomeStackParamList = {
   Joobs: undefined;
   Search: undefined;
   CreatePost: undefined;
-  SideMenu: undefined;
 };
 
 type HomeStackNavigationProp = StackNavigationProp<HomeStackParamList>;
@@ -37,13 +35,6 @@ const HomeStack = () => {
         }}
         name="Search"
         component={Search}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="SideMenu"
-        component={SideMenu}
       />
     </Stack.Navigator>
   );

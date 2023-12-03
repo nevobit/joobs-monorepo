@@ -14,13 +14,11 @@ const BasicInformation = ({navigation, route}: any) => {
     const [name, setName] = useState(userInfo?.name);
     const [phone, setPhone] = useState('');
 
-
     let showPhoto = photo?.length > 5? photo : userInfo?.photo?.length > 5 ? userInfo?.photo : ""
 
     useEffect(() => {
         showPhoto = photo; 
     }, [photo])
-    console.log({showPhoto})
 
     const dispatch = useDispatch();
 

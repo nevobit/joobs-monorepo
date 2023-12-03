@@ -23,7 +23,6 @@ const PersonInformation = ({ navigation, params }: any) => {
 
     const dispatch = useDispatch();
 
-    console.log(gender)
     const onSubmit = () => {
         dispatch(saveUserInfo({ gender, born_date }));
         navigation.navigate('LocationInformation')

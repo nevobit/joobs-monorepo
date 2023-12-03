@@ -293,7 +293,7 @@ const EditProfileSkills = ({ navigation }: any) => {
                 gap: 10
             }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon name='arrow-back' size={25} color='#fff' />
+                    <Icon name='chevron-back' size={25} color='#fff' />
                 </TouchableOpacity>
                 <Text style={{
                     fontSize: 20,

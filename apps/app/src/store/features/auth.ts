@@ -29,11 +29,9 @@ export const isSignedIn = () => {
   AsyncStorage.getItem(UserKey)
     .then(res => {
       if (res !== null) {
-        console.log({res});
         state = res;
       } else {
         state = initialState;
-        console.log(false);
       }
     })
     .catch(err => console.log(err));

@@ -52,7 +52,7 @@ const Signin = ({navigation}: any) => {
               <TouchableOpacity style={{
                 marginBottom: 10
               }} onPress={() => navigation.navigate('Onboarding')}>
-          <Icon name='arrow-back' size={25} color='rgba(0,0,0,0.8)' />
+          <Icon name='chevron-back' size={25} color='rgba(0,0,0,0.8)' />
         </TouchableOpacity>
         <Text style={{
             fontWeight: '600',

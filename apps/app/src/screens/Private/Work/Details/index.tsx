@@ -31,9 +31,6 @@ const WorkDetails = ({ navigation, route }: any) => {
     })
     const { isLoading, user } = useUser();
 
-
-
-    console.log(proof)
     const onSubmit = async () => {
         await createApplication({
             variables: {
@@ -78,7 +75,7 @@ const WorkDetails = ({ navigation, route }: any) => {
                     alignItems: 'center',
                     gap: 7
                 }}>
-                    <Icon name='arrow-back-outline' size={24} color='#fff' />
+                    <Icon name='chevron-back-outline' size={24} color='#fff' />
                 </TouchableOpacity>
                 <Pressable onPress={() => share(data?.work?.title)} style={{
                     flexDirection: 'row',

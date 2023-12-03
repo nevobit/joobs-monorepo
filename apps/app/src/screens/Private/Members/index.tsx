@@ -27,8 +27,6 @@ const Members = ({ navigation }: any) => {
         })
     }, []);
 
-    console.log(data)
-
     useEffect(() => {
         refetch()
     }, [refetch])

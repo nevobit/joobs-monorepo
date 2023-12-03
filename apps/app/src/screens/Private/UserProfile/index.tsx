@@ -9,7 +9,9 @@ import {
   Text,
   TouchableOpacity,
   View as DefaultView,
+  Alert,
 } from 'react-native';
+import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useUser} from '../../../hooks/users/useUser';
 import {BottomSheet} from '../../../containers';
@@ -20,6 +22,7 @@ import Textarea from '../../../components/Shared/Textarea';
 // import BottomSheet from '@gorhom/bottom-sheet';
 import Geolocation from '@react-native-community/geolocation';
 import {View} from '../../../components/Shared/View';
+import Skill from '../../../components/UI/Skill';
 
 const UserProfile = ({navigation, route}: any) => {
   const [reported, setReported] = useState(false);
@@ -39,6 +42,20 @@ const UserProfile = ({navigation, route}: any) => {
     setReported(true)
   }
 
+  const share = async () => {
+    const options = {
+      message: `Hey, mira el perfil de ${user.name.split(" ")[0]} En Joobs`,
+      url: 'https://joobs.lat',
+    };
+
+    try {
+      await Share.open(options);
+    } catch (error) {
+      console.error(error);
+      // Alert.alert('Error al compartir', 'No se puede compartir en este momento. Inténtalo de nuevo más tarde.');
+    }
+  };
+
   const getLocation = () => {
     try {
       Geolocation.getCurrentPosition(
@@ -49,7 +66,6 @@ const UserProfile = ({navigation, route}: any) => {
           )
             .then(response => response.json())
             .then(responseJson => {
-              console.log({responseJson});
               const addressComponents =
                 responseJson?.results[0]?.address_components;
               let country = '';
@@ -133,7 +149,7 @@ const UserProfile = ({navigation, route}: any) => {
             size="large"
           />
         ) : (
-          <>
+          <Pressable>
             <DefaultView
               style={{
                 backgroundColor: '#121212',
@@ -147,11 +163,15 @@ const UserProfile = ({navigation, route}: any) => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                 }}>
+                  
                 <DefaultView
                   style={{
                     flexDirection: 'row',
                     gap: 10,
                   }}>
+                         <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name='chevron-back' size={25} color='#fff' />
+            </TouchableOpacity>
                   <Text
                     style={{
                       color: '#fff',
@@ -166,6 +186,13 @@ const UserProfile = ({navigation, route}: any) => {
                     alignItems: 'center',
                     gap: 15,
                   }}>
+                      <TouchableOpacity onPress={share} style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 7,
+      }}>
+          <Icon name="share-social-outline" size={23} color="#fff" />
+        </TouchableOpacity>
                   <TouchableOpacity onPress={() => setProfileOptions(true)}>
                     <Icon
                       name="ellipsis-vertical-sharp"
@@ -179,7 +206,7 @@ const UserProfile = ({navigation, route}: any) => {
             <DefaultView
               style={{
                 backgroundColor: '#121212',
-                height: 200,
+                height: 270,
                 paddingHorizontal: 15,
                 borderBottomEndRadius: 15,
                 borderBottomStartRadius: 15,
@@ -188,7 +215,7 @@ const UserProfile = ({navigation, route}: any) => {
                 style={{
                   position: 'relative',
                   backgroundColor: '#474747',
-                  height: 150,
+                  height: 210,
                   borderRadius: 10,
                   marginTop: 40,
                 }}>
@@ -240,6 +267,7 @@ const UserProfile = ({navigation, route}: any) => {
                     marginTop: 50,
                     marginLeft: 10,
                     fontSize: 16,
+                    fontWeight: "500",
                     color: '#fff',
                   }}>
                   {user?.name}
@@ -247,6 +275,8 @@ const UserProfile = ({navigation, route}: any) => {
 
                 {user?.headline && (
                   <Text
+                  lineBreakMode="tail"
+                  numberOfLines={2}
                     style={{
                       marginTop: 10,
                       marginLeft: 10,
@@ -266,7 +296,13 @@ const UserProfile = ({navigation, route}: any) => {
                   }}>
                   0 conexiones
                 </Text>
+                <DefaultView style={{
+                  paddingHorizontal: 10
+                }}>
+                <Button text='Conectar' />
               </DefaultView>
+              </DefaultView>
+              
             </DefaultView>
             <DefaultView
               style={{
@@ -288,14 +324,14 @@ const UserProfile = ({navigation, route}: any) => {
                       color: 'rgba(0,0,0,0.8)',
                       fontSize: 16,
                     }}>
-                    Sobre mi
+                    Sobre {user?.name.split(" ")[0]}
                   </Text>
                 </DefaultView>
 
                 <DefaultView
                   style={{
                     marginTop: 15,
-                    backgroundColor: 'rgba(0,0,0,0.05)',
+                    backgroundColor: 'rgba(0,0,0,0.03)',
                     borderRadius: 10,
                     padding: 10,
                   }}>
@@ -319,7 +355,7 @@ const UserProfile = ({navigation, route}: any) => {
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
-                          gap: 1,
+                          gap: 10,
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}>
@@ -340,90 +376,27 @@ const UserProfile = ({navigation, route}: any) => {
                       </DefaultView>
                     )}
                   </Text>
+                  {user?.college && (
+                    <DefaultView style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 10,
+                      marginTop: 15
+                    }}>
+                      <Icon name='school-outline' size={23} color="#121212" />
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: 'rgba(0,0,0,0.8)',
+                      }}>
+                      {user?.college}
+                    </Text>
+                    </DefaultView>
+
+                  )}
+
                 </DefaultView>
               </DefaultView>
-
-              {/* Private Information */}
-              {/* <View style={{
-                marginTop: 15,
-                backgroundColor: 'rgba(0,0,0,0.05)',
-                borderRadius: 10,
-                padding: 10
-              }} >
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center'
-                }}>
-                  <Text style={{
-                    fontWeight: '600',
-                    fontSize: 16,
-                    color: 'rgba(0,0,0,0.8)',
-                  }}>Informacion Privada </Text>
-                  <View style={{
-
-                    backgroundColor: 'rgba(255,255,255, .8)',
-                    marginLeft: 10,
-                    borderRadius: 50,
-                    paddingHorizontal: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex',
-                    flexDirection: 'row'
-                  }}>
-                    <Text> <Icon name="time-outline" color='rgba(0,0,0,0.8)' /> </Text>
-                    <Text style={{
-                      fontWeight: '400',
-                      fontSize: 12,
-                      color: 'rgba(0,0,0,0.8)'
-                    }}>Solo visible para ti</Text>
-                  </View>
-                </View>
-                <View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 10
-                  }}>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >Genero</Text>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >{user?.gender}</Text>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 10
-                  }}>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >Telefono</Text>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >{user?.phone}</Text>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 10
-                  }}>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >Nacimiento</Text>
-                    <Text style={{
-                      fontSize: 14,
-                      color: 'rgba(0,0,0,0.8)'
-                    }} >{user?.born_date}</Text>
-                  </View>
-
-                </View>
-              </View> */}
 
               {/* SKILLS */}
               <DefaultView
@@ -450,90 +423,17 @@ const UserProfile = ({navigation, route}: any) => {
                     flexDirection: 'row',
                     flexWrap: 'wrap',
                     marginTop: 10,
+                    gap: 10
                   }}>
                   {user?.skills?.map((skill: string) => (
-                    <Text
-                      style={{
-                        color: 'rgba(0,0,0,0.8)',
-                        fontSize: 15,
-                        marginRight: 10,
-                      }}
-                      key={skill}>
-                      {skill},
-                    </Text>
+                    <Skill key={skill} skill={skill} />
                   ))}
                 </DefaultView>
               </DefaultView>
 
-              {/* SOCIAL LINKS */}
-              {/* <Text style={{
-                fontSize: 16,
-                color: 'rgba(0,0,0,0.8)',
-                fontWeight: '600',
-                marginTop: 25
-              }}>Redes sociales</Text>
-              <Text style={{
-                color: 'rgba(0,0,0,0.6)',
-                fontSize: 14,
-                fontWeight: '400'
-              }}>Para que las personas puedan conocerte mejor</Text> */}
-
-              {/* <Pressable onPress={() => navigation.navigate('EditProfileNetwork', { id: 'g' })}   style={{
-                marginTop: 20
-              }}
-              >
-               
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 15
-                }}>
-                  <Icon name='logo-instagram' color='#E1306C' size={28} />
-                  <Input style={{
-                    width: '85%'
-                  }} editable={false} placeholder='Agregar usuario de Instagram' value={user?.instagram} />
-                </View>
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 15,
-                  marginTop: 15
-                }}>
-                  <Icon name='logo-twitter' color='#1DA1F2' size={28} />
-                  <Input editable={false} style={{
-                    width: '85%'
-                  }} placeholder='Agregar usuario de Twitter' value={user?.twitter} />
-                </View>
-              </Pressable> */}
-
-              {/* <View style={{
-                marginTop: 20
-              }}
-              >
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 15
-                }}>
-                  <Icon name='logo-facebook' color='#3b5998' size={28} />
-                  <Input  style={{
-                    width: '85%',
-                  }} editable={false} placeholder='Agregar link de Facebook' value={user?.facebook} />
-                </View>
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 15,
-                  marginTop: 15
-                }}>
-                  <Icon name='logo-linkedin' color='#0A66C2' size={28} />
-                  <Input style={{
-                    width: '85%'
-                  }} editable={false} placeholder='Agregar link de Linkedin' value={user?.linkedin} />
-                </View>
-              </View> */}
+    
             </DefaultView>
-          </>
+          </Pressable>
         )}
       </ScrollView>
 

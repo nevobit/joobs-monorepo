@@ -4,8 +4,6 @@ import { useMembersClubs } from '../../../../../hooks'
 
 const MembersClub = ({id}: { id: string }) => {
     const { members, isLoading } = useMembersClubs(id);
-
-    console.log(members)
     return (
         <ScrollView  contentContainerStyle={{
             marginBottom: 50,
@@ -13,8 +11,8 @@ const MembersClub = ({id}: { id: string }) => {
             paddingTop: 10,
         }}>
             {members?.map((member: any) => (
-                <Pressable>
-                <DefaultView key={member.id} style={{
+                <Pressable key={member.user.id} >
+                <DefaultView  style={{
                     backgroundColor: '#fff',
                     borderRadius: 10,
                     padding: 10,

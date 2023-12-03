@@ -17,7 +17,7 @@ const DiscussionsClub = ({navigation, id}: { navigation: any, id: string }) => {
           >
             {discussions?.slice().reverse().filter((disscusion: any) => disscusion.club.id == id).map((discussion: any) => (
               <Pressable key={discussion.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} >
-                <HomePost navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
+                <HomePost disliked={discussion.disliked} navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
               </Pressable>
             ))}
 

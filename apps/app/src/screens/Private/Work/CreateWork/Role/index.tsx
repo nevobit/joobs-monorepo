@@ -15,7 +15,6 @@ const Role = ({ navigation, route }: any) => {
         frecuency: ''
     });
 
-    console.log(remuneration)
     return (
         <View >
           <Header  title='Crear una publicación' step={2} />

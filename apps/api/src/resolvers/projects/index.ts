@@ -1,4 +1,4 @@
-import { createProject, getAllProjects, getProjectById } from '@joobs/business-logic'
+import { createProject, getAllProjects, getProjectById, updateProject } from '@joobs/business-logic'
 export default {
     Query: {
         projects: async () => {
@@ -34,6 +34,14 @@ export default {
         createProject: async (_: any, {data}: any, _context: any) => {
             const project = await createProject({...data, status: 'active'});
             return project;
+        },
+        updateProject: async (_: any, {data}: any) => {
+            try{
+                const project = await updateProject(data);
+                return project;
+            }catch(err:any){
+                throw new Error(err);
+            }
         }
     }
 }

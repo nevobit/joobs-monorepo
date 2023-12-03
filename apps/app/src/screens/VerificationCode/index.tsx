@@ -37,7 +37,6 @@ const VerificationCode = ({navigation, route}: any) => {
         },
       });
 
-      console.log(route.params.type);
       if (route.params.type == 'register') {
         dispatch(saveUserInfo({email: route.params.email}));
         navigation.navigate('Register', {email: route.params.email});
@@ -72,7 +71,7 @@ const VerificationCode = ({navigation, route}: any) => {
             marginBottom: 10,
           }}
           onPress={() => navigation.navigate('Onboarding')}>
-          <Icon name="arrow-back" size={25} color="rgba(0,0,0,0.8)" />
+          <Icon name="chevron-back" size={25} color="rgba(0,0,0,0.8)" />
         </TouchableOpacity>
         <Text
           style={{

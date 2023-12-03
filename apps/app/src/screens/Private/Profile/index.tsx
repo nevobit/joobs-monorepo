@@ -30,7 +30,6 @@ const Profile = ({ navigation }: any) => {
           )
             .then((response) => response.json())
             .then((responseJson) => {
-              console.log({ responseJson })
               const addressComponents = responseJson.results[0].address_components;
               let country = '';
               let city = '';
@@ -88,7 +87,7 @@ const Profile = ({ navigation }: any) => {
         {isLoading ? <ActivityIndicator color='#000' style={{
           marginTop: 15,
         }} size='large' /> : (
-          <>
+          <Pressable>
 
             <DefaultView style={{
               backgroundColor: '#121212',
@@ -562,7 +561,7 @@ const Profile = ({ navigation }: any) => {
               </DefaultView>
 
             </DefaultView>
-          </>
+          </Pressable>
 
         )}
 
