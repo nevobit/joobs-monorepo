@@ -11,6 +11,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import Geolocation from '@react-native-community/geolocation'
 import { View } from '../../../components/Shared/View'
 import Header from '../../../components/Layout/Header'
+import { useConnections } from '../../../hooks'
 
 const Profile = ({ navigation }: any) => {
   const [editProfile, setEditProfile] = useState(false);
@@ -20,6 +21,9 @@ const Profile = ({ navigation }: any) => {
     city: '',
   })
     const profileTitle = user?.email?.split('@')[0];
+
+    const { isLoading: isLoadingConnections, connections } = useConnections();
+
   useEffect(() => {
     try{
       Geolocation.getCurrentPosition(
@@ -165,7 +169,7 @@ const Profile = ({ navigation }: any) => {
                   marginLeft: 10,
                   fontSize: 14,
                   color: '#fff'
-                }}>0 conexiones</Text>
+                }}>{connections} conexiones</Text>
 
                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile', { id: 'g' })} style={{
                   position: 'absolute',

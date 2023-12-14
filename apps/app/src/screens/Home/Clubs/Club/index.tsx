@@ -51,12 +51,12 @@ const Club = ({ navigation, route }: any) => {
         }
     }
 
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        refetch().then(() => {
-            setRefreshing(false);
-        })
-    }, []);
+    // const onRefresh = React.useCallback(() => {
+    //     setRefreshing(true);
+    //     refetch().then(() => {
+    //         setRefreshing(false);
+    //     })
+    // }, []);
 
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const Club = ({ navigation, route }: any) => {
 
             </DefaultView>
             <ScrollView
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 contentContainerStyle={{
                     flex: 1,
                     height: '100%',

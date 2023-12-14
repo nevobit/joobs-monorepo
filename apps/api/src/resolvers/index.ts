@@ -11,7 +11,8 @@ import dislikes from './dislikes'
 import projects from './projects'
 import participants from './participants'
 import messages from './messages'
- 
+import connections from './connections'
+
 export default {
     Query: {
         ...works.Query,
@@ -25,6 +26,7 @@ export default {
         ...dislikes.Query,
         ...projects.Query,
         ...participants.Query,
+        ...connections.Query
     },
     Mutation: {
         ...auth.Mutation,
@@ -40,6 +42,7 @@ export default {
         ...participants.Mutation,
         ...messages.Mutation,
         ...users.Mutation,
+        ...connections.Mutation
     },
     Subscription: {
         ...messages.Subscription

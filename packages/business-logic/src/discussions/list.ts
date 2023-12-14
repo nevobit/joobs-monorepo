@@ -1,13 +1,12 @@
-import { Result, StatusType, clubs, Params, dislikes, dislikeRelations, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
+import { Result, clubs, Params, dislikes, dislikeRelations, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
 import { clientDb, /*clientDb */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
 
-export const getAllDiscussions = async ({ page= 1, limit=24, search, status= StatusType.ACTIVE }: Params): Promise<Result<any>> => {
+export const getAllDiscussions = async ({ page= 1, limit=24, search }: Params): Promise<Result<any>> => {
     const infoInstance = await clientDb();
 
-    console.log(status)
     const db = drizzle(infoInstance, { schema: { users, clubs, dislikes, dislikeRelations, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
 
     // await result.where(eq(discussions.status, status));

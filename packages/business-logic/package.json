@@ -10,6 +10,7 @@
         "@joobs/entities": "workspace:^",
         "drizzle-orm": "^0.28.6",
         "form-data": "^4.0.0",
+        "googleapis": "^129.0.0",
         "jsonwebtoken": "^9.0.2",
         "mailersend": "^2.2.0",
         "mailgun.js": "^9.3.0",

@@ -23,7 +23,6 @@ export const useUploadImage = () => {
         } catch (error: any) {
             setIsLoading(false);
             setError(JSON.stringify(error.message))
-            console.log(error)
         }
     };
 

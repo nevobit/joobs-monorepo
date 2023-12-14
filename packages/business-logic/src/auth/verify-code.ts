@@ -28,7 +28,6 @@ export const verifyCode = async ({ email, code }: { code: number, email: string 
         // Obtener el primer usuario del resultado
         const user = result[0];
 
-        console.log(user)
         // Verificar el código
         if(Number(user.code) !== Number(code)) {
             throw new Error('Invalid verification code');

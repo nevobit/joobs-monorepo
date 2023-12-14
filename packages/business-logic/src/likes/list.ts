@@ -12,6 +12,5 @@ export const getLikes = async ({ id }: {id: string}): Promise<any> => {
         user: true
     }});
 
-    console.log(result);
     return result
 }

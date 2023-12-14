@@ -87,8 +87,10 @@ const ProjectCard = ({difficulty, duration, skills, title}: any) => {
                     justifyContent: 'space-between',
                     alignItems: 'center'
                 }}>
-                    <Text> 
-                        {/* 41 Completados */}
+                    <Text style={{
+                        color: "#121212"
+                    }}> 
+                        0 Completados
                     </Text>
                     <Icon name='arrow-forward-outline' size={24} />
 

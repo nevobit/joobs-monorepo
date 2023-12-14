@@ -272,6 +272,11 @@ input UserInput {
     company_description: String
 }
 
+# CONNECTIONS
+input ConnectionInput {
+    receiverId: String
+}
+
 type Query {
     project(id: String): Project
     projects: [Project]
@@ -307,6 +312,12 @@ type Query {
     
     user(uuid: String): User
     users: [User]
+
+    # CONNECTIONS
+    isRequest(data: ConnectionInput): Boolean
+    isConnected(data: ConnectionInput): Boolean
+    connections(id: String): Int
+
 }
 
 
@@ -343,6 +354,10 @@ type Mutation {
     updateUser(data: UserInput): User
 
     addMessage(text: String!): Boolean
+
+    # CONNECTIONS
+    connect(data: ConnectionInput): Boolean
+    reject(data: ConnectionInput): Boolean
 }
 
 type Message {

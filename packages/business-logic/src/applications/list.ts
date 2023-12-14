@@ -20,7 +20,7 @@ export const getApplicationsById = async ({ page= 1, limit=24, search }: Params)
     })
 
     const pageSize = limit;
-    const skip = (page - 1) * pageSize;
+    // const skip = (page - 1) * pageSize;
     const count = (await result).length;
     const pages = Math.ceil(count / pageSize);
 
@@ -34,7 +34,6 @@ export const getApplicationsById = async ({ page= 1, limit=24, search }: Params)
     const hasNextPage = page < pages;
     const nextPage = hasNextPage? page + 1 : page;
 
-    console.log(skip, search)
     return {
         count,
         items,

@@ -13,8 +13,6 @@ export const getUserParticipant = async (projectId: string, id: string): Promise
         where: and(eq(participants.userId, id), eq(participants.projectId, projectId)),
     });
 
-    console.log({result})
-
     const isJoined = result.length > 0;
 
     return isJoined

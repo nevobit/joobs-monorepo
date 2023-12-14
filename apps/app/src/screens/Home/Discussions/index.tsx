@@ -11,9 +11,6 @@ const Discussions = ({ navigation, search }: any) => {
   const [refreshing, setRefreshing] = useState(false);
   const { discussions, isLoading, error, refetch } = useDiscussions();
 
-  console.log(discussions)
-  console.log(error)
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch().then(() => {
@@ -22,7 +19,7 @@ const Discussions = ({ navigation, search }: any) => {
   }, []);
 
   return (
-    <View  >
+    <>
       <ScrollView contentContainerStyle={{
         backgroundColor: "#f0f0f0",
         marginBottom: 10
@@ -102,7 +99,7 @@ const Discussions = ({ navigation, search }: any) => {
         style={styles.button}>
         <Icon name='pencil' size={22} color='#fff' />
       </TouchableOpacity>
-    </View>
+    </>
   )
 }
 

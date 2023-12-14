@@ -23,11 +23,11 @@ import Textarea from '../../../components/Shared/Textarea';
 import Geolocation from '@react-native-community/geolocation';
 import {View} from '../../../components/Shared/View';
 import Skill from '../../../components/UI/Skill';
+import { useConnect, useConnections, useIsConnected, useIsRequest, useReject } from '../../../hooks';
 
 const UserProfile = ({navigation, route}: any) => {
   const [reported, setReported] = useState(false);
-
-  const [editProfile, setEditProfile] = useState(false);
+  const [blocked, setBlocked] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
   const [profileOptions, setProfileOptions] = useState(false);
 
@@ -37,9 +37,25 @@ const UserProfile = ({navigation, route}: any) => {
     city: '',
   });
 
+  const { isCreating, connect } = useConnect(route.params.id);
+  const { isLoading: isLoadingRequest, isRequest, refetch: refetchRequest } = useIsRequest(route.params.id);
+  const { isLoading: isLoadingConnected, isConnected } = useIsConnected(route.params.id);
+  const { isLoading: isLoadingConnections, connections } = useConnections(route.params.id);
+  const { isRejected, reject } = useReject(route.params.id);
+
+
+
+
+  console.log("Request", isConnected)
+
   const opening = () => {
     setProfileOptions(false);  
     setReported(true)
+  }
+
+  const blocking = () => {
+    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito");
+    navigation.navigate("Home");
   }
 
   const share = async () => {
@@ -104,6 +120,20 @@ const UserProfile = ({navigation, route}: any) => {
     refetch();
   }, [refetch]);
 
+
+  const handleReject = async () => {
+    await reject();
+    refetchRequest();
+  }
+
+  const handleConnect = async () => {
+    await connect();
+    refetchRequest();
+  }
+
+  useEffect(() => {
+    refetchRequest();
+  }, [refetchRequest]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -294,12 +324,32 @@ const UserProfile = ({navigation, route}: any) => {
                     fontSize: 14,
                     color: '#fff',
                   }}>
-                  0 conexiones
+                  {connections} conexiones
                 </Text>
                 <DefaultView style={{
                   paddingHorizontal: 10
                 }}>
-                <Button text='Conectar' />
+                  {isRequest ? (
+                    <TouchableOpacity onPress={handleReject}  style={{
+                      height: 40,
+                      marginTop: 15
+                    }} > 
+                      <Text style={{
+                        textAlign: "center",
+                        fontWeight: "500",
+                        color: "#5368f5"
+                      }}>Cancelar solicitud</Text> 
+                    </TouchableOpacity>
+                  ): (
+                    <>
+                      {isConnected ? <></> : (
+
+                    <Button loading={isCreating} onPress={handleConnect} text='Conectar' />
+
+                      )}
+                    </>
+
+                  )}
               </DefaultView>
               </DefaultView>
               
@@ -441,8 +491,20 @@ const UserProfile = ({navigation, route}: any) => {
        
     <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
      
-
-     <TouchableOpacity onPress={opening}>
+    <TouchableOpacity style={{
+      height: 40,
+      justifyContent: "center"
+     }} onPress={blocking}>
+       <Text style={{
+         textAlign: 'center',
+         color: 'rgba(0,0,0,0.8)',
+         fontSize: 14
+       }}>Bloquear</Text>
+     </TouchableOpacity>
+     <TouchableOpacity style={{
+      height: 40,
+      justifyContent: "center"
+     }} onPress={opening}>
        <Text style={{
          textAlign: 'center',
          color: 'rgba(0,0,0,0.8)',

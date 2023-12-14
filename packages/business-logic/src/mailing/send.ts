@@ -1,9 +1,9 @@
-import { generate } from 'otp-generator';
-import { getEmailHTML, EmailSubjects, EmailTemplates } from './html-templates';
+import { generate } from "otp-generator";
+import { getEmailHTML, EmailSubjects, EmailTemplates } from "./html-templates";
 // import Mailgun from 'mailgun.js';
 // import formData from 'form-data';
 // import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
 // const MAILGUN_KEY = process.env.MAILGUN_KEY || 'anymailgunparameter';
 
@@ -20,28 +20,33 @@ const { RESEND_KEY } = process.env;
 // });
 const resend = new Resend(RESEND_KEY!);
 
+type EmailTemplateType =
+  | "verification"
+  | "changePassword"
+  | "resetPassword"
+  | "created";
 
-type EmailTemplateType = 'verification' | 'changePassword' | 'resetPassword' | 'created';
-
-export const sendEmail = async (data: any, templateType: EmailTemplateType, generateCode: boolean) => {
+export const sendEmail = async (
+  data: any,
+  templateType: EmailTemplateType,
+  generateCode: boolean
+) => {
   const htmlTemplate = EmailTemplates[templateType];
 
   const code = generate(6, {
     lowerCaseAlphabets: false,
     upperCaseAlphabets: false,
-    specialChars: false
+    specialChars: false,
   });
-
-  console.log({code})
 
   const html = getEmailHTML(htmlTemplate, code);
 
   const messageData = {
-    from: 'noreply@triquicoin.com',
+    from: "noreply@triquicoin.com",
     to: data.email,
     subject: EmailSubjects[templateType],
     text: EmailSubjects[templateType],
-    html: html
+    html: html,
   };
   // const sentFrom = new Sender(messageData.from, "Joobs");
   // const recipients = [
@@ -55,14 +60,12 @@ export const sendEmail = async (data: any, templateType: EmailTemplateType, gene
     //   console.log(error);
     // });
 
-
-
-const info = await resend.emails.send({
-  from: messageData.from,
-  to: messageData.to,
-  subject: messageData.subject,
-  html: messageData.html
-});
+    await resend.emails.send({
+      from: messageData.from,
+      to: messageData.to,
+      subject: messageData.subject,
+      html: messageData.html,
+    });
     // const emailParams = new EmailParams()
     // .setFrom(sentFrom)
     // .setTo(recipients)
@@ -70,27 +73,29 @@ const info = await resend.emails.send({
     // .setSubject(messageData.subject)
     // .setHtml(messageData.html)
     // .setText(messageData.text);
-  
+
     // const info = await mailerSend.email.send(emailParams);
-    console.log(info);
     return generateCode ? code : undefined;
   } catch (error: any) {
     console.log(error);
-      throw new Error(error.message);
+    throw new Error(error.message);
   }
-} 
+};
 
-export const sendEmailCreatedWork = async (data: any, templateType: EmailTemplateType) => {
+export const sendEmailCreatedWork = async (
+  data: any,
+  templateType: EmailTemplateType
+) => {
   const htmlTemplate = EmailTemplates[templateType];
 
   const html = getEmailHTML(htmlTemplate, data.title);
 
   const messageData = {
-    from: 'noreply@triquicoin.com',
+    from: "noreply@triquicoin.com",
     to: data.email,
     subject: EmailSubjects[templateType],
     text: EmailSubjects[templateType],
-    html: html
+    html: html,
   };
   // const sentFrom = new Sender(messageData.from, "Joobs");
   // const recipients = [
@@ -104,14 +109,12 @@ export const sendEmailCreatedWork = async (data: any, templateType: EmailTemplat
     //   console.log(error);
     // });
 
-
-
-const info = await resend.emails.send({
-  from: messageData.from,
-  to: messageData.to,
-  subject: messageData.subject,
-  html: messageData.html
-});
+    await resend.emails.send({
+      from: messageData.from,
+      to: messageData.to,
+      subject: messageData.subject,
+      html: messageData.html,
+    });
     // const emailParams = new EmailParams()
     // .setFrom(sentFrom)
     // .setTo(recipients)
@@ -119,12 +122,11 @@ const info = await resend.emails.send({
     // .setSubject(messageData.subject)
     // .setHtml(messageData.html)
     // .setText(messageData.text);
-  
+
     // const info = await mailerSend.email.send(emailParams);
-    console.log(info);
-    return 'Succesfully sent';
+    return "Succesfully sent";
   } catch (error: any) {
     console.log(error);
-      throw new Error(error.message);
+    throw new Error(error.message);
   }
-} 
+};

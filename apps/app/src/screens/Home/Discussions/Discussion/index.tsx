@@ -177,7 +177,10 @@ const DiscussionDetails = ({navigation, route}: any) => {
       await refetch();
     }
   };
-
+  const blocking = () => {
+    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito");
+    navigation.navigate("Home");
+  }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     refetch().then(() => {
@@ -557,7 +560,21 @@ const DiscussionDetails = ({navigation, route}: any) => {
       <BottomSheet
         isVisible={profileOptions}
         setIsVisible={() => setProfileOptions(!profileOptions)}>
-        <TouchableOpacity onPress={opening}>
+             
+    <TouchableOpacity style={{
+      height: 40,
+      justifyContent: "center"
+     }} onPress={blocking}>
+       <Text style={{
+         textAlign: 'center',
+         color: 'rgba(0,0,0,0.8)',
+         fontSize: 14
+       }}>Bloquear</Text>
+     </TouchableOpacity>
+        <TouchableOpacity style={{
+          height: 40,
+          justifyContent: "center"
+        }} onPress={opening}>
           <Text
             style={{
               textAlign: 'center',
@@ -577,6 +594,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 16,
             fontWeight: '600',
+            color: "#121212"
           }}>
           Reporte
         </Text>
@@ -585,6 +603,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 12,
             marginBottom: 20,
+            color: "#121212"
           }}>
           Ayúdanos a entender lo que está pasando y lo investigaremos.
         </Text>
@@ -614,6 +633,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 16,
             fontWeight: '600',
+            color: "#121212"
           }}>
           Gracias por hacernos saber
         </Text>
@@ -622,6 +642,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 12,
             marginBottom: 20,
+            color: "#121212"
           }}>
           Tus comentarios son importantes para ayudarnos a mantener la comunidad
           Joobs segura y de calidad.

@@ -136,6 +136,23 @@ CREATE TABLE IF NOT EXISTS "works" (
 	"updated_at" timestamp DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS "connections" (
+	"sender_id" uuid NOT NULL,
+	"receiver_id" uuid NOT NULL,
+	"status" varchar(256),
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
+	CONSTRAINT connections_sender_id_receiver_id PRIMARY KEY("sender_id","receiver_id")
+);
+
+CREATE TABLE IF NOT EXISTS "saved" (
+	"user_id" uuid NOT NULL,
+	"discussion_id" uuid NOT NULL,
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
+	CONSTRAINT saved_user_id_discussion_id PRIMARY KEY("user_id","discussion_id")
+);
+
 CREATE UNIQUE INDEX IF NOT EXISTS "clubs_id_index" ON "clubs" ("id");
 CREATE UNIQUE INDEX IF NOT EXISTS "discussions_id_index" ON "discussions" ("id");
 CREATE UNIQUE INDEX IF NOT EXISTS "projects_id_index" ON "projects" ("id");

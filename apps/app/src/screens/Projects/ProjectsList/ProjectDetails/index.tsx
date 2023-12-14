@@ -24,6 +24,7 @@ import {List} from 'react-native-paper';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import HTML from 'react-native-render-html';
 import CodeHighlighter from "react-native-code-highlighter";
+import Markdown, { MarkdownIt } from 'react-native-markdown-display';
 
 const ProjectDetails = ({navigation, route}: any) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -355,14 +356,12 @@ const ProjectDetails = ({navigation, route}: any) => {
                           title={'Paso ' + (index + 1)}
                           description={step.title}
                           right={() => <Icon name="add" size={23} />}>
-                          <List.Item
-                            title=""
-                            style={{}}
-                            descriptionNumberOfLines={1000}
-                            description={step.description}
-                          />
-                         
-
+                          
+                        <Markdown  markdownit={
+                MarkdownIt({typographer: true}).disable([ 'link', 'image' ])
+              } >
+                          {step.description}
+                        </Markdown>
 
                         </List.Accordion>
                       ),

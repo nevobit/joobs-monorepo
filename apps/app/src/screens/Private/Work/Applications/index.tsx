@@ -69,7 +69,7 @@ const Applications = ({navigation}: any) => {
 contentContainerStyle={{
   marginBottom: 50
 }}
-  data={data.applications}
+  data={data?.applications}
   renderItem={( { item } ) => 
   <Pressable key={item.id} onPress={() => navigation.navigate('WorkDetails', { id: item.work.id })}>
       <WorkCard {...item.work} />

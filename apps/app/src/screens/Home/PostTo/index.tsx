@@ -231,13 +231,15 @@ const PostTo = ({navigation, route}: any) => {
          fontSize: 16,
          fontWeight: "600",
          marginBottom: 15,
-         marginTop: 15
+         marginTop: 15,
+         color: 'rgba(0,0,0,0.8)',
        }} >Pautas de discusión</Text>
        <Text style={{
          textAlign: "left",
          fontSize: 12,
          fontWeight: "300",
-         marginBottom: 20
+         marginBottom: 20,
+         color: 'rgba(0,0,0,0.8)',
        }} >Joobs es una plataforma para discutir una variedad de temas. Te agradeceríamos si pudieras seguir estas pautas al crear una discusión:</Text>
        
        <DefaultView style={{
@@ -252,7 +254,8 @@ const PostTo = ({navigation, route}: any) => {
                 <Icon name='star' color="#5368f5" size={18} />
                 <Text style={{
                     fontSize: 12,
-                    fontWeight: "300"
+                    fontWeight: "300",
+                    color: 'rgba(0,0,0,0.8)',
                 }} >Sé amable con aquellos que comentan tu discussión.</Text>
             </DefaultView>
             <DefaultView style={{
@@ -263,7 +266,8 @@ const PostTo = ({navigation, route}: any) => {
                 <Icon name='star' color="#5368f5" size={18} />
                 <Text style={{
                     fontSize: 12,
-                    fontWeight: "300"
+                    fontWeight: "300",
+                    color: 'rgba(0,0,0,0.8)',
                 }} >Elige el club más relevante para publicar tu discussión.</Text>
             </DefaultView>
             <DefaultView style={{
@@ -274,7 +278,9 @@ const PostTo = ({navigation, route}: any) => {
                 <Icon name='star' color="#5368f5" size={18} />
                 <Text style={{
                     fontSize: 12,
-                    fontWeight: "300"
+                    fontWeight: "300",
+                    color: 'rgba(0,0,0,0.8)',
+
                 }} >No promociones ni vendas ningún producto o servicio.</Text>
             </DefaultView>
             <DefaultView style={{
@@ -285,7 +291,8 @@ const PostTo = ({navigation, route}: any) => {
                 <Icon name='star' color="#5368f5" size={18} />
                 <Text style={{
                     fontSize: 12,
-                    fontWeight: "300"
+                    fontWeight: "300",
+                    color: 'rgba(0,0,0,0.8)',
                 }} >No publiques requisitos de contratación. Puedes usar <Text style={{ color: "#5368f5", fontWeight: "500" }} >la sección de trabajo</Text> en su lugar.</Text>
             </DefaultView>
        </DefaultView>

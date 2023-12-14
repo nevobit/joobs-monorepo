@@ -39,6 +39,7 @@ const Onboarding = ({ navigation }: any) => {
                 dispatch(signin({ token: data.userLoginGoogle.token }));
             }
         } catch (error: any) {
+            console.log(error)
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {
