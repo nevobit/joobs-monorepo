@@ -10,3 +10,8 @@ mutation Mutation($data: DataCreateDiscussion) {
   }
 }
 `
+
+export const VOTE = gql`
+mutation Mutation($data: VoteInput) {
+  vote(data: $data)
+}`

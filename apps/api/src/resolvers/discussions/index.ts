@@ -1,4 +1,4 @@
-import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion, getMyDiscussions } from '@joobs/business-logic'
+import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion, getMyDiscussions, voteForDiscussionOption } from '@joobs/business-logic'
 export default {
     Query: {
         discussions: async (_:any, {}, ctx:any) => {
@@ -39,9 +39,16 @@ export default {
         createDiscussion: async (_: any, {data}: any, ctx: any) => {
             const { id } = await verifyToken(ctx) as {id: string};
             const userId = id;
-            const { title, description, images, link, clubId } = data;
-            const discussion = await createDiscussion({title, description, images, link, userId, clubId, status: 'active' });
+            const discussion = await createDiscussion({...data, userId, status: 'active' });
             return discussion;
-        }
+        },
+        vote: async (_: any, {data}: any, ctx: any) => {
+            const { id } = await verifyToken(ctx) as {id: string};
+            const userId = id;
+            console.log(data)
+            const discussion = await voteForDiscussionOption(userId, data.discussionId, data.optionId);
+            return discussion;
+        },
+        
     }
 }

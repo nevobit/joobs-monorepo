@@ -43,6 +43,12 @@ input DataCreateWork {
 
 #DISCUSSION
 
+type Poll {
+    id: String
+    text: String
+    votes: Int
+}
+
 type Discussion {
     id: ID
     title: String
@@ -51,20 +57,38 @@ type Discussion {
     created_at: String
     images: [String]
     link: String
+    voters: [String]
     comments: Int
+    isPoll: Boolean
+    poll: [Poll]
     likes: Int
     liked: Boolean
     disliked: Boolean
     description: String
 }
 
+input PollInput {
+    id: String
+    text: String
+    votes: Int
+    voters: [String]
+}
+
 input DataCreateDiscussion {
     title: String
     images: [String]
     link: String
+    voters: [String]
+    isPoll: Boolean
+    poll: [PollInput]
     clubId: String
     description: String
 }
+
+input VoteInput {
+    discussionId: String
+    optionId: String
+} 
 
 # APPLICATION
 type Application {
@@ -339,6 +363,8 @@ type Mutation {
     updateProject(data: DataCreateProject): Project
 
     comment(data: DataCreateComment): Comment
+
+    vote(data: VoteInput): Boolean
 
     like(data: DataCreateLike): Like
     likeDelete(data: DataCreateLike): Boolean

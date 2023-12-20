@@ -8,6 +8,13 @@
       "when": 1702397033272,
       "tag": "0000_great_morg",
       "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1702845617682,
+      "tag": "0001_secret_cloak",
+      "breakpoints": false
     }
   ]
 }

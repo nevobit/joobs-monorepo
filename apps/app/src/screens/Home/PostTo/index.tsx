@@ -17,31 +17,30 @@ import {useSelector} from 'react-redux';
 import {useClubs, useUploadImage} from '../../../hooks';
 import {DISCUSSIONS} from '../../../graphql/queries';
 import {View} from '../../../components/Shared/View';
-import { BottomSheet } from '../../../containers';
+import {BottomSheet} from '../../../containers';
 import Button from '../../../components/Shared/Button';
 const colors: string[] = [
-    'rgba(94, 53, 177, 0.3)', // Rosa claro
-    'rgba(0, 121, 107, 0.3)', // Lila claro
-    '#E6EE9C70', // Amarillo claro
-    '#C5E1A550', // Lima claro
-    '#A5D6A750', // Verde claro
-    '#80CBC450', // Verde menta
-    'rgba(230, 81, 0, 0.3)', // Azul claro
-    'rgba(96, 125, 139, 0.3)', // Turquesa claro
-    'rgba(0, 96, 100, 0.3)', // Azul cielo
-    'rgba(40, 53, 147, 0.3)', // Lavanda
-    '#E6EE9C70', // Amarillo claro
-    '#C5E1A550', // Lima claro
-    '#A5D6A750', // Verde claro
-  ];
+  'rgba(94, 53, 177, 0.3)', // Rosa claro
+  'rgba(0, 121, 107, 0.3)', // Lila claro
+  '#E6EE9C70', // Amarillo claro
+  '#C5E1A550', // Lima claro
+  '#A5D6A750', // Verde claro
+  '#80CBC450', // Verde menta
+  'rgba(230, 81, 0, 0.3)', // Azul claro
+  'rgba(96, 125, 139, 0.3)', // Turquesa claro
+  'rgba(0, 96, 100, 0.3)', // Azul cielo
+  'rgba(40, 53, 147, 0.3)', // Lavanda
+  '#E6EE9C70', // Amarillo claro
+  '#C5E1A550', // Lima claro
+  '#A5D6A750', // Verde claro
+];
 
 const PostTo = ({navigation, route}: any) => {
   const {user} = useSelector((state: any) => state.auth);
-  const { isLoading, clubs } = useClubs();
-    const [ search, setSearch ] = useState("");
-    const [ clubId, setClubId ] = useState("");
-    const [ visible, setVisible ] = useState(false);
-
+  const {isLoading, clubs} = useClubs();
+  const [search, setSearch] = useState('');
+  const [clubId, setClubId] = useState('');
+  const [visible, setVisible] = useState(false);
 
   const [createDiscussion, {loading: isCreating, error: creatingError}] =
     useMutation(CREATE_DISCUSSION, {
@@ -60,7 +59,11 @@ const PostTo = ({navigation, route}: any) => {
             title: route.params.post.title,
             description: route.params.post.description,
             images: route.params.post.images,
-            clubId
+            clubId,
+            isPoll: route.params.post.isPoll,
+            poll: route.params.post.poll,
+            voters: [],
+            link: route.params.post.link
           },
         },
         context: {
@@ -104,7 +107,7 @@ const PostTo = ({navigation, route}: any) => {
             Publicar en
           </Text>
         </DefaultView>
-        <TouchableOpacity onPress={()=> setVisible(true)} >
+        <TouchableOpacity onPress={() => setVisible(true)}>
           <Icon
             size={25}
             color="rgba(255,255, 255, .6)"
@@ -136,45 +139,57 @@ const PostTo = ({navigation, route}: any) => {
             style={{
               height: 40,
               width: '90%',
-              color: "#000"
+              color: '#000',
             }}
-            onChangeText={(text) => setSearch(text)}
+            onChangeText={text => setSearch(text)}
             placeholder="Buscar clubs. ej: Finanzas, Startup, etc."
           />
         </DefaultView>
-        <Text style={{
-            color: "#000",
-            marginTop: 20 
-        }}>Selecciona a qué club se dirige esta discusión:</Text>
+        <Text
+          style={{
+            color: '#000',
+            marginTop: 20,
+          }}>
+          Selecciona a qué club se dirige esta discusión:
+        </Text>
         {isLoading ? (
           <ActivityIndicator color="#121212" size="large" />
         ) : (
           <ScrollView
             style={{
               marginBottom: 50,
-              marginTop: 15
+              marginTop: 15,
             }}
             contentContainerStyle={{
               gap: 10,
-            }}
-           >
-            {clubs?.filter((club: any) => club.name.toLowerCase().includes(search.toLowerCase())).map((club: any, index: number) => (
-                <TouchableOpacity onPress={() => setClubId(club.id)} key={club.id} style={{
+            }}>
+            {clubs
+              ?.filter((club: any) =>
+                club.name.toLowerCase().includes(search.toLowerCase()),
+              )
+              .map((club: any, index: number) => (
+                <TouchableOpacity
+                  onPress={() => setClubId(club.id)}
+                  key={club.id}
+                  style={{
                     backgroundColor: colors[index],
                     height: 55,
                     borderRadius: 10,
                     padding: 10,
-                    justifyContent: "center",
+                    justifyContent: 'center',
                     paddingHorizontal: 15,
                     borderWidth: 1,
-                    borderColor: clubId == club.id ? "#000" : "#f2f2f2"
-                }}>
-                    <Text style={{
-                        fontWeight: "500",
-                        fontSize: 16
-                    }}>{club.name}</Text>
+                    borderColor: clubId == club.id ? '#000' : '#f2f2f2',
+                  }}>
+                  <Text
+                    style={{
+                      fontWeight: '500',
+                      fontSize: 16,
+                    }}>
+                    {club.name}
+                  </Text>
                 </TouchableOpacity>
-            ))}
+              ))}
           </ScrollView>
         )}
 
@@ -182,123 +197,156 @@ const PostTo = ({navigation, route}: any) => {
           style={{
             marginTop: 'auto',
           }}>
-            {clubId.length > 0 && (
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#5169f6',
-              borderRadius: 50,
-              height: 45,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            onPress={onSubmit}>
-            {isCreating ? (
-              <ActivityIndicator />
-            ) : (
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 16,
-                }}>
-                Siguiente
-              </Text>
-            )}
-          </TouchableOpacity>
-            )}
-
+          {clubId.length > 0 && (
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#5169f6',
+                borderRadius: 50,
+                height: 45,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              onPress={onSubmit}>
+              {isCreating ? (
+                <ActivityIndicator />
+              ) : (
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontSize: 16,
+                  }}>
+                  Siguiente
+                </Text>
+              )}
+            </TouchableOpacity>
+          )}
         </DefaultView>
       </DefaultView>
 
-      <BottomSheet isVisible={visible} setIsVisible={() => setVisible(!visible)}>
-       <DefaultView style={{
-         width: 50,
-         height: 50,
-         borderRadius: 100,
-         backgroundColor: "#5368f5",
-         alignItems: "center",
-         justifyContent: "center",
-         alignSelf: "center",
-         marginBottom: 10
-       }}>
-         <Icon name='information-outline' size={30} color="#fff" style={{
-           zIndex: 9999
-         }} />
-       </DefaultView>
-       <Text style={{
-         textAlign: "left",
-         fontSize: 16,
-         fontWeight: "600",
-         marginBottom: 15,
-         marginTop: 15,
-         color: 'rgba(0,0,0,0.8)',
-       }} >Pautas de discusión</Text>
-       <Text style={{
-         textAlign: "left",
-         fontSize: 12,
-         fontWeight: "300",
-         marginBottom: 20,
-         color: 'rgba(0,0,0,0.8)',
-       }} >Joobs es una plataforma para discutir una variedad de temas. Te agradeceríamos si pudieras seguir estas pautas al crear una discusión:</Text>
-       
-       <DefaultView style={{
-        gap: 10,
-        marginBottom: 45
-       }}>
-            <DefaultView style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10
-            }} >
-                <Icon name='star' color="#5368f5" size={18} />
-                <Text style={{
-                    fontSize: 12,
-                    fontWeight: "300",
-                    color: 'rgba(0,0,0,0.8)',
-                }} >Sé amable con aquellos que comentan tu discussión.</Text>
-            </DefaultView>
-            <DefaultView style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10
-            }} >
-                <Icon name='star' color="#5368f5" size={18} />
-                <Text style={{
-                    fontSize: 12,
-                    fontWeight: "300",
-                    color: 'rgba(0,0,0,0.8)',
-                }} >Elige el club más relevante para publicar tu discussión.</Text>
-            </DefaultView>
-            <DefaultView style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10
-            }} >
-                <Icon name='star' color="#5368f5" size={18} />
-                <Text style={{
-                    fontSize: 12,
-                    fontWeight: "300",
-                    color: 'rgba(0,0,0,0.8)',
+      <BottomSheet
+        isVisible={visible}
+        setIsVisible={() => setVisible(!visible)}>
+        <DefaultView
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 100,
+            backgroundColor: '#5368f5',
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            marginBottom: 10,
+          }}>
+          <Icon
+            name="information-outline"
+            size={30}
+            color="#fff"
+            style={{
+              zIndex: 9999,
+            }}
+          />
+        </DefaultView>
+        <Text
+          style={{
+            textAlign: 'left',
+            fontSize: 16,
+            fontWeight: '600',
+            marginBottom: 15,
+            marginTop: 15,
+            color: 'rgba(0,0,0,0.8)',
+          }}>
+          Pautas de discusión
+        </Text>
+        <Text
+          style={{
+            textAlign: 'left',
+            fontSize: 12,
+            fontWeight: '300',
+            marginBottom: 20,
+            color: 'rgba(0,0,0,0.8)',
+          }}>
+          Joobs es una plataforma para discutir una variedad de temas. Te
+          agradeceríamos si pudieras seguir estas pautas al crear una discusión:
+        </Text>
 
-                }} >No promociones ni vendas ningún producto o servicio.</Text>
-            </DefaultView>
-            <DefaultView style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10
-            }} >
-                <Icon name='star' color="#5368f5" size={18} />
-                <Text style={{
-                    fontSize: 12,
-                    fontWeight: "300",
-                    color: 'rgba(0,0,0,0.8)',
-                }} >No publiques requisitos de contratación. Puedes usar <Text style={{ color: "#5368f5", fontWeight: "500" }} >la sección de trabajo</Text> en su lugar.</Text>
-            </DefaultView>
-       </DefaultView>
+        <DefaultView
+          style={{
+            gap: 10,
+            marginBottom: 45,
+          }}>
+          <DefaultView
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 10,
+            }}>
+            <Icon name="star" color="#5368f5" size={18} />
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: '300',
+                color: 'rgba(0,0,0,0.8)',
+              }}>
+              Sé amable con aquellos que comentan tu discussión.
+            </Text>
+          </DefaultView>
+          <DefaultView
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 10,
+            }}>
+            <Icon name="star" color="#5368f5" size={18} />
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: '300',
+                color: 'rgba(0,0,0,0.8)',
+              }}>
+              Elige el club más relevante para publicar tu discussión.
+            </Text>
+          </DefaultView>
+          <DefaultView
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 10,
+            }}>
+            <Icon name="star" color="#5368f5" size={18} />
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: '300',
+                color: 'rgba(0,0,0,0.8)',
+              }}>
+              No promociones ni vendas ningún producto o servicio.
+            </Text>
+          </DefaultView>
+          <DefaultView
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 10,
+            }}>
+            <Icon name="star" color="#5368f5" size={18} />
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: '300',
+                color: 'rgba(0,0,0,0.8)',
+              }}>
+              No publiques requisitos de contratación. Puedes usar{' '}
+              <Text style={{color: '#5368f5', fontWeight: '500'}}>
+                la sección de trabajo
+              </Text>{' '}
+              en su lugar.
+            </Text>
+          </DefaultView>
+        </DefaultView>
 
-       <Button text='¡Entendido!' onPress={() => setVisible(false)} />
-</BottomSheet>
+        <Button text="¡Entendido!" onPress={() => setVisible(false)} />
+      </BottomSheet>
     </View>
   );
 };

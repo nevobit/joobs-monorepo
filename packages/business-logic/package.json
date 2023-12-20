@@ -2,12 +2,10 @@
     "name": "@joobs/business-logic",
     "version": "0.0.1",
     "main": "./src/index.ts",
-    "scripts": {
-        "build": "tsc"
-    },
     "dependencies": {
         "@joobs/data-sources": "workspace:^",
         "@joobs/entities": "workspace:^",
+        "@joobs/tsconfig": "workspace:^",
         "drizzle-orm": "^0.28.6",
         "form-data": "^4.0.0",
         "googleapis": "^129.0.0",

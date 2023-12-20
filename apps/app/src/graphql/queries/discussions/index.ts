@@ -10,7 +10,15 @@ query Query {
     images
     likes
     liked
+    link
     disliked
+    voters
+    isPoll
+    poll {
+      id
+      text
+      votes
+    }
     club {
       id
       name
@@ -32,7 +40,10 @@ query Query($discussionId: String) {
     description
     images
     likes
+    poll
+    isPoll
     liked
+    link
     disliked
     user {
       name
@@ -58,8 +69,11 @@ export const MY_DISCUSSIONS = gql`query MyDiscussions {
     description
     id
     images
+    link
     liked
     likes
+    poll
+    isPoll
     disliked
     link
     title

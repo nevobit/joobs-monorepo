@@ -12,6 +12,7 @@ import {DISCUSSIONS} from '../../../../graphql/queries';
 import {getColorForClub} from '../../../../screens/Home/club-color';
 import styles from './styles';
 import { DELETEDISLIKE, DISLIKE } from '../../../../graphql/mutations/dislikes';
+import { LinkPreview } from '@flyerhq/react-native-link-preview';
 interface Props {
   name: string;
   id: string;
@@ -29,6 +30,8 @@ interface Props {
   refetch: any;
   discussionId: string;
   navigation: any;
+  link: string;
+  isPoll: boolean;
 }
 
 
@@ -47,6 +50,8 @@ const HomePost = ({
   title,
   image,
   created_at,
+  link,
+  isPoll,
   text,
 }: Props) => {
   const { user: userInfo, refetch: refetchUser } = useUser();
@@ -198,12 +203,16 @@ const HomePost = ({
 
       <Text style={styles.postText}>{text}</Text>
 
-      {image && (
+      {image && image?.length > 0 && (
         <Image
           source={{ uri: image[0] }}
           style={styles.postImage}
         />
       )}
+
+    {link && (
+      <LinkPreview text={link} />
+    )}
 
       <View style={styles.postFooter}>
         <View style={styles.likeContainer}>

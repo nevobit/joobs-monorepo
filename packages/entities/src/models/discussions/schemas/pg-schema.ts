@@ -1,5 +1,5 @@
 // import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
+import { boolean, jsonb, pgTable, text, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core";
 import { users } from "../../users";
 import { relations } from "drizzle-orm";
 import { comments } from "../../comments";
@@ -11,8 +11,11 @@ export const discussions = pgTable('discussions', {
     title: varchar('title', { length: 256 }),
     description: text('description'),
     images: varchar('images', { length: 256 }).array(),
+    isPoll: boolean("isPoll").default(false),
+    poll: jsonb('poll').array(),
     link: varchar("link", { length: 256 }),
     status: varchar('status', { length: 256 }),
+    voters: varchar('voters').array(),
     userId: uuid('user_id'),
     clubId: uuid('club_id'),
     created_at: timestamp('created_at').defaultNow(),
