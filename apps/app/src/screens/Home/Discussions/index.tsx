@@ -1,16 +1,30 @@
 import { TouchableOpacity, ScrollView, RefreshControl, Pressable, View as DefaultView, Text } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { HomePoll, HomePost } from '../../../components/UI'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Instagram } from 'react-content-loader/native'
 import { useDiscussions } from '../../../hooks'
 import styles from './styles'
-import { View } from '../../../components/Shared/View'
-import { LinkPreview } from '@flyerhq/react-native-link-preview'
 
 const Discussions = ({ navigation, search }: any) => {
   const [refreshing, setRefreshing] = useState(false);
-  const { discussions, isLoading, error, refetch } = useDiscussions();
+  const [ option, setOption ] = useState("forme")
+  const { discussions, isLoading, error, refetch } = useDiscussions(option);
+
+  const changeOption = async (op: string) => {
+    setOption(op);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setRefreshing(true);
+      await refetch();
+      setRefreshing(false);
+    };
+  
+    fetchData();
+  }, [option, refetch]);
+  
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -25,7 +39,7 @@ const Discussions = ({ navigation, search }: any) => {
         backgroundColor: "#f0f0f0",
         marginBottom: 10
       }} style={styles.container}
-        refreshControl={<RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={onRefresh} />}
+        refreshControl={<RefreshControl tintColor="#000" refreshing={refreshing} onRefresh={onRefresh} />}
       >
         <DefaultView style={{
           backgroundColor: 'rgba(255,255,255,1)',
@@ -37,38 +51,38 @@ const Discussions = ({ navigation, search }: any) => {
           paddingHorizontal: 15,
           paddingTop: 10
         }}>
-          <TouchableOpacity style={{
-            backgroundColor: 'rgba(0,0,0,0.1)',
+          <TouchableOpacity onPress={() => changeOption("forme")} style={{
+            backgroundColor: option == "forme" ? "rgba(81, 105, 246, 0.2)" : 'rgba(0,0,0,0.1)',
             paddingHorizontal: 20,
             paddingVertical: 5,
             borderRadius: 50
           }}>
             <Text style={{
-              color: 'rgba(0,0,0,0.8)',
+              color: 'rgba(0,0,0,0.9)',
               fontWeight: '400',
               fontSize: 13
             }}>Para ti</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{
-            backgroundColor: 'rgba(0,0,0,0.1)',
+          <TouchableOpacity onPress={() => changeOption("popular")} style={{
+            backgroundColor: option == "popular" ? "rgba(81, 105, 246, 0.2)" : 'rgba(0,0,0,0.1)',
             paddingHorizontal: 20,
             paddingVertical: 5,
             borderRadius: 50
           }}>
             <Text style={{
-              color: 'rgba(0,0,0,0.8)',
+              color: 'rgba(0,0,0,0.9)',
               fontWeight: '400',
               fontSize: 13
             }}>Popular</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{
-            backgroundColor: 'rgba(0,0,0,0.1)',
+          <TouchableOpacity onPress={() => changeOption("latest")} style={{
+            backgroundColor: option == "latest" ? "rgba(81, 105, 246, 0.2)" : 'rgba(0,0,0,0.1)',
             paddingHorizontal: 20,
             paddingVertical: 5,
             borderRadius: 50
           }}>
             <Text style={{
-              color: 'rgba(0,0,0,0.8)',
+              color: 'rgba(0,0,0,0.9)',
               fontWeight: '400',
               fontSize: 13
             }}>Lo último</Text>
@@ -90,9 +104,9 @@ const Discussions = ({ navigation, search }: any) => {
               {discussions?.slice().reverse().filter((disscusion: any) => disscusion.title?.toLowerCase().includes(search?.toLowerCase() || '')).map((discussion: any) => (
                 <Pressable key={discussion.id} onPress={() => navigation.navigate('Discussion', { id: discussion.id })} >
                   { discussion?.isPoll ? (
-                    <HomePoll voters={discussion.voters} poll={discussion.poll} navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} disliked={discussion.disliked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
+                    <HomePoll headline={discussion.user?.headline} voters={discussion.voters} poll={discussion.poll} navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} disliked={discussion.disliked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
                   ): (
-                    <HomePost isPoll={discussion.isPoll} link={discussion.link} navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} disliked={discussion.disliked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
+                    <HomePost  headline={discussion.user?.headline} isPoll={discussion.isPoll} link={discussion.link} navigation={navigation} id={discussion.user.id} refetch={refetch} discussionId={discussion.id} liked={discussion.liked} disliked={discussion.disliked} likes={discussion.likes} comments={discussion.comments} photo={discussion?.user?.photo} title={discussion.title} image={discussion?.images} text={discussion.description} created_at={discussion.created_at} name={discussion.user.name} type={discussion.club.name} />
 
                   ) }
                 </Pressable>

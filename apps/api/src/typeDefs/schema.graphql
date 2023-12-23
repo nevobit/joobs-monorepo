@@ -296,6 +296,11 @@ input UserInput {
     company_description: String
 }
 
+input DiscussionInput {
+    option: String
+    userClubs: [String]
+}
+
 # CONNECTIONS
 input ConnectionInput {
     receiverId: String
@@ -326,7 +331,7 @@ type Query {
     application: Application
     applied: Boolean
 
-    discussions: [Discussion]
+    discussions(data: DiscussionInput): [Discussion]
     discussion(id: String): Discussion
     myDiscussions: [Discussion]
     

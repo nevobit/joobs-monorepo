@@ -31,6 +31,7 @@ interface Props {
   discussionId: string;
   navigation: any;
   link: string;
+  headline: string;
   isPoll: boolean;
 }
 
@@ -53,6 +54,7 @@ const HomePost = ({
   link,
   isPoll,
   text,
+  headline
 }: Props) => {
   const { user: userInfo, refetch: refetchUser } = useUser();
   const { user } = useSelector((state: any) => state.auth);
@@ -190,7 +192,8 @@ const HomePost = ({
           {renderProfileImage()}
           <View>
             <Text style={styles.profileName}>{name}</Text>
-            <Text style={styles.profileDate}>{fromNow(created_at)}</Text>
+            <Text style={styles.profileDate}>{headline}</Text>
+            {/* <Text style={styles.profileDate}>{fromNow(created_at)}</Text> */}
           </View>
         </View>
 

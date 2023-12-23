@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const DISCUSSIONS = gql`
-query Query {
-  discussions {
+query Discussions($data: DiscussionInput) {
+  discussions(data: $data) {
     id
     title
     description
@@ -27,6 +27,7 @@ query Query {
       id
       name
       photo
+      headline
     }
     created_at
   }

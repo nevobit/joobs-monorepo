@@ -31,6 +31,7 @@ interface Props {
   refetch: any;
   discussionId: string;
   navigation: any;
+  headline: string;
   voters: string[];
 }
 
@@ -51,6 +52,7 @@ const HomePoll = ({
   title,
   image,
   created_at,
+  headline,
   text,
 }: Props) => {
   const {user: userInfo, refetch: refetchUser} = useUser();
@@ -207,7 +209,8 @@ const HomePoll = ({
           {renderProfileImage()}
           <View>
             <Text style={styles.profileName}>{name}</Text>
-            <Text style={styles.profileDate}>{fromNow(created_at)}</Text>
+            <Text style={styles.profileDate}>{headline}</Text>
+            {/* <Text style={styles.profileDate}>{fromNow(created_at)}</Text> */}
           </View>
         </View>
 

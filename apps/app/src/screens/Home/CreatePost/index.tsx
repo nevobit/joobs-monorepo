@@ -25,7 +25,7 @@ const CreatePost = ({navigation}: any) => {
   const [visible, setVisible] = useState(false);
   const {photo, isLoading, getPhoto, error} = useUploadImage();
 
-  const [option, setOption] = useState('poll');
+  const [option, setOption] = useState('text');
 
   const [post, setPost] = useState<{
     title: string;

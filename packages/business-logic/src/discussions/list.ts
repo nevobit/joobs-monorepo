@@ -4,13 +4,19 @@ import { clientDb, /*clientDb */ } from '@joobs/data-sources'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
 
-export const getAllDiscussions = async ({ page= 1, limit=24, search }: Params): Promise<Result<any>> => {
+interface Props extends Params {
+  userClubs: string[];
+  option: string;
+}
+
+export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, option }: Props): Promise<Result<any>> => {
     const infoInstance = await clientDb();
 
     const db = drizzle(infoInstance, { schema: { users, clubs, dislikes, dislikeRelations, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
 
     // await result.where(eq(discussions.status, status));
   
+    console.log({userClubs})
     const result = await db.query.discussions.findMany({
         with: {
             user: true,
@@ -50,16 +56,41 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search }: Params): 
         })
       );
 
-      const sortedDiscussions = items.sort((a, b) => {
-        // Primero por likes (en orden descendente)
-        const likesComparison = a.likes - b.likes;
-        if (likesComparison !== 0) {
-            return likesComparison;
-        }
-    
-        // Luego por comentarios (en orden descendente)
-        return a.comments - b.comments;
-    });
+      let sortedDiscussions = items;
+
+      if(option == "forme" && userClubs){
+        sortedDiscussions = items.sort((a, b) => {
+          const isUserClubA = userClubs.includes(a.clubId!);
+          const isUserClubB = userClubs.includes(b.clubId!);
+
+          if (isUserClubA && !isUserClubB) {
+              return 1; // Mover a 'a' hacia arriba
+          } else if (!isUserClubA && isUserClubB) {
+              return -1; // Mover a 'b' hacia arriba
+          }
+
+          return 0; // Mantener el orden original
+      });
+      }else if(option == "popular"){
+      sortedDiscussions = items.sort((a, b) => {
+          // Primero por likes (en orden descendente)
+          const likesComparison = a.likes - b.likes;
+          if (likesComparison !== 0) {
+              return likesComparison;
+          }
+      
+          // Luego por comentarios (en orden descendente)
+          return a.comments - b.comments;
+      });
+      }else if(option == "latest"){
+        sortedDiscussions = items.sort((a, b) => {
+          const dateA = new Date(a.created_at!).getTime();
+          const dateB = new Date(b.created_at!).getTime();
+          return dateB + dateA;
+      });
+      }
+
+   
     return {
         count,
         items: sortedDiscussions,
