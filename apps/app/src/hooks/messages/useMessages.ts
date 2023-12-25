@@ -1,6 +1,14 @@
 import { useQuery } from "@apollo/client"
 import { MESSAGES } from "../../graphql/queries/messages";
 
-export const useMessages = () => {
-    const { data } = useQuery(MESSAGES);
+export const useMessages = (receiverId: string, setMesssagesList: any) => {
+    const { data, loading, error } = useQuery(MESSAGES, {
+        variables: {
+            receiverId
+        },
+        onCompleted(data) {
+            setMesssagesList(data.messages)
+        },
+    });
+    return { messages: data?.messages, isLoading: loading, error }
 }

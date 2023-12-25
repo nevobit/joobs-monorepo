@@ -9,3 +9,4 @@ export * from './members';
 export * from './participations';
 export * from './users';
 export * from './works';
+export * from './messages';

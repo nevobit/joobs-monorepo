@@ -1,7 +1,6 @@
 import { TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl, Pressable, View, Text, FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import { HomePost } from '../../../components/UI'
-import Icon from 'react-native-vector-icons/Ionicons'
 import { useQuery } from '@apollo/client'
 import { USERS } from '../../../graphql/queries'
 import { useSelector } from 'react-redux'

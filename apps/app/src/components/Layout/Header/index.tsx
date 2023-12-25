@@ -91,7 +91,7 @@ const Header = ({ menu, title, navigation, search, messages, notifications, prof
             )}
 
             {messages && (
-              <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
                 <Icon name='chatbubble-outline' size={24} color='#fff' />
               </TouchableOpacity>
             )}

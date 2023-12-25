@@ -16,7 +16,6 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, 
 
     // await result.where(eq(discussions.status, status));
   
-    console.log({userClubs})
     const result = await db.query.discussions.findMany({
         with: {
             user: true,

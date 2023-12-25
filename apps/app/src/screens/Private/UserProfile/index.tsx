@@ -23,7 +23,13 @@ import Textarea from '../../../components/Shared/Textarea';
 import Geolocation from '@react-native-community/geolocation';
 import {View} from '../../../components/Shared/View';
 import Skill from '../../../components/UI/Skill';
-import { useConnect, useConnections, useIsConnected, useIsRequest, useReject } from '../../../hooks';
+import {
+  useConnect,
+  useConnections,
+  useIsConnected,
+  useIsRequest,
+  useReject,
+} from '../../../hooks';
 
 const UserProfile = ({navigation, route}: any) => {
   const [reported, setReported] = useState(false);
@@ -37,30 +43,35 @@ const UserProfile = ({navigation, route}: any) => {
     city: '',
   });
 
-  const { isCreating, connect } = useConnect(route.params.id);
-  const { isLoading: isLoadingRequest, isRequest, refetch: refetchRequest } = useIsRequest(route.params.id);
-  const { isLoading: isLoadingConnected, isConnected } = useIsConnected(route.params.id);
-  const { isLoading: isLoadingConnections, connections } = useConnections(route.params.id);
-  const { isRejected, reject } = useReject(route.params.id);
+  const {isCreating, connect} = useConnect(route.params.id);
+  const {
+    isLoading: isLoadingRequest,
+    isRequest,
+    refetch: refetchRequest,
+  } = useIsRequest(route.params.id);
+  const {isLoading: isLoadingConnected, isConnected} = useIsConnected(
+    route.params.id,
+  );
+  const {isLoading: isLoadingConnections, connections} = useConnections(
+    route.params.id,
+  );
+  const {isRejected, reject} = useReject(route.params.id);
 
-
-
-
-  console.log("Request", isConnected)
+  console.log('Request', isConnected);
 
   const opening = () => {
-    setProfileOptions(false);  
-    setReported(true)
-  }
+    setProfileOptions(false);
+    setReported(true);
+  };
 
   const blocking = () => {
-    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito");
-    navigation.navigate("Home");
-  }
+    Alert.alert('Bloquear usuario', 'Usuario bloqueado con exito');
+    navigation.navigate('Home');
+  };
 
   const share = async () => {
     const options = {
-      message: `Hey, mira el perfil de ${user.name.split(" ")[0]} En Joobs`,
+      message: `Hey, mira el perfil de ${user.name.split(' ')[0]} En Joobs`,
       url: 'https://joobs.lat',
     };
 
@@ -120,16 +131,15 @@ const UserProfile = ({navigation, route}: any) => {
     refetch();
   }, [refetch]);
 
-
   const handleReject = async () => {
     await reject();
     refetchRequest();
-  }
+  };
 
   const handleConnect = async () => {
     await connect();
     refetchRequest();
-  }
+  };
 
   useEffect(() => {
     refetchRequest();
@@ -193,15 +203,14 @@ const UserProfile = ({navigation, route}: any) => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                 }}>
-                  
                 <DefaultView
                   style={{
                     flexDirection: 'row',
                     gap: 10,
                   }}>
-                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon name='chevron-back' size={25} color='#fff' />
-            </TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Icon name="chevron-back" size={25} color="#fff" />
+                  </TouchableOpacity>
                   <Text
                     style={{
                       color: '#fff',
@@ -216,13 +225,15 @@ const UserProfile = ({navigation, route}: any) => {
                     alignItems: 'center',
                     gap: 15,
                   }}>
-                      <TouchableOpacity onPress={share} style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 7,
-      }}>
-          <Icon name="share-social-outline" size={23} color="#fff" />
-        </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={share}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 7,
+                    }}>
+                    <Icon name="share-social-outline" size={23} color="#fff" />
+                  </TouchableOpacity>
                   <TouchableOpacity onPress={() => setProfileOptions(true)}>
                     <Icon
                       name="ellipsis-vertical-sharp"
@@ -297,7 +308,7 @@ const UserProfile = ({navigation, route}: any) => {
                     marginTop: 50,
                     marginLeft: 10,
                     fontSize: 16,
-                    fontWeight: "500",
+                    fontWeight: '500',
                     color: '#fff',
                   }}>
                   {user?.name}
@@ -305,8 +316,8 @@ const UserProfile = ({navigation, route}: any) => {
 
                 {user?.headline && (
                   <Text
-                  lineBreakMode="tail"
-                  numberOfLines={2}
+                    lineBreakMode="tail"
+                    numberOfLines={2}
                     style={{
                       marginTop: 10,
                       marginLeft: 10,
@@ -326,33 +337,70 @@ const UserProfile = ({navigation, route}: any) => {
                   }}>
                   {connections} conexiones
                 </Text>
-                <DefaultView style={{
-                  paddingHorizontal: 10
-                }}>
+                <DefaultView
+                  style={{
+                    paddingHorizontal: 10,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 15,
+                    marginTop: 20
+                  }}>
                   {isRequest ? (
-                    <TouchableOpacity onPress={handleReject}  style={{
-                      height: 40,
-                      marginTop: 15
-                    }} > 
-                      <Text style={{
-                        textAlign: "center",
-                        fontWeight: "500",
-                        color: "#5368f5"
-                      }}>Cancelar solicitud</Text> 
+                    <TouchableOpacity
+                      onPress={handleReject}
+                      style={{
+                        height: 40,
+                      }}>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          fontWeight: '500',
+                          color: '#5368f5',
+                          marginTop: 10
+                        }}>
+                        Cancelar solicitud
+                      </Text>
                     </TouchableOpacity>
-                  ): (
+                  ) : (
                     <>
-                      {isConnected ? <></> : (
-
-                    <Button loading={isCreating} onPress={handleConnect} text='Conectar' />
-
+                      {isConnected ? (
+                        <></>
+                      ) : (
+                        <Button
+                        style={{
+                          marginTop: 0,
+                          width: "45%"
+                        }}
+                          loading={isCreating}
+                          onPress={handleConnect}
+                          text="Conectar"
+                        />
                       )}
                     </>
-
                   )}
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('Chat', {id: route.params.id})
+                    }
+                    style={{
+                      borderColor: '#fff',
+                      borderRadius: 20,
+                      borderWidth: 1,
+                      padding: 10,
+                      height: 40,
+                      width: '45%',
+                    }}>
+                    <Text
+                      style={{
+                        color: '#fff',
+                        textAlign: 'center',
+                      }}>
+                      Mensaje
+                    </Text>
+                  </TouchableOpacity>
+                </DefaultView>
               </DefaultView>
-              </DefaultView>
-              
             </DefaultView>
             <DefaultView
               style={{
@@ -374,7 +422,7 @@ const UserProfile = ({navigation, route}: any) => {
                       color: 'rgba(0,0,0,0.8)',
                       fontSize: 16,
                     }}>
-                    Sobre {user?.name.split(" ")[0]}
+                    Sobre {user?.name.split(' ')[0]}
                   </Text>
                 </DefaultView>
 
@@ -427,24 +475,23 @@ const UserProfile = ({navigation, route}: any) => {
                     )}
                   </Text>
                   {user?.college && (
-                    <DefaultView style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 10,
-                      marginTop: 15
-                    }}>
-                      <Icon name='school-outline' size={23} color="#121212" />
-                    <Text
+                    <DefaultView
                       style={{
-                        fontSize: 14,
-                        color: 'rgba(0,0,0,0.8)',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 10,
+                        marginTop: 15,
                       }}>
-                      {user?.college}
-                    </Text>
+                      <Icon name="school-outline" size={23} color="#121212" />
+                      <Text
+                        style={{
+                          fontSize: 14,
+                          color: 'rgba(0,0,0,0.8)',
+                        }}>
+                        {user?.college}
+                      </Text>
                     </DefaultView>
-
                   )}
-
                 </DefaultView>
               </DefaultView>
 
@@ -473,84 +520,113 @@ const UserProfile = ({navigation, route}: any) => {
                     flexDirection: 'row',
                     flexWrap: 'wrap',
                     marginTop: 10,
-                    gap: 10
+                    gap: 10,
                   }}>
                   {user?.skills?.map((skill: string) => (
                     <Skill key={skill} skill={skill} />
                   ))}
                 </DefaultView>
               </DefaultView>
-
-    
             </DefaultView>
           </Pressable>
         )}
       </ScrollView>
 
       <>
-       
-    <BottomSheet isVisible={profileOptions} setIsVisible={() => setProfileOptions(!profileOptions)}>
-     
-    <TouchableOpacity style={{
-      height: 40,
-      justifyContent: "center"
-     }} onPress={blocking}>
-       <Text style={{
-         textAlign: 'center',
-         color: 'rgba(0,0,0,0.8)',
-         fontSize: 14
-       }}>Bloquear</Text>
-     </TouchableOpacity>
-     <TouchableOpacity style={{
-      height: 40,
-      justifyContent: "center"
-     }} onPress={opening}>
-       <Text style={{
-         textAlign: 'center',
-         color: 'rgba(0,0,0,0.8)',
-         fontSize: 14
-       }}>Reportar</Text>
-     </TouchableOpacity>
-   </BottomSheet>
+        <BottomSheet
+          isVisible={profileOptions}
+          setIsVisible={() => setProfileOptions(!profileOptions)}>
+          <TouchableOpacity
+            style={{
+              height: 40,
+              justifyContent: 'center',
+            }}
+            onPress={blocking}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: 'rgba(0,0,0,0.8)',
+                fontSize: 14,
+              }}>
+              Bloquear
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: 40,
+              justifyContent: 'center',
+            }}
+            onPress={opening}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: 'rgba(0,0,0,0.8)',
+                fontSize: 14,
+              }}>
+              Reportar
+            </Text>
+          </TouchableOpacity>
+        </BottomSheet>
 
-   <BottomSheet isVisible={reported} setIsVisible={() => setReported(!reported)}>
-       <Text style={{
-         textAlign: "center",
-         fontSize: 16,
-         fontWeight: "600"
-       }} >Reporte</Text>
-       <Text style={{
-         textAlign: "center",
-         fontSize: 12,
-         marginBottom: 20
-       }} >Ayúdanos a entender lo que está pasando y lo investigaremos.</Text>
+        <BottomSheet
+          isVisible={reported}
+          setIsVisible={() => setReported(!reported)}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 16,
+              fontWeight: '600',
+            }}>
+            Reporte
+          </Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 12,
+              marginBottom: 20,
+            }}>
+            Ayúdanos a entender lo que está pasando y lo investigaremos.
+          </Text>
 
-       <DefaultView style={{
-         width: 50,
-         height: 50,
-         borderRadius: 100,
-         backgroundColor: "#5368f5",
-         alignItems: "center",
-         justifyContent: "center",
-         alignSelf: "center",
-         marginBottom: 10
-       }}>
-         <Icon name='checkmark-outline' size={30} color="#fff" style={{
-           zIndex: 9999
-         }} />
-       </DefaultView>
-       <Text style={{
-         textAlign: "center",
-         fontSize: 16,
-         fontWeight: "600"
-       }} >Gracias por hacernos saber</Text>
-       <Text style={{
-         textAlign: "center",
-         fontSize: 12,
-         marginBottom: 20
-       }} >Tus comentarios son importantes para ayudarnos a mantener la comunidad Joobs segura y de calidad.</Text>
-       <Button text='Listo' onPress={() => setReported(false)} />
-</BottomSheet>
+          <DefaultView
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 100,
+              backgroundColor: '#5368f5',
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              marginBottom: 10,
+            }}>
+            <Icon
+              name="checkmark-outline"
+              size={30}
+              color="#fff"
+              style={{
+                zIndex: 9999,
+              }}
+            />
+          </DefaultView>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 16,
+              fontWeight: '600',
+            }}>
+            Gracias por hacernos saber
+          </Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 12,
+              marginBottom: 20,
+            }}>
+            Tus comentarios son importantes para ayudarnos a mantener la
+            comunidad Joobs segura y de calidad.
+          </Text>
+          <Button text="Listo" onPress={() => setReported(false)} />
+        </BottomSheet>
       </>
     </View>
   );

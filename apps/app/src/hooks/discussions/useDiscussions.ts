@@ -7,7 +7,6 @@ export const useDiscussions = (option: string) => {
 
     const userClubIds = clubs?.map((club: any) => club.id);
 
-    console.log({userClubIds})
     const { data, loading, error, refetch } = useQuery(DISCUSSIONS, {
         variables: {
             data: {

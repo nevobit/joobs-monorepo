@@ -1,11 +1,10 @@
 import { getAllDiscussions, createDiscussion, verifyToken, getDiscussion, getMyDiscussions, voteForDiscussionOption } from '@joobs/business-logic'
 export default {
     Query: {
-        discussions: async (_:any, data:any, ctx:any) => {
-            console.log(data.data.option)
+        discussions: async (_:any, { data }:any, ctx:any) => {
             try{
                 const { id } = await verifyToken(ctx) as {id: string};
-                const discussions = await getAllDiscussions({userClubs: data.data.userClubs, option: data.data.option, search: id});
+                const discussions = await getAllDiscussions({userClubs: data.userClubs, option: data.option, search: id});
                 return discussions.items;
             }catch(err:any){
                 console.log(err)

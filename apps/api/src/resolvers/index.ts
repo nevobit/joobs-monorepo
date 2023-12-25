@@ -26,7 +26,8 @@ export default {
         ...dislikes.Query,
         ...projects.Query,
         ...participants.Query,
-        ...connections.Query
+        ...connections.Query,
+        ...messages.Query
     },
     Mutation: {
         ...auth.Mutation,

@@ -19,6 +19,7 @@ import UserProfile from '../../screens/Private/UserProfile';
 import PostTo from '../../screens/Home/PostTo';
 import SideMenu from '../SideMenu';
 import { MyDiscussions } from '../../screens/Private';
+import Chat from '../../screens/Private/Messages/Chat';
 
 export type RootStackParamsList = {
   Initial: undefined;
@@ -26,7 +27,7 @@ export type RootStackParamsList = {
   Messages: undefined;
   Notifications: undefined;
   CreateWork: undefined;
-  Chat: undefined;
+  Chat: { id: string };
   ProjectDetails: { id: string };
   WorkDetails: { id: string };
   Club: { id: string };
@@ -120,7 +121,7 @@ export const AppNavigator = () => {
           presentation: 'card',
         }}
       />
-      <HomeStack.Screen name="Chat" component={Messages}
+      <HomeStack.Screen name="Chat" component={Chat}
         options={{
           headerShown: false,
           presentation: 'card',

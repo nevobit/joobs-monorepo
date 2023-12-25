@@ -40,7 +40,7 @@ const httpLink = createHttpLink({
 });
 
 const wsLink = new GraphQLWsLink(createWsClient({
-    url: 'ws://localhost:9000/graphql'
+    url: 'ws://192.168.1.71:8000/graphql'
 }));
 
 const client = new ApolloClient({

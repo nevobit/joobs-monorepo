@@ -16,15 +16,20 @@ const Signin = ({navigation}: any) => {
 
   const [login, {loading, error}] = useMutation(LOGIN);
 
-
     const onSubmit = async (e: any) => {
         e.preventDefault();
+        console.log("Enter here")
+        console.log("Email", email)
         try {
-          const { data } = await login({
+          const { data, errors } = await login({
             variables: {
               email
             }
           });
+
+          console.log("ERRORS", errors)
+          console.log("error", data)
+        
           navigation.navigate('VerificationCode', { email, type: data.userLogin.type })
           // if(data.userLogin.type == 'register') {
             // navigation.navigate('Register')

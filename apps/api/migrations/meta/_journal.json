@@ -15,6 +15,13 @@
       "when": 1702845617682,
       "tag": "0001_secret_cloak",
       "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1703473850276,
+      "tag": "0002_kind_magneto",
+      "breakpoints": false
     }
   ]
 }

@@ -24,8 +24,6 @@ export const isRequest = async (data: InferInsertModel<typeof connections>) => {
         )
       )
     );
-
-    console.log({existingConnection})
   if (existingConnection.length > 0) {
     return true;
   }

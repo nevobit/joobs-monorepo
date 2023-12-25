@@ -347,6 +347,17 @@ type Query {
     isConnected(data: ConnectionInput): Boolean
     connections(id: String): Int
 
+    # MESSAGES
+    messages(receiverId: String): [Message]
+    conversations: [Conversation]
+
+}
+
+type Conversation {
+    participantId: String
+    lastMessage: String
+    lastMessageTime: String
+    user: User
 }
 
 
@@ -389,12 +400,22 @@ type Mutation {
     # CONNECTIONS
     connect(data: ConnectionInput): Boolean
     reject(data: ConnectionInput): Boolean
+
+    # MESSAGES
+    createMessage(data: MessageInput): Message
+}
+
+input MessageInput {
+    text: String
+    receiverId: String
 }
 
 type Message {
     id: ID
-    user: User
     text: String
+    receiverId: String
+    senderId: String
+    created_at: String
 }
 
 type Subscription {
