@@ -52,7 +52,7 @@ const Chats = () => {
       backgroundColor: "#fff",
       minHeight: "100%"
     }} >
-      { conversations?.length < 0 ? (
+      { conversations?.length <= 0 ? (
 
       <View style={{
         alignItems: 'center',
@@ -87,18 +87,18 @@ const Chats = () => {
                 alignItems: "center",
                 gap: 10
               }} >
-                {renderProfileImage(conversation.user.photo, conversation.user.name)}
+                {renderProfileImage(conversation?.user?.photo, conversation?.user?.name)}
                 <View style={{
                     gap: 5
                 }} >
                   <Text style={{
                     fontWeight: "600",
                     fontSize: 14,
-                  }} >{conversation.user.name}</Text>
+                  }} >{conversation?.user?.name}</Text>
                   <Text style={{
                     color: "rgba(0,0,0,0.7)",
                     fontSize: 13
-                  }} >{conversation.lastMessage}</Text>
+                  }} >{conversation?.lastMessage}</Text>
                 </View>
               </View>
 

@@ -27,6 +27,7 @@ import {LIKES} from '../../../../graphql/queries/likes';
 import {DELETELIKE, LIKE} from '../../../../graphql/mutations/likes';
 import {View} from '../../../../components/Shared/View';
 import {BottomSheet} from '../../../../containers';
+import { useBlock } from '../../../../hooks';
 
 const DiscussionDetails = ({navigation, route}: any) => {
   const [text, setText] = useState('');
@@ -43,16 +44,12 @@ const DiscussionDetails = ({navigation, route}: any) => {
     error,
     refetch,
   } = useQuery(DISCUSSION, {
-    context: {
-      headers: {
-        authorization: user.token ? `Bearer ${user.token}` : '',
-      },
-    },
     variables: {
       discussionId: route.params.id,
     },
   });
 
+  console.log({error})
   const {
     data: dataComments,
     loading: isLoadingComments,
@@ -177,8 +174,12 @@ const DiscussionDetails = ({navigation, route}: any) => {
       await refetch();
     }
   };
-  const blocking = () => {
-    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito");
+
+  const { block } = useBlock(data?.discussion?.user?.id);
+
+  const blocking = async () => {
+    await block();
+    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito, recarga la pantalla para ver los cambios");
     navigation.navigate("Home");
   }
   const onRefresh = React.useCallback(() => {
@@ -337,7 +338,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
           {data?.discussion?.description}
         </Text>
 
-        {data?.discussion?.images && (
+        {data?.discussion?.images.length > 0 && (
           <Image
             source={{
               uri: data?.discussion.images[0],

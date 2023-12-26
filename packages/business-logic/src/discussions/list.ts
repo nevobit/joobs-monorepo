@@ -1,4 +1,4 @@
-import { Result, clubs, Params, dislikes, dislikeRelations, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
+import { Result, clubs, Params, dislikes, blocks, dislikeRelations, discussions, users, likes, clubRelations, likeRelations, comments, userRelations, discussionRelations, works } from "@joobs/entities";
 import { clientDb, /*clientDb */ } from '@joobs/data-sources'
 // import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -12,7 +12,7 @@ interface Props extends Params {
 export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, option }: Props): Promise<Result<any>> => {
     const infoInstance = await clientDb();
 
-    const db = drizzle(infoInstance, { schema: { users, clubs, dislikes, dislikeRelations, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
+    const db = drizzle(infoInstance, { schema: { users,  blocks, clubs, dislikes, dislikeRelations, discussions, clubRelations, discussionRelations, userRelations, comments, likes, likeRelations, works } })
 
     // await result.where(eq(discussions.status, status));
   
@@ -22,6 +22,7 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, 
             club: true
         }
     })
+
 
     const pageSize = limit;
     const count = (await result).length;
@@ -37,6 +38,9 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, 
     const nextPage = hasNextPage? page + 1 : page;
 
     const userLike = await db.query.likes.findMany({ where: eq(likes.userId, search!) });
+    const userBlock = await db.query.blocks.findMany({ where: eq(blocks.senderId, search!) });
+    const blockedUserIds = userBlock.map((block) => block.receiverId);
+
     const userDislike = await db.query.dislikes.findMany({ where: eq(dislikes.userId, search!) });
 
 
@@ -89,10 +93,13 @@ export const getAllDiscussions = async ({ page= 1, limit=24, search, userClubs, 
       });
       }
 
+      const discussionsWithoutBlockedUsers = sortedDiscussions.filter(discussion => !blockedUserIds.includes(discussion.userId!));
+
+
    
     return {
         count,
-        items: sortedDiscussions,
+        items: discussionsWithoutBlockedUsers,
         pageInfo: {
             page,
             pages,

@@ -12,6 +12,7 @@ import projects from './projects'
 import participants from './participants'
 import messages from './messages'
 import connections from './connections'
+import blocks from "./blocks"
 
 export default {
     Query: {
@@ -43,7 +44,8 @@ export default {
         ...participants.Mutation,
         ...messages.Mutation,
         ...users.Mutation,
-        ...connections.Mutation
+        ...connections.Mutation,
+        ...blocks.Mutation
     },
     Subscription: {
         ...messages.Subscription

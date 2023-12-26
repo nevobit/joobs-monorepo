@@ -20,6 +20,7 @@ export default {
                     return clubs;
                     
                 }catch(err:any){
+                    console.log(err)
                     throw new Error(err);
                 }
         },

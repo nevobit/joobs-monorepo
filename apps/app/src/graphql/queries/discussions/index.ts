@@ -41,12 +41,17 @@ query Query($discussionId: String) {
     description
     images
     likes
-    poll
+    poll {
+      id
+      text
+      votes
+    }
     isPoll
     liked
     link
     disliked
     user {
+      id
       name
       photo
     }

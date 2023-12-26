@@ -6,3 +6,4 @@ export * from './participants';
 export * from './useUploadImage';
 export * from './users';
 export * from './messages';
+export * from './blocks';

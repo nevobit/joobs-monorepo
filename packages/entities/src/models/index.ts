@@ -12,3 +12,4 @@ export * from './works';
 export * from './connections';
 export * from './saved';
 export * from './messages';
+export * from './blocks';

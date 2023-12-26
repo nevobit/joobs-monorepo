@@ -306,6 +306,10 @@ input ConnectionInput {
     receiverId: String
 }
 
+input BlockInput {
+    receiverId: String
+}
+
 type Query {
     project(id: String): Project
     projects: [Project]
@@ -400,6 +404,9 @@ type Mutation {
     # CONNECTIONS
     connect(data: ConnectionInput): Boolean
     reject(data: ConnectionInput): Boolean
+
+    # BLOCKS
+    block(data: BlockInput): Boolean
 
     # MESSAGES
     createMessage(data: MessageInput): Message

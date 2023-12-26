@@ -14,3 +14,4 @@ export * from './users';
 export * from './verify';
 export * from './works';
 export * from './messages';
+export * from './blocks';
