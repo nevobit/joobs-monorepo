@@ -24,7 +24,7 @@ export const sendConnection = async (data: InferInsertModel<typeof connections>)
         // console.log(i)
         const message: Message = {
           notification: {
-            title: "Tienes una solicitud de conección de " + sender[0].name!,
+            title: "Tienes una solicitud de conexión de " + sender[0].name!,
             body: "Click aquí para ver su perfil",
           },
           token: receiver[0].token!,
