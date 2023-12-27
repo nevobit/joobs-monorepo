@@ -233,6 +233,7 @@ type User {
     gender: String
     headline: String
     about: String
+    token: String
     company_name: String
     college: String
     proof_of_work: ProofOfWork
@@ -280,6 +281,7 @@ input UserInput {
     skills: [String]
     born_date: String
     gender: String
+    token: String
     headline: String
     about: String
     company_name: String

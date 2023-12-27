@@ -31,6 +31,7 @@ export const users = pgTable('users', {
     about: text('about'),
     born_date: varchar('born_date', { length: 256 }),
     code: integer('code'),
+    token: varchar('token'),
     gender: varchar('gender', { length: 256 }),
     email: varchar('email', { length: 256 }).notNull(),
     last_login: varchar('last_login', { length: 256 }).notNull(),

@@ -6,6 +6,7 @@ query Query($receiverId: String) {
       id
       text
       senderId
+      created_at
     }
   }
 `

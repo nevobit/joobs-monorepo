@@ -89,11 +89,12 @@ const Chats = () => {
               }} >
                 {renderProfileImage(conversation?.user?.photo, conversation?.user?.name)}
                 <View style={{
-                    gap: 5
+                    gap: 2
                 }} >
                   <Text style={{
                     fontWeight: "600",
                     fontSize: 14,
+                    color: "rgba(0,0,0,.9)"
                   }} >{conversation?.user?.name}</Text>
                   <Text style={{
                     color: "rgba(0,0,0,0.7)",

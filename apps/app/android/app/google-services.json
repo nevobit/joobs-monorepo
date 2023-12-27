@@ -14,16 +14,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "987824436257-dpcml2k0kn5tebptgpvpl9caoj1jm6vb.apps.googleusercontent.com",
+          "client_id": "987824436257-o8eo5s7j4a0kr0517aih23jsgr6nokjj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.nevobit.joobs",
             "certificate_hash": "9b1e046da8b682b86aa01ec66ddfd0a40e3e75c6"
           }
-        },
-        {
-          "client_id": "987824436257-hvrj3nqp746qg9q2abl0m943ffol5udu.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -35,8 +31,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "987824436257-hvrj3nqp746qg9q2abl0m943ffol5udu.apps.googleusercontent.com",
+              "client_id": "987824436257-9mjhqtu4ou96fcugor6ie0f02fj0inhg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "987824436257-otmdujon1l4p6oebdvr0iavdf41vovsr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nevobit.joobsios"
+              }
             }
           ]
         }

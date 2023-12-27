@@ -6,12 +6,13 @@ import {
   View as DefaultView,
   Text,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {HomePoll, HomePost} from '../../../components/UI';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Instagram} from 'react-content-loader/native';
-import {useDiscussions, useMyClubs} from '../../../hooks';
+import {useDiscussions, useMyClubs, useUpdateUser} from '../../../hooks';
 import styles from './styles';
+import { getFcmToken } from '../../../utils/fcmHelper';
 
 const Discussions = ({navigation, search}: any) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -23,6 +24,22 @@ const Discussions = ({navigation, search}: any) => {
   const changeOption = async (op: string) => {
     setOption(op);
   };
+
+  const { updateUser, isUpdating } = useUpdateUser();
+
+  const submit = async () => {
+    const token = getFcmToken();
+      try{
+          await updateUser({variables: {
+              data: { token }
+          }});
+      }catch(err){
+          console.log(err)
+      }
+  }
+  useEffect(() => {
+    submit()
+  }, []); 
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -118,7 +135,7 @@ const Discussions = ({navigation, search}: any) => {
           </TouchableOpacity>
         </DefaultView>
 
-        {isLoading ? (
+        {isLoading || isLoadingClubs ? (
           <DefaultView
             style={{
               flex: 1,

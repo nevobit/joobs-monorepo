@@ -1,7 +1,10 @@
 import React from 'react'
 import { View as DefaultView, Pressable, Text } from 'react-native';
 
-const MessageCard = ({ text, isSender }: { text: string, isSender: boolean }) => {
+const MessageCard = ({ text, isSender, created_at }: { text: string, isSender: boolean, created_at: string }) => {
+  
+  const date = new Date(Number(created_at))
+  console.log(date)
   return (
     <Pressable
               style={{
@@ -24,8 +27,9 @@ const MessageCard = ({ text, isSender }: { text: string, isSender: boolean }) =>
                 style={{
                   fontSize: 12,
                   alignSelf: isSender? 'flex-end': "flex-start",
+                  color: "rgba(0,0,0,0.8)"
                 }}>
-                02:25 PM
+                  {date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
               </Text>
             </Pressable>
   )

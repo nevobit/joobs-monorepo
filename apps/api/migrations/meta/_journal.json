@@ -29,6 +29,13 @@
       "when": 1703586194959,
       "tag": "0003_tough_sauron",
       "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1703664866672,
+      "tag": "0004_melted_shocker",
+      "breakpoints": false
     }
   ]
 }

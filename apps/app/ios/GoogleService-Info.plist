@@ -2,18 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>987824436257-otmdujon1l4p6oebdvr0iavdf41vovsr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.987824436257-otmdujon1l4p6oebdvr0iavdf41vovsr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>987824436257-o8eo5s7j4a0kr0517aih23jsgr6nokjj.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC3WUN4RDV7ci-SxGG6SVrsso9AqBHpB0w</string>
+	<string>AIzaSyCd2VHqgmn5bJ3vUHkGqTN-yA2edWD2ztM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>50623224650</string>
+	<string>987824436257</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.partiaf.partiaf</string>
+	<string>com.nevobit.joobsios</string>
 	<key>PROJECT_ID</key>
-	<string>partiaf-776e2</string>
+	<string>joobs-93292</string>
 	<key>STORAGE_BUCKET</key>
-	<string>partiaf-776e2.appspot.com</string>
+	<string>joobs-93292.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:50623224650:ios:c503ed7460db473e467fb3</string>
+	<string>1:987824436257:ios:ab2abddfc727169677df60</string>
 </dict>
 </plist>
