@@ -11,11 +11,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7483531A247C55102AB147E6 /* libPods-movility-movilityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 807DB41D82F8E1B61B8DEBF0 /* libPods-movility-movilityTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9ABD7C793FE6734E76C76A92 /* libPods-movility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70786A55FC69E5027AE6188 /* libPods-movility.a */; };
 		A743C3E02B16454A003F310B /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = A743C3DF2B16454A003F310B /* 152.png */; };
 		A74A22B42B3C014D00E9183B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A74A22B32B3C014D00E9183B /* GoogleService-Info.plist */; };
-		CC490C52672CEF32D702C9FC /* libPods-movility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 813AF1FEBF915AF777A3D3D9 /* libPods-movility.a */; };
+		FCD69D1C77FD0D97DA580575 /* libPods-movility-movilityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6C08A9AE52750F86BE6CDB /* libPods-movility-movilityTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +32,7 @@
 		00E356EE1AD99517003FC87E /* movilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* movilityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = movilityTests.m; sourceTree = "<group>"; };
+		0B6C08A9AE52750F86BE6CDB /* libPods-movility-movilityTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movility-movilityTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* movility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = movility/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = movility/AppDelegate.mm; sourceTree = "<group>"; };
@@ -41,13 +42,12 @@
 		3B4392A12AC88292D35C810B /* Pods-movility.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movility.debug.xcconfig"; path = "Target Support Files/Pods-movility/Pods-movility.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-movility.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movility.release.xcconfig"; path = "Target Support Files/Pods-movility/Pods-movility.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-movility-movilityTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movility-movilityTests.debug.xcconfig"; path = "Target Support Files/Pods-movility-movilityTests/Pods-movility-movilityTests.debug.xcconfig"; sourceTree = "<group>"; };
-		807DB41D82F8E1B61B8DEBF0 /* libPods-movility-movilityTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movility-movilityTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		813AF1FEBF915AF777A3D3D9 /* libPods-movility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movility.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = movility/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-movility-movilityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movility-movilityTests.release.xcconfig"; path = "Target Support Files/Pods-movility-movilityTests/Pods-movility-movilityTests.release.xcconfig"; sourceTree = "<group>"; };
 		A743C3DF2B16454A003F310B /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
 		A74A22B32B3C014D00E9183B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A74A22B52B3C029800E9183B /* movility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = movility.entitlements; path = movility/movility.entitlements; sourceTree = "<group>"; };
+		E70786A55FC69E5027AE6188 /* libPods-movility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movility.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7483531A247C55102AB147E6 /* libPods-movility-movilityTests.a in Frameworks */,
+				FCD69D1C77FD0D97DA580575 /* libPods-movility-movilityTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC490C52672CEF32D702C9FC /* libPods-movility.a in Frameworks */,
+				9ABD7C793FE6734E76C76A92 /* libPods-movility.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				813AF1FEBF915AF777A3D3D9 /* libPods-movility.a */,
-				807DB41D82F8E1B61B8DEBF0 /* libPods-movility-movilityTests.a */,
+				E70786A55FC69E5027AE6188 /* libPods-movility.a */,
+				0B6C08A9AE52750F86BE6CDB /* libPods-movility-movilityTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

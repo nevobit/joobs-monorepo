@@ -8,8 +8,7 @@ export default {
     Query: {
         messages: async (_:any, { receiverId }: { receiverId: string }, ctx:any ) => {
             const { id } = await verifyToken(ctx) as {id: string};
-            const info = await getMyConversations({ id });
-            console.log(info.items)
+            await getMyConversations({ id });
             const messages = await getAllMessages({ receiver: receiverId, id })
             // pubSub.publish(MESSAGE_ADDED, { messageAdded: {} })
             return messages.items;

@@ -11,7 +11,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
 import { PaperProvider } from 'react-native-paper';
 import Icon from "react-native-vector-icons/Ionicons"
-import { checkApplicationNotificationPermission, getFcmToken, registerListenerWithFCM } from './src/utils/fcmHelper';
+import { registerListenerWithFCM } from './src/utils/fcmHelper';
 import firebase from '@react-native-firebase/app';
 import { useUpdateUser } from './src/hooks';
 

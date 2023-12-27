@@ -17,6 +17,8 @@ import resolvers from '../resolvers';
 import { name } from '../../package.json';
 import { ApolloServer } from '@apollo/server';
 import express from 'express';
+import * as admin from "firebase-admin";
+// import { applicationDefault } from "firebase-admin/app";
 
 const {
   PORT,
@@ -34,7 +36,20 @@ const {
 
 // });
 
+console.log("[server]: Initializing Firebase Admin SDK...");
+var serviceAccount = require("../../service-account-key.json");
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://joobs-93292.firebaseio.com",
+});
+
+
+// export const firebaseApp = admin.initializeApp({
+//   credential: applicationDefault(),
+//   projectId: process.env.FIREBASE_PROJECT_ID,
+//   storageBucket: process.env.FILES_BUCKET,
+// });
 const main = async () => {
   await initDataSources({
     postgres: {

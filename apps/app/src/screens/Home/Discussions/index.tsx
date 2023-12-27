@@ -28,7 +28,7 @@ const Discussions = ({navigation, search}: any) => {
   const { updateUser, isUpdating } = useUpdateUser();
 
   const submit = async () => {
-    const token = getFcmToken();
+    const token = await getFcmToken();
       try{
           await updateUser({variables: {
               data: { token }

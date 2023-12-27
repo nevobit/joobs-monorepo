@@ -54,6 +54,7 @@
     "drizzle-orm": "^0.28.6",
     "express": "^4.18.2",
     "fastify": "4.23.2",
+    "firebase-admin": "^12.0.0",
     "graphql": "^16.8.1",
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.14.2",
