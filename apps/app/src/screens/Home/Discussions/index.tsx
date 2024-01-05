@@ -41,6 +41,14 @@ const Discussions = ({navigation, search}: any) => {
     submit()
   }, []); 
 
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      refetch()
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await refetch({data: {option, userClubs: userClubIds}});

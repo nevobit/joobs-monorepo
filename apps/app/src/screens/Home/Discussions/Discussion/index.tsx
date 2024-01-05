@@ -27,7 +27,7 @@ import {LIKES} from '../../../../graphql/queries/likes';
 import {DELETELIKE, LIKE} from '../../../../graphql/mutations/likes';
 import {View} from '../../../../components/Shared/View';
 import {BottomSheet} from '../../../../containers';
-import { useBlock } from '../../../../hooks';
+import { useBlock, useDiscussions } from '../../../../hooks';
 
 const DiscussionDetails = ({navigation, route}: any) => {
   const [text, setText] = useState('');
@@ -176,10 +176,12 @@ const DiscussionDetails = ({navigation, route}: any) => {
   };
 
   const { block } = useBlock(data?.discussion?.user?.id);
+  const { refetch: refetchDiscussions } = useDiscussions("forme");
 
   const blocking = async () => {
     await block();
     Alert.alert("Bloquear usuario", "Usuario bloqueado con exito, recarga la pantalla para ver los cambios");
+    await refetchDiscussions();
     navigation.navigate("Home");
   }
   const onRefresh = React.useCallback(() => {
