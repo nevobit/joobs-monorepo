@@ -24,6 +24,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {View} from '../../../components/Shared/View';
 import Skill from '../../../components/UI/Skill';
 import {
+  useBlock,
   useConnect,
   useConnections,
   useIsConnected,
@@ -36,7 +37,6 @@ const UserProfile = ({navigation, route}: any) => {
   const [blocked, setBlocked] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
   const [profileOptions, setProfileOptions] = useState(false);
-
   const {isLoading, user, refetch, error} = useUser(route.params.id);
   const [location, setLocation] = useState({
     country: '',
@@ -64,8 +64,14 @@ const UserProfile = ({navigation, route}: any) => {
     setReported(true);
   };
 
-  const blocking = () => {
-    Alert.alert('Bloquear usuario', 'Usuario bloqueado con exito');
+  const {block} = useBlock(route.params.id);
+
+  const blocking = async () => {
+    await block();
+    Alert.alert(
+      'Bloquear usuario',
+      'Usuario bloqueado con exito, recarga la pantalla para ver los cambios',
+    );
     navigation.navigate('Home');
   };
 
@@ -344,7 +350,7 @@ const UserProfile = ({navigation, route}: any) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 15,
-                    marginTop: 20
+                    marginTop: 20,
                   }}>
                   {isRequest ? (
                     <TouchableOpacity
@@ -357,7 +363,7 @@ const UserProfile = ({navigation, route}: any) => {
                           textAlign: 'center',
                           fontWeight: '500',
                           color: '#5368f5',
-                          marginTop: 10
+                          marginTop: 10,
                         }}>
                         Cancelar solicitud
                       </Text>
@@ -368,10 +374,10 @@ const UserProfile = ({navigation, route}: any) => {
                         <></>
                       ) : (
                         <Button
-                        style={{
-                          marginTop: 0,
-                          width: "45%"
-                        }}
+                          style={{
+                            marginTop: 0,
+                            width: '45%',
+                          }}
                           loading={isCreating}
                           onPress={handleConnect}
                           text="Conectar"

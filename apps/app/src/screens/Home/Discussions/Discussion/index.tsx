@@ -27,7 +27,7 @@ import {LIKES} from '../../../../graphql/queries/likes';
 import {DELETELIKE, LIKE} from '../../../../graphql/mutations/likes';
 import {View} from '../../../../components/Shared/View';
 import {BottomSheet} from '../../../../containers';
-import { useBlock, useDiscussions } from '../../../../hooks';
+import {useBlock, useDiscussions} from '../../../../hooks';
 
 const DiscussionDetails = ({navigation, route}: any) => {
   const [text, setText] = useState('');
@@ -49,7 +49,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
     },
   });
 
-  console.log({error})
+  console.log({error});
   const {
     data: dataComments,
     loading: isLoadingComments,
@@ -175,15 +175,19 @@ const DiscussionDetails = ({navigation, route}: any) => {
     }
   };
 
-  const { block } = useBlock(data?.discussion?.user?.id);
-  const { refetch: refetchDiscussions } = useDiscussions("forme");
+  const {block} = useBlock(data?.discussion?.user?.id);
+  const {refetch: refetchDiscussions} = useDiscussions('forme');
 
   const blocking = async () => {
     await block();
-    Alert.alert("Bloquear usuario", "Usuario bloqueado con exito, recarga la pantalla para ver los cambios");
+    Alert.alert(
+      'Bloquear usuario',
+      'Usuario bloqueado con exito, recarga la pantalla para ver los cambios',
+    );
     await refetchDiscussions();
-    navigation.navigate("Home");
-  }
+    navigation.navigate('Home');
+  };
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     refetch().then(() => {
@@ -233,76 +237,75 @@ const DiscussionDetails = ({navigation, route}: any) => {
         style={{
           backgroundColor: '#f0f0f0',
           paddingBottom: 40,
-          height: "100%",
+          height: '100%',
         }}>
-          <Pressable>
-
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            gap: 10,
-            alignItems: 'flex-start',
-          }}>
+        <Pressable>
           <DefaultView
             style={{
               flexDirection: 'row',
-              gap: 8,
+              justifyContent: 'space-between',
+              gap: 10,
+              alignItems: 'flex-start',
             }}>
-            {data?.discussion?.user?.photo ? (
-              <Image
-                source={{
-                  uri: data?.discussion?.user?.photo,
-                }}
-                width={30}
-                height={30}
-                style={{
-                  borderRadius: 50,
-                  borderWidth: 1,
-                  borderColor: 'rgba(0,0,0,0.1)',
-                }}
-              />
-            ) : (
-              <DefaultView
-                style={{
-                  backgroundColor: '#d5bffd',
-                  height: 30,
-                  width: 30,
-                  borderRadius: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+            <DefaultView
+              style={{
+                flexDirection: 'row',
+                gap: 8,
+              }}>
+              {data?.discussion?.user?.photo ? (
+                <Image
+                  source={{
+                    uri: data?.discussion?.user?.photo,
+                  }}
+                  width={30}
+                  height={30}
+                  style={{
+                    borderRadius: 50,
+                    borderWidth: 1,
+                    borderColor: 'rgba(0,0,0,0.1)',
+                  }}
+                />
+              ) : (
+                <DefaultView
+                  style={{
+                    backgroundColor: '#d5bffd',
+                    height: 30,
+                    width: 30,
+                    borderRadius: 50,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      fontWeight: '600',
+                      fontSize: 16,
+                      color: 'rgba(0,0,0,0.8)',
+                    }}>
+                    {data?.discussion?.user?.name?.charAt(0)}
+                  </Text>
+                </DefaultView>
+              )}
+
+              <DefaultView style={{}}>
                 <Text
                   style={{
+                    fontSize: 14,
                     fontWeight: '600',
-                    fontSize: 16,
                     color: 'rgba(0,0,0,0.8)',
                   }}>
-                  {data?.discussion?.user?.name?.charAt(0)}
+                  {data?.discussion?.user?.name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: 'rgba(0,0,0,0.8)',
+                  }}>
+                  {fromNow(data?.discussion?.created_at)}
                 </Text>
               </DefaultView>
-            )}
-
-            <DefaultView style={{}}>
-              <Text
-                style={{
-                  fontSize: 14,
-                  fontWeight: '600',
-                  color: 'rgba(0,0,0,0.8)',
-                }}>
-                {data?.discussion?.user?.name}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: 'rgba(0,0,0,0.8)',
-                }}>
-                {fromNow(data?.discussion?.created_at)}
-              </Text>
             </DefaultView>
-          </DefaultView>
 
-          {/* <View style={{
+            {/* <View style={{
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: '#c1c6fb70',
@@ -317,210 +320,213 @@ const DiscussionDetails = ({navigation, route}: any) => {
             fontWeight: '500'
           }}>{type}</Text>
         </View> */}
-        </DefaultView>
+          </DefaultView>
 
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: '500',
-            color: 'rgba(0,0,0,0.8)',
-            marginTop: 10,
-            marginBottom: 8,
-          }}>
-          {data?.discussion?.title}
-        </Text>
-
-        <Text
-          style={{
-            fontSize: 14,
-            fontWeight: '400',
-            color: 'rgba(0,0,0,0.6)',
-            marginBottom: 15,
-          }}>
-          {data?.discussion?.description}
-        </Text>
-
-        {data?.discussion?.images.length > 0 && (
-          <Image
-            source={{
-              uri: data?.discussion.images[0],
-            }}
+          <Text
             style={{
-              flex: 1,
-              width: '100%',
-              height: 300,
-              resizeMode: 'contain',
-            }}
-          />
-        )}
-
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            borderTopWidth: 1,
-            borderTopColor: 'rgba(0,0,0,0.1)',
-            paddingTop: 10,
-            paddingHorizontal: 5,
-            marginBottom: 10,
-          }}>
-          <TouchableOpacity
-            disabled={likeDeleteLoading || likeLoading}
-            onPress={onSubmitLike}
-            style={{
-              flexDirection: 'row',
-              gap: 5,
-              alignItems: 'center',
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'rgba(0,0,0,0.8)',
+              marginTop: 10,
+              marginBottom: 8,
             }}>
-            <Icon
-              name={!data?.discussion.liked ? 'triangle-outline' : 'triangle'}
-              size={20}
-              color="rgba(0,0,0,0.8)"
-            />
-            <Text
+            {data?.discussion?.title}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: '400',
+              color: 'rgba(0,0,0,0.6)',
+              marginBottom: 15,
+            }}>
+            {data?.discussion?.description}
+          </Text>
+
+          {data?.discussion?.images.length > 0 && (
+            <Image
+              source={{
+                uri: data?.discussion.images[0],
+              }}
               style={{
-                fontSize: 14,
-                color: 'rgba(0,0,0,0.8)',
-              }}>
-              {dataLikes?.likes.length}
-            </Text>
-          </TouchableOpacity>
+                flex: 1,
+                width: '100%',
+                height: 300,
+                resizeMode: 'contain',
+              }}
+            />
+          )}
 
           <DefaultView
             style={{
               flexDirection: 'row',
-              alignItems: 'center',
-              gap: 7,
+              justifyContent: 'space-between',
+              borderTopWidth: 1,
+              borderTopColor: 'rgba(0,0,0,0.1)',
+              paddingTop: 10,
+              paddingHorizontal: 5,
+              marginBottom: 10,
             }}>
-            <Icon name="chatbubble-outline" size={20} color="rgba(0,0,0,0.8)" />
-            <Text
+            <TouchableOpacity
+              disabled={likeDeleteLoading || likeLoading}
+              onPress={onSubmitLike}
               style={{
-                fontSize: 14,
-                color: 'rgba(0,0,0,0.8)',
-              }}>
-              {dataComments?.comments.length}
-            </Text>
-          </DefaultView>
-
-          <TouchableOpacity
-            onPress={share}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 7,
-            }}>
-            <Icon
-              name="share-social-outline"
-              size={25}
-              color="rgba(0,0,0,0.8)"
-            />
-          </TouchableOpacity>
-        </DefaultView>
-
-        <DefaultView>
-          {dataComments?.comments.length == 0 ? (
-            <DefaultView
-              style={{
+                flexDirection: 'row',
+                gap: 5,
                 alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 15,
               }}>
-              <Image
-                source={{
-                  uri: 'https://i.ibb.co/N6PvW1M/Screenshot-from-2023-11-02-11-46-00-removebg-preview.png',
-                }}
-                style={{
-                  width: 150,
-                  height: 150,
-                }}
+              <Icon
+                name={!data?.discussion.liked ? 'triangle-outline' : 'triangle'}
+                size={20}
+                color="rgba(0,0,0,0.8)"
               />
               <Text
                 style={{
-                  color: 'rgba(0,0,0,0.5)',
-                  fontWeight: '500',
                   fontSize: 14,
+                  color: 'rgba(0,0,0,0.8)',
                 }}>
-                Sé el primero en comentar
+                {dataLikes?.likes.length}
+              </Text>
+            </TouchableOpacity>
+
+            <DefaultView
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 7,
+              }}>
+              <Icon
+                name="chatbubble-outline"
+                size={20}
+                color="rgba(0,0,0,0.8)"
+              />
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: 'rgba(0,0,0,0.8)',
+                }}>
+                {dataComments?.comments.length}
               </Text>
             </DefaultView>
-          ) : (
-            <>
-              {dataComments?.comments.map((comment: any) => (
-                <DefaultView
-                  key={comment.id}
+
+            <TouchableOpacity
+              onPress={share}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 7,
+              }}>
+              <Icon
+                name="share-social-outline"
+                size={25}
+                color="rgba(0,0,0,0.8)"
+              />
+            </TouchableOpacity>
+          </DefaultView>
+
+          <DefaultView>
+            {dataComments?.comments.length == 0 ? (
+              <DefaultView
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: 15,
+                }}>
+                <Image
+                  source={{
+                    uri: 'https://i.ibb.co/N6PvW1M/Screenshot-from-2023-11-02-11-46-00-removebg-preview.png',
+                  }}
                   style={{
-                    backgroundColor: '#fff',
-                    padding: 10,
-                    marginBottom: 15,
-                    borderBottomWidth: 2,
-                    borderBottomColor: 'rgba(0,0,0,0.1)',
-                    paddingBottom: 20,
-                    paddingTop: 5,
+                    width: 150,
+                    height: 150,
+                  }}
+                />
+                <Text
+                  style={{
+                    color: 'rgba(0,0,0,0.5)',
+                    fontWeight: '500',
+                    fontSize: 14,
                   }}>
+                  Sé el primero en comentar
+                </Text>
+              </DefaultView>
+            ) : (
+              <>
+                {dataComments?.comments.map((comment: any) => (
                   <DefaultView
+                    key={comment.id}
                     style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      gap: 10,
+                      backgroundColor: '#fff',
+                      padding: 10,
+                      marginBottom: 15,
+                      borderBottomWidth: 2,
+                      borderBottomColor: 'rgba(0,0,0,0.1)',
+                      paddingBottom: 20,
+                      paddingTop: 5,
                     }}>
                     <DefaultView
                       style={{
-                        backgroundColor: 'rgba(230, 81, 0, 0.5)',
-                        width: 25,
-                        height: 25,
                         flexDirection: 'row',
-                        borderRadius: 50,
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        gap: 10,
+                      }}>
+                      <DefaultView
+                        style={{
+                          backgroundColor: 'rgba(230, 81, 0, 0.5)',
+                          width: 25,
+                          height: 25,
+                          flexDirection: 'row',
+                          borderRadius: 50,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                        <Text
+                          style={{
+                            fontSize: 15,
+                            color: 'rgba(0,0,0,0.8)',
+                          }}>
+                          {comment.user.name.charAt(0)}
+                        </Text>
+                      </DefaultView>
+                      <Text
+                        style={{
+                          color: 'rgba(0,0,0,0.8)',
+                          fontSize: 14,
+                          fontWeight: '500',
+                        }}>
+                        {comment.user.name.split(' ')[0]}
+                      </Text>
+                      <Text
+                        style={{
+                          color: 'rgba(0,0,0,0.6)',
+                          fontSize: 14,
+                          fontWeight: '400',
+                        }}>
+                        {fromNow(comment.created_at)}
+                      </Text>
+                    </DefaultView>
+
+                    <DefaultView
+                      style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        gap: 10,
+                        marginTop: 5,
                       }}>
                       <Text
                         style={{
-                          fontSize: 15,
-                          color: 'rgba(0,0,0,0.8)',
+                          fontSize: 14,
+                          color: 'rgba(0,0,0,0.6)',
                         }}>
-                        {comment.user.name.charAt(0)}
+                        {comment.text}
                       </Text>
                     </DefaultView>
-                    <Text
-                      style={{
-                        color: 'rgba(0,0,0,0.8)',
-                        fontSize: 14,
-                        fontWeight: '500',
-                      }}>
-                      {comment.user.name.split(' ')[0]}
-                    </Text>
-                    <Text
-                      style={{
-                        color: 'rgba(0,0,0,0.6)',
-                        fontSize: 14,
-                        fontWeight: '400',
-                      }}>
-                      {fromNow(comment.created_at)}
-                    </Text>
                   </DefaultView>
-
-                  <DefaultView
-                    style={{
-                      flexDirection: 'row',
-                      flexWrap: 'wrap',
-                      gap: 10,
-                      marginTop: 5,
-                    }}>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        color: 'rgba(0,0,0,0.6)',
-                      }}>
-                      {comment.text}
-                    </Text>
-                  </DefaultView>
-                </DefaultView>
-              ))}
-            </>
-          )}
-        </DefaultView>
+                ))}
+              </>
+            )}
+          </DefaultView>
         </Pressable>
-
       </ScrollView>
       <DefaultView
         style={{
@@ -563,21 +569,27 @@ const DiscussionDetails = ({navigation, route}: any) => {
       <BottomSheet
         isVisible={profileOptions}
         setIsVisible={() => setProfileOptions(!profileOptions)}>
-             
-    <TouchableOpacity style={{
-      height: 40,
-      justifyContent: "center"
-     }} onPress={blocking}>
-       <Text style={{
-         textAlign: 'center',
-         color: 'rgba(0,0,0,0.8)',
-         fontSize: 14
-       }}>Bloquear</Text>
-     </TouchableOpacity>
-        <TouchableOpacity style={{
-          height: 40,
-          justifyContent: "center"
-        }} onPress={opening}>
+        <TouchableOpacity
+          style={{
+            height: 40,
+            justifyContent: 'center',
+          }}
+          onPress={blocking}>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: 'rgba(0,0,0,0.8)',
+              fontSize: 14,
+            }}>
+            Bloquear
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            height: 40,
+            justifyContent: 'center',
+          }}
+          onPress={opening}>
           <Text
             style={{
               textAlign: 'center',
@@ -597,7 +609,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 16,
             fontWeight: '600',
-            color: "#121212"
+            color: '#121212',
           }}>
           Reporte
         </Text>
@@ -606,7 +618,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 12,
             marginBottom: 20,
-            color: "#121212"
+            color: '#121212',
           }}>
           Ayúdanos a entender lo que está pasando y lo investigaremos.
         </Text>
@@ -636,7 +648,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 16,
             fontWeight: '600',
-            color: "#121212"
+            color: '#121212',
           }}>
           Gracias por hacernos saber
         </Text>
@@ -645,7 +657,7 @@ const DiscussionDetails = ({navigation, route}: any) => {
             textAlign: 'center',
             fontSize: 12,
             marginBottom: 20,
-            color: "#121212"
+            color: '#121212',
           }}>
           Tus comentarios son importantes para ayudarnos a mantener la comunidad
           Joobs segura y de calidad.

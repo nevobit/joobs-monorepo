@@ -12,12 +12,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Instagram} from 'react-content-loader/native';
 import {useDiscussions, useMyClubs, useUpdateUser} from '../../../hooks';
 import styles from './styles';
-import { getFcmToken } from '../../../utils/fcmHelper';
+import {getFcmToken} from '../../../utils/fcmHelper';
 
 const Discussions = ({navigation, search}: any) => {
   const [refreshing, setRefreshing] = useState(false);
   const [option, setOption] = useState('forme');
-  const {discussions, isLoading, error, refetch} = useDiscussions(option);
+  const {discussions, isLoading, refetch} = useDiscussions(option);
   const {clubs, isLoading: isLoadingClubs} = useMyClubs();
   const userClubIds = clubs?.map((club: any) => club.id);
 
@@ -25,25 +25,27 @@ const Discussions = ({navigation, search}: any) => {
     setOption(op);
   };
 
-  const { updateUser, isUpdating } = useUpdateUser();
+  const {updateUser} = useUpdateUser();
 
   const submit = async () => {
     const token = await getFcmToken();
-      try{
-          await updateUser({variables: {
-              data: { token }
-          }});
-      }catch(err){
-          console.log(err)
-      }
-  }
+    try {
+      await updateUser({
+        variables: {
+          data: {token},
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    submit()
-  }, []); 
+    submit();
+  }, []);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      refetch()
+      refetch();
     });
 
     return unsubscribe;
